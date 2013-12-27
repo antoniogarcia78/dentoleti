@@ -1,0 +1,8 @@
+dentoleti_patient:
+    resource: "@DentoletiPatientBundle/Resources/config/routing.yml"
+    prefix:   /patients
+
+dentoleti_general:
+    resource: "@DentoletiGeneralBundle/Resources/config/routing.yml"
+    prefix:   /
+

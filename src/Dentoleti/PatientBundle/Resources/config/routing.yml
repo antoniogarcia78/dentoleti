@@ -1,0 +1,3 @@
+patient_add:
+    pattern:  /add
+    defaults: { _controller: DentoletiPatientBundle:Default:add }
