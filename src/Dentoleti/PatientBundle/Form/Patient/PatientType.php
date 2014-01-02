@@ -17,7 +17,7 @@ class PatientType extends AbstractType
 		$builder->add('civil_status', 'entity', array(
 			'class' => 'DentoletiGeneralBundle:CivilStatus',
 			'property' => 'status',
-			'empty_value' => 'SELECT a civil status'
+			'empty_value' => '-- ESTADO CIVIL --'
 		));
 		$builder->add('birthday', 'date', array(
 		  'widget' => 'single_text',
@@ -30,17 +30,17 @@ class PatientType extends AbstractType
 		$builder->add('country', 'entity', array(
 			'class' => 'DentoletiGeneralBundle:Country',
 			'property' => 'name',
-			'empty_value' => 'SELECCT A COUNTRY',
+			'empty_value' => '-- PAÍS --',
 		));
 		$builder->add('province', 'entity', array(
 			'class' => 'DentoletiGeneralBundle:Province',
 			'property' => 'name',
-			'empty_value' => 'SELECCT A PROVINCE',
+			'empty_value' => '-- PROVINCIA --',
 		));
 		$builder->add('town', 'entity', array(
 			'class' => 'DentoletiGeneralBundle:Town',
 			'property' => 'name',
-			'empty_value' => 'SELECCT A TOWN',
+			'empty_value' => '-- POBLACIÓN --',
 		));
 		$builder->add('postalCode', 'text');
 		$builder->add('occupation', 'text');
