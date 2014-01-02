@@ -1,5 +1,4 @@
 <?php
-
 namespace Dentoleti\GeneralBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
