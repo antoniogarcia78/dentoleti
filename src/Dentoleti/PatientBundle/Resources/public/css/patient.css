@@ -1,0 +1,57 @@
+#patient {
+	font-size: 2.2em;
+	padding-left: 2%;
+	padding-top: 2%;
+}
+
+#patient fieldset {
+	width: auto;
+	float: left;
+}
+
+#patient label {
+	padding: 5px;
+}
+
+#personal {
+	clear: both;
+	float: left;
+}
+
+#contact {
+	float: left;
+	padding-left: 7px;
+}
+
+#clinic {
+	clear: both;
+	float: left;
+}
+
+.col1-two {
+	clear: both;
+	float: left;
+	padding: 3px;
+}
+
+.col2-two {
+	float: left;
+}
+
+.col1-three {
+	clear: both;
+	float: left;
+}
+
+.col2-three {
+	float: left;
+}
+
+.col3-three {
+	float: left;
+}
+
+#buttons {
+	clear: both;
+	float: left;
+}
