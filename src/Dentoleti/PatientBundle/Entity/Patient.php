@@ -4,7 +4,7 @@ namespace Dentoleti\PatientBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-use dentoleti\GeneralBundle\Meeting;
+use Dentoleti\GeneralBundle\Meeting;
 
 /**
  * Patient

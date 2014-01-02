@@ -1,1 +1,149 @@
 {% extends '::frontend.html.twig' %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletipatient/css/patient.css') }}">
+	{{ parent() }}
+{% endblock %}
+
+{% block article %}
+<div id="patient">
+	{{ form_start(form) }}
+		{{ form_errors(form) }}
+
+		<div id="personal">
+			<fieldset>
+				<legend>Datos personales</legend>
+				<div class="col1-two">
+					{{ form_label(form.nif) }}
+					{{ form_errors(form.nif) }}
+					{{ form_widget(form.nif) }}
+				</div>
+				<div class="col2-two">
+					{{ form_label(form.name) }}
+					{{ form_errors(form.name) }}
+					{{ form_widget(form.name) }}
+				</div>
+				<div class="col1-two">
+					{{ form_label(form.surname1) }}
+					{{ form_errors(form.surname1) }}
+					{{ form_widget(form.surname1) }}
+				</div>
+				<div class="col2-two">
+					{{ form_label(form.surname2) }}
+					{{ form_errors(form.surname2) }}
+					{{ form_widget(form.surname2) }}
+				</div>
+				<div class="col1-two">
+					{{ form_label(form.civil_status) }}
+					{{ form_errors(form.civil_status) }}
+					{{ form_widget(form.civil_status) }}
+				</div>
+				<div class="col2-two">
+					{{ form_label(form.birthday) }}
+					{{ form_errors(form.birthday) }}
+					{{ form_widget(form.birthday) }}
+				</div>
+				<div class="col1-two">
+					{{ form_label(form.occupation) }}
+					{{ form_errors(form.occupation) }}
+					{{ form_widget(form.occupation) }}
+				</div>
+			</fieldset>
+		</div>
+		<div id="contact">
+			<fieldset>
+				<legend>Datos de contacto</legend>
+				<div class="col1-two">
+					{{ form_label(form.phone1) }}
+					{{ form_errors(form.phone1) }}
+					{{ form_widget(form.phone1) }}
+				</div>
+				<div class="col2-two">
+					{{ form_label(form.phone2) }}
+					{{ form_errors(form.phone2) }}
+					{{ form_widget(form.phone2) }}
+				</div>
+				<div class="col1-two">
+					{{ form_label(form.email) }}
+					{{ form_errors(form.email) }}
+					{{ form_widget(form.email) }}
+				</div>
+				<div class="col2-two">
+					{{ form_label(form.address) }}
+					{{ form_errors(form.address) }}
+					{{ form_widget(form.address) }}
+				</div>
+				<div class="col1-two">
+					{{ form_label(form.country) }}
+					{{ form_errors(form.country) }}
+					{{ form_widget(form.country) }}
+				</div>
+				<div class="col2-two">
+					{{ form_label(form.province) }}
+					{{ form_errors(form.province) }}
+					{{ form_widget(form.province) }}
+				</div>
+				<div class="col1-two">
+					{{ form_label(form.town) }}
+					{{ form_errors(form.town) }}
+					{{ form_widget(form.town) }}
+				</div>
+				<div class="col2-two">
+					{{ form_label(form.postalCode) }}
+					{{ form_errors(form.postalCode) }}
+					{{ form_widget(form.postalCode) }}
+				</div>
+			</fieldset>
+		</div>
+		<div id="clinic">
+			<fieldset>
+				<legend>Datos clínicos</legend>
+				<div class="col1-three">
+					{{ form_label(form.allergies) }}
+					{{ form_errors(form.allergies) }}
+					{{ form_widget(form.allergies) }}
+				</div>
+				<div class="col2-three">
+					{{ form_label(form.diseases) }}
+					{{ form_errors(form.diseases) }}
+					{{ form_widget(form.diseases) }}
+				</div>
+				<div class="col3-three">
+					{{ form_label(form.vih) }}
+					{{ form_errors(form.vih) }}
+					{{ form_widget(form.vih) }}
+				</div>
+				<div class="col1-three">
+					{{ form_label(form.observations) }}
+					{{ form_errors(form.observations) }}
+					{{ form_widget(form.observations) }}
+				</div>
+				{# Como no hay más elementos en las otras columnas, volvemos a poner un col1-three #}
+				<div class="col1-three">
+					{{ form_label(form.lastVisit) }}
+					{{ form_errors(form.lastVisit) }}
+					{{ form_widget(form.lastVisit) }}
+				</div>
+				<div class="col2-three">
+					{{ form_label(form.revisionFrequency) }}
+					{{ form_errors(form.revisionFrequency) }}
+					{{ form_widget(form.revisionFrequency) }}
+				</div>
+				<div class="col3-three">
+					{{ form_label(form.meetings) }}
+					{{ form_errors(form.meetings) }}
+					{{ form_widget(form.meetings) }}
+				</div>
+				<div class="col1-three">
+					{{ form_label(form.treatment) }}
+					{{ form_errors(form.treatment) }}
+					{{ form_widget(form.treatment) }}
+				</div>
+			</fieldset>
+		</div>
+		<div id="buttons">
+			{{ form_widget(form.save) }}
+		</div>
+	{{ form_end(form) }}
+</div>
+{% endblock %}

@@ -13,12 +13,12 @@
         <nav>
             <div id='cssmenu'>
                 <ul>
-                    <li class='active'><a href='index.html'><span>Home</span></a></li>
-                    <li class='has-sub'><a href='#'><span>Products</span></a>
+                    <li class='active'><a href="{{ path('portada') }}"><span>Inicio</span></a></li>
+                    <li class='has-sub'><a href='#'><span>Pacientes</span></a>
                         <ul>
-                            <li><a href='#'><span>Widgets</span></a></li>
-                            <li><a href='#'><span>Menus</span></a></li>
-                            <li class='last'><a href='#'><span>Products</span></a></li>
+                            <li><a href="{{ path('patient_add') }}"><span>Agregar</span></a></li>
+                            <li><a href='#'><span>Eliminar</span></a></li>
+                            <li class='last'><a href='#'><span>Búsqueda</span></a></li>
                         </ul>
                     </li>
                     <li class='has-sub'><a href='#'><span>Company</span></a>
