@@ -46,7 +46,7 @@ class PatientType extends AbstractType
 		$builder->add('occupation', 'text');
 		$builder->add('allergies', 'text');
 		$builder->add('diseases', 'text');
-		$builder->add('vih', 'checkbox');
+		$builder->add('vih', 'checkbox', array('required' => false));
 		$builder->add('observations', 'textarea');
 		$builder->add('lastVisit', 'text');
 		$builder->add('revisionFrequency', 'text');

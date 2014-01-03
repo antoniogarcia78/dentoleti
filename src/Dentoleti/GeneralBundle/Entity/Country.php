@@ -61,4 +61,12 @@ class Country
     {
         return $this->name;
     }
+
+    /**
+     * Método toString
+     */
+    public function __toString()
+    {
+        return $this->getName();
+    }
 }

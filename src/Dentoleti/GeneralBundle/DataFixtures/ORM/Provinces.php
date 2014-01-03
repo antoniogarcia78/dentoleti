@@ -1,5 +1,5 @@
 <?php
-namespace Dentoleti\GeneralBunmdle\DataFixtures\ORM;
+namespace Dentoleti\GeneralBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -8,7 +8,8 @@ use Dentoleti\GeneralBundle\Entity\Country;
 use Dentoleti\GeneralBundle\Entity\Province;
 
 /**
- * Carga las provincias que manejará la aplicación. Se insertarán solo los datos relacionados con España
+ * Carga las provincias que manejará la aplicación.
+ * Se insertarán solo los datos relacionados con España
  */
 class Provinces extends AbstractFixture implements OrderedFixtureInterface
 {

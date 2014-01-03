@@ -61,6 +61,9 @@ class Meeting
         return $this->theway;
     }
 
+    /**
+     * Método toString
+     */
     public function __toString()
     {
         return $this->getTheway();

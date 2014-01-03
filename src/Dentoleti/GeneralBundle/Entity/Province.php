@@ -92,4 +92,12 @@ class Province
     {
         return $this->country;
     }
+
+    /**
+     * Método toString
+     */
+    public function __toString()
+    {
+        return $this->getName();
+    }
 }

@@ -5,6 +5,10 @@ namespace Dentoleti\PatientBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Dentoleti\GeneralBundle\Meeting;
+use Dentoleti\GeneralBundle\CivilStatus;
+use Dentoleti\GeneralBundle\Country;
+use Dentoleti\GeneralBundle\Province;
+use Dentoleti\GeneralBundle\Town;
 
 /**
  * Patient
@@ -52,9 +56,7 @@ class Patient
     private $surname2;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="civil_status", type="smallint")
+     * @ORM\ManyToOne(targetEntity="Dentoleti\GeneralBundle\Entity\CivilStatus")
      */
     private $civilStatus;
 
@@ -95,23 +97,17 @@ class Patient
     
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="country", type="integer")
+     * @ORM\ManyToOne(targetEntity="Dentoleti\GeneralBundle\Entity\Country")
      */
     private $country;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="province", type="integer")
+     * @ORM\ManyToOne(targetEntity="Dentoleti\GeneralBundle\Entity\Province")
      */
     private $province;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="town", type="integer")
+     * @ORM\ManyToOne(targetEntity="Dentoleti\GeneralBundle\Entity\Town")
      */
     private $town;
 
@@ -179,9 +175,7 @@ class Patient
     private $treatment;
 
     /**
-     * @var integer
-     *
-     * @ORM\OneToMany(targetEntity="Dentoleti\GeneralBundle\Entity\Meeting", mappedBy="theway")
+     * @ORM\ManyToOne(targetEntity="Dentoleti\GeneralBundle\Entity\Meeting")
      */
     private $meeting;
 

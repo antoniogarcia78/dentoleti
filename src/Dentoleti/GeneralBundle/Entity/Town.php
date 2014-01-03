@@ -92,4 +92,12 @@ class Town
     {
         return $this->province;
     }
+
+    /**
+     * Método toString
+     */
+    public function __toString()
+    {
+        return $this->getName();
+    }
 }

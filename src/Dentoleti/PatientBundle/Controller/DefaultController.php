@@ -10,18 +10,20 @@ class DefaultController extends Controller
 {
     public function addAction()
     {
+    	$petition = $this->getRequest();
+
     	$patient = new Patient();
 		
 		$form = $this->createForm(new PatientType(), $patient);
 		
+		$form->handleRequest($petition);
+
 		if ($form->isValid()){
 		  //save the form
 		  $em = $this->getDoctrine()->getManager();
-		  $country = $em
-		    ->getRepository('connect2ticLocationBundle:Country')
-		    ->find($patient->getCountry());
+		  
 		  $em->persist($patient);
-		  $em->flush(); 
+		  $em->flush();
       	}
 
         return $this->render('DentoletiPatientBundle:Default:patient.html.twig', array(
