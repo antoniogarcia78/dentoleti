@@ -76,3 +76,10 @@
 	color: #ffffff;
 	width: inherit;
 }
+
+#list td {
+	text-align: center;
+	font-size: 0.7em;
+	padding-right: 2px;
+	padding-left: 2px;
+}
