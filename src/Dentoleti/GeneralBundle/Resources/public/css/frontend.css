@@ -13,12 +13,17 @@ header,
 footer,
 aside,
 nav,
+section,
 article {
 	display: block;
 }
 
 header {
 	padding: 2%;
+}
+
+section {
+	clear: both;
 }
 
 footer {
