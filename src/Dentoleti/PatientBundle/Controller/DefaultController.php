@@ -30,4 +30,16 @@ class DefaultController extends Controller
         	'form' => $form->createView()
         ));
     }
+
+    public function listAction()
+    {
+    	$em = $this->getDoctrine()->getManager();
+
+    	$patients = $em->getRepository('DentoletiPatientBundle:Patient')
+    		->findAll();
+
+    	return $this->render('DentoletiPatientBundle:Default:list.html.twig', array(
+    		'patients' => $patients
+    	));
+    }
 }

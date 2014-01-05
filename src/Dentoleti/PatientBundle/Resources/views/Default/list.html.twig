@@ -1,0 +1,33 @@
+{% extends '::frontend.html.twig' %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletipatient/css/patient.css') }}">
+	{{ parent() }}
+{% endblock %}
+
+{% block article %}
+	<table>
+		<tr>
+			<th>Historia</th>
+			<th>NIF</th>
+			<th>Nombre</th>
+			<th>Apellidos</th>
+			<th>Email</th>
+			<th>Teléfono</th>
+			<th>Doctor</th>
+		</tr>
+		{% for patient in patients %}
+		<tr>
+
+			<td>{{ patient.id }}</td>
+			<td>{{ patient.nif }}</td>
+			<td>{{ patient.name }}</td>
+			<td>{{ patient.surname1 }} {{ patient.surname2 }}</td>
+			<td>{{ patient.email }}</td>
+			<td>{{ patient.phone1 }}</td>
+			<td>Doc</td>
+		</tr>
+		{% endfor %}		
+	</table>
+	
+{% endblock %}

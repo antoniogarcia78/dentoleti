@@ -14,7 +14,7 @@ use Dentoleti\GeneralBundle\Town;
  * Patient
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Dentoleti\PatientBundle\Entity\PatientRepository")
  */
 class Patient
 {
@@ -725,10 +725,10 @@ class Patient
     /**
      * Add meetings
      *
-     * @param \connect2tic\PatientBundle\Entity\Meeting $meetings
+     * @param \Dentoleti\PatientBundle\Entity\Meeting $meetings
      * @return Patient
      */
-    public function addMeeting(\connect2tic\PatientBundle\Entity\Meeting $meetings)
+    public function addMeeting(\Dentoleti\PatientBundle\Entity\Meeting $meetings)
     {
         $this->meetings[] = $meetings;
 
@@ -738,10 +738,15 @@ class Patient
     /**
      * Remove meetings
      *
-     * @param \connect2tic\PatientBundle\Entity\Meeting $meetings
+     * @param \Dentoleti\PatientBundle\Entity\Meeting $meetings
      */
-    public function removeMeeting(\connect2tic\PatientBundle\Entity\Meeting $meetings)
+    public function removeMeeting(\Dentoleti\PatientBundle\Entity\Meeting $meetings)
     {
         $this->meetings->removeElement($meetings);
+    }
+
+    public function __toString()
+    {
+        return $this->getName() . ' ' . $this->getSurname1() . ' ' . $this->getSurname2();
     }
 }
