@@ -31,7 +31,7 @@
 			<td>Doc</td>
 			<td><a href="{{ path('patient_view', { 'id': patient.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/eye.png') }}"></a></td>
 			<td><a href="{{ path('patient_edit', { 'id': patient.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/edit.png') }}"></a></td>
-			<td><a href="#"><img src="{{ asset('bundles/dentoletigeneral/images/icons/erase.png') }}"></a></td>
+			<td><a href="{{ path('patient_delete', { 'id': patient.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/erase.png') }}"></a></td>
 		</tr>
 		{% endfor %}		
 	</table>

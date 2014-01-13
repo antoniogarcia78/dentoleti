@@ -93,4 +93,26 @@ class DefaultController extends Controller
             'patient' => $patient
         ));
     }
+
+    /**
+     * Delete method for deleting one patient given by the id
+     */
+    public function deleteAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $patient = $em->getRepository('DentoletiPatientBundle:Patient')
+            ->findOneById($id);
+
+        if (!$patient) {
+            throw $this->createNotFoundException('No existe el paciente');
+        }
+        else {
+            $em->remove($patient);
+            $em->flush();
+        }
+
+        //TODO Pendiente de ver donde redirigir la petición
+        return $this->forward('DentoletiPatientBundle:Default:list');
+    }
 }

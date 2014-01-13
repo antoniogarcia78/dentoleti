@@ -13,3 +13,7 @@ patient_edit:
 patient_view:
     pattern: /view/{id}
     defaults: { _controller: DentoletiPatientBundle:Default:view }
+
+patient_delete:
+    pattern: /delete/{id}
+    defaults: { _controller: DentoletiPatientBundle:Default:delete }
