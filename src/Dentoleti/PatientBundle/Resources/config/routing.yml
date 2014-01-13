@@ -10,3 +10,6 @@ patient_edit:
     pattern: /edit/{id}
     defaults: { _controller: DentoletiPatientBundle:Default:edit }
 
+patient_view:
+    pattern: /view/{id}
+    defaults: { _controller: DentoletiPatientBundle:Default:view }

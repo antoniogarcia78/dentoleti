@@ -1,0 +1,96 @@
+{% extends '::frontend.html.twig' %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletipatient/css/patient.css') }}">
+	{{ parent() }}
+{% endblock %}
+
+{% block article %}
+<div id="patient">
+	<div id="personal">
+		<fieldset>
+			<legend>Datos personales</legend>
+			<div class="col1-two">
+				Nif: <span>{{ patient.nif }}</span>
+			</div>
+			<div class="col2-two">
+				Nombre: <span>{{ patient.name }}</span>
+			</div>
+			<br>
+			<div class="col1-two">
+				Apellidos: <span>{{ patient.surname1 }} {{ patient.surname2 }}</span>
+			</div>
+			<br>
+			<div class="col1-two">
+				Estado civil: <span>{{ patient.civilStatus }}</span>
+			</div>
+			<div class="col2-two">
+				Fecha de nacimiento: <span>{{ patient.birthday | date('d-m-Y') }}</span>
+			</div>
+			<br>
+			<div class="col1-two">
+				Ocupación: <span>{{ patient.occupation }}</span>
+			</div>
+		</fieldset>
+	</div>
+	<div id="contact">
+		<fieldset>
+			<legend>Datos de contacto</legend>
+			<div class="col1-two">
+				Teléfono 1: <span>{{ patient.phone1 }}</span>
+			</div>
+			<div class="col2-two">
+				Teléfono 2: <span>{{ patient.phone2 }}</span>
+			</div>
+			<div class="col1-two">
+				Email: <span>{{ patient.email }}</span>
+			</div>
+			<div class="col2-two">
+				Dirección: <span>{{ patient.address }}</span>
+			</div>
+			<div class="col1-two">
+				País: <span>{{ patient.country }}</span>
+			</div>
+			<div class="col2-two">
+				Provincia: <span>{{ patient.province }}</span>
+			</div>
+			<div class="col1-two">
+				Población: <span>{{ patient.town }}</span>
+			</div>
+			<div class="col2-two">
+				Código postal: <span>{{ patient.postalCode }}</span>
+			</div>
+		</fieldset>
+	</div>
+	<div id="clinic">
+		<fieldset>
+		<legend>Datos clínicos</legend>
+		<div class="col1-three">
+			Alergias: <span>{{ patient.allergies }}</span>
+		</div>
+		<div class="col2-three">
+			Enfermedades: <span>{{ patient.diseases }}</span>
+		</div>
+		<div class="col3-three">
+			Vih: <span>{{ patient.vih }}</span>
+		</div>
+		<div class="col1-three">
+			Observaciones: <span>{{ patient.observations }}</span>
+		</div>
+		{# Como no hay más elementos en las otras columnas, volvemos a poner un col1-three #}
+		<div class="col1-three">
+			Última visita: <span>{{ patient.lastVisit }}</span>
+		</div>
+		<div class="col2-three">
+			Frecuencia: <span>{{ patient.revisionFrequency }}</span>
+		</div>
+		<div class="col3-three">
+			Forma de conocernos: <span>{{ patient.meeting }}</span>
+		</div>
+		<div class="col1-three">
+			Tratamiento: <span>{{ patient.treatment }}</span>
+		</div>
+		</fieldset>
+	</div>
+</div>
+{% endblock %}

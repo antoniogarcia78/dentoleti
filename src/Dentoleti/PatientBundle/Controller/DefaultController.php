@@ -75,5 +75,22 @@ class DefaultController extends Controller
 
     }
 
-    
+    /**
+     * Method for view all the patient's information
+     */
+    public function viewAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $patient = $em->getRepository('DentoletiPatientBundle:Patient')
+            ->findOneById($id);
+
+        if (!$patient) {
+            throw $this->createNotFoundException('No existe el paciente');
+        }
+
+        return $this->render('DentoletiPatientBundle:Default:patient_view.html.twig', array(
+            'patient' => $patient
+        ));
+    }
 }

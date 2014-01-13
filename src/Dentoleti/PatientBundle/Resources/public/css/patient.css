@@ -38,6 +38,7 @@
 
 .col2-two {
 	float: left;
+	padding: 3px;
 }
 
 .col1-three {
@@ -57,6 +58,10 @@
 	clear: both;
 	float: left;
 	padding-top: 7px;
+}
+
+#buttons button {
+	width: 50px;
 }
 
 /* Patients list styles */
@@ -82,4 +87,11 @@
 	font-size: 0.7em;
 	padding-right: 2px;
 	padding-left: 2px;
+}
+
+/* Patient's view styles 
+ * Some styles has been implemented before in the patient's form
+ */
+#patient span {
+	color: #09aca0;
 }
