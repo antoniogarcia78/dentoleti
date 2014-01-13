@@ -51,7 +51,7 @@ class PatientType extends AbstractType
 		$builder->add('lastVisit', 'text');
 		$builder->add('revisionFrequency', 'text');
 		$builder->add('treatment', 'textarea');
-		$builder->add('meetings', 'entity', array(
+		$builder->add('meeting', 'entity', array(
 			'class' => 'DentoletiGeneralBundle:Meeting',
 			'property' => 'theway',
 		));

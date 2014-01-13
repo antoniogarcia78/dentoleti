@@ -8,6 +8,9 @@ use Dentoleti\PatientBundle\Form\Patient\PatientType;
 
 class DefaultController extends Controller
 {
+    /**
+     * Add a new patient in the system
+     */
     public function addAction()
     {
     	$petition = $this->getRequest();
@@ -31,6 +34,9 @@ class DefaultController extends Controller
         ));
     }
 
+    /**
+     * List all the patients in the system
+     */
     public function listAction()
     {
     	$em = $this->getDoctrine()->getManager();
@@ -42,4 +48,32 @@ class DefaultController extends Controller
     		'patients' => $patients
     	));
     }
+
+    /**
+     * View the patient with the $id given in the params
+     */
+    public function editAction($id)
+    {
+        $petition = $this->getRequest();
+
+        $em = $this->getDoctrine()->getManager();
+
+        $patient = $em->getRepository('DentoletiPatientBundle:Patient')
+            ->findOneById($id);
+
+        if (!$patient) {
+            throw $this->createNotFoundException('No existe el paciente');
+        }
+
+        $form = $this->createForm(new PatientType(), $patient);
+        
+        $form->handleRequest($petition);
+
+        return $this->render('DentoletiPatientBundle:Default:patient.html.twig', array(
+            'form' => $form->createView()
+        ));
+
+    }
+
+    
 }

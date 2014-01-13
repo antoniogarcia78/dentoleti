@@ -28,7 +28,7 @@
 			<td>{{ patient.email }}</td>
 			<td>{{ patient.phone1 }}</td>
 			<td>Doc</td>
-			<td><a href="#"><img src="{{ asset('bundles/dentoletigeneral/images/icons/edit.png') }}"></a></td>
+			<td><a href="{{ path('patient_edit', { 'id': patient.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/edit.png') }}"></a></td>
 			<td><a href="#"><img src="{{ asset('bundles/dentoletigeneral/images/icons/erase.png') }}"></a></td>
 		</tr>
 		{% endfor %}		

@@ -140,9 +140,9 @@ class Patient
     private $diseases;
 
     /**
-     * @var integer
+     * @var boolean
      *
-     * @ORM\Column(name="vih", type="smallint")
+     * @ORM\Column(name="vih", type="boolean")
      */
     private $vih;
 
@@ -178,10 +178,6 @@ class Patient
      * @ORM\ManyToOne(targetEntity="Dentoleti\GeneralBundle\Entity\Meeting")
      */
     private $meeting;
-
-    public function __construct() {
-        $this->meetings = new ArrayCollection();
-    }
 
     /**
      * Get id
@@ -654,26 +650,26 @@ class Patient
     }
 
     /**
-     * Set meetings
+     * Set meeting
      *
-     * @param integer $meetings
+     * @param $meeting
      * @return Patient
      */
-    public function setMeetings($meetings)
+    public function setMeeting($meeting)
     {
-        $this->meetings = $meetings;
+        $this->meeting = $meeting;
 
         return $this;
     }
 
     /**
-     * Get meetings
+     * Get meeting
      *
      * @return integer 
      */
-    public function getMeetings()
+    public function getMeeting()
     {
-        return $this->meetings;
+        return $this->meeting;
     }
 
     /**
