@@ -21,7 +21,6 @@
 
 #contact {
 	float: left;
-	padding-left: 7px;
 }
 
 #clinic {
@@ -37,7 +36,7 @@
 }
 
 .col2-two {
-	/* float: left;*/
+	float: left;
 	padding: 3px;
 }
 
@@ -57,15 +56,17 @@
 .label {
 	float: left;
 	top: 13px;
+	width: 120px;
 }
 
 .data {
 	float: left;
+	width: 180px;
 }
 
 .error {
 	clear: both;
-	text-align: right;
+	text-align: left;
 }
 
 #buttons {
