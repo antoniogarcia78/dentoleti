@@ -9,19 +9,37 @@
 <div id="patient">
 	{{ form_start(form) }}
 		{{ form_errors(form) }}
+		{% for flashMessage in app.session.flashbag.get('notice') %}
+    		<div class="flash-notice">
+        		{{ flashMessage }}
+    		</div>
+		{% endfor %}
 
+		<br>
 		<div id="personal">
 			<fieldset>
 				<legend>Datos personales</legend>
 				<div class="col1-two">
-					{{ form_label(form.nif) }}
-					{{ form_errors(form.nif) }}
-					{{ form_widget(form.nif) }}
+					<div class="label">
+						{{ form_label(form.nif) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.nif) }}
+					</div>
+					<div class="error">
+						{{ form_errors(form.nif) }}
+					</div>
 				</div>
 				<div class="col2-two">
-					{{ form_label(form.name) }}
-					{{ form_errors(form.name) }}
-					{{ form_widget(form.name) }}
+					<div class="label">
+						{{ form_label(form.name) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.name) }}
+					</div>
+					<div class="error">
+						{{ form_errors(form.name) }}
+					</div>
 				</div>
 				<div class="col1-two">
 					{{ form_label(form.surname1) }}

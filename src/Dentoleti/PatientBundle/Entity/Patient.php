@@ -4,6 +4,8 @@ namespace Dentoleti\PatientBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\ExecutionContextInterface;
 use Dentoleti\GeneralBundle\Meeting;
 use Dentoleti\GeneralBundle\CivilStatus;
 use Dentoleti\GeneralBundle\Country;
@@ -15,6 +17,7 @@ use Dentoleti\GeneralBundle\Town;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Dentoleti\PatientBundle\Entity\PatientRepository")
+ * @Assert\Callback(methods={"validDni", "numericPhones"})
  */
 class Patient
 {
@@ -30,28 +33,28 @@ class Patient
     /**
      * @var string
      *
-     * @ORM\Column(name="nif", type="string", length=9)
+     * @ORM\Column(name="nif", type="string", length=9, nullable=true)
      */
     private $nif;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=50)
+     * @ORM\Column(name="name", type="string", length=50, nullable=true)
      */
     private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="surname1", type="string", length=50)
+     * @ORM\Column(name="surname1", type="string", length=50, nullable=true)
      */
     private $surname1;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="surname2", type="string", length=50)
+     * @ORM\Column(name="surname2", type="string", length=50, nullable=true)
      */
     private $surname2;
 
@@ -63,35 +66,35 @@ class Patient
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="birthday", type="datetime")
+     * @ORM\Column(name="birthday", type="datetime", nullable=true)
      */
     private $birthday;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="phone1", type="string", length=15)
+     * @ORM\Column(name="phone1", type="string", length=15, nullable=true)
      */
     private $phone1;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="phone2", type="string", length=15)
+     * @ORM\Column(name="phone2", type="string", length=15, nullable=true)
      */
     private $phone2;
     
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=50)
+     * @ORM\Column(name="email", type="string", length=50, nullable=true)
      */
     private $email;
     
     /**
      * @var string
      *
-     * @ORM\Column(name="address", type="string", length=100)
+     * @ORM\Column(name="address", type="string", length=100, nullable=true)
      */
     private $address;
     
@@ -114,28 +117,28 @@ class Patient
     /**
      * @var integer
      *
-     * @ORM\Column(name="postal_code", type="integer")
+     * @ORM\Column(name="postal_code", type="integer", nullable=true)
      */
     private $postalCode;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="occupation", type="text")
+     * @ORM\Column(name="occupation", type="text", nullable=true)
      */
     private $occupation;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="allergies", type="text")
+     * @ORM\Column(name="allergies", type="text", nullable=true)
      */
     private $allergies;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="diseases", type="text")
+     * @ORM\Column(name="diseases", type="text", nullable=true)
      */
     private $diseases;
 
@@ -149,28 +152,28 @@ class Patient
     /**
      * @var string
      *
-     * @ORM\Column(name="observations", type="text")
+     * @ORM\Column(name="observations", type="text", nullable=true)
      */
     private $observations;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="last_visit", type="string", length=50)
+     * @ORM\Column(name="last_visit", type="string", length=50, nullable=true)
      */
     private $lastVisit;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="revision_frequency", type="string", length=30)
+     * @ORM\Column(name="revision_frequency", type="string", length=30, nullable=true)
      */
     private $revisionFrequency;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="treatment", type="text")
+     * @ORM\Column(name="treatment", type="text", nullable=true)
      */
     private $treatment;
 
@@ -745,4 +748,126 @@ class Patient
     {
         return $this->getName() . ' ' . $this->getSurname1() . ' ' . $this->getSurname2();
     }
+
+    /**
+     * Validator method for checking if the phone telephones are not numeric
+     */
+    public function numericPhones(ExecutionContextInterface $context)
+    {
+        $validation = true;
+        if (strlen($this->getPhone1() > 0) && !is_numeric($this->getPhone1())) {
+            $context->addViolationAt('phone1', 'El teléfono 1 no es válido', array(), null);
+            $validation = false;
+        }
+        if (strlen($this->getPhone2() > 0) && !is_numeric($this->getPhone2())) {
+            $context->addViolationAt('phone2', 'El teléfono 2 no es válido', array(), null);
+            $validation = false;
+        }
+        return $validation;
+    }
+
+    /**
+     * Validator method for checking the DNI/CIF given
+     */
+    public function validDni(ExecutionContextInterface $context)
+    {
+        $dni = $this->getNif();
+
+        if ((strlen($dni) > 0) && (!$this->validateNif($dni))) {
+            if (!$this->validateCif($dni)) {
+                $context->addViolationAt('nif', 'El nif/cif no es válido', array(), null);
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+        else {
+            return true;
+        }
+    }
+
+    /**
+     * CIF Validation
+     */
+    public function validateCif ($cif) {
+        if (strlen($cif) != 9) {
+            return false;
+        }
+        $cif_codes = 'JABCDEFGHI';
+
+        $sum = (string) $this->getCifSum ($cif);
+        $n = (10 - substr ($sum, -1)) % 10;
+
+        if (preg_match ('/^[ABCDEFGHJNPQRSUVW]{1}/', $cif)) {
+            if (in_array ($cif[0], array ('A', 'B', 'E', 'H'))) {
+                // Numerico
+                return ($cif[8] == $n);
+            } elseif (in_array ($cif[0], array ('K', 'P', 'Q', 'S'))) {
+                // Letras
+                return ($cif[8] == $cif_codes[$n]);
+            } else {
+                // Alfanumérico
+                if (is_numeric ($cif[8])) {
+                    return ($cif[8] == $n);
+                } else {
+                    return ($cif[8] == $cif_codes[$n]);
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * NIE, DNI and NIF validation
+     */
+    public function validateNif($nif) {
+        if (strlen($nif) != 9){
+            return false;
+        }
+        $nif_codes = 'TRWAGMYFPDXBNJZSQVHLCKE';
+
+        $sum = (string) $this->getCifSum($nif);
+        $n = 10 - substr($sum, -1);
+
+        if (preg_match ('/^[0-9]{8}[A-Z]{1}$/', $nif)) {
+            // DNIs
+            $num = substr($nif, 0, 8);
+
+            return ($nif[8] == $nif_codes[$num % 23]);
+        } elseif (preg_match ('/^[XYZ][0-9]{7}[A-Z]{1}$/', $nif)) {
+            // NIEs normales
+            $tmp = substr ($nif, 1, 7);
+            $tmp = strtr(substr ($nif, 0, 1), 'XYZ', '012') . $tmp;
+
+            return ($nif[8] == $nif_codes[$tmp % 23]);
+        } elseif (preg_match ('/^[KLM]{1}/', $nif)) {
+            // NIFs especiales
+            return ($nif[8] == chr($n + 64));
+        } elseif (preg_match ('/^[T]{1}[A-Z0-9]{8}$/', $nif)) {
+            // NIE extraño
+            return true;
+        }
+
+        return false;
+    }
+
+    /** 
+     * Auxiliar function for special CIF and NIFS
+     *
+     */
+    private function getCifSum ($cif) {
+        $sum = $cif[2] + $cif[4] + $cif[6];
+
+        for ($i = 1; $i<8; $i += 2) {
+            $tmp = (string) (2 * $cif[$i]);
+
+            $tmp = $tmp[0] + ((strlen ($tmp) == 2) ?  $tmp[1] : 0);
+
+            $sum += $tmp;
+        }
+
+        return $sum;
+    }
+
 }

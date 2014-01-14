@@ -10,50 +10,90 @@ class PatientType extends AbstractType
 {
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
-		$builder->add('nif', 'text');
-		$builder->add('name', 'text');
-		$builder->add('surname1', 'text');
-		$builder->add('surname2', 'text');
+		$builder->add('nif', 'text', array(
+			'required' => false
+		));
+		$builder->add('name', 'text', array(
+			'required' => false
+		));
+		$builder->add('surname1', 'text', array(
+			'required' => false
+		));
+		$builder->add('surname2', 'text', array(
+			'required' => false
+		));
 		$builder->add('civil_status', 'entity', array(
 			'class' => 'DentoletiGeneralBundle:CivilStatus',
 			'property' => 'status',
-			'empty_value' => '-- ESTADO CIVIL --'
+			'empty_value' => '-- ESTADO CIVIL --',
+			'required' => false
 		));
 		$builder->add('birthday', 'date', array(
 		  'widget' => 'single_text',
 		  'format' => 'd/MM/y',
-		  ));
-		$builder->add('phone1', 'text');
-		$builder->add('phone2', 'text');
-		$builder->add('email', 'email');
-		$builder->add('address', 'text');
+		  'required' => false
+		));
+		$builder->add('phone1', 'text', array(
+			'required' => false
+		));
+		$builder->add('phone2', 'text', array(
+			'required' => false
+		));
+		$builder->add('email', 'email', array(
+			'required' => false
+		));
+		$builder->add('address', 'text', array(
+			'required' => false
+		));
 		$builder->add('country', 'entity', array(
 			'class' => 'DentoletiGeneralBundle:Country',
 			'property' => 'name',
 			'empty_value' => '-- PAÍS --',
+			'required' => false
 		));
 		$builder->add('province', 'entity', array(
 			'class' => 'DentoletiGeneralBundle:Province',
 			'property' => 'name',
 			'empty_value' => '-- PROVINCIA --',
+			'required' => false
 		));
 		$builder->add('town', 'entity', array(
 			'class' => 'DentoletiGeneralBundle:Town',
 			'property' => 'name',
 			'empty_value' => '-- POBLACIÓN --',
+			'required' => false
 		));
-		$builder->add('postalCode', 'text');
-		$builder->add('occupation', 'text');
-		$builder->add('allergies', 'text');
-		$builder->add('diseases', 'text');
-		$builder->add('vih', 'checkbox', array('required' => false));
-		$builder->add('observations', 'textarea');
-		$builder->add('lastVisit', 'text');
-		$builder->add('revisionFrequency', 'text');
-		$builder->add('treatment', 'textarea');
+		$builder->add('postalCode', 'text', array(
+			'required' => false
+		));
+		$builder->add('occupation', 'text', array(
+			'required' => false
+		));
+		$builder->add('allergies', 'text', array(
+			'required' => false
+		));
+		$builder->add('diseases', 'text', array(
+			'required' => false
+		));
+		$builder->add('vih', 'checkbox', array(
+			'required' => false
+		));
+		$builder->add('observations', 'textarea', array(
+			'required' => false
+		));
+		$builder->add('lastVisit', 'text', array(
+			'required' => false
+		));
+		$builder->add('revisionFrequency', 'text', array(
+			'required' => false
+		));
+		$builder->add('treatment', 'textarea', array(
+			'required' => false
+		));
 		$builder->add('meeting', 'entity', array(
 			'class' => 'DentoletiGeneralBundle:Meeting',
 			'property' => 'theway',
+			'required' => false
 		));
 
 		$builder->add('save', 'submit');

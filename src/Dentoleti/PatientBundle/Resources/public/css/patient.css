@@ -37,7 +37,7 @@
 }
 
 .col2-two {
-	float: left;
+	/* float: left;*/
 	padding: 3px;
 }
 
@@ -52,6 +52,20 @@
 
 .col3-three {
 	float: left;
+}
+
+.label {
+	float: left;
+	top: 13px;
+}
+
+.data {
+	float: left;
+}
+
+.error {
+	clear: both;
+	text-align: right;
 }
 
 #buttons {
