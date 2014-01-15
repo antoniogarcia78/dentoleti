@@ -5,6 +5,7 @@ namespace Dentoleti\PatientBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Dentoleti\PatientBundle\Entity\Patient;
 use Dentoleti\PatientBundle\Form\Patient\PatientType;
+use Dentoleti\PatientBundle\Helper\PatientsUtils;
 
 class DefaultController extends Controller
 {
@@ -74,6 +75,9 @@ class DefaultController extends Controller
         
         $form->handleRequest($petition);
 
+        $em->persist($patient);
+        $em->flush();
+        
         return $this->render('DentoletiPatientBundle:Default:patient.html.twig', array(
             'form' => $form->createView()
         ));
@@ -100,7 +104,11 @@ class DefaultController extends Controller
     }
 
     /**
-     * Delete method for deleting one patient given by the id
+     * ATTENTION
+     *
+     * Delete method for deleting one patient given by the id.
+     * This will delete the record and all the relations with other entities
+     * so that, USE IT WITH CAREFULL
      */
     public function deleteAction($id)
     {
@@ -116,6 +124,32 @@ class DefaultController extends Controller
             $em->remove($patient);
             $em->flush();
         }
+
+        //TODO Pendiente de ver donde redirigir la petición
+        return $this->forward('DentoletiPatientBundle:Default:list');
+    }
+
+    /**
+     * This method is used to set the patient's information to default values
+     * The intention of this method is to delete the information but not its relationships
+     */
+    public function eraseAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $patient = $em->getRepository('DentoletiPatientBundle:Patient')
+            ->findOneById($id);
+
+        if (!$patient) {
+            throw $this->createNotFoundException('No existe el paciente');
+        }
+
+        $utils = new PatientsUtils();
+
+        $patient = $utils->setNullPatient($patient);
+
+        $em->persist($patient);
+        $em->flush();
 
         //TODO Pendiente de ver donde redirigir la petición
         return $this->forward('DentoletiPatientBundle:Default:list');

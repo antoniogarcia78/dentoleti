@@ -11,25 +11,55 @@
 		<fieldset>
 			<legend>Datos personales</legend>
 			<div class="col1-two">
-				Nif: <span>{{ patient.nif }}</span>
+				<div class="label">
+					Nif: 
+				</div>
+				<div class="data">
+					<span>{{ patient.nif }}</span>
+				</div>
 			</div>
 			<div class="col2-two">
-				Nombre: <span>{{ patient.name }}</span>
+				<div class="label">
+					Nombre: 
+				</div>
+				<div class="data">
+					<span>{{ patient.name }}</span>
+				</div>
 			</div>
 			<br>
 			<div class="col1-two">
-				Apellidos: <span>{{ patient.surname1 }} {{ patient.surname2 }}</span>
+				<div class="label">
+					Apellidos: 
+				</div>
+				<div class="data">
+					<span>{{ patient.surname1 }} {{ patient.surname2 }}</span>
+				</div>
 			</div>
 			<br>
 			<div class="col1-two">
-				Estado civil: <span>{{ patient.civilStatus }}</span>
+				<div class="label">
+					Estado civil: 
+				</div>
+				<div class="data">
+					<span>{{ patient.civilStatus }}</span>
+				</div>
 			</div>
 			<div class="col2-two">
-				Fecha de nacimiento: <span>{{ patient.birthday | date('d-m-Y') }}</span>
+				<div class="label">
+					Fecha de nacimiento: 
+				</div>
+				<div class="data">
+					<span>{{ patient.birthday | date('d-m-Y') }}</span>
+				</div>
 			</div>
 			<br>
 			<div class="col1-two">
-				Ocupación: <span>{{ patient.occupation }}</span>
+				<div class="label">
+					Ocupación: 
+				</div>
+				<div class="data">
+					<span>{{ patient.occupation }}</span>
+				</div>
 			</div>
 		</fieldset>
 	</div>
@@ -37,28 +67,68 @@
 		<fieldset>
 			<legend>Datos de contacto</legend>
 			<div class="col1-two">
-				Teléfono 1: <span>{{ patient.phone1 }}</span>
+				<div class="label">
+					Teléfono 1: 
+				</div>
+				<div class="data">
+					<span>{{ patient.phone1 }}</span>
+				</div>
 			</div>
 			<div class="col2-two">
-				Teléfono 2: <span>{{ patient.phone2 }}</span>
+				<div class="label">
+					Teléfono 2: 
+				</div>
+				<div class="data">
+					<span>{{ patient.phone2 }}</span>
+				</div>
 			</div>
 			<div class="col1-two">
-				Email: <span>{{ patient.email }}</span>
+				<div class="label">
+					Email: 
+				</div>
+				<div class="data">
+					<span>{{ patient.email }}</span>
+				</div>
 			</div>
 			<div class="col2-two">
-				Dirección: <span>{{ patient.address }}</span>
+				<div class="label">
+					Dirección: 
+				</div>
+				<div class="data">
+					<span>{{ patient.address }}</span>
+				</div>
 			</div>
 			<div class="col1-two">
-				País: <span>{{ patient.country }}</span>
+				<div class="label">
+					País: 
+				</div>
+				<div class="data">
+					<span>{{ patient.country }}</span>
+				</div>
 			</div>
 			<div class="col2-two">
-				Provincia: <span>{{ patient.province }}</span>
+				<div class="label">
+					Provincia: 
+				</div>
+				<div class="data">
+					<span>{{ patient.province }}</span>
+				</div>
 			</div>
 			<div class="col1-two">
-				Población: <span>{{ patient.town }}</span>
+				<div class="label">
+					Población: 
+				</div>
+				<div class="data">
+					<span>{{ patient.town }}</span>
+				</div>
 			</div>
 			<div class="col2-two">
-				Código postal: <span>{{ patient.postalCode }}</span>
+				<div class="label">
+					Código postal: 
+				</div>
+				<div class="data">
+					<span>{{ patient.postalCode }}</span>
+				</div>
 			</div>
 		</fieldset>
 	</div>
@@ -66,29 +136,69 @@
 		<fieldset>
 		<legend>Datos clínicos</legend>
 		<div class="col1-three">
-			Alergias: <span>{{ patient.allergies }}</span>
+			<div class="label">
+				Alergias: 
+			</div>
+			<div class="data">
+				<span>{{ patient.allergies }}</span>
+			</div>
 		</div>
 		<div class="col2-three">
-			Enfermedades: <span>{{ patient.diseases }}</span>
+			<div class="label">
+				Enfermedades: 
+			</div>
+			<div class="data">
+				<span>{{ patient.diseases }}</span>
+			</div>
 		</div>
 		<div class="col3-three">
-			Vih: <span>{{ patient.vih }}</span>
-		</div>
-		<div class="col1-three">
-			Observaciones: <span>{{ patient.observations }}</span>
+			<div class="label">
+				Vih: 
+			</div>
+			<div class="data">
+				<span>{{ patient.vih }}</span>
+			</div>
 		</div>
 		{# Como no hay más elementos en las otras columnas, volvemos a poner un col1-three #}
 		<div class="col1-three">
-			Última visita: <span>{{ patient.lastVisit }}</span>
+			<div class="label">
+				Última visita: 
+			</div>
+			<div class="data">
+				<span>{{ patient.lastVisit }}</span>
+			</div>
 		</div>
 		<div class="col2-three">
-			Frecuencia: <span>{{ patient.revisionFrequency }}</span>
+			<div class="label">
+				Frecuencia: 
+			</div>
+			<div class="data">
+				<span>{{ patient.revisionFrequency }}</span>
+			</div>
 		</div>
 		<div class="col3-three">
-			Forma de conocernos: <span>{{ patient.meeting }}</span>
+			<div class="label">
+				Forma de conocernos: 
+			</div>
+			<div class="data">
+				<span>{{ patient.meeting }}</span>
+			</div>
 		</div>
 		<div class="col1-three">
-			Tratamiento: <span>{{ patient.treatment }}</span>
+			<div class="label">
+				Tratamiento: 
+			</div>
+			<div class="data">
+				<span>{{ patient.treatment }}</span>
+			</div>
+		</div>
+		<div class="col2-three">
+			<div class="label">
+				Observaciones: 
+			</div>
+			<div class="data">
+				<span>{{ patient.observations }}</span>
+			</div>
 		</div>
 		</fieldset>
 	</div>

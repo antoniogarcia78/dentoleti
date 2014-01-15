@@ -17,3 +17,7 @@ patient_view:
 patient_delete:
     pattern: /delete/{id}
     defaults: { _controller: DentoletiPatientBundle:Default:delete }
+
+patient_erase:
+    pattern: /erase/{id}
+    defaults: { _controller: DentoletiPatientBundle:Default:erase }

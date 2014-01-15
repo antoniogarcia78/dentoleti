@@ -60,6 +60,7 @@ class Patient
 
     /**
      * @ORM\ManyToOne(targetEntity="Dentoleti\GeneralBundle\Entity\CivilStatus")
+     * @ORM\JoinColumn(name="civilStatus_id", referencedColumnName="id", nullable=true)
      */
     private $civilStatus;
 
@@ -101,16 +102,19 @@ class Patient
 
     /**
      * @ORM\ManyToOne(targetEntity="Dentoleti\GeneralBundle\Entity\Country")
+     * @ORM\JoinColumn(name="country_id", referencedColumnName="id", nullable=true)
      */
     private $country;
 
     /**
      * @ORM\ManyToOne(targetEntity="Dentoleti\GeneralBundle\Entity\Province")
+     * @ORM\JoinColumn(name="province_id", referencedColumnName="id", nullable=true)
      */
     private $province;
 
     /**
      * @ORM\ManyToOne(targetEntity="Dentoleti\GeneralBundle\Entity\Town")
+     * @ORM\JoinColumn(name="town_id", referencedColumnName="id", nullable=true)
      */
     private $town;
 
@@ -179,6 +183,7 @@ class Patient
 
     /**
      * @ORM\ManyToOne(targetEntity="Dentoleti\GeneralBundle\Entity\Meeting")
+     * @ORM\JoinColumn(name="meeting_id", referencedColumnName="id", nullable=true)
      */
     private $meeting;
 
