@@ -8,11 +8,27 @@
 
 {% block article %}
 <div id="search">
-	{% for flashMessage in app.session.flashbag.get('notice') %}
-    	<div class="flash-notice">
-       		{{ flashMessage }}
-    	</div>
-	{% endfor %}
-	{{ form(form) }}
+	{{ form_start(form) }}
+		{{ form_errors(form) }}
+		{% for flashMessage in app.session.flashbag.get('notice') %}
+	    	<div class="flash-notice">
+	       		{{ flashMessage }}
+	    	</div>
+		{% endfor %}
+		<div class="col1-two">
+			<div class="label">
+				{{ form_label(form.surnames) }}
+			</div>
+			<div class="data">
+				{{ form_widget(form.surnames) }}
+				<div class="error">
+					{{ form_errors(form.surnames) }}
+				</div>
+			</div>
+		</div>
+		<div id="buttons">
+			{{ form_widget(form.search) }}
+		</div>
+	{{ form_end(form) }}
 </div>
 {% endblock %}
