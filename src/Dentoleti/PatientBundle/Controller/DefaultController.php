@@ -3,6 +3,7 @@
 namespace Dentoleti\PatientBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Dentoleti\PatientBundle\Entity\Patient;
 use Dentoleti\PatientBundle\Form\Patient\PatientType;
 use Dentoleti\PatientBundle\Helper\PatientsUtils;
@@ -153,5 +154,49 @@ class DefaultController extends Controller
 
         //TODO Pendiente de ver donde redirigir la petición
         return $this->forward('DentoletiPatientBundle:Default:list');
+    }
+
+    /**
+     * This method search a patient by the surnames
+     */
+    public function searchAction(Request $request)
+    {
+        $searchData = array();
+        $form = $this->createFormBuilder($searchData)
+            ->add('surnames', 'text')
+            ->add('search', 'submit')
+            ->getForm();
+
+        if ($request->isMethod('POST')) {
+            // The search params has been submited and we will search the data and 
+            // redirect to the list view
+            $form->bind($request);
+
+            $searchData = $form->getData();
+
+            $em = $this->getDoctrine()->getManager();
+
+            $patients = $em->getRepository('DentoletiPatientBundle:Patient')
+            ->findPatients($searchData['surnames']);
+
+            // If the list is empty, send also a flashmessage to indicate it
+            if (count($patients) == 0) {
+
+                $this->get('session')->getFlashBag()->add(
+                    'notice',
+                    'No hay pacientes'
+                );
+            }
+
+            return $this->render('DentoletiPatientBundle:Default:list.html.twig', array(
+                'patients' => $patients
+            ));
+            
+        }
+        
+        // This wil render the search form
+        return $this->render('DentoletiPatientBundle:Default:search.html.twig', array(
+            'form' => $form->createView()
+        ));
     }
 }
