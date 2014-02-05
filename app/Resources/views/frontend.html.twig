@@ -1,0 +1,45 @@
+{% extends '::main.html.twig' %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletigeneral/css/fonts.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletigeneral/css/menu.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletigeneral/css/frontend.css') }}">
+{% endblock %}
+
+{% block body %}
+<div id="contendor">
+    <header>
+        <h1><a href="{{ path('portada') }}"><img src="{{ asset('bundles/dentoletigeneral/images/logo.png')}}"></a></h1>
+        <nav>
+            <div id='cssmenu'>
+                <ul>
+                    <li class='active'><a href="{{ path('portada') }}"><span>Inicio</span></a></li>
+                    <li class='has-sub'><a href='#'><span>Pacientes</span></a>
+                        <ul>
+                            <li><a href="{{ path('patient_add') }}"><span>Agregar</span></a></li>
+                            <li><a href='{{ path('patients_list') }}'><span>Listado</span></a></li>
+                            <li class='last'><a href='{{ path('patient_search') }}'><span>Búsqueda</span></a></li>
+                        </ul>
+                    </li>
+                    <li class='has-sub'><a href='#'><span>Company</span></a>
+                        <ul>
+                            <li><a href='#'><span>About</span></a></li>
+                            <li class='last'><a href='#'><span>Location</span></a></li>
+                        </ul>
+                    </li>
+                    <li class='last'><a href='#'><span>Contact</span></a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <aside>
+        {% block aside %}{% endblock %}
+    </aside>
+    <section>
+        <article>
+            {# Quizás la portada lleve varios artículos con los últimos historiales vistos #}
+            {% block article %}{% endblock %}
+        </article>
+    </section>
+</div>
+{% endblock %}

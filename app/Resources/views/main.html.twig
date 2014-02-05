@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    {% block stylesheets %}{% endblock %}
+</head>
+<body id="{% block id '' %}">
+    {% block body %}{% endblock %}
+    <footer>
+        &copy; 2013 - {{ 'now' | date('Y') }} <br>
+        Luis González Rodríguez - Connect2tic
+    </footer>
+
+    {% block javascripts %}{% endblock %}
+</body>
+</html>

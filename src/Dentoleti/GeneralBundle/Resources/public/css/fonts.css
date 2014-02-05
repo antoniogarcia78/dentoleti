@@ -1,0 +1,8 @@
+/** From Google fonts... */
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600,800|Coming+Soon|Architects+Daughter);
+
+* {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 0.9em;
+	font-weight: 400;
+}

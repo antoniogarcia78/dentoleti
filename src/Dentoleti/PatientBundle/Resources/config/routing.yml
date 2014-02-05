@@ -1,0 +1,27 @@
+patient_add:
+    pattern:  /add
+    defaults: { _controller: DentoletiPatientBundle:Default:add }
+
+patients_list:
+    pattern: /list
+    defaults: { _controller: DentoletiPatientBundle:Default:list }
+
+patient_edit:
+    pattern: /edit/{id}
+    defaults: { _controller: DentoletiPatientBundle:Default:edit }
+
+patient_view:
+    pattern: /view/{id}
+    defaults: { _controller: DentoletiPatientBundle:Default:view }
+
+patient_delete:
+    pattern: /delete/{id}
+    defaults: { _controller: DentoletiPatientBundle:Default:delete }
+
+patient_erase:
+    pattern: /erase/{id}
+    defaults: { _controller: DentoletiPatientBundle:Default:erase }
+
+patient_search:
+    pattern: /search
+    defaults: { _controller: DentoletiPatientBundle:Default:search }

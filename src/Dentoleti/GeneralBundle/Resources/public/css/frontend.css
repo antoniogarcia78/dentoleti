@@ -1,0 +1,33 @@
+/**
+ * CSS general para el frontend
+ */
+
+* {
+	list-style:none;
+	text-decoration:none;
+	margin:0;
+	padding:0;
+}
+
+header,
+footer,
+aside,
+nav,
+section,
+article {
+	display: block;
+}
+
+header {
+	padding: 2%;
+}
+
+section {
+	clear: both;
+}
+
+footer {
+	clear: both;
+	text-align: center;
+	padding: 2%;
+}

@@ -1,0 +1,3 @@
+portada:
+    pattern:  /
+    defaults: { _controller: DentoletiGeneralBundle:Default:index }

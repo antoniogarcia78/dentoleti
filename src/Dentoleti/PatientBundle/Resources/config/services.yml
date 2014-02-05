@@ -1,0 +1,7 @@
+parameters:
+#    dentoleti_patient.example.class: Dentoleti\PatientBundle\Example
+
+services:
+#    dentoleti_patient.example:
+#        class: %dentoleti_patient.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
