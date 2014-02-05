@@ -28,6 +28,15 @@ class Country
      */
     private $name;
 
+    /**
+     * Set Id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
 
     /**
      * Get id
