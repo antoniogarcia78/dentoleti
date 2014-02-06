@@ -24,9 +24,9 @@ class Speciality
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255)
      */
-    private $description;
+    private $name;
 
 
     /**
@@ -40,25 +40,25 @@ class Speciality
     }
 
     /**
-     * Set description
+     * Set name
      *
-     * @param string $description
+     * @param string $name
      * @return Speciality
      */
-    public function setDescription($description)
+    public function setName($name)
     {
-        $this->description = $description;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get description
+     * Get name
      *
      * @return string 
      */
-    public function getDescription()
+    public function getName()
     {
-        return $this->description;
+        return $this->name;
     }
 }
