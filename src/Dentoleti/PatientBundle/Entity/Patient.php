@@ -119,9 +119,8 @@ class Patient
     private $town;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="postal_code", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="Dentoleti\GeneralBundle\Entity\PostalCode")
+     * @ORM\JoinColumn(name="postalcode_id", referencedColumnName="id", nullable=true)
      */
     private $postalCode;
 
