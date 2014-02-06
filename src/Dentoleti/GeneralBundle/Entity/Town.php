@@ -36,6 +36,15 @@ class Town
      */
     private $province;
 
+    /**
+     * Set Id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
 
     /**
      * Get id
