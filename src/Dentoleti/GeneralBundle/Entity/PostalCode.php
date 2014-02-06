@@ -24,9 +24,9 @@ class PostalCode
     /**
      * @var string
      *
-     * @ORM\Column(name="codpostal", type="string", length=5)
+     * @ORM\Column(name="postalCode", type="string", length=5)
      */
-    private $codpostal;
+    private $postalCode;
 
     /**
      * @var string
@@ -57,26 +57,26 @@ class PostalCode
     }
 
     /**
-     * Set codpostal
+     * Set postalCode
      *
-     * @param string $codpostal
+     * @param string $postalCode
      * @return PostalCode
      */
-    public function setCodpostal($codpostal)
+    public function setPostalCode($postalCode)
     {
-        $this->codpostal = $codpostal;
+        $this->postalCode = $postalCode;
 
         return $this;
     }
 
     /**
-     * Get codpostal
+     * Get postalCode
      *
      * @return string 
      */
-    public function getCodpostal()
+    public function getPostalCode()
     {
-        return $this->codpostal;
+        return $this->postalCode;
     }
 
     /**
@@ -100,5 +100,13 @@ class PostalCode
     public function getTown()
     {
         return $this->town;
+    }
+
+    /**
+     * Método toString
+     */
+    public function __toString()
+    {
+        return $this->getPostalCode();
     }
 }

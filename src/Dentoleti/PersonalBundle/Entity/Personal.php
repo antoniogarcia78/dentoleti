@@ -47,7 +47,7 @@ class Personal
      *
      * @ORM\Column(name="postal_code", type="integer", nullable=true)
      */
-    private $postalcode;
+    private $postalCode;
 
     /**
      * @ORM\ManyToOne(targetEntity="Dentoleti\GeneralBundle\Entity\Town")
@@ -79,9 +79,9 @@ class Personal
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="datetime")
+     * @ORM\Column(name="registrationDate", type="datetime")
      */
-    private $date;
+    private $registrationDate;
 
     /**
      * @var boolean
@@ -171,26 +171,26 @@ class Personal
     }
 
     /**
-     * Set postalcode
+     * Set postalCode
      *
-     * @param string $postalcode
+     * @param string $postalCode
      * @return Personal
      */
-    public function setPostalcode($postalcode)
+    public function setPostalCode($postalCode)
     {
-        $this->postalcode = $postalcode;
+        $this->postalCode = $postalCode;
 
         return $this;
     }
 
     /**
-     * Get postalcode
+     * Get postalCode
      *
      * @return string 
      */
-    public function getPostalcode()
+    public function getPostalCode()
     {
-        return $this->postalcode;
+        return $this->postalCode;
     }
 
     /**
@@ -286,26 +286,26 @@ class Personal
     }
 
     /**
-     * Set date
+     * Set registrationDate
      *
-     * @param \DateTime $date
+     * @param \DateTime $registrationDate
      * @return Personal
      */
-    public function setDate($date)
+    public function setRegistrationDate($registrationDate)
     {
-        $this->date = $date;
+        $this->registrationDate = $registrationDate;
 
         return $this;
     }
 
     /**
-     * Get date
+     * Get registrationDate
      *
      * @return \DateTime 
      */
-    public function getDate()
+    public function getRegistrationDate()
     {
-        return $this->date;
+        return $this->registrationDate;
     }
 
     /**

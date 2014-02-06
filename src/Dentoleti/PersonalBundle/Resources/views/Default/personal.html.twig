@@ -1,0 +1,132 @@
+{% extends '::frontend.html.twig' %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletipatient/css/patient.css') }}">
+	{{ parent() }}
+{% endblock %}
+
+{% block article %}
+<div id="patient">
+	{{ form_start(form) }}
+		{{ form_errors(form) }}
+		{% for flashMessage in app.session.flashbag.get('notice') %}
+    		<div class="flash-notice">
+        		{{ flashMessage }}
+    		</div>
+		{% endfor %}
+
+		<br>
+		<div id="personal">
+			<fieldset>
+				<legend>Datos del personal</legend>
+				<div class="col1-two">
+					<div class="label">
+						{{ form_label(form.name) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.name) }}
+						<div class="error">
+							{{ form_errors(form.name) }}
+						</div>
+					</div>
+					
+				</div>
+				<div class="col2-two">
+					<div class="label">
+						{{ form_label(form.address) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.address) }}
+						<div class="error">
+							{{ form_errors(form.address) }}
+						</div>
+					</div>
+				</div>
+				<div class="col2-two">
+					<div class="label">
+						{{ form_label(form.position) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.position) }}
+						<div class="error">
+							{{ form_errors(form.position) }}
+						</div>
+					</div>
+				</div>
+				<div class="col1-two">
+					<div class="label">
+						{{ form_label(form.phone1) }}
+					</div>
+					<div class="data">				
+						{{ form_widget(form.phone1) }}
+						<div class="error">
+							{{ form_errors(form.phone1) }}
+						</div>
+					</div>
+				</div>
+				<div class="col2-two">
+					<div class="label">
+						{{ form_label(form.phone2) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.phone2) }}
+						<div class="error">
+							{{ form_errors(form.phone2) }}
+						</div>
+					</div>
+				</div>
+				<div class="col2-two">
+					<div class="label">
+						{{ form_label(form.address) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.address) }}
+						<div class="error">
+							{{ form_errors(form.address) }}
+						</div>
+					</div>
+				</div>
+				<div class="col1-two">
+					<div class="label">
+						{{ form_label(form.postalCode) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.postalCode) }}
+						<div class="error">
+							{{ form_errors(form.postalCode) }}
+						</div>
+					</div>
+				</div>
+				<div class="col2-two">
+					<div class="label">
+						{{ form_label(form.town) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.town) }}
+						<div class="error">
+							{{ form_errors(form.town) }}
+						</div>					
+					</div>
+				</div>
+				<div class="col1-two">
+					<div class="label">
+						{{ form_label(form.observations) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.observations) }}
+						<div class="error">
+							{{ form_errors(form.observations) }}
+						</div>
+					</div>
+				</div>
+			</fieldset>
+		</div>
+			</fieldset>
+		</div>
+		<div id="buttons">
+			{{ form_widget(form.save) }}
+		</div>
+	{{ form_rest(form) }}
+	{{ form_end(form) }}
+</div>
+{% endblock %}
