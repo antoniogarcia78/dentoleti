@@ -29,7 +29,7 @@ class PatientsUtils
 	}
 
 	/**
-	 * This method set the $patient to dafault values
+	 * This method set the $patient to null values
 	 */
 	public function setNullPatient($patient)
 	{
