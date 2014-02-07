@@ -1,12 +1,12 @@
 {% extends '::frontend.html.twig' %}
 
 {% block stylesheets %}
-	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletipatient/css/patient.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletipersonal/css/personal.css') }}">
 	{{ parent() }}
 {% endblock %}
 
 {% block article %}
-<div id="patient">
+<div id="personal">
 	{{ form_start(form) }}
 		{{ form_errors(form) }}
 		{% for flashMessage in app.session.flashbag.get('notice') %}
@@ -16,7 +16,7 @@
 		{% endfor %}
 
 		<br>
-		<div id="personal">
+		<div id="info">
 			<fieldset>
 				<legend>Datos del personal</legend>
 				<div class="col1-two">
@@ -75,17 +75,6 @@
 						</div>
 					</div>
 				</div>
-				<div class="col2-two">
-					<div class="label">
-						{{ form_label(form.address) }}
-					</div>
-					<div class="data">
-						{{ form_widget(form.address) }}
-						<div class="error">
-							{{ form_errors(form.address) }}
-						</div>
-					</div>
-				</div>
 				<div class="col1-two">
 					<div class="label">
 						{{ form_label(form.postalCode) }}
@@ -119,8 +108,6 @@
 						</div>
 					</div>
 				</div>
-			</fieldset>
-		</div>
 			</fieldset>
 		</div>
 		<div id="buttons">
