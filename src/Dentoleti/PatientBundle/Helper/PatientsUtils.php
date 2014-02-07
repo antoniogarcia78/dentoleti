@@ -6,22 +6,6 @@ namespace Dentoleti\PatientBundle\Helper;
  */
 class PatientsUtils
 {
-	const NIF = "00000000T";
-	const NAME = "Default name";
-	const SURNAME = "Default surname";
-	const CIVIL_STATUS = "0";
-	const BIRTHDAY = "01/01/1930";
-	const PHONE = "600000000";
-	const EMAIL = "nadie@default.com";
-	const ADDRESS = "Default street";
-	const COUNTRY = "0";
-	const PROVINCE = "0";
-	const TOWN = "0";
-	const POSTAL_CODE = "00000";
-	const OCCUPATION = "Default occupation";
-	const ALLERGIES = "Default allergies";
-	const DISEASES = "Default diseases";
-	const VIH = "false";
 	
 	function __construct()
 	{
