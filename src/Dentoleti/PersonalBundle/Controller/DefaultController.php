@@ -101,4 +101,23 @@ class DefaultController extends Controller
             'form' => $form->createView()
         ));
     }
+
+    /**
+     * Method for view all the patient's information
+     */
+    public function viewAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $personal = $em->getRepository('DentoletiPersonalBundle:Personal')
+            ->findOneById($id);
+
+        if (!$personal) {
+            throw $this->createNotFoundException('No existe el personal');
+        }
+
+        return $this->render('DentoletiPersonalBundle:Default:personal_view.html.twig', array(
+            'personal' => $personal
+        ));
+    }
 }

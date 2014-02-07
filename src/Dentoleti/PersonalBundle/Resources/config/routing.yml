@@ -9,3 +9,7 @@ personal_list:
 personal_search:
     pattern: /search
     defaults: { _controller: DentoletiPersonalBundle:Default:search }
+
+personal_view:
+    pattern: /view/{id}
+    defaults: { _controller: DentoletiPersonalBundle:Default:view }
