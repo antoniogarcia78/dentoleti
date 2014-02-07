@@ -6,6 +6,10 @@ namespace Dentoleti\PersonalBundle\Helper;
  */
 class PersonalUtils
 {
+	function __construct()
+	{
+		//Empty
+	}
 
 	/**
 	 * This method set the $personal to null values
