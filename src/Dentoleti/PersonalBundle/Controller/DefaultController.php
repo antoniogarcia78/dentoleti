@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Dentoleti\PersonalBundle\Form\Personal\PersonalType;
 use Dentoleti\PersonalBundle\Entity\Personal;
+use Dentoleti\PersonalBundle\Helper\PersonalUtils;
 
 class DefaultController extends Controller
 {
@@ -147,6 +148,57 @@ class DefaultController extends Controller
         return $this->render('DentoletiPersonalBundle:Default:personal.html.twig', array(
             'form' => $form->createView()
         ));
+    }
 
+    /**
+     * ATTENTION
+     *
+     * Delete method for deleting one personal given by the id.
+     * This will delete the record and all the relations with other entities
+     * so that, USE IT WITH CAREFULL
+     */
+    public function deleteAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $personal = $em->getRepository('DentoletiPersonalBundle:Personal')
+            ->findOneById($id);
+
+        if (!$personal) {
+            throw $this->createNotFoundException('No existe el personal');
+        }
+        else {
+            $em->remove($personal);
+            $em->flush();
+        }
+
+        //TODO Pendiente de ver donde redirigir la petición
+        return $this->forward('DentoletiPersonalBundle:Default:list');
+    }
+
+    /**
+     * This method is used to set the personal's information to default values
+     * The intention of this method is to delete the information but not its relationships
+     */
+    public function eraseAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $personal = $em->getRepository('DentoletiPersonalBundle:Personal')
+            ->findOneById($id);
+
+        if (!$personal) {
+            throw $this->createNotFoundException('No existe el personal');
+        }
+
+        $utils = new PersonalUtils();
+
+        $personal = $utils->setNullPersonal($personal);
+
+        $em->persist($personal);
+        $em->flush();
+
+        //TODO Pendiente de ver donde redirigir la petición
+        return $this->forward('DentoletiPersonalBundle:Default:list');
     }
 }

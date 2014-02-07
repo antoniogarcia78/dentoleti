@@ -17,3 +17,11 @@ personal_view:
 personal_edit:
     pattern: /edit/{id}
     defaults: { _controller: DentoletiPersonalBundle:Default:edit }
+
+personal_delete:
+    pattern: /delete/{id}
+    defaults: { _controller: DentoletiPersonalBundle:Default:delete }
+
+personal_erase:
+    pattern: /erase/{id}
+    defaults: { _controller: DentoletiPersonalBundle:Default:erase }
