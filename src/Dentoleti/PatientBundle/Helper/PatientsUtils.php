@@ -2,8 +2,8 @@
 namespace Dentoleti\PatientBundle\Helper;
 
 /**
-* Class helper for Patients
-*/
+ * Helper class for Patients
+ */
 class PatientsUtils
 {
 	const NIF = "00000000T";
