@@ -8,6 +8,9 @@ use Dentoleti\PersonalBundle\Entity\Personal;
 
 class DefaultController extends Controller
 {
+    /**
+     * Add a new personal in the system
+     */
     public function addAction()
     {
         $petition = $this->getRequest();
@@ -37,5 +40,20 @@ class DefaultController extends Controller
         return $this->render('DentoletiPersonalBundle:Default:personal.html.twig', array(
         	'form' => $form->createView()
         ));
+    }
+
+    /**
+     * List all the personal in the system
+     */
+    public function listAction()
+    {
+      $em = $this->getDoctrine()->getManager();
+
+      $personalList = $em->getRepository('DentoletiPersonalBundle:Personal')
+        ->findActivePersonal();
+
+      return $this->render('DentoletiPersonalBundle:Default:list.html.twig', array(
+        'personalList' => $personalList
+      ));
     }
 }

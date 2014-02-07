@@ -1,3 +1,7 @@
 personal_add:
     pattern:  /add
     defaults: { _controller: DentoletiPersonalBundle:Default:add }
+
+personal_list:
+    pattern: /list
+    defaults: { _controller: DentoletiPersonalBundle:Default:list }
