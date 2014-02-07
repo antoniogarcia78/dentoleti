@@ -3,6 +3,7 @@
 namespace Dentoleti\PersonalBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Dentoleti\PersonalBundle\Form\Personal\PersonalType;
 use Dentoleti\PersonalBundle\Entity\Personal;
 
@@ -55,5 +56,49 @@ class DefaultController extends Controller
       return $this->render('DentoletiPersonalBundle:Default:list.html.twig', array(
         'personalList' => $personalList
       ));
+    }
+
+    /**
+     * This method search a personal by the surnames
+     */
+    public function searchAction(Request $request)
+    {
+        $searchData = array();
+        $form = $this->createFormBuilder($searchData)
+            ->add('name', 'text')
+            ->add('search', 'submit')
+            ->getForm();
+
+        if ($request->isMethod('POST')) {
+            // The search params has been submited and we will search the data and 
+            // redirect to the list view
+            $form->bind($request);
+
+            $searchData = $form->getData();
+
+            $em = $this->getDoctrine()->getManager();
+
+            $personalList = $em->getRepository('DentoletiPersonalBundle:Personal')
+            ->findSearchedPersonal($searchData['name']);
+
+            // If the list is empty, send also a flashmessage to indicate it
+            if (count($personalList) == 0) {
+
+                $this->get('session')->getFlashBag()->add(
+                    'notice',
+                    'No hay personal'
+                );
+            }
+
+            return $this->render('DentoletiPersonalBundle:Default:list.html.twig', array(
+                'personalList' => $personalList
+            ));
+            
+        }
+        
+        // This wil render the search form
+        return $this->render('DentoletiPersonalBundle:Default:search.html.twig', array(
+            'form' => $form->createView()
+        ));
     }
 }

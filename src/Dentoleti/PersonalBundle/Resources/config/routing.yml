@@ -5,3 +5,7 @@ personal_add:
 personal_list:
     pattern: /list
     defaults: { _controller: DentoletiPersonalBundle:Default:list }
+
+personal_search:
+    pattern: /search
+    defaults: { _controller: DentoletiPersonalBundle:Default:search }
