@@ -13,3 +13,7 @@ personal_search:
 personal_view:
     pattern: /view/{id}
     defaults: { _controller: DentoletiPersonalBundle:Default:view }
+
+personal_edit:
+    pattern: /edit/{id}
+    defaults: { _controller: DentoletiPersonalBundle:Default:edit }
