@@ -12,6 +12,11 @@
 
 #personal label {
 	padding: 5px;
+	font-size: initial;
+}
+
+#personal input {
+	font-size: inherit;
 }
 
 #info {
@@ -92,8 +97,8 @@
 #personal-data {
 	clear: both;
 	float: left;
-	width: auto;
+	width: 700px;
 }
-#personal-data select {
-	width: 180px;
+#personal-data .data {
+	width: auto;
 }
