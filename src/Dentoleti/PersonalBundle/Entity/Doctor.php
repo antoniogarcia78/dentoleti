@@ -10,7 +10,7 @@ use Dentoleti\PersonalBundle\Entity\Personal;
  * Doctor
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Dentoleti\PersonalBundle\Entity\DoctorRepository")
  */
 class Doctor
 {

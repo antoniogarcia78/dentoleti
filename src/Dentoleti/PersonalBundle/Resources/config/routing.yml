@@ -29,3 +29,7 @@ personal_erase:
 doctor_add:
     pattern: /doctor/add
     defaults: { _controller: DentoletiPersonalBundle:Doctor:add }
+
+doctor_list:
+    pattern: /doctor/list
+    defaults: { _controller: DentoletiPersonalBundle:Doctor:list }

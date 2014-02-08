@@ -1,0 +1,42 @@
+{% extends '::frontend.html.twig' %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletipersonal/css/personal.css') }}">
+	{{ parent() }}
+{% endblock %}
+
+{% block article %}
+	{% for flashMessage in app.session.flashbag.get('notice') %}
+    	<div class="flash-notice">
+       		{{ flashMessage }}
+    	</div>
+	{% endfor %}
+	<table id="list">
+		<tr>
+			<th>id</th>
+			<th>Especialidad</th>
+			<th>Nombre</th>
+			<th>Nº colegiado</th>
+			<th>Comisión</th>
+			<th>Observaciones</th>
+			<th>Ver</th>
+			<th>Editar</th>
+			<th>Eliminar</th>
+		</tr>
+		{% for doctor in doctorslList %}
+		<tr>
+
+			<td>{{ doctor.id }}</td>
+			<td>{{ doctor.speciality }}</td>
+			<td>{{ doctor.personal.name }}</td>
+			<td>{{ doctor.referee }}</td>
+			<td>{{ doctor.commission }}</td>
+			<td>{{ doctor.observations }}</td>
+			<td><a href="{{ path('personal_view', { 'id': doctor.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/eye.png') }}"></a></td>
+			<td><a href="{{ path('personal_edit', { 'id': doctor.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/edit.png') }}"></a></td>
+			<td><a href="{{ path('personal_erase', { 'id': doctor.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/erase.png') }}"></a></td>
+		</tr>
+		{% endfor %}		
+	</table>
+	
+{% endblock %}

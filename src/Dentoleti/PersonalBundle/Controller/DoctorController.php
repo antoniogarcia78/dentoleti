@@ -42,4 +42,19 @@ class DoctorController extends Controller
         	'form' => $form->createView()
         ));
     }
+
+    /**
+     * List all the personal in the system
+     */
+    public function listAction()
+    {
+      $em = $this->getDoctrine()->getManager();
+
+      $doctorslList = $em->getRepository('DentoletiPersonalBundle:Doctor')
+        ->findActiveDoctors();
+
+      return $this->render('DentoletiPersonalBundle:Default:doctors_list.html.twig', array(
+        'doctorslList' => $doctorslList
+      ));
+    }
 }
