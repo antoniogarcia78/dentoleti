@@ -41,7 +41,10 @@ class PersonalType extends AbstractType
 			'required' => false
 		));
 
-		$builder->add('save', 'submit');
+		if ($options['entity'] == 'Personal')
+		{
+			$builder->add('save', 'submit');
+		}
 	}
 
 	public function getName()
@@ -52,6 +55,7 @@ class PersonalType extends AbstractType
 	public function setDefaultOptions(OptionsResolverInterface $resolver)
    	{
    		$resolver->setDefaults(array(
+   			'entity' => 'Personal',
    	  		'data_class' => 'Dentoleti\PersonalBundle\Entity\Personal',
       	));
    	}

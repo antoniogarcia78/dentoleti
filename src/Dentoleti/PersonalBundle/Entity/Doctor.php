@@ -3,6 +3,7 @@
 namespace Dentoleti\PersonalBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use Dentoleti\PersonalBundle\Entity\Personal;
 
 /**
@@ -25,8 +26,8 @@ class Doctor
     /**
      * @var string
      *
-     * @OneToOne(targetEntity="Personal")
-     * @JoinColumn(name="personal_id", referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="Personal", cascade={"persist"})
+     * @ORM\JoinColumn(name="personal_id", referencedColumnName="id")
      * @Assert\Type(type="Dentoleti\PersonalBundle\Entity\Personal")
      */
     private $personal;

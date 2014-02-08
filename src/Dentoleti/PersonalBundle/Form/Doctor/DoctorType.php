@@ -4,14 +4,13 @@ namespace Dentoleti\PersonalBundle\Form\Doctor;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Dentoleti\PersonalBundle\Form\Personal\PersonalType;
 
 class DoctorType extends AbstractType
 {
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
-		$builder->add('personal', 'text', array(
-			'required' => false
-		));
+		$builder->add('personal', new PersonalType(), array('entity' => 'Doctor'));
 		$builder->add('speciality', 'text', array(
 			'required' => false
 		));
