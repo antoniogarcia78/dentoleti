@@ -22,7 +22,7 @@ class DefaultController extends Controller
 		$form = $this->createForm(new PersonalType(), $personal);
 		
 		$personal->setRegistrationDate(new \DateTime());
-    $personal->setActive(true);
+        $personal->setActive(true);
 
 		$form->handleRequest($petition);
 
