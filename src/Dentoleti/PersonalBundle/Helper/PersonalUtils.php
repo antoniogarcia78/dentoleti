@@ -14,7 +14,7 @@ class PersonalUtils
 	/**
 	 * This method set the $personal to null values
 	 */
-	public function setNullPersonal($personal)
+	public function erasePersonal($personal)
 	{
 		$personal->setName(null);
 		$personal->setPosition(null);
@@ -25,8 +25,19 @@ class PersonalUtils
 		$personal->setPhone2(null);
 		$personal->setObservations(null);
 		$personal->setRegistrationDate(null);
-		$personal->setActive(null);
+		$personal->setActive(0);
 
 		return $personal;
+	}
+
+	public function eraseDoctor($doctor)
+	{
+		$doctor->setPersonal($this->erasePersonal($doctor->getPersonal()));
+		$doctor->setSpeciality(null);
+		$doctor->setReferee(null);
+		$doctor->setObservations(null);
+		$doctor->setCommission(null);
+
+		return $doctor;
 	}
 }

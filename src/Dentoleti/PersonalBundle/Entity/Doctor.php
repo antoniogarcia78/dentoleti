@@ -27,7 +27,7 @@ class Doctor
      * @var string
      *
      * @ORM\OneToOne(targetEntity="Personal", cascade={"persist"})
-     * @ORM\JoinColumn(name="personal_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="personal_id", referencedColumnName="id", nullable=true)
      * @Assert\Type(type="Dentoleti\PersonalBundle\Entity\Personal")
      */
     private $personal;

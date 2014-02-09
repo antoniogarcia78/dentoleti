@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Dentoleti\PersonalBundle\Form\Doctor\DoctorType;
 use Dentoleti\PersonalBundle\Entity\Doctor;
+use Dentoleti\PersonalBundle\Helper\PersonalUtils;
 
 class DoctorController extends Controller
 {
@@ -148,5 +149,57 @@ class DoctorController extends Controller
         return $this->render('DentoletiPersonalBundle:Default:search.html.twig', array(
             'form' => $form->createView()
         ));
+    }
+
+    /**
+     * ATTENTION
+     *
+     * Delete method for deleting one doctor given by the id.
+     * This will delete the record and all the relations with other entities
+     * so that, USE IT WITH CAREFULL
+     */
+    public function deleteAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $doctor = $em->getRepository('DentoletiPersonalBundle:Doctor')
+            ->findOneById($id);
+
+        if (!$doctor) {
+            throw $this->createNotFoundException('No existe el doctor');
+        }
+        else {
+            $em->remove($doctor);
+            $em->flush();
+        }
+
+        //TODO Pendiente de ver donde redirigir la petición
+        return $this->forward('DentoletiPersonalBundle:Doctor:list');
+    }
+
+    /**
+     * This method is used to set the doctors's information to default values
+     * The intention of this method is to delete the information but not its relationships
+     */
+    public function eraseAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $doctor = $em->getRepository('DentoletiPersonalBundle:Doctor')
+            ->findOneById($id);
+
+        if (!$doctor) {
+            throw $this->createNotFoundException('No existe el doctor');
+        }
+
+        $utils = new PersonalUtils();
+
+        $doctor = $utils->eraseDoctor($doctor);
+
+        $em->persist($doctor);
+        $em->flush();
+
+        //TODO Pendiente de ver donde redirigir la petición
+        return $this->forward('DentoletiPersonalBundle:Default:list');
     }
 }

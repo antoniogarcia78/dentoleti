@@ -193,7 +193,7 @@ class DefaultController extends Controller
 
         $utils = new PersonalUtils();
 
-        $personal = $utils->setNullPersonal($personal);
+        $personal = $utils->erasePersonal($personal);
 
         $em->persist($personal);
         $em->flush();
