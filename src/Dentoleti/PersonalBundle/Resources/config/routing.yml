@@ -37,3 +37,7 @@ doctor_list:
 doctor_view:
     pattern: /doctor/view/{id}
     defaults: { _controller: DentoletiPersonalBundle:Doctor:view }
+
+doctor_edit:
+    pattern: /doctor/edit/{id}
+    defaults: { _controller:DentoletiPersonalBundle:Doctor:edit }

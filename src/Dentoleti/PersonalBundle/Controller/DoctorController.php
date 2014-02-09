@@ -76,4 +76,32 @@ class DoctorController extends Controller
             'doctor' => $doctor
         ));
     }
+
+    /**
+     * Edit the doctor with the $id given in the params
+     */
+    public function editAction($id)
+    {
+        $petition = $this->getRequest();
+
+        $em = $this->getDoctrine()->getManager();
+
+        $doctor = $em->getRepository('DentoletiPersonalBundle:Doctor')
+            ->findOneById($id);
+
+        if (!$doctor) {
+            throw $this->createNotFoundException('No existe el doctor');
+        }
+
+        $form = $this->createForm(new DoctorType(), $doctor);
+        
+        $form->handleRequest($petition);
+
+        $em->persist($doctor);
+        $em->flush();
+        
+        return $this->render('DentoletiPersonalBundle:Default:doctor.html.twig', array(
+            'form' => $form->createView()
+        ));
+    }
 }
