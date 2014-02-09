@@ -44,7 +44,7 @@ class DoctorController extends Controller
     }
 
     /**
-     * List all the personal in the system
+     * List all the doctors in the system
      */
     public function listAction()
     {
@@ -56,5 +56,24 @@ class DoctorController extends Controller
       return $this->render('DentoletiPersonalBundle:Default:doctors_list.html.twig', array(
         'doctorslList' => $doctorslList
       ));
+    }
+
+    /**
+     * Method for view all the doctor's information
+     */
+    public function viewAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $doctor = $em->getRepository('DentoletiPersonalBundle:Doctor')
+            ->findOneById($id);
+
+        if (!$doctor) {
+            throw $this->createNotFoundException('No existe el doctor');
+        }
+
+        return $this->render('DentoletiPersonalBundle:Default:doctor_view.html.twig', array(
+            'doctor' => $doctor
+        ));
     }
 }
