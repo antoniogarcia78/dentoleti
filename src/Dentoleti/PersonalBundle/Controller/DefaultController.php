@@ -123,7 +123,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * View the personal with the $id given in the params
+     * Edit the personal with the $id given in the params
      */
     public function editAction($id)
     {
