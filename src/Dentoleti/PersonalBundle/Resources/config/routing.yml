@@ -41,3 +41,7 @@ doctor_view:
 doctor_edit:
     pattern: /doctor/edit/{id}
     defaults: { _controller:DentoletiPersonalBundle:Doctor:edit }
+
+doctor_search:
+    pattern: /doctor/serach
+    defaults: { _controller:DentoletiPersonalBundle:Doctor:search }

@@ -50,11 +50,11 @@ class DoctorController extends Controller
     {
       $em = $this->getDoctrine()->getManager();
 
-      $doctorslList = $em->getRepository('DentoletiPersonalBundle:Doctor')
+      $doctorsList = $em->getRepository('DentoletiPersonalBundle:Doctor')
         ->findActiveDoctors();
 
       return $this->render('DentoletiPersonalBundle:Doctor:list.html.twig', array(
-        'doctorslList' => $doctorslList
+        'doctorsList' => $doctorsList
       ));
     }
 
@@ -101,6 +101,51 @@ class DoctorController extends Controller
         $em->flush();
         
         return $this->render('DentoletiPersonalBundle:Doctor:doctor.html.twig', array(
+            'form' => $form->createView()
+        ));
+    }
+
+    /**
+     * This method search a doctor by the name
+     */
+    public function searchAction(Request $request)
+    {
+        $searchData = array();
+        $form = $this->createFormBuilder($searchData)
+            ->add('name', 'text')
+            ->add('search', 'submit')
+            ->getForm();
+
+        if ($request->isMethod('POST')) {
+            // The search params has been submited and we will search the data and 
+            // redirect to the list view
+            $form->bind($request);
+
+            $searchData = $form->getData();
+
+            $em = $this->getDoctrine()->getManager();
+
+            $doctorsList = $em->getRepository('DentoletiPersonalBundle:Doctor')
+            ->findSearchedDoctor($searchData['name']);
+
+            // If the list is empty, send also a flashmessage to indicate it
+            if (count($doctorsList) == 0) {
+
+                $this->get('session')->getFlashBag()->add(
+                    'notice',
+                    'No existe ese doctor'
+                );
+            }
+
+            return $this->render('DentoletiPersonalBundle:Doctor:list.html.twig', array(
+                'doctorsList' => $doctorsList
+            ));
+            
+        }
+        
+        // This wil render the search form. We can reuser the same that we used for
+        // the general Personal
+        return $this->render('DentoletiPersonalBundle:Default:search.html.twig', array(
             'form' => $form->createView()
         ));
     }

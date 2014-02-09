@@ -18,4 +18,20 @@ class DoctorRepository extends EntityRepository
 		
 		return $query->getResult();
 	}
+
+	public function findSearchedDoctor($name)
+	{
+		$em = $this->getEntityManager();
+
+		$query = $em->createQuery('
+			SELECT d
+			FROM DentoletiPersonalBundle:Doctor d
+			JOIN d.personal p
+			WHERE p.name = :name
+			');
+
+		$query->setParameter('name', $name);
+
+		return $query->getResult();
+	}
 }
