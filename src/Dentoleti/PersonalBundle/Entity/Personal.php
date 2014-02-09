@@ -330,4 +330,12 @@ class Personal
     {
         return $this->active;
     }
+
+    /**
+     * Method __toString
+     */
+    public function __toString()
+    {
+        return $this->getName();
+    }
 }

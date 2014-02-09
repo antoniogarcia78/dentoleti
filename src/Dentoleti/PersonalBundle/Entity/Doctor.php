@@ -184,4 +184,12 @@ class Doctor
     {
         return $this->commission;
     }
+
+    /**
+     * Method __toString
+     */
+    public function __toString()
+    {
+        return $this->getPersonal();
+    }
 }
