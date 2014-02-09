@@ -60,7 +60,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * This method search a personal by the surnames
+     * This method search a personal by the name
      */
     public function searchAction(Request $request)
     {
