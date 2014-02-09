@@ -11,7 +11,11 @@ class DoctorType extends AbstractType
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
 		$builder->add('personal', new PersonalType(), array('entity' => 'Doctor'));
-		$builder->add('speciality', 'text', array(
+		
+		$builder->add('speciality', 'entity', array(
+			'class' => 'DentoletiPersonalBundle:Speciality',
+			'property' => 'name',
+			'empty_value' => '-- Especialidad --',
 			'required' => false
 		));
 		$builder->add('referee', 'text', array(

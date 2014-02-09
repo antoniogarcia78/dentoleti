@@ -33,9 +33,8 @@ class Doctor
     private $personal;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="speciality", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="Dentoleti\PersonalBundle\Entity\Speciality")
+     * @ORM\JoinColumn(name="speciality_id", referencedColumnName="id", nullable=true)
      */
     private $speciality;
 
