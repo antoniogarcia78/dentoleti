@@ -63,7 +63,10 @@ class PatientType extends AbstractType
 			'empty_value' => '-- POBLACIÓN --',
 			'required' => false
 		));
-		$builder->add('postalCode', 'text', array(
+		$builder->add('postalCode', 'entity', array(
+			'class' => 'DentoletiGeneralBundle:PostalCode',
+			'property' => 'postalCode',
+			'empty_value' => '-- Código postal --',
 			'required' => false
 		));
 		$builder->add('occupation', 'text', array(
