@@ -38,7 +38,7 @@ class DoctorController extends Controller
           );
       	}
 
-        return $this->render('DentoletiPersonalBundle:Default:doctor.html.twig', array(
+        return $this->render('DentoletiPersonalBundle:Doctor:doctor.html.twig', array(
         	'form' => $form->createView()
         ));
     }
@@ -53,7 +53,7 @@ class DoctorController extends Controller
       $doctorslList = $em->getRepository('DentoletiPersonalBundle:Doctor')
         ->findActiveDoctors();
 
-      return $this->render('DentoletiPersonalBundle:Default:doctors_list.html.twig', array(
+      return $this->render('DentoletiPersonalBundle:Doctor:list.html.twig', array(
         'doctorslList' => $doctorslList
       ));
     }
@@ -72,7 +72,7 @@ class DoctorController extends Controller
             throw $this->createNotFoundException('No existe el doctor');
         }
 
-        return $this->render('DentoletiPersonalBundle:Default:doctor_view.html.twig', array(
+        return $this->render('DentoletiPersonalBundle:Doctor:doctor_view.html.twig', array(
             'doctor' => $doctor
         ));
     }
@@ -100,7 +100,7 @@ class DoctorController extends Controller
         $em->persist($doctor);
         $em->flush();
         
-        return $this->render('DentoletiPersonalBundle:Default:doctor.html.twig', array(
+        return $this->render('DentoletiPersonalBundle:Doctor:doctor.html.twig', array(
             'form' => $form->createView()
         ));
     }
