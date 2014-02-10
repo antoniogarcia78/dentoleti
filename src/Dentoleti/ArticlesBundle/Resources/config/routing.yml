@@ -17,3 +17,11 @@ articles_list:
 article_edit:
     pattern: /edit/{id}
     defaults: { _controller: DentoletiArticlesBundle:Default:edit }
+
+article_delete:
+    pattern: /delete/{id}
+    defaults: { _controller: DentoletiArticlesBundle:Default:delete }
+
+article_erase:
+    pattern: /erase/{id}
+    defaults: { _controller: DentoletiArticlesBundle:Default:erase }

@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Dentoleti\ArticlesBundle\Entity\Article;
 use Dentoleti\ArticlesBundle\Form\Article\ArticleType;
+use Dentoleti\ArticlesBundle\Helper\ArticlesUtils;
 
 class DefaultController extends Controller
 {
@@ -145,5 +146,58 @@ class DefaultController extends Controller
         return $this->render('DentoletiArticlesBundle:Default:article.html.twig', array(
             'form' => $form->createView()
         ));
+    }
+
+    /**
+     * ATTENTION
+     *
+     * Delete method for deleting one article given by the id.
+     * This will delete the record and all the relations with other entities
+     * so that, USE IT WITH CAREFULL
+     */
+    public function deleteAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $article = $em->getRepository('DentoletiArticlesBundle:Article')
+            ->findOneById($id);
+
+        if (!$article) {
+            throw $this->createNotFoundException('No existe el article');
+        }
+        else {
+            $em->remove($article);
+            $em->flush();
+        }
+
+        //TODO Pendiente de ver donde redirigir la petición
+        return $this->forward('DentoletiArticlesBundle:Default:list');
+    }
+
+    /**
+     * This method is used to set the article's information to default values
+     * The intention of this method is to delete the information but not its relationships
+     */
+    public function eraseAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $article = $em->getRepository('DentoletiArticlesBundle:Article')
+            ->findOneById($id);
+
+        if (!$article) {
+            throw $this->createNotFoundException('No existe el article');
+        }
+
+        //Nuevo helper
+        $utils = new ArticlesUtils();
+
+        $article = $utils->eraseArticle($article);
+
+        $em->persist($article);
+        $em->flush();
+
+        //TODO Pendiente de ver donde redirigir la petición
+        return $this->forward('DentoletiArticlesBundle:Default:list');
     }
 }

@@ -182,4 +182,12 @@ class Article
     {
         return $this->registrationDate;
     }
+
+    /**
+     * Method toString
+     */
+    public function __toString()
+    {
+        return $this->getDescription();
+    }
 }
