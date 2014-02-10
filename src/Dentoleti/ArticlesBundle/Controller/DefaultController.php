@@ -103,4 +103,19 @@ class DefaultController extends Controller
             'article' => $article
         ));
     }
+
+    /**
+     * List all the articles in the system
+     */
+    public function listAction()
+    {
+      $em = $this->getDoctrine()->getManager();
+
+      $articlesList = $em->getRepository('DentoletiArticlesBundle:Article')
+        ->findAll();
+
+      return $this->render('DentoletiArticlesBundle:Default:list.html.twig', array(
+        'articlesList' => $articlesList
+      ));
+    }
 }

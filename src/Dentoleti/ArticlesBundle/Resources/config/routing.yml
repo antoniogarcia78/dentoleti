@@ -9,3 +9,7 @@ articles_search:
 articles_view:
     pattern: /view/{id}
     defaults: { _controller: DentoletiArticlesBundle:Default:view }
+
+articles_list:
+    pattern: /list
+    defaults: { _controller: DentoletiArticlesBundle:Default:list }
