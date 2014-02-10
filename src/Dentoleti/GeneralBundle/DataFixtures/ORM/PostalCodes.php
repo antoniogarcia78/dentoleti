@@ -11336,7 +11336,7 @@ class PostalCodes extends AbstractFixture implements OrderedFixtureInterface
 				'DentoletiGeneralBundle:Town')->findOneById($cp['town']);
 
 			$entity->setId($cp['id']);
-			$entity->setCodpostal($cp['codpostal']);
+			$entity->setPostalCode($cp['codpostal']);
 			$entity->setTown($town);
 
 			$metadata = $manager->getClassMetaData(get_class($entity));
