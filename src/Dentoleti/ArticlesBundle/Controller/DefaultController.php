@@ -84,4 +84,23 @@ class DefaultController extends Controller
             'form' => $form->createView()
         ));
     }
+
+    /**
+     * Method for view all the articles's information
+     */
+    public function viewAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $article = $em->getRepository('DentoletiArticlesBundle:Article')
+            ->findOneById($id);
+
+        if (!$article) {
+            throw $this->createNotFoundException('No existe el artículo');
+        }
+
+        return $this->render('DentoletiArticlesBundle:Default:article_view.html.twig', array(
+            'article' => $article
+        ));
+    }
 }

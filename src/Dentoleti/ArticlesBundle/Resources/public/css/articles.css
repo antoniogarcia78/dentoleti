@@ -19,6 +19,33 @@
 	width: 50px;
 }
 
+.col1-two {
+	clear: both;
+	float: left;
+	padding: 3px;
+}
+
+.col2-two {
+	float: left;
+	padding: 3px;
+}
+
+.label {
+	float: left;
+	top: 13px;
+	width: 150px;
+}
+
+.data {
+	float: left;
+	width: 180px;
+}
+
+.error {
+	clear: both;
+	text-align: left;
+}
+
 /* Article list styles */
 #list {
 	font-size: 2.2em;

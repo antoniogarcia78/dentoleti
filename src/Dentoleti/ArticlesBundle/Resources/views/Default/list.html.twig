@@ -32,7 +32,7 @@
 			<td>{{ article.price }}</td>
 			<td>{{ article.vat }}</td>
 			<td>{{ article.family }}</td>
-			<td><a href="{{ path('personal_view', { 'id': article.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/eye.png') }}"></a></td>
+			<td><a href="{{ path('articles_view', { 'id': article.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/eye.png') }}"></a></td>
 			<td><a href="{{ path('personal_edit', { 'id': article.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/edit.png') }}"></a></td>
 			<td><a href="{{ path('personal_erase', { 'id': article.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/erase.png') }}"></a></td>
 		</tr>
