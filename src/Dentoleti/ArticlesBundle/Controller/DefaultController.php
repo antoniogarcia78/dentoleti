@@ -40,4 +40,48 @@ class DefaultController extends Controller
        	'form' => $form->createView()
       ));
     }
+
+    /**
+     * This method search an article by the name
+     */
+    public function searchAction(Request $request)
+    {
+        $searchData = array();
+        $form = $this->createFormBuilder($searchData)
+            ->add('description', 'text')
+            ->add('search', 'submit')
+            ->getForm();
+
+        if ($request->isMethod('POST')) {
+            // The search params has been submited and we will search the data and 
+            // redirect to the list view
+            $form->bind($request);
+
+            $searchData = $form->getData();
+
+            $em = $this->getDoctrine()->getManager();
+
+            $articlesList = $em->getRepository('DentoletiArticlesBundle:Article')
+            ->findSearchedArticles($searchData['description']);
+
+            // If the list is empty, send also a flashmessage to indicate it
+            if (count($articlesList) == 0) {
+
+                $this->get('session')->getFlashBag()->add(
+                    'notice',
+                    'No hay artículos'
+                );
+            }
+
+            return $this->render('DentoletiArticlesBundle:Default:list.html.twig', array(
+                'articlesList' => $articlesList
+            ));
+            
+        }
+        
+        // This wil render the search form
+        return $this->render('DentoletiArticlesBundle:Default:search.html.twig', array(
+            'form' => $form->createView()
+        ));
+    }
 }

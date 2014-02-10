@@ -1,3 +1,7 @@
 articles_add:
     pattern:  /add
     defaults: { _controller: DentoletiArticlesBundle:Default:add }
+
+articles_search:
+    pattern: /search
+    defaults: { _controller: DentoletiArticlesBundle:Default:search }
