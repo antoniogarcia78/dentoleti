@@ -1,0 +1,7 @@
+parameters:
+#    dentoleti_budget.example.class: Dentoleti\BudgetBundle\Example
+
+services:
+#    dentoleti_budget.example:
+#        class: %dentoleti_budget.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
