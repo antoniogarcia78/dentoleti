@@ -12,8 +12,9 @@ class ArticlesUtils
 		$article->setPrice(null);
 		$article->setVat(null);
 		$article->setFamily(null);
-		$article->setRegistrationDate(null);
 
+		//We will keep the registrationDate of the object
+		
 		return $article;
 	}
 }
