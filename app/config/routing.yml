@@ -1,3 +1,7 @@
+dentoleti_articles:
+    resource: "@DentoletiArticlesBundle/Resources/config/routing.yml"
+    prefix:   /
+
 dentoleti_personal:
     resource: "@DentoletiPersonalBundle/Resources/config/routing.yml"
     prefix:   /personal
