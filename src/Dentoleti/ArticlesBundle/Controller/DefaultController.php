@@ -118,4 +118,32 @@ class DefaultController extends Controller
         'articlesList' => $articlesList
       ));
     }
+
+    /**
+     * Edit the article with the $id given in the params
+     */
+    public function editAction($id)
+    {
+        $petition = $this->getRequest();
+
+        $em = $this->getDoctrine()->getManager();
+
+        $article = $em->getRepository('DentoletiArticlesBundle:Article')
+            ->findOneById($id);
+
+        if (!$article) {
+            throw $this->createNotFoundException('No existe el article');
+        }
+
+        $form = $this->createForm(new ArticleType(), $article);
+        
+        $form->handleRequest($petition);
+
+        $em->persist($article);
+        $em->flush();
+        
+        return $this->render('DentoletiArticlesBundle:Default:article.html.twig', array(
+            'form' => $form->createView()
+        ));
+    }
 }

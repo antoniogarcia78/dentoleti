@@ -1,4 +1,4 @@
-articles_add:
+article_add:
     pattern:  /add
     defaults: { _controller: DentoletiArticlesBundle:Default:add }
 
@@ -6,10 +6,14 @@ articles_search:
     pattern: /search
     defaults: { _controller: DentoletiArticlesBundle:Default:search }
 
-articles_view:
+article_view:
     pattern: /view/{id}
     defaults: { _controller: DentoletiArticlesBundle:Default:view }
 
 articles_list:
     pattern: /list
     defaults: { _controller: DentoletiArticlesBundle:Default:list }
+
+article_edit:
+    pattern: /edit/{id}
+    defaults: { _controller: DentoletiArticlesBundle:Default:edit }
