@@ -45,7 +45,7 @@ class Article
     /**
      * @var string
      *
-     * @ORM\OneToOne(targetEntity="Family")
+     * @ORM\ManyToOne(targetEntity="Family")
      * @ORM\JoinColumn(name="family_id", referencedColumnName="id", nullable=true)
      */
     private $family;
