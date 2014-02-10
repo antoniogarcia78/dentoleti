@@ -16,12 +16,6 @@ class Articles extends AbstractFixture implements OrderedFixtureInterface
 	public function load(ObjectManager $manager)
 	{
 		$articles = array(
-			/*array('codigo' => 'limp',
-				'description' => 'NULL',
-				'price' => 'NULL',
-				'vat' => 'NULL',
-				'family' => 'NULL',
-			),*/
 			array('codigo' => 'md 286',
 				'description' => 'PROMO EMPASTES NIÑO 15% DTO',
 				'price' => '34',
