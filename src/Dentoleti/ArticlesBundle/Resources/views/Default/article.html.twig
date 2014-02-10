@@ -1,0 +1,74 @@
+{% extends '::frontend.html.twig' %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletiarticles/css/articles.css') }}">
+	{{ parent() }}
+{% endblock %}
+
+{% block article %}
+<div id="article-item">
+	{{ form_start(form) }}
+		{{ form_errors(form) }}
+		{% for flashMessage in app.session.flashbag.get('notice') %}
+    		<div class="flash-notice">
+        		{{ flashMessage }}
+    		</div>
+		{% endfor %}
+		<br>
+		<div id="item">
+			<fieldset>
+				<legend>Datos personales</legend>
+				<div class="col1-two">
+					<div class="label">
+						{{ form_label(form.description) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.description) }}
+						<div class="error">
+							{{ form_errors(form.description) }}
+						</div>
+					</div>
+					
+				</div>
+				<div class="col2-two">
+					<div class="label">
+						{{ form_label(form.price) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.price) }}
+						<div class="error">
+							{{ form_errors(form.price) }}
+						</div>
+					</div>
+				</div>
+				<div class="col1-two">
+					<div class="label">
+						{{ form_label(form.vat) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.vat) }}
+						<div class="error">
+							{{ form_errors(form.vat) }}
+						</div>
+					</div>
+				</div>
+				<div class="col2-two">
+					<div class="label">
+						{{ form_label(form.family) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.family) }}
+						<div class="error">
+							{{ form_errors(form.family) }}
+						</div>
+					</div>
+				</div>
+			</fieldset>
+		</div>
+		<div id="buttons">
+			{{ form_widget(form.save) }}
+		</div>
+	{{ form_rest(form) }}
+	{{ form_end(form) }}
+</div>
+{% endblock %}
