@@ -1,0 +1,7 @@
+parameters:
+#    dentoleti_consultation.example.class: Dentoleti\ConsultationBundle\Example
+
+services:
+#    dentoleti_consultation.example:
+#        class: %dentoleti_consultation.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
