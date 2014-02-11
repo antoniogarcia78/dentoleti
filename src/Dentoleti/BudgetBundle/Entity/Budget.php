@@ -78,9 +78,9 @@ class Budget
     private $discountInsurance;
 
     /**
-     * @var string
      *
-     * @ORM\Column(name="consultation", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="Dentoleti\ConsultationBundle\Entity\Consultation")
+     * @ORM\JoinColumn(name="consultation_id", referencedColumnName="id", nullable=true)
      */
     private $consultation;
 
