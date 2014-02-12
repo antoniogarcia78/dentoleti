@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Dentoleti\BudgetBundle\Entity\Budget;
 use Dentoleti\BudgetBundle\Form\Budget\BudgetType;
+use Dentoleti\BudgetBundle\Helper\BudgetsUtils;
 
 class DefaultController extends Controller
 {
@@ -147,5 +148,57 @@ class DefaultController extends Controller
             'form' => $form->createView()
         ));
 
+    }
+
+    /**
+     * ATTENTION
+     *
+     * Delete method for deleting one budget given by the id.
+     * This will delete the record and all the relations with other entities
+     * so that, USE IT WITH CAREFULL
+     */
+    public function deleteAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $budget = $em->getRepository('DentoletiBudgetBundle:Budget')
+            ->findOneById($id);
+
+        if (!$budget) {
+            throw $this->createNotFoundException('No existe el presupuesto');
+        }
+        else {
+            $em->remove($budget);
+            $em->flush();
+        }
+
+        //TODO Pendiente de ver donde redirigir la petición
+        return $this->forward('DentoletiBudgetBundle:Default:list');
+    }
+
+    /**
+     * This method is used to set the budget's information to default values
+     * The intention of this method is to delete the information but not its relationships
+     */
+    public function eraseAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $budget = $em->getRepository('DentoletiBudgetBundle:Budget')
+            ->findOneById($id);
+
+        if (!$budget) {
+            throw $this->createNotFoundException('No existe el presupuesto');
+        }
+
+        $utils = new BudgetsUtils();
+
+        $budget = $utils->setNullBudget($budget);
+
+        $em->persist($budget);
+        $em->flush();
+
+        //TODO Pendiente de ver donde redirigir la petición
+        return $this->forward('DentoletiBudgetBundle:Default:list');
     }
 }

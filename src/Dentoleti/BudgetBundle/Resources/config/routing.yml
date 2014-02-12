@@ -17,3 +17,11 @@ budget_view:
 budget_edit:
     pattern: /edit/{id}
     defaults: { _controller: DentoletiBudgetBundle:Default:edit }
+
+budget_delete:
+    pattern: /delete/{id}
+    defaults: { _controller: DentoletiBudgetBundle:Default:delete }
+
+budget_erase:
+    pattern: /erase/{id}
+    defaults: { _controller: DentoletiBudgetBundle:Default:erase }
