@@ -119,4 +119,33 @@ class DefaultController extends Controller
             'budget' => $budget
         ));
     }
+
+    /**
+     * Edit the budget with the $id given in the params
+     */
+    public function editAction($id)
+    {
+        $petition = $this->getRequest();
+
+        $em = $this->getDoctrine()->getManager();
+
+        $budget = $em->getRepository('DentoletiBudgetBundle:Budget')
+            ->findOneById($id);
+
+        if (!$budget) {
+            throw $this->createNotFoundException('No existe el presupuesto');
+        }
+
+        $form = $this->createForm(new BudgetType(), $budget);
+        
+        $form->handleRequest($petition);
+
+        $em->persist($budget);
+        $em->flush();
+        
+        return $this->render('DentoletiBudgetBundle:Default:budget.html.twig', array(
+            'form' => $form->createView()
+        ));
+
+    }
 }

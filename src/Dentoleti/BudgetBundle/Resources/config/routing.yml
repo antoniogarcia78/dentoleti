@@ -13,3 +13,7 @@ budget_search:
 budget_view:
     pattern: /view/{id}
     defaults: { _controller: DentoletiBudgetBundle:Default:view }
+
+budget_edit:
+    pattern: /edit/{id}
+    defaults: { _controller: DentoletiBudgetBundle:Default:edit }
