@@ -109,10 +109,10 @@ class PatientType extends AbstractType
 	}
 	
 	public function setDefaultOptions(OptionsResolverInterface $resolver)
-   {
-   	$resolver->setDefaults(array(
-   	  'data_class' => 'Dentoleti\PatientBundle\Entity\Patient',
-      ));
-   }
+   	{
+   		$resolver->setDefaults(array(
+   		  'data_class' => 'Dentoleti\PatientBundle\Entity\Patient',
+    	));
+   	}
 	
 }

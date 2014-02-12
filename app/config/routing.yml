@@ -1,10 +1,10 @@
 dentoleti_consultation:
     resource: "@DentoletiConsultationBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /consultation
 
 dentoleti_budget:
     resource: "@DentoletiBudgetBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /budget
 
 dentoleti_articles:
     resource: "@DentoletiArticlesBundle/Resources/config/routing.yml"

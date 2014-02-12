@@ -301,4 +301,12 @@ class Budget
     {
         return $this->consultation;
     }
+
+    /**
+     * Method toString
+     */
+    public function __toString()
+    {
+        return $this->getId();
+    }
 }
