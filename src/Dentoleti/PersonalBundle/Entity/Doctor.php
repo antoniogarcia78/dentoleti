@@ -190,6 +190,6 @@ class Doctor
      */
     public function __toString()
     {
-        return $this->getPersonal();
+        return $this->getPersonal()->getName();
     }
 }

@@ -725,29 +725,6 @@ class Patient
         return $this->address;
     }
 
-    /**
-     * Add meetings
-     *
-     * @param \Dentoleti\PatientBundle\Entity\Meeting $meetings
-     * @return Patient
-     */
-    public function addMeeting(\Dentoleti\PatientBundle\Entity\Meeting $meetings)
-    {
-        $this->meetings[] = $meetings;
-
-        return $this;
-    }
-
-    /**
-     * Remove meetings
-     *
-     * @param \Dentoleti\PatientBundle\Entity\Meeting $meetings
-     */
-    public function removeMeeting(\Dentoleti\PatientBundle\Entity\Meeting $meetings)
-    {
-        $this->meetings->removeElement($meetings);
-    }
-
     public function __toString()
     {
         return $this->getName() . ' ' . $this->getSurname1() . ' ' . $this->getSurname2();

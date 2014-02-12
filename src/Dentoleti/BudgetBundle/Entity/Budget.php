@@ -37,8 +37,8 @@ class Budget
 
     /**
      *
-     * @ORM\ManyToOne(targetEntity="Dentoleti\PersonalBundle\Entity\Doctor")
-     * @ORM\JoinColumn(name="patient_id", referencedColumnName="id", nullable=true)
+     * @ORM\OneToOne(targetEntity="Dentoleti\PersonalBundle\Entity\Doctor")
+     * @ORM\JoinColumn(name="doctor_id", referencedColumnName="id", nullable=true)
      */
     private $doctor;
 
@@ -79,7 +79,7 @@ class Budget
 
     /**
      *
-     * @ORM\ManyToOne(targetEntity="Dentoleti\ConsultationBundle\Entity\Consultation")
+     * @ORM\OneToOne(targetEntity="Dentoleti\ConsultationBundle\Entity\Consultation")
      * @ORM\JoinColumn(name="consultation_id", referencedColumnName="id", nullable=true)
      */
     private $consultation;

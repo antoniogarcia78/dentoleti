@@ -71,6 +71,7 @@
 #list,
 #list th {
 	border: 1px solid black;
+	font-size: 1.3em;
 }
 
 #list th {
@@ -81,7 +82,7 @@
 
 #list td {
 	text-align: center;
-	font-size: 0.7em;
+	font-size: 1.3em;
 	padding-right: 2px;
 	padding-left: 2px;
 }
