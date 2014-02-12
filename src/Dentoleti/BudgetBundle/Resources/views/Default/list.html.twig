@@ -1,0 +1,50 @@
+{% extends '::frontend.html.twig' %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletibudget/css/budget.css') }}">
+	{{ parent() }}
+{% endblock %}
+
+{% block article %}
+	{% for flashMessage in app.session.flashbag.get('notice') %}
+    	<div class="flash-notice">
+       		{{ flashMessage }}
+    	</div>
+	{% endfor %}
+	<table id="list">
+		<tr>
+			<th>Id</th>
+			<th>Paciente</th>
+			<th>Fecha presupuesto</th>
+			<th>Doctor</th>
+			<th>Descuento</th>
+			<th>Ausencia de piezas</th>
+			<th>Observaciones</th>
+			<th>Descuento de empresa</th>
+			<th>Descuento del seguro</th>
+			<th>Consulta</th>
+			<th>Ver</th>
+			<th>Editar</th>
+			<th>Eliminar</th>
+		</tr>
+		{% for budget in budgets %}
+		<tr>
+
+			<td>{{ budget.id }}</td>
+			<td>{{ budget.patient }}</td>
+			<td>{{ budget.budgetDate | date('d-m-Y') }}</td>
+			<td>{{ budget.doctor }}</td>
+			<td>{{ budget.discount }}</td>
+			<td>{{ budget.noTooth }}</td>
+			<td>{{ budget.observations }}</td>
+			<td>{{ budget.discountCompany }}</td>
+			<td>{{ budget.discountInsurance }}</td>
+			<td>{{ budget.consultation }}</td>
+			<td><a href="{{ path('patient_view', { 'id': budget.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/eye.png') }}"></a></td>
+			<td><a href="{{ path('patient_edit', { 'id': budget.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/edit.png') }}"></a></td>
+			<td><a href="{{ path('patient_erase', { 'id': budget.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/erase.png') }}"></a></td>
+		</tr>
+		{% endfor %}		
+	</table>
+	
+{% endblock %}

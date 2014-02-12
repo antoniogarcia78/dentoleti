@@ -1,3 +1,7 @@
 budget_add:
     pattern:  /add
     defaults: { _controller: DentoletiBudgetBundle:Default:add }
+
+budget_list:
+    pattern:  /list
+    defaults: { _controller: DentoletiBudgetBundle:Default:list }

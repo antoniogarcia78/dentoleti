@@ -41,4 +41,19 @@ class DefaultController extends Controller
         	'form' => $form->createView()
         ));
     }
+
+    /**
+     * List all the budgets in the system
+     */
+    public function listAction()
+    {
+      $em = $this->getDoctrine()->getManager();
+
+      $budgets = $em->getRepository('DentoletiBudgetBundle:Budget')
+        ->findAll();
+
+      return $this->render('DentoletiBudgetBundle:Default:list.html.twig', array(
+        'budgets' => $budgets
+      ));
+    }
 }
