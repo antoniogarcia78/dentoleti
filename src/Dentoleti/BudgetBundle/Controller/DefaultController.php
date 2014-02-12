@@ -49,11 +49,55 @@ class DefaultController extends Controller
     {
       $em = $this->getDoctrine()->getManager();
 
-      $budgets = $em->getRepository('DentoletiBudgetBundle:Budget')
+      $budgetsList = $em->getRepository('DentoletiBudgetBundle:Budget')
         ->findAll();
 
       return $this->render('DentoletiBudgetBundle:Default:list.html.twig', array(
-        'budgets' => $budgets
+        'budgetsList' => $budgetsList
       ));
+    }
+
+    /**
+     * This method search a budget by the id
+     */
+    public function searchAction(Request $request)
+    {
+        $searchData = array();
+        $form = $this->createFormBuilder($searchData)
+            ->add('id', 'text')
+            ->add('search', 'submit')
+            ->getForm();
+
+        if ($request->isMethod('POST')) {
+            // The search params has been submited and we will search the data and 
+            // redirect to the list view
+            $form->bind($request);
+
+            $searchData = $form->getData();
+
+            $em = $this->getDoctrine()->getManager();
+
+            $budget = $em->getRepository('DentoletiBudgetBundle:Budget')
+            ->findOneById($searchData['id']);
+
+            // If the list is empty, send also a flashmessage to indicate it
+            if (count($budget) == 0) {
+
+                $this->get('session')->getFlashBag()->add(
+                    'notice',
+                    'No hay presupuesto'
+                );
+            }
+
+            return $this->render('DentoletiBudgetBundle:Default:budget_view.html.twig', array(
+                'budget' => $budget
+            ));
+            
+        }
+        
+        // This wil render the search form
+        return $this->render('DentoletiBudgetBundle:Default:search.html.twig', array(
+            'form' => $form->createView()
+        ));
     }
 }
