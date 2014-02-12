@@ -9,3 +9,7 @@ budget_list:
 budget_search:
     pattern:  /search
     defaults: { _controller: DentoletiBudgetBundle:Default:search }
+
+budget_view:
+    pattern: /view/{id}
+    defaults: { _controller: DentoletiBudgetBundle:Default:view }

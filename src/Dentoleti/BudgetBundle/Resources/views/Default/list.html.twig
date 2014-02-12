@@ -40,7 +40,7 @@
 			<td>{{ budget.discountCompany }}</td>
 			<td>{{ budget.discountInsurance }}</td>
 			<td>{{ budget.consultation }}</td>
-			<td><a href="{{ path('patient_view', { 'id': budget.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/eye.png') }}"></a></td>
+			<td><a href="{{ path('budget_view', { 'id': budget.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/eye.png') }}"></a></td>
 			<td><a href="{{ path('patient_edit', { 'id': budget.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/edit.png') }}"></a></td>
 			<td><a href="{{ path('patient_erase', { 'id': budget.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/erase.png') }}"></a></td>
 		</tr>

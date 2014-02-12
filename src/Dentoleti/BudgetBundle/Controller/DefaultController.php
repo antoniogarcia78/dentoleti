@@ -100,4 +100,23 @@ class DefaultController extends Controller
             'form' => $form->createView()
         ));
     }
+
+    /**
+     * Method for view all the budget's information
+     */
+    public function viewAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $budget = $em->getRepository('DentoletiBudgetBundle:Budget')
+            ->findOneById($id);
+
+        if (!$budget) {
+            throw $this->createNotFoundException('No existe el presupuesto');
+        }
+
+        return $this->render('DentoletiBudgetBundle:Default:budget_view.html.twig', array(
+            'budget' => $budget
+        ));
+    }
 }
