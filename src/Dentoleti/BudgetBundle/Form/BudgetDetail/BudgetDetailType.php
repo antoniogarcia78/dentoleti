@@ -5,10 +5,14 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+use Dentoleti\BudgetBundle\Form\Budget\BudgetType;
+
 class BudgetDetailType extends AbstractType
 {
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
+		$builder->add('budget', new BudgetType());
+
 		$builder->add('article', 'entity', array(
 			'class' => 'DentoletiArticlesBundle:Article',
 			'property' => 'description',
@@ -28,7 +32,8 @@ class BudgetDetailType extends AbstractType
 			'required' => false
 		));
 
-		$builder->add('add', 'submit');
+		$builder->add('addItem', 'submit');
+		$builder->add('save', 'submit');
 	}
 
 	public function getName()

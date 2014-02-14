@@ -1,0 +1,36 @@
+{% extends '::frontend.html.twig' %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletibudget/css/budget.css') }}">
+	{{ parent() }}
+{% endblock %}
+
+{% block article %}
+	{% for flashMessage in app.session.flashbag.get('notice') %}
+    	<div class="flash-notice">
+       		{{ flashMessage }}
+    	</div>
+	{% endfor %}
+	<table id="list">
+		<tr>
+			<th>Id</th>
+			<th>Artículo</th>
+			<th>Precio</th>
+			<th>Cantidad</th>
+			<th>Pieza dental</th>
+			<th>Eliminar</th>
+		</tr>
+		{% for budgetDetail in budgetDetailsList %}
+		<tr>
+
+			<td>{{ budgetDetail.id }}</td>
+			<td>{{ budgetDetail.article }}</td>
+			<td>{{ budgetDetail.price }}</td>
+			<td>{{ budgetDetail.amount }}</td>
+			<td>{{ budgetDetail.tooth }}</td>
+			<td><a href="{{ path('budget_delete', { 'id': budgetDetail.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/erase.png') }}"></a></td>
+		</tr>
+		{% endfor %}		
+	</table>
+	
+{% endblock %}

@@ -36,6 +36,9 @@ class DefaultController extends Controller
             'notice',
             'El presupuesto se ha guardado correctamente'
           );
+          return $this->forward('DentoletiBudgetBundle:Details:add', array(
+            'budgetId' => $budget->getId()
+          ));
       	}
 
         return $this->render('DentoletiBudgetBundle:Default:budget.html.twig', array(
