@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table()
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  */
 class Budget
 {
@@ -23,8 +24,8 @@ class Budget
 
     /**
      *
-     * @ORM\ManyToOne(targetEntity="Dentoleti\PatientBundle\Entity\Patient")
-     * @ORM\JoinColumn(name="patient_id", referencedColumnName="id", nullable=true)
+     * @ORM\ManyToOne(targetEntity="Dentoleti\PatientBundle\Entity\Patient",cascade={"persist"})
+     * @ORM\JoinColumn(name="patient_id", referencedColumnName="id", nullable=true, unique=false)
      */
     private $patient;
 
@@ -37,8 +38,8 @@ class Budget
 
     /**
      *
-     * @ORM\OneToOne(targetEntity="Dentoleti\PersonalBundle\Entity\Doctor")
-     * @ORM\JoinColumn(name="doctor_id", referencedColumnName="id", nullable=true)
+     * @ORM\ManyToOne(targetEntity="Dentoleti\PersonalBundle\Entity\Doctor",cascade={"persist"})
+     * @ORM\JoinColumn(name="doctor_id", referencedColumnName="id", nullable=true, unique=false)
      */
     private $doctor;
 
@@ -79,7 +80,7 @@ class Budget
 
     /**
      *
-     * @ORM\OneToOne(targetEntity="Dentoleti\ConsultationBundle\Entity\Consultation")
+     * @ORM\OneToOne(targetEntity="Dentoleti\ConsultationBundle\Entity\Consultation",cascade={"persist"})
      * @ORM\JoinColumn(name="consultation_id", referencedColumnName="id", nullable=true)
      */
     private $consultation;
@@ -352,5 +353,13 @@ class Budget
     public function getBudgetDetails()
     {
         return $this->budgetDetails;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function preSetDate()
+    {
+        $this->setBudgetDate(new \DateTime());
     }
 }

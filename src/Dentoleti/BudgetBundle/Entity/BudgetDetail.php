@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * BudgetDetail
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Dentoleti\BudgetBundle\Entity\BudgetDetailRepository")
  */
 class BudgetDetail
 {
@@ -31,7 +31,7 @@ class BudgetDetail
     /**
      *
      * @ORM\ManyToOne(targetEntity="Dentoleti\ArticlesBundle\Entity\Article", inversedBy="budgetDetails",cascade={"persist"})
-     * @ORM\JoinColumn(name="doctor_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="article_id", referencedColumnName="id", nullable=true)
      */
     private $article;
 
@@ -180,5 +180,13 @@ class BudgetDetail
     public function getTooth()
     {
         return $this->tooth;
+    }
+
+    /**
+     * Method toString
+     */
+    public function __toString()
+    {
+        return "{$this->getId()}";
     }
 }
