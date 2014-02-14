@@ -57,6 +57,10 @@ class Article
      */
     private $registrationDate;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Dentoleti\BudgetBundle\Entity\BudgetDetail", mappedBy="article")
+     */
+    private $budgetDetails;
 
     /**
      * Get id

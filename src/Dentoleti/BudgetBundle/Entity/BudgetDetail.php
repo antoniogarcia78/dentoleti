@@ -23,14 +23,14 @@ class BudgetDetail
 
     /**
      *
-     * @ORM\ManyToOne(targetEntity="Dentoleti\BudgetBundle\Entity\Budget")
+     * @ORM\ManyToOne(targetEntity="Dentoleti\BudgetBundle\Entity\Budget", inversedBy="budgetDetails",cascade={"persist"})
      * @ORM\JoinColumn(name="budget_id", referencedColumnName="id")
      */
     private $budget;
 
     /**
      *
-     * @ORM\OneToOne(targetEntity="Dentoleti\ArticlesBundle\Entity\Article")
+     * @ORM\ManyToOne(targetEntity="Dentoleti\ArticlesBundle\Entity\Article", inversedBy="budgetDetails",cascade={"persist"})
      * @ORM\JoinColumn(name="doctor_id", referencedColumnName="id", nullable=true)
      */
     private $article;

@@ -84,6 +84,10 @@ class Budget
      */
     private $consultation;
 
+    /**
+     * @ORM\OneToMany(targetEntity="BudgetDetail", mappedBy="budget")
+     */
+    private $budgetDetails;
 
     /**
      * Get id
@@ -308,5 +312,45 @@ class Budget
     public function __toString()
     {
         return $this->getId();
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->budgetDetails = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add budgetDetails
+     *
+     * @param \Dentoleti\BudgetBundle\Entity\BudgetDetail $budgetDetails
+     * @return Budget
+     */
+    public function addBudgetDetail(\Dentoleti\BudgetBundle\Entity\BudgetDetail $budgetDetails)
+    {
+        $this->budgetDetails[] = $budgetDetails;
+
+        return $this;
+    }
+
+    /**
+     * Remove budgetDetails
+     *
+     * @param \Dentoleti\BudgetBundle\Entity\BudgetDetail $budgetDetails
+     */
+    public function removeBudgetDetail(\Dentoleti\BudgetBundle\Entity\BudgetDetail $budgetDetails)
+    {
+        $this->budgetDetails->removeElement($budgetDetails);
+    }
+
+    /**
+     * Get budgetDetails
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getBudgetDetails()
+    {
+        return $this->budgetDetails;
     }
 }
