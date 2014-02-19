@@ -28,7 +28,7 @@
 			<td>{{ budgetDetail.price }}</td>
 			<td>{{ budgetDetail.amount }}</td>
 			<td>{{ budgetDetail.tooth }}</td>
-			<td><a href="{{ path('budget_delete', { 'id': budgetDetail.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/erase.png') }}"></a></td>
+			<td><a href="{{ path('budget_details_delete', { 'budgetDetailId': budgetDetail.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/erase.png') }}"></a></td>
 		</tr>
 		{% endfor %}		
 	</table>
