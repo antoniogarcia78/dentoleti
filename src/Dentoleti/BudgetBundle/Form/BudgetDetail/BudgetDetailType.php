@@ -11,7 +11,7 @@ class BudgetDetailType extends AbstractType
 {
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
-		$builder->add('budget', new BudgetType());
+		//$builder->add('budget', new BudgetType());
 
 		$builder->add('article', 'entity', array(
 			'class' => 'DentoletiArticlesBundle:Article',
@@ -33,7 +33,7 @@ class BudgetDetailType extends AbstractType
 		));
 
 		$builder->add('addItem', 'submit');
-		$builder->add('save', 'submit');
+		$builder->add('saveAndFinish', 'submit');
 	}
 
 	public function getName()

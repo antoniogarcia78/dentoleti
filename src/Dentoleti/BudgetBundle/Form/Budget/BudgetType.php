@@ -51,6 +51,7 @@ class BudgetType extends AbstractType
 		));
 
 		$builder->add('save', 'submit');
+		$builder->add('addItem', 'submit');
 	}
 
 	public function getName()

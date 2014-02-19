@@ -27,5 +27,13 @@ budget_erase:
     defaults: { _controller: DentoletiBudgetBundle:Default:erase }
 
 budget_details_add:
-    pattern: /details/add
+    pattern: /details/add/{budgetId}
     defaults: { _controller: DentoletiBudgetBundle:Details:add }
+
+budget_details_list:
+    pattern: /details/list/{budgetId}
+    defaults: { _controller: DentoletiBudgetBundle:Details:list }
+
+budget_details_delete:
+    pattern: /details/delete/{budgetDetailId}
+    defaults: { _controller: DentoletiBudgetBundle:Details:delete }

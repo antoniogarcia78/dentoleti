@@ -58,7 +58,8 @@
 }
 
 #buttons button {
-	width: 50px;
+	width: 70px;
+	font-size: 0.6em;
 }
 
 /* Personal list styles */

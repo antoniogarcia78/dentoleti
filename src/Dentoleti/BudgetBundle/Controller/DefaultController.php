@@ -26,20 +26,28 @@ class DefaultController extends Controller
 		$form->handleRequest($petition);
 
 		if ($form->isValid()){
-		  //save the form
-		  $em = $this->getDoctrine()->getManager();
-		  
-		  $em->persist($budget);
-		  $em->flush();
+            //save the form
+    		$em = $this->getDoctrine()->getManager();
+    		
+    		$em->persist($budget);
+    		$em->flush();
 
-          $this->get('session')->getFlashBag()->add(
-            'notice',
-            'El presupuesto se ha guardado correctamente'
-          );
-          return $this->forward('DentoletiBudgetBundle:Details:add', array(
-            'budgetId' => $budget->getId()
-          ));
-      	}
+            $this->get('session')->getFlashBag()->add(
+              'notice',
+              'El presupuesto se ha guardado correctamente'
+            );
+
+            $nextAction = $form->get('addItem')->isClicked()
+              ? 'budget_details_add'
+              : 'budget_add';
+
+            if ('budget_details_add' == $nextAction){
+                return $this->redirect($this->generateUrl($nextAction, array(
+                    'budgetId' => $budget->getId())));
+            }
+
+            return $this->redirect($this->generateUrl($nextAction));
+     	}
 
         return $this->render('DentoletiBudgetBundle:Default:budget.html.twig', array(
         	'form' => $form->createView()
