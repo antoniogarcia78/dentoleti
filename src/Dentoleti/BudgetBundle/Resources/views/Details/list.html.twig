@@ -15,9 +15,10 @@
 		<tr>
 			<th>Id</th>
 			<th>Artículo</th>
+			<th>Pieza dental</th>
 			<th>Precio</th>
 			<th>Cantidad</th>
-			<th>Pieza dental</th>
+			<th>Total</th>
 			<th>Eliminar</th>
 		</tr>
 		{% for budgetDetail in budgetDetailsList %}
@@ -25,12 +26,17 @@
 
 			<td>{{ budgetDetail.id }}</td>
 			<td>{{ budgetDetail.article }}</td>
+			<td>{{ budgetDetail.tooth }}</td>
 			<td>{{ budgetDetail.price }}</td>
 			<td>{{ budgetDetail.amount }}</td>
-			<td>{{ budgetDetail.tooth }}</td>
-			<td><a href="{{ path('budget_details_delete', { 'budgetDetailId': budgetDetail.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/erase.png') }}"></a></td>
+			<td>{{ partialTotals[budgetDetail.id] }}</td>
+			<td><a href="{{ path('budget_details_delete', { 'budgetId': budgetId , 'budgetDetailId': budgetDetail.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/erase.png') }}"></a></td>
 		</tr>
-		{% endfor %}		
+		{% endfor %}
+		<tr>
+			<td class="total" colspan="5">Total</td>
+			<td class="total"><strong>{{ total }}</strong></td>
+		</tr>
 	</table>
-	
+	<a href="{{ path('budget_details_add', { 'budgetId': budgetId }) }}">AddNewItem</a>
 {% endblock %}
