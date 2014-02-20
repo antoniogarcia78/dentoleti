@@ -66,16 +66,16 @@ class DetailsController extends Controller
     	$budgetDetailsList = $em->getRepository('DentoletiBudgetBundle:BudgetDetail')
 			->findArticlesOfBudget($budget);
 
-		$partialTotals = array();
+		  $partialTotals = array();
 
-		$total = 0;
-		foreach ($budgetDetailsList as $budgetDetail) {
-			$partial = $budgetDetail->getAmount() * $budgetDetail->getPrice();
-			$total = $total + $partial;
-			$partialTotals[$budgetDetail->getId()] = $partial;
-		}
+  		$total = 0;
+  		foreach ($budgetDetailsList as $budgetDetail) {
+  			$partial = $budgetDetail->getAmount() * $budgetDetail->getPrice();
+  			$total = $total + $partial;
+  			$partialTotals[$budgetDetail->getId()] = $partial;
+  		}
 
-		return $this->render('DentoletiBudgetBundle:Details:list.html.twig', array(
+  		return $this->render('DentoletiBudgetBundle:Details:list.html.twig', array(
         	'budgetDetailsList' => $budgetDetailsList,
         	'partialTotals' => $partialTotals,
         	'total' => $total,
