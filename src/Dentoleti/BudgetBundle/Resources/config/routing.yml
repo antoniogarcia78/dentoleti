@@ -35,5 +35,5 @@ budget_details_list:
     defaults: { _controller: DentoletiBudgetBundle:Details:list }
 
 budget_details_delete:
-    pattern: /details/delete/{budgetDetailId}
+    pattern: /details/delete/{budgetId}/{budgetDetailId}
     defaults: { _controller: DentoletiBudgetBundle:Details:delete }

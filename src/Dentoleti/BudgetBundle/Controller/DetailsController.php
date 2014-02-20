@@ -46,12 +46,6 @@ class DetailsController extends Controller
                     'budgetId' => $budget->getId())));
 		}
 
-		//$budgetDetailsList = $em->getRepository('DentoletiBudgetBundle:BudgetDetail')
-		//	->findArticlesOfBudget($budget);
-		
-		//return $this->render('DentoletiBudgetBundle:Details:list.html.twig', array(
-        //	'budgetDetailsList' => $budgetDetailsList
-        //));
 		return $this->render('DentoletiBudgetBundle:Details:budget_detail.html.twig', array(
         	'form' => $form->createView(),
         	'budget' => $budget
@@ -70,9 +64,49 @@ class DetailsController extends Controller
 
     	$budgetDetailsList = $em->getRepository('DentoletiBudgetBundle:BudgetDetail')
 			->findArticlesOfBudget($budget);
-		
+
+		$partialTotals = array();
+
+		$total = 0;
+		foreach ($budgetDetailsList as $budgetDetail) {
+			$partial = $budgetDetail->getAmount() * $budgetDetail->getPrice();
+			$total = $total + $partial;
+			$partialTotals[$budgetDetail->getId()] = $partial;
+		}
+
 		return $this->render('DentoletiBudgetBundle:Details:list.html.twig', array(
-        	'budgetDetailsList' => $budgetDetailsList
+        	'budgetDetailsList' => $budgetDetailsList,
+        	'partialTotals' => $partialTotals,
+        	'total' => $total,
+        	'budgetId' => $budget->getId()
+        ));
+    }
+
+    /**
+     * ATTENTION
+     *
+     * Delete method for deleting one budget details given by the id.
+     * This will delete the record and all the relations with other entities
+     * so that, USE IT WITH CAREFULL
+     */
+    public function deleteAction($budgetId, $budgetDetailId)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $budgetDetail = $em->getRepository('DentoletiBudgetBundle:BudgetDetail')
+            ->findOneById($budgetDetailId);
+
+        if (!$budgetDetail) {
+            throw $this->createNotFoundException('No existe el detalle');
+        }
+        else {
+            $em->remove($budgetDetail);
+            $em->flush();
+        }
+
+        //TODO Pendiente de ver donde redirigir la petición
+        return $this->forward('DentoletiBudgetBundle:Details:list', array(
+        	'budgetId' => $budgetId
         ));
     }
 
