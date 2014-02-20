@@ -2,6 +2,7 @@
 namespace Dentoleti\BudgetBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Ps\PdfBundle\Annotation\Pdf;
 use Dentoleti\BudgetBundle\Entity\BudgetDetail;
 use Dentoleti\BudgetBundle\Form\BudgetDetail\BudgetDetailType;
 
@@ -109,5 +110,4 @@ class DetailsController extends Controller
         	'budgetId' => $budgetId
         ));
     }
-
 }

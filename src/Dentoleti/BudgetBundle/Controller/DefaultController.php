@@ -4,6 +4,8 @@ namespace Dentoleti\BudgetBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Ps\PdfBundle\Annotation\Pdf;
 use Dentoleti\BudgetBundle\Entity\Budget;
 use Dentoleti\BudgetBundle\Form\Budget\BudgetType;
 use Dentoleti\BudgetBundle\Helper\BudgetsUtils;
@@ -154,6 +156,17 @@ class DefaultController extends Controller
 
         $em->persist($budget);
         $em->flush();
+
+        $nextAction = $form->get('addItem')->isClicked()
+              ? 'budget_details_add'
+              : 'budget_add';
+
+            if ('budget_details_add' == $nextAction){
+                return $this->redirect($this->generateUrl($nextAction, array(
+                    'budgetId' => $budget->getId())));
+            }
+
+            return $this->redirect($this->generateUrl($nextAction));
         
         return $this->render('DentoletiBudgetBundle:Default:budget.html.twig', array(
             'form' => $form->createView()
@@ -211,5 +224,25 @@ class DefaultController extends Controller
 
         //TODO Pendiente de ver donde redirigir la petición
         return $this->forward('DentoletiBudgetBundle:Default:list');
+    }
+
+    /**
+     * @Pdf()
+     */
+    public function confirmAction($budgetId)
+    {
+        $facade = $this->get('ps_pdf.facade');
+        $response = new Response();
+
+        $this->render('DentoletiBudgetBundle:Default:budget.pdf.twig', 
+            array(), $response);
+
+        $xml = $response->getContent();
+        
+        $content = $facade->render($xml);
+
+        file_put_contents('/tmp/'.$budgetId.'.pdf', $content);
+
+        return new Response($content, 200, array('content-type' => 'application/pdf'));
     }
 }
