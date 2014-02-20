@@ -234,8 +234,28 @@ class DefaultController extends Controller
         $facade = $this->get('ps_pdf.facade');
         $response = new Response();
 
-        $this->render('DentoletiBudgetBundle:Default:budget.pdf.twig', 
-            array(), $response);
+        $em = $this->getDoctrine()->getManager();
+
+        //Obtain the budget
+        $budget = $em->getRepository('DentoletiBudgetBundle:Budget')
+            ->findOneById($budgetId);
+        $budgetDetailsList = $em->getRepository('DentoletiBudgetBundle:BudgetDetail')
+            ->findArticlesOfBudget($budget);
+
+        $partialTotals = array();
+
+        $total = 0;
+        foreach ($budgetDetailsList as $budgetDetail) {
+            $partial = $budgetDetail->getAmount() * $budgetDetail->getPrice();
+            $total = $total + $partial;
+            $partialTotals[$budgetDetail->getId()] = $partial;
+        }
+
+        $this->render('DentoletiBudgetBundle:Default:budget.pdf.twig', array(
+            'budget' => $budget,
+            'budgetDetailsList' => $budgetDetailsList,
+            'partialTotals' => $partialTotals,
+            'total' => $total), $response);
 
         $xml = $response->getContent();
         

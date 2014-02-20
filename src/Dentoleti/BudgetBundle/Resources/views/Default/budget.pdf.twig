@@ -1,7 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf SYSTEM "%resources%/dtd/doctype.dtd">
+
 <pdf>
     <dynamic-page>
-        <div color="red" border.color="black" background.color="pink">
-        	This text is red on pink backgroun into black border
-    	</div>
-	</dynamic-page>
+    	<div>
+       		<img src="{{ pdf_image('DentoletiGeneralBundle:logo.png') }}" />
+       	</div>
+       	<div>
+       		<stylesheet>
+       			<attribute name="float" value="right" />
+       			<attribute name="width" value="30%" />
+       		</stylesheet>
+       		<strong>Paciente Nº: </strong>{{ budget.patient.id }}
+       		<br/>
+       		{{ budget.patient.name | upper}} {{ budget.patient.surname1 | upper }} {{ budget.patient.surname2 | upper }}
+       		<br/>
+       		{{ budget.patient.nif }}
+       		<br/>
+       		{{ budget.patient.postalCode }} - {{ budget.patient.town }}
+       	</div>
+       	<div>
+       		<p>Avd, de Sevilla, 108</p>
+       	</div>
+       	<div>
+       		<stylesheet>
+       			<attribute name="float" value="left" />
+       			<attribute name="width" value="20%" />
+       		</stylesheet>
+       		<p><strong>Presupuesto: </strong> {{ budget.id }}</p>
+       	</div>
+       	<div>
+       		<stylesheet>
+       			<attribute name="float" value="right" />
+       			<attribute name="width" value="80%" />
+       			<attribute name="text-align" value="center" />
+       		</stylesheet>
+       		<p><strong>Fecha: </strong> {{ budget.budgetDate | date('d-m-Y') }} </p>
+       	</div>
+       	<div height="67%">
+			<table>
+				<tr>
+					<td border.type="none" width="40%">Descripción</td>
+					<td border.type="none" width="10%">Nº pieza</td>
+					<td border.type="none" width="10%">Cantidad</td>
+					<td border.type="none" width="10%">Precio</td>
+					<td border.type="none" width="10%">Subtotal</td>
+				</tr>
+				<tr>
+					<td border.type="none" colspan="5">
+						<hr/>
+					</td>
+				</tr>
+				{% for budgetDetail in budgetDetailsList %}
+				<tr>
+					<td border.type="none" width="40%">{{ budgetDetail.article }}</td>
+					<td border.type="none" width="10%">{{ budgetDetail.tooth }}</td>
+					<td border.type="none" width="10%">{{ budgetDetail.amount }}</td>
+					<td border.type="none" width="10%">{{ budgetDetail.price }}</td>
+					<td border.type="none" width="10%">{{ partialTotals[budgetDetail.id] }}</td>
+				</tr>
+				{% endfor %}
+			</table>  
+       	</div>
+       	<div>
+			<hr/>
+		</div>
+		<div text-align="right">
+			<strong font-size="16px">TOTAL {{ total }}€</strong>
+		</div>
+    </dynamic-page>
 </pdf>
