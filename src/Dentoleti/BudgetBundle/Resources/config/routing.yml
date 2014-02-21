@@ -34,6 +34,10 @@ budget_details_add:
     pattern: /details/add/{budgetId}
     defaults: { _controller: DentoletiBudgetBundle:Details:add }
 
+budget_details_edit:
+    pattern: /details/edit/{budgetDetailId}
+    defaults: { _controller: DentoletiBudgetBundle:Details:edit }
+
 budget_details_list:
     pattern: /details/list/{budgetId}
     defaults: { _controller: DentoletiBudgetBundle:Details:list }
