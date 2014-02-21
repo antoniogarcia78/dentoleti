@@ -37,29 +37,33 @@
        		</stylesheet>
        		<p><strong>Fecha: </strong> {{ budget.budgetDate | date('d-m-Y') }} </p>
        	</div>
-       	<div height="67%">
+       	<div height="67%" width="100%">
 			<table>
 				<tr>
-					<td border.type="none" width="40%">Descripción</td>
-					<td border.type="none" width="10%">Nº pieza</td>
-					<td border.type="none" width="10%">Cantidad</td>
-					<td border.type="none" width="10%">Precio</td>
-					<td border.type="none" width="10%">Subtotal</td>
+					<td border.type="none" width="45%">Descripción</td>
+					<td border.type="none" width="5%" text-align="center">Pieza</td>
+                              <td border.type="none" width="10%" text-align="center">Precio/unidad</td>
+					<td border.type="none" width="5%" text-align="center">Cantidad</td>
+                              <td border.type="none" width="5%" text-align="center">Parcial</td>
+                              <td border.type="none" width="5%" text-align="center">IVA</td>
+					<td border.type="none" width="5%" text-align="center">Subtotal</td>
 				</tr>
 				<tr>
-					<td border.type="none" colspan="5">
-						<hr/>
-					</td>
-				</tr>
-				{% for budgetDetail in budgetDetailsList %}
-				<tr>
-					<td border.type="none" width="40%">{{ budgetDetail.article }}</td>
-					<td border.type="none" width="10%">{{ budgetDetail.tooth }}</td>
-					<td border.type="none" width="10%">{{ budgetDetail.amount }}</td>
-					<td border.type="none" width="10%">{{ budgetDetail.price }}</td>
-					<td border.type="none" width="10%">{{ partialTotals[budgetDetail.id] }}</td>
-				</tr>
-				{% endfor %}
+                              <td border.type="none" colspan="7">
+                                    <hr/>
+                              </td>
+                        </tr>
+                        {% for budgetDetail in budgetDetailsList %}
+                        <tr>
+                              <td border.type="none">{{ budgetDetail.article.description }}</td>
+                              <td border.type="none" text-align="center">{{ budgetDetail.tooth }}</td>
+                              <td border.type="none" text-align="center">{{ budgetDetail.price }}</td>
+                              <td border.type="none" text-align="center">{{ budgetDetail.amount }}</td>
+                              <td border.type="none" text-align="center">{{ partialTotals[budgetDetail.id] }}</td>
+                              <td border.type="none" text-align="center">{{ ivas[budgetDetail.id] }}</td>
+                              <td border.type="none" text-align="center">{{ subTotals[budgetDetail.id] }}</td>
+                        </tr>
+                        {% endfor %}
 			</table>  
        	</div>
        	<div>

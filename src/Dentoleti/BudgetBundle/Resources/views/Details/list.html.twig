@@ -16,9 +16,11 @@
 			<th>Id</th>
 			<th>Artículo</th>
 			<th>Pieza dental</th>
-			<th>Precio</th>
+			<th>Precio/unidad</th>
 			<th>Cantidad</th>
-			<th>Total</th>
+			<th>Parcial</th>
+			<th>IVA</th>
+			<th>Subtotal</th>
 			<th>Editar</th>
 			<th>Eliminar</th>
 		</tr>
@@ -31,13 +33,15 @@
 			<td>{{ budgetDetail.price }}</td>
 			<td>{{ budgetDetail.amount }}</td>
 			<td>{{ partialTotals[budgetDetail.id] }}</td>
+			<td>{{ ivas[budgetDetail.id] }}</td>
+			<td>{{ subTotals[budgetDetail.id] }}</td>
 			<td><a href="{{ path('budget_details_edit', { 'budgetDetailId': budgetDetail.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/edit.png') }}"></a></td>
 			<td><a href="{{ path('budget_details_delete', { 'budgetId': budgetId , 'budgetDetailId': budgetDetail.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/erase.png') }}"></a></td>
 		</tr>
 		{% endfor %}
 		<tr>
-			<td class="total" colspan="5">Total</td>
-			<td class="total"><strong>{{ total }}</strong></td>
+			<td class="total" colspan="6">Total</td>
+			<td class="total"><strong>{{ total }}€</strong></td>
 		</tr>
 	</table>
 	<a href="{{ path('budget_details_add', { 'budgetId': budgetId }) }}">AddNewItem</a>

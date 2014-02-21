@@ -243,19 +243,29 @@ class DefaultController extends Controller
             ->findArticlesOfBudget($budget);
 
         $partialTotals = array();
+        $subTotals = array();
+        $ivas = array();
 
         $total = 0;
         foreach ($budgetDetailsList as $budgetDetail) {
             $partial = $budgetDetail->getAmount() * $budgetDetail->getPrice();
-            $total = $total + $partial;
+            $ivas[$budgetDetail->getId()] = 
+                $budgetDetail->getArticle()->getVat() * $partial;
+
             $partialTotals[$budgetDetail->getId()] = $partial;
+            $subTotals[$budgetDetail->getId()] =
+                $partial + $ivas[$budgetDetail->getId()];
+            $total = $total + $subTotals[$budgetDetail->getId()];
         }
 
         $this->render('DentoletiBudgetBundle:Default:budget.pdf.twig', array(
             'budget' => $budget,
             'budgetDetailsList' => $budgetDetailsList,
             'partialTotals' => $partialTotals,
-            'total' => $total), $response);
+            'total' => $total,
+            'budgetId' => $budget->getId(),
+            'ivas' => $ivas,
+            'subTotals' => $subTotals), $response);
 
         $xml = $response->getContent();
         
