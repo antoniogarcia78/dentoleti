@@ -2,6 +2,7 @@
 namespace Dentoleti\BudgetBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Ps\PdfBundle\Annotation\Pdf;
 use Dentoleti\BudgetBundle\Entity\BudgetDetail;
 use Dentoleti\BudgetBundle\Form\BudgetDetail\BudgetDetailType;
@@ -108,6 +109,44 @@ class DetailsController extends Controller
         //TODO Pendiente de ver donde redirigir la petición
         return $this->forward('DentoletiBudgetBundle:Details:list', array(
         	'budgetId' => $budgetId
+        ));
+    }
+
+    /**
+     * Edit the budget detail with the $budgetId given in the params
+     */
+    public function editAction(Request $request, $budgetDetailId)
+    {
+      $petition = $this->getRequest();
+
+      $em = $this->getDoctrine()->getManager();
+
+      $budgetDetail = $em->getRepository('DentoletiBudgetBundle:BudgetDetail')
+          ->findOneById($budgetDetailId);
+
+      if (!$budgetDetail) {
+          throw $this->createNotFoundException('No existe el presupuesto');
+      }
+
+      $form = $this->createForm(new BudgetDetailType(), $budgetDetail);
+       
+      $form->handleRequest($petition);
+ 
+      $em->persist($budgetDetail);
+      $em->flush();
+
+      if ($request->isMethod('POST')) {
+        $nextAction = $form->get('addItem')->isClicked()
+              ? 'budget_details_add'
+              : 'budget_details_list';
+
+        return $this->redirect($this->generateUrl($nextAction, array(
+          'budgetId' => $budgetDetail->getBudget()->getId())));
+      }
+
+      return $this->render('DentoletiBudgetBundle:Details:budget_detail.html.twig', array(
+            'form' => $form->createView(),
+            'budget' => $budgetDetail->getBudget()
         ));
     }
 }

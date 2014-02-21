@@ -19,6 +19,7 @@
 			<th>Precio</th>
 			<th>Cantidad</th>
 			<th>Total</th>
+			<th>Editar</th>
 			<th>Eliminar</th>
 		</tr>
 		{% for budgetDetail in budgetDetailsList %}
@@ -30,6 +31,7 @@
 			<td>{{ budgetDetail.price }}</td>
 			<td>{{ budgetDetail.amount }}</td>
 			<td>{{ partialTotals[budgetDetail.id] }}</td>
+			<td><a href="{{ path('budget_details_edit', { 'budgetDetailId': budgetDetail.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/edit.png') }}"></a></td>
 			<td><a href="{{ path('budget_details_delete', { 'budgetId': budgetId , 'budgetDetailId': budgetDetail.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/erase.png') }}"></a></td>
 		</tr>
 		{% endfor %}
@@ -39,5 +41,5 @@
 		</tr>
 	</table>
 	<a href="{{ path('budget_details_add', { 'budgetId': budgetId }) }}">AddNewItem</a>
-	<a href="{{ path('budget_complete_view', { 'budgetId': budgetId }) }}">View</a>
+	<a href="{{ path('budget_complete_view', { 'budgetId': budgetId }) }}" target="_blank">View</a>
 {% endblock %}
