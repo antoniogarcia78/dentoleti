@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new Dentoleti\BudgetBundle\DentoletiBudgetBundle(),
             new Dentoleti\ConsultationBundle\DentoletiConsultationBundle(),
             new Ps\PdfBundle\PsPdfBundle(),
+            new Dentoleti\TreatmentBundle\DentoletiTreatmentBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
