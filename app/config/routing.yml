@@ -1,6 +1,6 @@
 dentoleti_treatment:
     resource: "@DentoletiTreatmentBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /treatment
 
 dentoleti_consultation:
     resource: "@DentoletiConsultationBundle/Resources/config/routing.yml"
