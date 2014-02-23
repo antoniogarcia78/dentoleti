@@ -1,3 +1,3 @@
-dentoleti_treatment_homepage:
-    path:  /hello/{name}
-    defaults: { _controller: DentoletiTreatmentBundle:Default:index }
+treatment_add:
+    pattern:  /add
+    defaults: { _controller: DentoletiTreatmentBundle:Default:add }

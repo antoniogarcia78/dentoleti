@@ -36,9 +36,8 @@ class Treatment
     private $state;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="budget", type="string", length=255)
+     * @ORM\OneToOne(targetEntity="Dentoleti\BudgetBundle\Entity\Budget")
+     * @ORM\JoinColumn(name="budget_id", referencedColumnName="id", nullable=true)
      */
     private $budget;
 
@@ -216,6 +215,14 @@ class Treatment
     public function getFunded()
     {
         return $this->funded;
+    }
+
+    /**
+     * Method toString
+     */
+    public function __toString()
+    {
+        return $this->getBudget();
     }
 }
 
