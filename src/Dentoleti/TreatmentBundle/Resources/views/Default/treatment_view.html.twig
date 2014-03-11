@@ -1,0 +1,66 @@
+{% extends '::frontend.html.twig' %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletitreatment/css/tratamiento.css') }}">
+	{{ parent() }}
+{% endblock %}
+
+{% block article %}
+<div id="treatment">
+	<div id="info">
+		<fieldset>
+			<legend>Datos del tratamiento</legend>
+			<div class="col1-two">
+				<div class="label">
+					Identificador: 
+				</div>
+				<div class="data">
+					<span>{{ treatment.id }}</span>
+				</div>
+			</div>
+			<div class="col2-two">
+				<div class="label">
+					Fecha de registro: 
+				</div>
+				<div class="data">
+					<span>{{ treatment.treatmentDate | date('d-m-Y') }}</span>
+				</div>
+			</div>
+			<div class="col2-two">
+				<div class="label">
+					Presupuesto: 
+				</div>
+				<div class="data">
+					<span>{{ treatment.budget }}</span>
+				</div>
+			</div>
+			<br>
+			<div class="col1-two">
+				<div class="label">
+					Piezas que faltan: 
+				</div>
+				<div class="data">
+					<span>{{ treatment.noTooth }}</span>
+				</div>
+			</div>
+			<br>
+			<div class="col1-two">
+				<div class="label">
+					Costes de financiación: 
+				</div>
+				<div class="data">
+					<span>{{ treatment.financingCosts }}</span>
+				</div>
+			</div>
+			<div class="col1-two">
+				<div class="label">
+					Financiado: 
+				</div>
+				<div class="data">
+					<span>{{ treatment.funded }}</span>
+				</div>
+			</div>
+		</fieldset>
+	</div>
+</div>
+{% endblock %}

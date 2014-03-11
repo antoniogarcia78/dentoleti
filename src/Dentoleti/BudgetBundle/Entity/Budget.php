@@ -312,7 +312,7 @@ class Budget
      */
     public function __toString()
     {
-        return $this->getId();
+        return strval($this->getId());
     }
     /**
      * Constructor

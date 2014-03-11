@@ -1,0 +1,40 @@
+{% extends '::frontend.html.twig' %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletitreatment/css/tratamiento.css') }}">
+	{{ parent() }}
+{% endblock %}
+
+{% block article %}
+	{% for flashMessage in app.session.flashbag.get('notice') %}
+    	<div class="flash-notice">
+       		{{ flashMessage }}
+    	</div>
+	{% endfor %}
+	<table id="list">
+		<tr>
+			<th>id</th>
+			<th>Fecha de registro</th>
+			<th>Estado</th>
+			<th>Presupuesto</th>
+			<th>Paciente</th>
+			<th>Ver</th>
+			<th>Editar</th>
+			<th>Eliminar</th>
+		</tr>
+		{% for treatment in treatmentList %}
+		<tr>
+
+			<td>{{ treatment.id }}</td>
+			<td>{{ treatment.treatmentDate | date('d-m-Y') }}</td>
+			<td>{{ treatment.state }}</td>
+			<td>{{ treatment.budget }}</td>
+			<td>{{ treatment.budget.patient }}</td>
+			<td><a href="{{ path('treatment_view', { 'id': treatment.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/eye.png') }}"></a></td>
+			<td><a href="#"><img src="{{ asset('bundles/dentoletigeneral/images/icons/edit.png') }}"></a></td>
+			<td><a href="#"><img src="{{ asset('bundles/dentoletigeneral/images/icons/erase.png') }}"></a></td>
+		</tr>
+		{% endfor %}		
+	</table>
+	
+{% endblock %}
