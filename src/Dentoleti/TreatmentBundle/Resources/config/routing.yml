@@ -1,3 +1,12 @@
 treatment_add:
     pattern:  /add
     defaults: { _controller: DentoletiTreatmentBundle:Default:add }
+
+treatment_list:
+    pattern: /list
+    defaults: { _controller: DentoletiTreatmentBundle:Default:list }
+
+treatment_view:
+    pattern: /view/{id}
+    defaults: { _controller: DentoletiTreatmentBundle:Default:view }
+

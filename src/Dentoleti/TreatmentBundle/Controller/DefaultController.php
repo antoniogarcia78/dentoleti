@@ -49,4 +49,38 @@ class DefaultController extends Controller
        	'form' => $form->createView()
       ));
     }
+
+    /**
+     * List all the treatments in the system
+     */
+    public function listAction()
+    {
+      $em = $this->getDoctrine()->getManager();
+
+      $treatmentList = $em->getRepository('DentoletiTreatmentBundle:Treatment')
+        ->findAll();
+
+      return $this->render('DentoletiTreatmentBundle:Default:list.html.twig', array(
+        'treatmentList' => $treatmentList
+      ));
+    }
+
+    /**
+     * Method for view all the treatment's information
+     */
+    public function viewAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $treatment = $em->getRepository('DentoletiTreatmentBundle:Treatment')
+            ->findOneById($id);
+
+        if (!$treatment) {
+            throw $this->createNotFoundException('No existe el tratamiento');
+        }
+
+        return $this->render('DentoletiTreatmentBundle:Default:treatment_view.html.twig', array(
+            'treatment' => $treatment
+        ));
+    }
 }
