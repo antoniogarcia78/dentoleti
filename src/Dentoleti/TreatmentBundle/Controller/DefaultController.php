@@ -13,42 +13,40 @@ class DefaultController extends Controller
      */
     public function addAction()
     {
-        $petition = $this->getRequest();
-
-    	$treatment = new Treatment();
+      $petition = $this->getRequest();
+      $treatment = new Treatment();
+      $form = $this->createForm(new TreatmentType(), $treatment);
 		
-		$form = $this->createForm(new TreatmentType(), $treatment);
-		
-		$treatment->setTreatmentDate(new \DateTime());
+		  $treatment->setTreatmentDate(new \DateTime());
 
-		$form->handleRequest($petition);
+		  $form->handleRequest($petition);
 
-		if ($form->isValid()){
+		  if ($form->isValid()){
             //save the form
     		$em = $this->getDoctrine()->getManager();
     		
     		$em->persist($treatment);
     		$em->flush();
 
-            $this->get('session')->getFlashBag()->add(
-              'notice',
-              'El presupuesto se ha guardado correctamente'
-            );
+        $this->get('session')->getFlashBag()->add(
+          'notice',
+          'El tratamiento se ha guardado correctamente'
+        );
 
-            $nextAction = $form->get('save')->isClicked()
-              ? 'treatment_add' //TODO cambiar por treatment_details_add
-              : 'treatment_add';
+        $nextAction = $form->get('save')->isClicked()
+          ? 'treatment_add' //TODO cambiar por treatment_details_add
+          : 'treatment_add';
 
-            if ('budget_details_add' == $nextAction){
-                return $this->redirect($this->generateUrl($nextAction, array(
-                    'budgetId' => $treatment->getId())));
-            }
+        if ('budget_details_add' == $nextAction){
+          return $this->redirect($this->generateUrl($nextAction, array(
+            'budgetId' => $treatment->getId())));
+        }
 
-            return $this->redirect($this->generateUrl($nextAction));
+        return $this->redirect($this->generateUrl($nextAction));
      	}
 
-        return $this->render('DentoletiTreatmentBundle:Default:treatment.html.twig', array(
-        	'form' => $form->createView()
-        ));
+      return $this->render('DentoletiTreatmentBundle:Default:treatment.html.twig', array(
+       	'form' => $form->createView()
+      ));
     }
 }
