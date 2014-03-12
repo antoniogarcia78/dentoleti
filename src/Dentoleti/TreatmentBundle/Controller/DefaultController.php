@@ -83,4 +83,32 @@ class DefaultController extends Controller
             'treatment' => $treatment
         ));
     }
+
+    /**
+     * Edit the treatment with the $id given in the params
+     */
+    public function editAction($id)
+    {
+        $petition = $this->getRequest();
+
+        $em = $this->getDoctrine()->getManager();
+
+        $treatment = $em->getRepository('DentoletiTreatmentBundle:Treatment')
+            ->findOneById($id);
+
+        if (!$treatment) {
+            throw $this->createNotFoundException('No existe el tratamiento');
+        }
+
+        $form = $this->createForm(new TreatmentType(), $treatment);
+        
+        $form->handleRequest($petition);
+
+        $em->persist($treatment);
+        $em->flush();
+        
+        return $this->render('DentoletiTreatmentBundle:Default:treatment.html.twig', array(
+            'form' => $form->createView()
+        ));
+    }
 }
