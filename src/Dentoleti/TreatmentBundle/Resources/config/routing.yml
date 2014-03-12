@@ -13,3 +13,7 @@ treatment_view:
 treatment_edit:
     pattern: /edit/{id}
     defaults: { _controller: DentoletiTreatmentBundle:Default:edit }
+
+treatment_delete:
+    pattern: /delete/{id}
+    defaults: { _controller: DentoletiTreatmentBundle:Default:delete }

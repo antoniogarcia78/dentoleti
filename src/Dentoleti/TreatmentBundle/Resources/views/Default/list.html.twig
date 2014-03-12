@@ -32,7 +32,7 @@
 			<td>{{ treatment.budget.patient }}</td>
 			<td><a href="{{ path('treatment_view', { 'id': treatment.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/eye.png') }}"></a></td>
 			<td><a href="{{ path('treatment_edit', { 'id': treatment.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/edit.png') }}"></a></td>
-			<td><a href="#"><img src="{{ asset('bundles/dentoletigeneral/images/icons/erase.png') }}"></a></td>
+			<td><a href="{{ path('treatment_delete', { 'id': treatment.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/erase.png') }}"></a></td>
 		</tr>
 		{% endfor %}		
 	</table>
