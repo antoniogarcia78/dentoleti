@@ -17,3 +17,4 @@ treatment_edit:
 treatment_delete:
     pattern: /delete/{id}
     defaults: { _controller: DentoletiTreatmentBundle:Default:delete }
+
