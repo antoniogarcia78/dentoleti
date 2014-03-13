@@ -202,5 +202,23 @@
 		</div>
 		</fieldset>
 	</div>
+	<div id="treatments">
+		<fieldset>
+		<legend>Tratamientos</legend>
+		<div class="col1-three">
+			<div class="label">
+				Listado de tratamientos:
+			</div>
+			<div class="data">
+				<ul>
+				{% for treatment in treatments %}
+					<li><a href="{{ path('treatment_view', { 'id' : treatment.id }) }}">{{ treatment.id }}</a></li>
+				{% endfor %}
+				</ul>
+			</div>
+		</div>
+		
+		</fieldset>
+	</div>
 </div>
 {% endblock %}

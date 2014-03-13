@@ -75,12 +75,21 @@ class DefaultController extends Controller
         $treatment = $em->getRepository('DentoletiTreatmentBundle:Treatment')
             ->findOneById($id);
 
+        $budget_details = $em->getRepository('DentoletiBudgetBundle:BudgetDetail')
+          ->findBudgetDetails($treatment->getBudget());
+
+        $articles = array();
+        foreach ($budget_details as $budget_detail) {
+          $articles[] = $budget_detail->getArticle();
+        }
+
         if (!$treatment) {
             throw $this->createNotFoundException('No existe el tratamiento');
         }
 
         return $this->render('DentoletiTreatmentBundle:Default:treatment_view.html.twig', array(
-            'treatment' => $treatment
+            'treatment' => $treatment,
+            'articles' => $articles
         ));
     }
 

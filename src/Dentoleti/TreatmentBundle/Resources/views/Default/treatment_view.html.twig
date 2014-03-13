@@ -62,5 +62,20 @@
 			</div>
 		</fieldset>
 	</div>
+	<div>
+		<fieldset>
+			<legend>Tratamientos pendientes</legend>
+			<div class="label">
+				Pendiente: 
+			</div>
+			<div class="data">
+				<ul>
+				{% for article in articles %}
+					<li>{{ article.description }}</li>
+				{% endfor %}
+				</ul>
+			</div>
+		</fieldset>
+	</div>
 </div>
 {% endblock %}

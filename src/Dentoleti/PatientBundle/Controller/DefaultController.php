@@ -95,12 +95,16 @@ class DefaultController extends Controller
         $patient = $em->getRepository('DentoletiPatientBundle:Patient')
             ->findOneById($id);
 
+        $treatments = $em->getRepository('DentoletiTreatmentBundle:Treatment')
+            ->findTreatmentsByPatient($patient->getId());
+
         if (!$patient) {
             throw $this->createNotFoundException('No existe el paciente');
         }
 
         return $this->render('DentoletiPatientBundle:Default:patient_view.html.twig', array(
-            'patient' => $patient
+            'patient' => $patient,
+            'treatments' => $treatments
         ));
     }
 
