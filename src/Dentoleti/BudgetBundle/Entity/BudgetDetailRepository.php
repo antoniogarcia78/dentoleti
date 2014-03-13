@@ -12,7 +12,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class BudgetDetailRepository extends EntityRepository
 {
-	public function findArticles($budget)
+	public function findBudgetDetails($budget)
 	{
 		$em = $this->getEntityManager();
 
@@ -37,7 +37,7 @@ class BudgetDetailRepository extends EntityRepository
 			JOIN bd.article a
 			JOIN bd.budget b
 			WHERE bd.budget = :budget
-			');
+			'); //TODO revisar JOIN bd.budget b. Creo que es innecesario
 		
 		$query->setParameter('budget', $budget);
 		
