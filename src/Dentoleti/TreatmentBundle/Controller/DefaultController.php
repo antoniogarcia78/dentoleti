@@ -4,6 +4,7 @@ namespace Dentoleti\TreatmentBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Dentoleti\TreatmentBundle\Entity\Treatment;
+use Dentoleti\AccountingBundle\Entity\Debt;
 use Dentoleti\TreatmentBundle\Form\Treatment\TreatmentType;
 
 class DefaultController extends Controller
@@ -15,6 +16,8 @@ class DefaultController extends Controller
     {
       $petition = $this->getRequest();
       $treatment = new Treatment();
+      $debt = new Debt();
+
       $form = $this->createForm(new TreatmentType(), $treatment);
 		
 		  $treatment->setTreatmentDate(new \DateTime());
@@ -22,10 +25,38 @@ class DefaultController extends Controller
 		  $form->handleRequest($petition);
 
 		  if ($form->isValid()){
-            //save the form
-    		$em = $this->getDoctrine()->getManager();
-    		
+        // Get the entity manager
+        $em = $this->getDoctrine()->getManager();
+
+        $budget = $em->getRepository('DentoletiBudgetBundle:Budget')
+          ->findOneById($treatment->getBudget()->getId());
+
+        $budgetDetailsList = $em->getRepository('DentoletiBudgetBundle:BudgetDetail')
+          ->findArticlesOfBudget($budget);
+
+        $partialTotals = array();
+        $subTotals = array();
+        $ivas = array();
+
+        $total = 0;
+        foreach ($budgetDetailsList as $budgetDetail) {
+          $partial = $budgetDetail->getAmount() * $budgetDetail->getPrice();
+          $ivas[$budgetDetail->getId()] = 
+              $budgetDetail->getArticle()->getVat() * $partial;
+          
+          $partialTotals[$budgetDetail->getId()] = $partial;
+          $subTotals[$budgetDetail->getId()] =
+              $partial + $ivas[$budgetDetail->getId()];
+          $total = $total + $subTotals[$budgetDetail->getId()];
+          
+        }
+        $debt->setTreatment($treatment);
+        $debt->setAmount($total);
+
+        //save the form
     		$em->persist($treatment);
+        //save the debt
+        $em->persist($debt);
     		$em->flush();
 
         $this->get('session')->getFlashBag()->add(
