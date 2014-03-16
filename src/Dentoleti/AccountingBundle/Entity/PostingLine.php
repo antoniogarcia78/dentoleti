@@ -36,7 +36,7 @@ class PostingLine
     private $postingLineDate;
 
     /**
-     * @ORM\OneToOne(targetEntity="Dentoleti\TreatmentBundle\Entity\Treatment")
+     * @ORM\ManyToOne(targetEntity="Dentoleti\TreatmentBundle\Entity\Treatment")
      * @ORM\JoinColumn(name="treatment_id", referencedColumnName="id")
      */
     private $treatment;
