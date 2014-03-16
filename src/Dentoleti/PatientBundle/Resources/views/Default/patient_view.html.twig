@@ -204,7 +204,7 @@
 	</div>
 	<div id="treatments">
 		<fieldset>
-		<legend>Tratamientos</legend>
+		<legend>Tratamientos en curso</legend>
 		<div class="col1-three">
 			<div class="label">
 				Listado de tratamientos:
@@ -217,8 +217,28 @@
 				</ul>
 			</div>
 		</div>
-		
 		</fieldset>
 	</div>
+	{% if debts is not empty %}
+	<div id="debts">
+		<fieldset>
+		<legend>Tratamientos pendientes de cobros</legend>
+		<div class="col1-three">
+			<div class="label">
+				Listado de tratamientos:
+			</div>
+			<div class="data">
+				<ul>
+				{% for debt in debts %}
+					<li><a href="{{ path('treatment_view', { 'id' : debt.treatment.id }) }}">{{ debt.treatment.id }}</a></li>
+					<li>{{ debt.amount }}€</a></li>
+					<li><a href="{{ path('dentoleti_accounting_add_fund', { 'treatment_id' : debt.treatment.id, 'debt_id' : debt.id }) }}">Añadir ingreso</a></li>
+				{% endfor %}
+				</ul>
+			</div>
+		</div>
+		</fieldset>
+	</div>
+	{% endif %}
 </div>
 {% endblock %}

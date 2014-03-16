@@ -35,6 +35,25 @@
 	padding-top: 7px;
 }
 
+#debts {
+	clear: both;
+	float: left;
+	padding-top: 7px;
+}
+
+#debts fieldset {
+	width: auto;
+	float: left;
+}
+
+#debts label {
+	padding: 5px;
+}
+
+#debts li {
+	display: inline;
+}
+
 .col1-two {
 	clear: both;
 	float: left;
