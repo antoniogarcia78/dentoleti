@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Dentoleti\TreatmentBundle\Entity\Treatment;
 use Dentoleti\AccountingBundle\Entity\Debt;
 use Dentoleti\TreatmentBundle\Form\Treatment\TreatmentType;
+use Dentoleti\TreatmentBundle\Helper\TreatmentUtils;
 
 class DefaultController extends Controller
 {
@@ -166,11 +167,17 @@ class DefaultController extends Controller
         $treatment = $em->getRepository('DentoletiTreatmentBundle:Treatment')
             ->findOneById($id);
 
+        $treatmentUtils = new TreatmentUtils();
+        $treatment = $treatmentUtils->cancelTreatment($treatment);
+
+        $dentoletiDebtService = $this->get('dentoleti_debts');
+        $dentoletiDebtService->createDebtCancelled($treatment->getId());
+
         if (!$treatment) {
             throw $this->createNotFoundException('No existe el tratamiento');
         }
         else {
-            $em->remove($treatment);
+            $em->persist($treatment);
             $em->flush();
         }
 
