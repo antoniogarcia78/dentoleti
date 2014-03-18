@@ -26,4 +26,19 @@ class DebtRepository extends EntityRepository
 
 		return $query->getResult();
 	}
+
+	public function findDebtForTreatment($treatment_id)
+	{
+		$em = $this->getEntityManager();
+
+		$query = $em->createQuery('
+			SELECT d, t
+			FROM DentoletiAccountingBundle:Debt d
+			JOIN d.treatment t
+			WHERE t.id = :treatment_id
+			');
+		$query->setParameter('treatment_id', $treatment_id);
+
+		return $query->getResult()[0];
+	}
 }
