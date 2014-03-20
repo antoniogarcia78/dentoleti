@@ -102,6 +102,9 @@ class DefaultController extends Controller
      */
     public function viewAction($id)
     {
+        $log = $this->get('monolog.logger.dentoleti');
+        $log->info("Vista del usuario " . $id);
+        
         $em = $this->getDoctrine()->getManager();
 
         $treatment = $em->getRepository('DentoletiTreatmentBundle:Treatment')
