@@ -12,14 +12,17 @@ web_profiler:
     intercept_redirects: false
 
 monolog:
+    channels: ["dentoleti"]
     handlers:
         main:
             type:   stream
             path:   "%kernel.logs_dir%/%kernel.environment%.log"
             level:  debug
+            channels: ["!dentoleti"]
         console:
             type:   console
             bubble: false
+            channels: ["!dentoleti"]
         # uncomment to get logging in your browser
         # you may have to allow bigger header sizes in your Web server configuration
         #firephp:
@@ -28,6 +31,11 @@ monolog:
         #chromephp:
         #    type:   chromephp
         #    level:  info
+        dentoleti:
+            type:    stream
+            path:    "%kernel.logs_dir%/dentoleti.log"
+            level:   info
+            channels: ["dentoleti"]
 
 assetic:
     use_controller: true
