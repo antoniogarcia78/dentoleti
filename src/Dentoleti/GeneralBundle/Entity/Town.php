@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Town
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Dentoleti\GeneralBundle\Entity\TownRepository")
  */
 class Town
 {
@@ -35,6 +35,16 @@ class Town
      * @ORM\JoinColumn(name="province_id", referencedColumnName="id")
      */
     private $province;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Dentoleti\GeneralBundle\Entity\PostalCode", mappedBy="towns")
+     */
+    private $postalcodes;
+
+    public function __construct()
+    {
+        $this->postalcodes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Set Id
@@ -108,5 +118,39 @@ class Town
     public function __toString()
     {
         return $this->getName();
+    }
+
+    /**
+     * Add postalcodes
+     *
+     * @param \Dentoleti\GeneralBundle\Entity\PostalCode $postalcodes
+     *
+     * @return Town
+     */
+    public function addPostalcode(\Dentoleti\GeneralBundle\Entity\PostalCode $postalcodes)
+    {
+        $this->postalcodes[] = $postalcodes;
+
+        return $this;
+    }
+
+    /**
+     * Remove postalcodes
+     *
+     * @param \Dentoleti\GeneralBundle\Entity\PostalCode $postalcodes
+     */
+    public function removePostalcode(\Dentoleti\GeneralBundle\Entity\PostalCode $postalcodes)
+    {
+        $this->postalcodes->removeElement($postalcodes);
+    }
+
+    /**
+     * Get postalcodes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPostalcodes()
+    {
+        return $this->postalcodes;
     }
 }

@@ -5,11 +5,17 @@ namespace Dentoleti\PatientBundle\Form\Patient;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Doctrine\ORM\EntityRepository;
+use Symfony\Component\Form\FormInterface;
+use Dentoleti\GeneralBundle\Entity\PostalCode;
 
 class PatientType extends AbstractType
 {
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
+
 		$builder->add('nif', 'text', array(
 			'required' => false
 		));
@@ -45,30 +51,49 @@ class PatientType extends AbstractType
 		$builder->add('address', 'text', array(
 			'required' => false
 		));
-		$builder->add('country', 'entity', array(
-			'class' => 'DentoletiGeneralBundle:Country',
-			'property' => 'name',
-			'empty_value' => '-- PAÍS --',
-			'required' => false
-		));
-		$builder->add('province', 'entity', array(
-			'class' => 'DentoletiGeneralBundle:Province',
-			'property' => 'name',
-			'empty_value' => '-- PROVINCIA --',
-			'required' => false
-		));
-		$builder->add('town', 'entity', array(
-			'class' => 'DentoletiGeneralBundle:Town',
-			'property' => 'name',
-			'empty_value' => '-- POBLACIÓN --',
-			'required' => false
-		));
+		
 		$builder->add('postalCode', 'entity', array(
 			'class' => 'DentoletiGeneralBundle:PostalCode',
 			'property' => 'postalCode',
 			'empty_value' => '-- Código postal --',
 			'required' => false
 		));
+
+		$formModifier = function(FormInterface $form, PostalCode $postalCode = null) {
+			$towns = null === $postalCode ? array() : $postalCode->getTowns();
+
+			$form->add('town', 'entity', array(
+				'class' => 'DentoletiGeneralBundle:Town',
+				'property' => 'name',
+				'empty_value' => '-- POBLACIÓN --',
+				'required' => false,
+				'choices' => $towns
+			));
+		};
+
+		$builder->addEventListener(
+			FormEvents::PRE_SET_DATA,
+			function(FormEvent $event) use ($formModifier) {
+                // this would be your entity, i.e. SportMeetup
+                $data = $event->getData();
+
+                $formModifier($event->getForm(), $data->getPostalCode());
+            }
+		);
+
+		$builder->get('postalCode')->addEventListener(
+			FormEvents::PRE_SUBMIT,
+            function(FormEvent $event) use ($formModifier) {
+                // It's important here to fetch $event->getForm()->getData(), as
+                // $event->getData() will get you the client data (that is, the ID)
+                $postalCode = $event->getForm()->getData();
+
+                // since we've added the listener to the child, we'll have to pass on
+                // the parent to the callback functions!
+                $formModifier($event->getForm()->getParent(), $postalCode);
+            }
+		);
+
 		$builder->add('occupation', 'text', array(
 			'required' => false
 		));
