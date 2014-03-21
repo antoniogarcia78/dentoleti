@@ -31,10 +31,9 @@ class PostalCode
     /**
      * @var string
      *
-     * @ORM\ManyToOne(targetEntity="Town")
-     * @ORM\JoinColumn(name="town_id", referencedColumnName="id")
+     * @ORM\ManyToMany(targetEntity="Dentoleti\GeneralBundle\Entity\Town", inversedBy="postalcodes")
      */
-    private $town;
+    private $towns;
 
     /**
      * Set Id
@@ -80,33 +79,51 @@ class PostalCode
     }
 
     /**
-     * Set town
-     *
-     * @param string $town
-     * @return PostalCode
-     */
-    public function setTown($town)
-    {
-        $this->town = $town;
-
-        return $this;
-    }
-
-    /**
-     * Get town
-     *
-     * @return string 
-     */
-    public function getTown()
-    {
-        return $this->town;
-    }
-
-    /**
      * Método toString
      */
     public function __toString()
     {
         return $this->getPostalCode();
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->towns = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add towns
+     *
+     * @param \Dentoleti\GeneralBundle\Entity\Town $towns
+     *
+     * @return PostalCode
+     */
+    public function addTown(\Dentoleti\GeneralBundle\Entity\Town $towns)
+    {
+        $this->towns[] = $towns;
+
+        return $this;
+    }
+
+    /**
+     * Remove towns
+     *
+     * @param \Dentoleti\GeneralBundle\Entity\Town $towns
+     */
+    public function removeTown(\Dentoleti\GeneralBundle\Entity\Town $towns)
+    {
+        $this->towns->removeElement($towns);
+    }
+
+    /**
+     * Get towns
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTowns()
+    {
+        return $this->towns;
     }
 }

@@ -146,6 +146,7 @@
 						</div>
 					</div>
 				</div>
+				{#
 				<div class="col1-two">
 					<div class="label">
 						{{ form_label(form.country) }}
@@ -168,25 +169,26 @@
 						</div>
 					</div>
 				</div>
+				#}
 				<div class="col1-two">
 					<div class="label">
-						{{ form_label(form.town) }}
+						{{ form_label(form.postalCode) }}
 					</div>
-					<div class="data">
-						{{ form_widget(form.town) }}
+					<div class="data" id="cp">
+						{{ form_widget(form.postalCode) }}
 						<div class="error">
-							{{ form_errors(form.town) }}
+							{{ form_errors(form.postalCode) }}
 						</div>					
 					</div>
 				</div>
 				<div class="col2-two">
 					<div class="label">
-						{{ form_label(form.postalCode) }}
+						{{ form_label(form.town) }}
 					</div>
-					<div class="data">
-						{{ form_widget(form.postalCode) }}
+					<div class="data" id="town">
+						{{ form_widget(form.town) }}
 						<div class="error">
-							{{ form_errors(form.postalCode) }}
+							{{ form_errors(form.town) }}
 						</div>
 					</div>
 				</div>
@@ -292,4 +294,25 @@
 	{{ form_rest(form) }}
 	{{ form_end(form) }}
 </div>
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script type="text/javascript">
+	var path = '{{ path('load_provinces') }}';
+	// When cp change
+	$("#patient_postalCode").change(function() {
+		var data = {
+			cp_id: $(this).val()
+		};
+		$.ajax({
+			type: 'POST',
+			url: path,
+			data: data,
+			success: function(data) {
+				$('#patient_town').html(data);
+			}
+		});
+	});
+	</script>
 {% endblock %}

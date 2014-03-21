@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="utf-8">
     <title>{% block title %}{% endblock %}</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     {% block stylesheets %}{% endblock %}
@@ -13,6 +13,13 @@
         Luis González Rodríguez - Connect2tic
     </footer>
 
-    {% block javascripts %}{% endblock %}
+    {% block javascripts %}
+        <script src="{{ asset('bundles/dentoletigeneral/js/jquery-2.1.0.min.js') }}"></script>
+        {#
+        {% javascripts '@DentoletiPatientBundle/Resources/public/js/ajax-calls.js'%}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+        #}
+    {% endblock %}
 </body>
 </html>

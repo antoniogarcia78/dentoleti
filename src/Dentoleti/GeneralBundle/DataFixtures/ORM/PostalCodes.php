@@ -11330,19 +11330,20 @@ class PostalCodes extends AbstractFixture implements OrderedFixtureInterface
 			);
 
 		foreach ($cps as $cp) {
-			$entity = new PostalCode();
+			$postalCode = new PostalCode();
 
 			$town = $manager->getRepository(
 				'DentoletiGeneralBundle:Town')->findOneById($cp['town']);
 
-			$entity->setId($cp['id']);
-			$entity->setPostalCode($cp['codpostal']);
-			$entity->setTown($town);
+			$postalCode->setId($cp['id']);
+			$postalCode->setPostalCode($cp['codpostal']);
+			$postalCode->addTown($town);
+			$town->addPostalCode($postalCode);
 
-			$metadata = $manager->getClassMetaData(get_class($entity));
+			$metadata = $manager->getClassMetaData(get_class($postalCode));
 			$metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
 
-			$manager->persist($entity);
+			$manager->persist($postalCode);
 		}
 
 
