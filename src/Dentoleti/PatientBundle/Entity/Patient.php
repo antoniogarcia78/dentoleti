@@ -8,8 +8,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\ExecutionContextInterface;
 use Dentoleti\GeneralBundle\Meeting;
 use Dentoleti\GeneralBundle\CivilStatus;
-use Dentoleti\GeneralBundle\Country;
-use Dentoleti\GeneralBundle\Province;
 use Dentoleti\GeneralBundle\Town;
 
 /**
@@ -99,18 +97,6 @@ class Patient
      */
     private $address;
     
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Dentoleti\GeneralBundle\Entity\Country")
-     * @ORM\JoinColumn(name="country_id", referencedColumnName="id", nullable=true)
-     */
-    private $country;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Dentoleti\GeneralBundle\Entity\Province")
-     * @ORM\JoinColumn(name="province_id", referencedColumnName="id", nullable=true)
-     */
-    private $province;
 
     /**
      * @ORM\ManyToOne(targetEntity="Dentoleti\GeneralBundle\Entity\Town")
@@ -378,52 +364,6 @@ class Patient
     public function getPhone2()
     {
         return $this->phone2;
-    }
-
-    /**
-     * Set country
-     *
-     * @param integer $country
-     * @return Patient
-     */
-    public function setCountry($country)
-    {
-        $this->country = $country;
-
-        return $this;
-    }
-
-    /**
-     * Get country
-     *
-     * @return integer 
-     */
-    public function getCountry()
-    {
-        return $this->country;
-    }
-
-    /**
-     * Set province
-     *
-     * @param integer $province
-     * @return Patient
-     */
-    public function setProvince($province)
-    {
-        $this->province = $province;
-
-        return $this;
-    }
-
-    /**
-     * Get province
-     *
-     * @return integer 
-     */
-    public function getProvince()
-    {
-        return $this->province;
     }
 
     /**

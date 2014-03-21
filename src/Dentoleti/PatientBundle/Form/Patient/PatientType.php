@@ -82,7 +82,7 @@ class PatientType extends AbstractType
 		);
 
 		$builder->get('postalCode')->addEventListener(
-			FormEvents::PRE_SUBMIT,
+			FormEvents::POST_SUBMIT,
             function(FormEvent $event) use ($formModifier) {
                 // It's important here to fetch $event->getForm()->getData(), as
                 // $event->getData() will get you the client data (that is, the ID)
