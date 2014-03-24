@@ -11,7 +11,7 @@ use Dentoleti\GeneralBundle\Entity\Town;
  * Carga de todos las poblaciones de España. Se guardarán los datos
  * con su correspondiente relación con las provincias
  */
-class Towns extends AbstractFixture implements OrderedFixtureInterface
+class Towns1 extends AbstractFixture implements OrderedFixtureInterface
 {
 	public function getOrder()
 	{
