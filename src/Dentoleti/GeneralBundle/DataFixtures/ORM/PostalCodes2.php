@@ -11345,7 +11345,7 @@ class PostalCodes2 extends AbstractFixture implements OrderedFixtureInterface
 			$metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
 
 			$manager->persist($postalCode);
-			if ($cantidad == 50){
+			if ($cantidad == 20){
 				$manager->flush();
 				$cantidad = 0;
 			} else {
