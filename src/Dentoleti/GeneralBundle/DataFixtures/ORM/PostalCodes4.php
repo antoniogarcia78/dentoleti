@@ -3169,7 +3169,7 @@ class PostalCodes4 extends AbstractFixture implements OrderedFixtureInterface
 			array('codpostal' => '24395', 'id' => '4636', 'town' => '4138'),
 			array('codpostal' => '24394', 'id' => '4635', 'town' => '4137'),
 			array('codpostal' => '24393', 'id' => '4634', 'town' => '4136'),
-			array('codpostal' => '24392', 'id' => '4633', 'town' => '4135'),
+			*/array('codpostal' => '24392', 'id' => '4633', 'town' => '4135'),
 			array('codpostal' => '24391', 'id' => '4632', 'town' => '4134'),
 			array('codpostal' => '24390', 'id' => '4631', 'town' => '4133'),
 			array('codpostal' => '50246', 'id' => '11090', 'town' => '9848'),
@@ -4382,7 +4382,7 @@ class PostalCodes4 extends AbstractFixture implements OrderedFixtureInterface
 			array('codpostal' => '47283', 'id' => '10433', 'town' => '9293'),
 			array('codpostal' => '47280', 'id' => '10430', 'town' => '4011'),
 			array('codpostal' => '47281', 'id' => '10431', 'town' => '9291'),
-			array('codpostal' => '11300', 'id' => '2059', 'town' => '1788'),
+			/*array('codpostal' => '11300', 'id' => '2059', 'town' => '1788'),
 			array('codpostal' => '27680', 'id' => '5640', 'town' => '5086'),
 			array('codpostal' => '27685', 'id' => '5641', 'town' => '5087'),
 			array('codpostal' => '27686', 'id' => '5642', 'town' => '5088'),
@@ -7998,7 +7998,7 @@ class PostalCodes4 extends AbstractFixture implements OrderedFixtureInterface
 			array('codpostal' => '33007', 'id' => '7075', 'town' => '6284'),
 			array('codpostal' => '33006', 'id' => '7074', 'town' => '6285'),
 			array('codpostal' => '33005', 'id' => '7073', 'town' => '6284'),
-			*/array('codpostal' => '33004', 'id' => '7072', 'town' => '6284'),
+			array('codpostal' => '33004', 'id' => '7072', 'town' => '6284'),
 			array('codpostal' => '33776', 'id' => '7371', 'town' => '6555'),
 			array('codpostal' => '42365', 'id' => '9365', 'town' => '8339'),
 			array('codpostal' => '48012', 'id' => '10552', 'town' => '9395'),
@@ -11326,7 +11326,7 @@ class PostalCodes4 extends AbstractFixture implements OrderedFixtureInterface
 			array('codpostal' => '28192', 'id' => '5847', 'town' => '5232'),
 			array('codpostal' => '33682', 'id' => '7314', 'town' => '6500'),
 			array('codpostal' => '41530', 'id' => '9184', 'town' => '8171'),
-			array('codpostal' => '38340', 'id' => '8521', 'town' => '7585'),
+			array('codpostal' => '38340', 'id' => '8521', 'town' => '7585'),*/
 			);
 
 		$cantidad = 0;

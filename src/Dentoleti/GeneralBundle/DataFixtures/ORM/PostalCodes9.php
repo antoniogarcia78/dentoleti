@@ -11,17 +11,17 @@ use Dentoleti\GeneralBundle\Entity\Town;
  * Carga de todos las poblaciones de España. Se guardarán los datos
  * con su correspondiente relación con las provincias
  */
-class PostalCodes extends AbstractFixture implements OrderedFixtureInterface
+class PostalCodes9 extends AbstractFixture implements OrderedFixtureInterface
 {
 	public function getOrder()
 	{
-		return 11;
+		return 19;
 	}
 
 	public function load(ObjectManager $manager)
 	{
 		$cps = array(
-			array('codpostal' => '35540', 'id' => '7748', 'town' => '6895'),
+			/*array('codpostal' => '35540', 'id' => '7748', 'town' => '6895'),
 			array('codpostal' => '35541', 'id' => '7749', 'town' => '6896'),
 			array('codpostal' => '35542', 'id' => '7750', 'town' => '6897'),
 			array('codpostal' => '35543', 'id' => '7751', 'town' => '6898'),
@@ -1121,7 +1121,7 @@ class PostalCodes extends AbstractFixture implements OrderedFixtureInterface
 			array('codpostal' => '25360', 'id' => '5014', 'town' => '4490'),
 			array('codpostal' => '27213', 'id' => '5385', 'town' => '4837'),
 			array('codpostal' => '27212', 'id' => '5384', 'town' => '4836'),
-			/*array('codpostal' => '27211', 'id' => '5383', 'town' => '4835'),
+			array('codpostal' => '27211', 'id' => '5383', 'town' => '4835'),
 			array('codpostal' => '27210', 'id' => '5382', 'town' => '4762'),
 			array('codpostal' => '27217', 'id' => '5389', 'town' => '4841'),
 			array('codpostal' => '27216', 'id' => '5388', 'town' => '4840'),
@@ -11226,7 +11226,7 @@ class PostalCodes extends AbstractFixture implements OrderedFixtureInterface
 			array('codpostal' => '42134', 'id' => '9287', 'town' => '8262'),
 			array('codpostal' => '42138', 'id' => '9288', 'town' => '8263'),
 			array('codpostal' => '49166', 'id' => '10769', 'town' => '9556'),
-			array('codpostal' => '15890', 'id' => '2894', 'town' => '2471'),
+			*/array('codpostal' => '15890', 'id' => '2894', 'town' => '2471'),
 			array('codpostal' => '15891', 'id' => '2895', 'town' => '2532'),
 			array('codpostal' => '15892', 'id' => '2896', 'town' => '2471'),
 			array('codpostal' => '15893', 'id' => '2897', 'town' => '2533'),
@@ -11326,7 +11326,7 @@ class PostalCodes extends AbstractFixture implements OrderedFixtureInterface
 			array('codpostal' => '28192', 'id' => '5847', 'town' => '5232'),
 			array('codpostal' => '33682', 'id' => '7314', 'town' => '6500'),
 			array('codpostal' => '41530', 'id' => '9184', 'town' => '8171'),
-			array('codpostal' => '38340', 'id' => '8521', 'town' => '7585'),*/
+			array('codpostal' => '38340', 'id' => '8521', 'town' => '7585'),
 			);
 
 		$cantidad = 0;
@@ -11345,11 +11345,11 @@ class PostalCodes extends AbstractFixture implements OrderedFixtureInterface
 			$metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
 
 			$manager->persist($postalCode);
-			if ($cantidad == 20) {
+			if ($cantidad == 20){
 				$manager->flush();
 				$cantidad = 0;
 			} else {
-				$cantidad = $cantidad +1;
+				$cantidad = $cantidad + 1;
 			}
 		}
 
