@@ -11,11 +11,11 @@ use Dentoleti\GeneralBundle\Entity\Town;
  * Carga de todos las poblaciones de España. Se guardarán los datos
  * con su correspondiente relación con las provincias
  */
-class Towns1 extends AbstractFixture implements OrderedFixtureInterface
+class Towns4 extends AbstractFixture implements OrderedFixtureInterface
 {
 	public function getOrder()
 	{
-		return 6;
+		return 9;
 	}
 
 	public function load(ObjectManager $manager)
@@ -2497,7 +2497,7 @@ class Towns1 extends AbstractFixture implements OrderedFixtureInterface
 			array('name' => "TORNADIZO, EL", 'id' => '7492', 'province' => '039'),
 			array('name' => "PUERTO ADENTRO", 'id' => '5725', 'province' => '032'),
 			array('name' => "SENDIN", 'id' => '6057', 'province' => '034'),
-			*/array('name' => "VILAMACOLUM", 'id' => '2886', 'province' => '017'),
+			array('name' => "VILAMACOLUM", 'id' => '2886', 'province' => '017'),
 			array('name' => "SANT TOMÀS, PLATJA, Urbanitzacio", 'id' => '981', 'province' => '007'),
 			array('name' => "LALUENGA", 'id' => '3546', 'province' => '022'),
 			array('name' => "SANT LLORENÇ DE LES ARENES", 'id' => '2876', 'province' => '017'),
@@ -5017,7 +5017,7 @@ class Towns1 extends AbstractFixture implements OrderedFixtureInterface
 			array('name' => "VALDENEBRO", 'id' => '8323', 'province' => '028'),
 			array('name' => "VILLAR DE OLALLA", 'id' => '2612', 'province' => '016'),
 			array('name' => "USTES", 'id' => '5842', 'province' => '033'),
-			/*array('name' => "MEIRAMA", 'id' => '2298', 'province' => '015'),
+			array('name' => "MEIRAMA", 'id' => '2298', 'province' => '015'),
 			array('name' => "VIVER DE LA SIERRA", 'id' => '9851', 'province' => '024'),
 			array('name' => "VALENCIA DEL VENTOSO", 'id' => '741', 'province' => '006'),
 			array('name' => "SANTIORXO (SAN XURXO)", 'id' => '4961', 'province' => '029'),
@@ -9129,7 +9129,7 @@ class Towns1 extends AbstractFixture implements OrderedFixtureInterface
 			array('name' => "ORBA (CASCO ANTIGUO)", 'id' => '345', 'province' => '003'),
 			array('name' => "SANTO DOMINGO-CAUDILLA", 'id' => '8843', 'province' => '046'),
 			array('name' => "CONFORTO", 'id' => '5117', 'province' => '029'),
-			/*array('name' => "SANTA XUSTA DE MORAÑA (SANTA XUSTA)", 'id' => '7110', 'province' => '038'),
+			*/array('name' => "SANTA XUSTA DE MORAÑA (SANTA XUSTA)", 'id' => '7110', 'province' => '038'),
 			array('name' => "VENTAS DE SANTA LUCIA", 'id' => '3664', 'province' => '022'),
 			array('name' => "POZO DE LA SERNA", 'id' => '2039', 'province' => '013'),
 			array('name' => "CALDAS DE REIS (CASCO URBANO)", 'id' => '7099', 'province' => '038'),

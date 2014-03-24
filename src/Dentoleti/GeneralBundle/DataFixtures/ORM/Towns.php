@@ -21,7 +21,7 @@ class Towns extends AbstractFixture implements OrderedFixtureInterface
 	public function load(ObjectManager $manager)
 	{
 		$towns = array(
-			/* array('name' => "SAN JUSTE", 'id' => '3636', 'province' => '022'),
+			array('name' => "SAN JUSTE", 'id' => '3636', 'province' => '022'),
 			array('name' => "MOLINOS", 'id' => '8677', 'province' => '045'),
 			array('name' => "LLINARS (CASTELLAR DEL RIU)", 'id' => '1204', 'province' => '008'),
 			array('name' => "VILLANUEVA DE LAS TORRES", 'id' => '3115', 'province' => '018'),
@@ -2497,7 +2497,7 @@ class Towns extends AbstractFixture implements OrderedFixtureInterface
 			array('name' => "TORNADIZO, EL", 'id' => '7492', 'province' => '039'),
 			array('name' => "PUERTO ADENTRO", 'id' => '5725', 'province' => '032'),
 			array('name' => "SENDIN", 'id' => '6057', 'province' => '034'),
-			array('name' => "VILAMACOLUM", 'id' => '2886', 'province' => '017'),
+			/*array('name' => "VILAMACOLUM", 'id' => '2886', 'province' => '017'),
 			array('name' => "SANT TOMÀS, PLATJA, Urbanitzacio", 'id' => '981', 'province' => '007'),
 			array('name' => "LALUENGA", 'id' => '3546', 'province' => '022'),
 			array('name' => "SANT LLORENÇ DE LES ARENES", 'id' => '2876', 'province' => '017'),
@@ -4570,7 +4570,7 @@ class Towns extends AbstractFixture implements OrderedFixtureInterface
 			array('name' => "FILGUEIRA (SAN PEDRO)", 'id' => '7008', 'province' => '038'),
 			array('name' => "ULEILA DEL CAMPO", 'id' => '411', 'province' => '004'),
 			array('name' => "VILLAR DEL PROFETA", 'id' => '7441', 'province' => '039'),
-			*/array('name' => "XUSTANS (SAN MARTIÑO)", 'id' => '7172', 'province' => '038'),
+			array('name' => "XUSTANS (SAN MARTIÑO)", 'id' => '7172', 'province' => '038'),
 			array('name' => "ENCINILLA", 'id' => '1412', 'province' => '009'),
 			array('name' => "BOVERA", 'id' => '4414', 'province' => '023'),
 			array('name' => "PALOMARES DEL CAMPO", 'id' => '2603', 'province' => '016'),
@@ -10064,9 +10064,10 @@ class Towns extends AbstractFixture implements OrderedFixtureInterface
 			array('name' => "AGULLENT", 'id' => '9211', 'province' => '047'),
 			array('name' => "PEÑISCOLA", 'id' => '1974', 'province' => '012'),
 			array('name' => "XESTEIRA (CASTRELO)", 'id' => '7092', 'province' => '038'),
-			array('name' => "CABAÑAS DE LA SAGRA", 'id' => '8871', 'province' => '046'),
+			array('name' => "CABAÑAS DE LA SAGRA", 'id' => '8871', 'province' => '046'),*/
 		);
 
+		$cantidad = 0;
 		foreach ($towns as $town) {
 			$entity = new Town();
 
@@ -10081,6 +10082,12 @@ class Towns extends AbstractFixture implements OrderedFixtureInterface
 			$metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
 
 			$manager->persist($entity);
+			if ($cantidad == 20){
+				$manager->flush();
+				$cantidad = 0;
+			} else {
+				$cantidad = $cantidad + 1;
+			}
 		}
 
 
