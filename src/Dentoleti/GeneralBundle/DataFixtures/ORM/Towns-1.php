@@ -21,7 +21,7 @@ class Towns extends AbstractFixture implements OrderedFixtureInterface
 	public function load(ObjectManager $manager)
 	{
 		$towns = array(
-			/* array('name' => "SAN JUSTE", 'id' => '3636', 'province' => '022'),
+			array('name' => "SAN JUSTE", 'id' => '3636', 'province' => '022'),
 			array('name' => "MOLINOS", 'id' => '8677', 'province' => '045'),
 			array('name' => "LLINARS (CASTELLAR DEL RIU)", 'id' => '1204', 'province' => '008'),
 			array('name' => "VILLANUEVA DE LAS TORRES", 'id' => '3115', 'province' => '018'),
@@ -4570,7 +4570,7 @@ class Towns extends AbstractFixture implements OrderedFixtureInterface
 			array('name' => "FILGUEIRA (SAN PEDRO)", 'id' => '7008', 'province' => '038'),
 			array('name' => "ULEILA DEL CAMPO", 'id' => '411', 'province' => '004'),
 			array('name' => "VILLAR DEL PROFETA", 'id' => '7441', 'province' => '039'),
-			*/array('name' => "XUSTANS (SAN MARTIÑO)", 'id' => '7172', 'province' => '038'),
+			array('name' => "XUSTANS (SAN MARTIÑO)", 'id' => '7172', 'province' => '038'),
 			array('name' => "ENCINILLA", 'id' => '1412', 'province' => '009'),
 			array('name' => "BOVERA", 'id' => '4414', 'province' => '023'),
 			array('name' => "PALOMARES DEL CAMPO", 'id' => '2603', 'province' => '016'),
@@ -9129,7 +9129,7 @@ class Towns extends AbstractFixture implements OrderedFixtureInterface
 			array('name' => "ORBA (CASCO ANTIGUO)", 'id' => '345', 'province' => '003'),
 			array('name' => "SANTO DOMINGO-CAUDILLA", 'id' => '8843', 'province' => '046'),
 			array('name' => "CONFORTO", 'id' => '5117', 'province' => '029'),
-			array('name' => "SANTA XUSTA DE MORAÑA (SANTA XUSTA)", 'id' => '7110', 'province' => '038'),
+			/*array('name' => "SANTA XUSTA DE MORAÑA (SANTA XUSTA)", 'id' => '7110', 'province' => '038'),
 			array('name' => "VENTAS DE SANTA LUCIA", 'id' => '3664', 'province' => '022'),
 			array('name' => "POZO DE LA SERNA", 'id' => '2039', 'province' => '013'),
 			array('name' => "CALDAS DE REIS (CASCO URBANO)", 'id' => '7099', 'province' => '038'),
@@ -10064,7 +10064,7 @@ class Towns extends AbstractFixture implements OrderedFixtureInterface
 			array('name' => "AGULLENT", 'id' => '9211', 'province' => '047'),
 			array('name' => "PEÑISCOLA", 'id' => '1974', 'province' => '012'),
 			array('name' => "XESTEIRA (CASTRELO)", 'id' => '7092', 'province' => '038'),
-			array('name' => "CABAÑAS DE LA SAGRA", 'id' => '8871', 'province' => '046'),
+			array('name' => "CABAÑAS DE LA SAGRA", 'id' => '8871', 'province' => '046'), */
 		);
 
 		foreach ($towns as $town) {
