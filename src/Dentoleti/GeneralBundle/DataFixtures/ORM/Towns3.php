@@ -11,11 +11,11 @@ use Dentoleti\GeneralBundle\Entity\Town;
  * Carga de todos las poblaciones de España. Se guardarán los datos
  * con su correspondiente relación con las provincias
  */
-class Towns1 extends AbstractFixture implements OrderedFixtureInterface
+class Towns3 extends AbstractFixture implements OrderedFixtureInterface
 {
 	public function getOrder()
 	{
-		return 6;
+		return 8;
 	}
 
 	public function load(ObjectManager $manager)
@@ -2497,7 +2497,7 @@ class Towns1 extends AbstractFixture implements OrderedFixtureInterface
 			array('name' => "TORNADIZO, EL", 'id' => '7492', 'province' => '039'),
 			array('name' => "PUERTO ADENTRO", 'id' => '5725', 'province' => '032'),
 			array('name' => "SENDIN", 'id' => '6057', 'province' => '034'),
-			*/array('name' => "VILAMACOLUM", 'id' => '2886', 'province' => '017'),
+			array('name' => "VILAMACOLUM", 'id' => '2886', 'province' => '017'),
 			array('name' => "SANT TOMÀS, PLATJA, Urbanitzacio", 'id' => '981', 'province' => '007'),
 			array('name' => "LALUENGA", 'id' => '3546', 'province' => '022'),
 			array('name' => "SANT LLORENÇ DE LES ARENES", 'id' => '2876', 'province' => '017'),
@@ -5017,7 +5017,7 @@ class Towns1 extends AbstractFixture implements OrderedFixtureInterface
 			array('name' => "VALDENEBRO", 'id' => '8323', 'province' => '028'),
 			array('name' => "VILLAR DE OLALLA", 'id' => '2612', 'province' => '016'),
 			array('name' => "USTES", 'id' => '5842', 'province' => '033'),
-			/*array('name' => "MEIRAMA", 'id' => '2298', 'province' => '015'),
+			array('name' => "MEIRAMA", 'id' => '2298', 'province' => '015'),
 			array('name' => "VIVER DE LA SIERRA", 'id' => '9851', 'province' => '024'),
 			array('name' => "VALENCIA DEL VENTOSO", 'id' => '741', 'province' => '006'),
 			array('name' => "SANTIORXO (SAN XURXO)", 'id' => '4961', 'province' => '029'),
@@ -7578,7 +7578,7 @@ class Towns1 extends AbstractFixture implements OrderedFixtureInterface
 			array('name' => "SANT ISCLE DE VALLALTA", 'id' => '1108', 'province' => '008'),
 			array('name' => "TERQUE", 'id' => '444', 'province' => '004'),
 			array('name' => "VALDEMORILLO DE LA SIERRA", 'id' => '2651', 'province' => '016'),
-			array('name' => "CALDES D'ESTRAC", 'id' => '1116', 'province' => '008'),
+			*/array('name' => "CALDES D'ESTRAC", 'id' => '1116', 'province' => '008'),
 			array('name' => "LAGES, LOS", 'id' => '5559', 'province' => '032'),
 			array('name' => "VALLE DE TRAPAGA", 'id' => '9476', 'province' => '049'),
 			array('name' => "Palencia", 'id' => '6674', 'province' => '036'),
