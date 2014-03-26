@@ -26,7 +26,6 @@
 		</tr>
 		{% for budgetDetail in budgetDetailsList %}
 		<tr>
-
 			<td>{{ budgetDetail.id }}</td>
 			<td>{{ budgetDetail.article }}</td>
 			<td>{{ budgetDetail.tooth }}</td>
@@ -45,5 +44,5 @@
 		</tr>
 	</table>
 	<a href="{{ path('budget_details_add', { 'budgetId': budgetId }) }}">AddNewItem</a>
-	<a href="{{ path('budget_complete_view', { 'budgetId': budgetId }) }}" target="_blank">View</a>
+	<a href="{{ path('budget_complete_view', { 'budgetId': budgetId }) }}" target="_blank">Generar PDF</a>
 {% endblock %}
