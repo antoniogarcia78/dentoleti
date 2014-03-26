@@ -31,13 +31,6 @@ class Personal
     /**
      * @var string
      *
-     * @ORM\Column(name="position", type="string", length=50)
-     */
-    private $position;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="address", type="string", length=100)
      */
     private $address;
@@ -65,16 +58,9 @@ class Personal
     /**
      * @var string
      *
-     * @ORM\Column(name="phone2", type="string", length=15)
+     * @ORM\Column(name="phone2", type="string", length=15, nullable=true)
      */
     private $phone2;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="Observations", type="text")
-     */
-    private $observations;
 
     /**
      * @var \DateTime
@@ -122,29 +108,6 @@ class Personal
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Set position
-     *
-     * @param string $position
-     * @return Personal
-     */
-    public function setPosition($position)
-    {
-        $this->position = $position;
-
-        return $this;
-    }
-
-    /**
-     * Get position
-     *
-     * @return string 
-     */
-    public function getPosition()
-    {
-        return $this->position;
     }
 
     /**
@@ -260,29 +223,6 @@ class Personal
     public function getPhone2()
     {
         return $this->phone2;
-    }
-
-    /**
-     * Set observations
-     *
-     * @param string $observations
-     * @return Personal
-     */
-    public function setObservations($observations)
-    {
-        $this->observations = $observations;
-
-        return $this;
-    }
-
-    /**
-     * Get observations
-     *
-     * @return string 
-     */
-    public function getObservations()
-    {
-        return $this->observations;
     }
 
     /**

@@ -41,21 +41,14 @@ class Doctor
     /**
      * @var string
      *
-     * @ORM\Column(name="referee", type="string", length=12)
+     * @ORM\Column(name="referee", type="string", length=12, nullable=true)
      */
     private $referee;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="observations", type="text")
-     */
-    private $observations;
-
-    /**
      * @var float
      *
-     * @ORM\Column(name="commission", type="float")
+     * @ORM\Column(name="commission", type="float", nullable=true)
      */
     private $commission;
 
@@ -137,29 +130,6 @@ class Doctor
     public function getReferee()
     {
         return $this->referee;
-    }
-
-    /**
-     * Set observations
-     *
-     * @param string $observations
-     * @return Doctor
-     */
-    public function setObservations($observations)
-    {
-        $this->observations = $observations;
-
-        return $this;
-    }
-
-    /**
-     * Get observations
-     *
-     * @return string 
-     */
-    public function getObservations()
-    {
-        return $this->observations;
     }
 
     /**
