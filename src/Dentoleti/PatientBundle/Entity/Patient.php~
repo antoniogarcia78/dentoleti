@@ -8,8 +8,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\ExecutionContextInterface;
 use Dentoleti\GeneralBundle\Meeting;
 use Dentoleti\GeneralBundle\CivilStatus;
-use Dentoleti\GeneralBundle\Country;
-use Dentoleti\GeneralBundle\Province;
 use Dentoleti\GeneralBundle\Town;
 
 /**
@@ -99,6 +97,7 @@ class Patient
      */
     private $address;
     
+
     /**
      * @ORM\ManyToOne(targetEntity="Dentoleti\GeneralBundle\Entity\Town")
      * @ORM\JoinColumn(name="town_id", referencedColumnName="id", nullable=true)
@@ -106,9 +105,8 @@ class Patient
     private $town;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="postal_code", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="Dentoleti\GeneralBundle\Entity\PostalCode")
+     * @ORM\JoinColumn(name="postalcode_id", referencedColumnName="id", nullable=true)
      */
     private $postalCode;
 
@@ -139,6 +137,13 @@ class Patient
      * @ORM\Column(name="vih", type="boolean")
      */
     private $vih;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="smoker", type="boolean")
+     */
+    private $smoker;
 
     /**
      * @var string
@@ -665,29 +670,6 @@ class Patient
     public function getAddress()
     {
         return $this->address;
-    }
-
-    /**
-     * Add meetings
-     *
-     * @param \Dentoleti\PatientBundle\Entity\Meeting $meetings
-     * @return Patient
-     */
-    public function addMeeting(\Dentoleti\PatientBundle\Entity\Meeting $meetings)
-    {
-        $this->meetings[] = $meetings;
-
-        return $this;
-    }
-
-    /**
-     * Remove meetings
-     *
-     * @param \Dentoleti\PatientBundle\Entity\Meeting $meetings
-     */
-    public function removeMeeting(\Dentoleti\PatientBundle\Entity\Meeting $meetings)
-    {
-        $this->meetings->removeElement($meetings);
     }
 
     public function __toString()

@@ -206,6 +206,17 @@
 						</div>					
 					</div>
 				</div>
+				<div class="col1-three">
+					<div class="label">
+						{{ form_label(form.smoker) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.smoker) }}
+						<div class="error">
+							{{ form_errors(form.smoker) }}
+						</div>					
+					</div>
+				</div>
 				{# Como no hay más elementos en las otras columnas, volvemos a poner un col1-three #}
 				<div class="col1-three">
 					<div class="label">
