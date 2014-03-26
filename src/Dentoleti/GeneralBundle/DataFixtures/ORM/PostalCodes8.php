@@ -15,7 +15,7 @@ class PostalCodes8 extends AbstractFixture implements OrderedFixtureInterface
 {
 	public function getOrder()
 	{
-		return 18;
+		return 17;
 	}
 
 	public function load(ObjectManager $manager)
