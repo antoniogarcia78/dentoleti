@@ -79,13 +79,6 @@ class Budget
     private $discountInsurance;
 
     /**
-     *
-     * @ORM\OneToOne(targetEntity="Dentoleti\ConsultationBundle\Entity\Consultation",cascade={"persist"})
-     * @ORM\JoinColumn(name="consultation_id", referencedColumnName="id", nullable=true)
-     */
-    private $consultation;
-
-    /**
      * @ORM\OneToMany(targetEntity="BudgetDetail", mappedBy="budget")
      */
     private $budgetDetails;
@@ -282,29 +275,6 @@ class Budget
     public function getDiscountInsurance()
     {
         return $this->discountInsurance;
-    }
-
-    /**
-     * Set consultation
-     *
-     * @param string $consultation
-     * @return Budget
-     */
-    public function setConsultation($consultation)
-    {
-        $this->consultation = $consultation;
-
-        return $this;
-    }
-
-    /**
-     * Get consultation
-     *
-     * @return string 
-     */
-    public function getConsultation()
-    {
-        return $this->consultation;
     }
 
     /**

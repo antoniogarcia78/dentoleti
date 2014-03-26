@@ -43,13 +43,6 @@ class BudgetType extends AbstractType
 			'required' => false
 		));
 
-		$builder->add('consultation', 'entity', array(
-			'class' => 'DentoletiConsultationBundle:Consultation',
-			'property' => 'id',
-			'empty_value' => '-- Consulta --',
-			'required' => false
-		));
-
 		$builder->add('save', 'submit');
 		$builder->add('addItem', 'submit');
 	}
