@@ -10,7 +10,7 @@ class Families extends AbstractFixture implements OrderedFixtureInterface
 {
 	public function getOrder()
 	{
-		return 8;
+		return 20;
 	}
 
 	public function load(ObjectManager $manager)

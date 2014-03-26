@@ -11,11 +11,11 @@ use Dentoleti\GeneralBundle\Entity\Town;
  * Carga de todos las poblaciones de España. Se guardarán los datos
  * con su correspondiente relación con las provincias
  */
-class Towns4 extends AbstractFixture implements OrderedFixtureInterface
+class Towns3 extends AbstractFixture implements OrderedFixtureInterface
 {
 	public function getOrder()
 	{
-		return 9;
+		return 8;
 	}
 
 	public function load(ObjectManager $manager)
@@ -7578,7 +7578,7 @@ class Towns4 extends AbstractFixture implements OrderedFixtureInterface
 			array('name' => "SANT ISCLE DE VALLALTA", 'id' => '1108', 'province' => '008'),
 			array('name' => "TERQUE", 'id' => '444', 'province' => '004'),
 			array('name' => "VALDEMORILLO DE LA SIERRA", 'id' => '2651', 'province' => '016'),
-			array('name' => "CALDES D'ESTRAC", 'id' => '1116', 'province' => '008'),
+			*/array('name' => "CALDES D'ESTRAC", 'id' => '1116', 'province' => '008'),
 			array('name' => "LAGES, LOS", 'id' => '5559', 'province' => '032'),
 			array('name' => "VALLE DE TRAPAGA", 'id' => '9476', 'province' => '049'),
 			array('name' => "Palencia", 'id' => '6674', 'province' => '036'),
@@ -9129,7 +9129,7 @@ class Towns4 extends AbstractFixture implements OrderedFixtureInterface
 			array('name' => "ORBA (CASCO ANTIGUO)", 'id' => '345', 'province' => '003'),
 			array('name' => "SANTO DOMINGO-CAUDILLA", 'id' => '8843', 'province' => '046'),
 			array('name' => "CONFORTO", 'id' => '5117', 'province' => '029'),
-			*/array('name' => "SANTA XUSTA DE MORAÑA (SANTA XUSTA)", 'id' => '7110', 'province' => '038'),
+			/*array('name' => "SANTA XUSTA DE MORAÑA (SANTA XUSTA)", 'id' => '7110', 'province' => '038'),
 			array('name' => "VENTAS DE SANTA LUCIA", 'id' => '3664', 'province' => '022'),
 			array('name' => "POZO DE LA SERNA", 'id' => '2039', 'province' => '013'),
 			array('name' => "CALDAS DE REIS (CASCO URBANO)", 'id' => '7099', 'province' => '038'),
@@ -10064,7 +10064,7 @@ class Towns4 extends AbstractFixture implements OrderedFixtureInterface
 			array('name' => "AGULLENT", 'id' => '9211', 'province' => '047'),
 			array('name' => "PEÑISCOLA", 'id' => '1974', 'province' => '012'),
 			array('name' => "XESTEIRA (CASTRELO)", 'id' => '7092', 'province' => '038'),
-			array('name' => "CABAÑAS DE LA SAGRA", 'id' => '8871', 'province' => '046'),
+			array('name' => "CABAÑAS DE LA SAGRA", 'id' => '8871', 'province' => '046'), */
 		);
 
 		$cantidad = 0;

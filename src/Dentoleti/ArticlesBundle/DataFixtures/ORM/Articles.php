@@ -10,7 +10,7 @@ class Articles extends AbstractFixture implements OrderedFixtureInterface
 {
 	public function getOrder()
 	{
-		return 9;
+		return 19;
 	}
 
 	public function load(ObjectManager $manager)
