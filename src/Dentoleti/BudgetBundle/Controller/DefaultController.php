@@ -271,7 +271,6 @@ class DefaultController extends Controller
             'partialTotals' => $partialTotals,
             'total' => $total,
             'budgetId' => $budget->getId(),
-            'ivas' => $ivas,
             'subTotals' => $subTotals), $response);
 
         $xml = $response->getContent();
