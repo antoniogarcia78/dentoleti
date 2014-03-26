@@ -145,6 +145,11 @@ class DefaultController extends Controller
         $em->persist($personal);
         $em->flush();
         
+        $this->get('session')->getFlashBag()->add(
+            'notice',
+            'El personal se ha actualizado correctamente'
+        );
+
         return $this->render('DentoletiPersonalBundle:Default:personal.html.twig', array(
             'form' => $form->createView()
         ));
