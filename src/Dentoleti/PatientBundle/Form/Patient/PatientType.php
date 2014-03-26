@@ -106,6 +106,9 @@ class PatientType extends AbstractType
 		$builder->add('vih', 'checkbox', array(
 			'required' => false
 		));
+		$builder->add('smoker', 'checkbox', array(
+			'required' => false
+		));
 		$builder->add('observations', 'textarea', array(
 			'required' => false
 		));

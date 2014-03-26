@@ -139,6 +139,13 @@ class Patient
     private $vih;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="smoker", type="boolean")
+     */
+    private $smoker;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="observations", type="text", nullable=true)
@@ -791,4 +798,28 @@ class Patient
         return $sum;
     }
 
+
+    /**
+     * Set smoker
+     *
+     * @param boolean $smoker
+     *
+     * @return Patient
+     */
+    public function setSmoker($smoker)
+    {
+        $this->smoker = $smoker;
+
+        return $this;
+    }
+
+    /**
+     * Get smoker
+     *
+     * @return boolean 
+     */
+    public function getSmoker()
+    {
+        return $this->smoker;
+    }
 }
