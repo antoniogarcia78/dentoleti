@@ -197,7 +197,8 @@ class Patient
      */
     public function setNif($nif)
     {
-        $this->nif = $nif;
+        //upper the letter of the DNI
+        $this->nif = strtoupper($nif);
 
         return $this;
     }
