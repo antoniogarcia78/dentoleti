@@ -15,9 +15,6 @@ class PersonalType extends AbstractType
 		$builder->add('address', 'text', array(
 			'required' => false
 		));
-		$builder->add('position', 'text', array(
-			'required' => false
-		));
 		$builder->add('postalCode', 'entity', array(
 			'class' => 'DentoletiGeneralBundle:PostalCode',
 			'property' => 'postalCode',
@@ -37,10 +34,7 @@ class PersonalType extends AbstractType
 		$builder->add('phone2', 'text', array(
 			'required' => false
 		));
-		$builder->add('observations', 'textarea', array(
-			'required' => false
-		));
-
+		
 		if ($options['entity'] == 'Personal')
 		{
 			$builder->add('save', 'submit');

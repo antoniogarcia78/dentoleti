@@ -23,9 +23,6 @@ class DoctorType extends AbstractType
 										  //Esto es un workaround Issue #140
 			'required' => false
 		));
-		$builder->add('observations', 'textarea', array(
-			'required' => false
-		));
 		$builder->add('commission', 'number', array(
 			'required' => false
 		));

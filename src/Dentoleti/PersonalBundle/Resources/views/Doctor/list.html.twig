@@ -18,7 +18,6 @@
 			<th>Nombre</th>
 			<th>Nº colegiado</th>
 			<th>Comisión</th>
-			<th>Observaciones</th>
 			<th>Ver</th>
 			<th>Editar</th>
 			<th>Eliminar</th>
@@ -31,7 +30,6 @@
 			<td>{{ doctor.personal.name }}</td>
 			<td>{{ doctor.referee }}</td>
 			<td>{{ doctor.commission }}</td>
-			<td>{{ doctor.observations }}</td>
 			<td><a href="{{ path('doctor_view', { 'id': doctor.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/eye.png') }}"></a></td>
 			<td><a href="{{ path('doctor_edit', { 'id': doctor.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/edit.png') }}"></a></td>
 			<td><a href="{{ path('doctor_erase', { 'id': doctor.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/erase.png') }}"></a></td>
