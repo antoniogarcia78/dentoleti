@@ -78,6 +78,11 @@ class DefaultController extends Controller
 
         $em->persist($patient);
         $em->flush();
+
+        $this->get('session')->getFlashBag()->add(
+            'notice',
+            'El paciente se ha actualizado correctamente'
+        );
         
         return $this->render('DentoletiPatientBundle:Default:patient.html.twig', array(
             'form' => $form->createView()

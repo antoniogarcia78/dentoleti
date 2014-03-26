@@ -81,7 +81,7 @@ class DoctorController extends Controller
     /**
      * Edit the doctor with the $id given in the params
      */
-    public function editAction($id)
+    public function editAction($id, Request $request)
     {
         $petition = $this->getRequest();
 
@@ -101,6 +101,13 @@ class DoctorController extends Controller
         $em->persist($doctor);
         $em->flush();
         
+        if ($request->isMethod('POST')) {
+            $this->get('session')->getFlashBag()->add(
+                'notice',
+                'El doctor se ha actualizado correctamente'
+            );
+        }
+
         return $this->render('DentoletiPersonalBundle:Doctor:doctor.html.twig', array(
             'form' => $form->createView()
         ));
