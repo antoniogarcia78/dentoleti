@@ -52,6 +52,13 @@ class Doctor
      */
     private $commission;
 
+    /**
+     * @var string
+     *
+     * @ORM\ManyToMany(targetEntity="Dentoleti\GeneralBundle\Entity\Day", inversedBy="doctors")
+     */
+    private $days;
+
 
     /**
      * Get id
@@ -161,5 +168,46 @@ class Doctor
     public function __toString()
     {
         return $this->getPersonal()->getName();
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->days = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add days
+     *
+     * @param \Dentoleti\GeneralBundle\Entity\Day $days
+     *
+     * @return Doctor
+     */
+    public function addDay(\Dentoleti\GeneralBundle\Entity\Day $days)
+    {
+        $this->days[] = $days;
+
+        return $this;
+    }
+
+    /**
+     * Remove days
+     *
+     * @param \Dentoleti\GeneralBundle\Entity\Day $days
+     */
+    public function removeDay(\Dentoleti\GeneralBundle\Entity\Day $days)
+    {
+        $this->days->removeElement($days);
+    }
+
+    /**
+     * Get days
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDays()
+    {
+        return $this->days;
     }
 }

@@ -54,6 +54,16 @@
 					<span>{{ doctor.commission }}</span>
 				</div>
 			</div>
+			<div class="col2-two">
+				<div class="label">
+					Días que viene: 
+				</div>
+				{% for day in doctor.days %}
+					<div class="data">
+						<span>{{ day.name }}</span>
+					</div>
+				{% endfor %}
+			</div>
 		</fieldset>
 	</div>
 </div>
