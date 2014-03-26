@@ -82,7 +82,7 @@ class DefaultController extends Controller
         if ($request->isMethod('POST')) {
             $this->get('session')->getFlashBag()->add(
                 'notice',
-                'El doctor se ha actualizado correctamente'
+                'El paciente se ha actualizado correctamente'
             );
         }
         
