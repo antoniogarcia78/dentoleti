@@ -50,11 +50,13 @@
                         </td>
                   </tr>
                   {% for budgetDetail in budgetDetailsList %}
+                  {% for i in 1..budgetDetail.amount %}
                   <tr>
                         <td border.type="none">{{ budgetDetail.article.description }}</td>
                         <td border.type="none" text-align="center">{{ budgetDetail.tooth }}</td>
                         <td border.type="none" text-align="center">{{ budgetDetail.price }}</td>
                   </tr>
+                  {% endfor %}
                   {% endfor %}
 		</table>  
  	</div>
