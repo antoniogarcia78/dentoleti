@@ -27,6 +27,14 @@ class DoctorType extends AbstractType
 			'required' => false
 		));
 
+		$builder->add('days', 'entity', array(
+			'class' => 'DentoletiGeneralBundle:Day',
+			'property' => 'name',
+			'expanded' => true,
+			'multiple' => true,
+			'required' => false
+		));
+
 		$builder->add('save', 'submit');
 	}
 
