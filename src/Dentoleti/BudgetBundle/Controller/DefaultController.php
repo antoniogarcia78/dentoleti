@@ -137,7 +137,7 @@ class DefaultController extends Controller
     /**
      * Edit the budget with the $id given in the params
      */
-    public function editAction($id)
+    public function editAction($id, Request $request)
     {
         $petition = $this->getRequest();
 
@@ -157,16 +157,23 @@ class DefaultController extends Controller
         $em->persist($budget);
         $em->flush();
 
-        $nextAction = $form->get('addItem')->isClicked()
-              ? 'budget_details_add'
-              : 'budget_add';
+        if ($request->isMethod('POST')) {
+            $this->get('session')->getFlashBag()->add(
+                'notice',
+                'El presupuesto se ha actualizado correctamente'
+            );
 
-            if ('budget_details_add' == $nextAction){
-                return $this->redirect($this->generateUrl($nextAction, array(
-                    'budgetId' => $budget->getId())));
-            }
+            $nextAction = $form->get('addItem')->isClicked()
+                  ? 'budget_details_add'
+                  : 'budget_add';
 
-            return $this->redirect($this->generateUrl($nextAction));
+                if ('budget_details_add' == $nextAction){
+                    return $this->redirect($this->generateUrl($nextAction, array(
+                        'budgetId' => $budget->getId())));
+                }
+
+                return $this->redirect($this->generateUrl($nextAction));
+        }
         
         return $this->render('DentoletiBudgetBundle:Default:budget.html.twig', array(
             'form' => $form->createView()

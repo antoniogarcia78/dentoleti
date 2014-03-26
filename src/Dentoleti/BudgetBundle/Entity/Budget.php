@@ -46,35 +46,35 @@ class Budget
     /**
      * @var float
      *
-     * @ORM\Column(name="discount", type="float")
+     * @ORM\Column(name="discount", type="float", nullable=true)
      */
     private $discount;
 
      /**
      * @var string
      *
-     * @ORM\Column(name="noTooth", type="text")
+     * @ORM\Column(name="noTooth", type="text", nullable=true)
      */
     private $noTooth;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="observations", type="text")
+     * @ORM\Column(name="observations", type="text", nullable=true)
      */
     private $observations;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="discountCompany", type="float")
+     * @ORM\Column(name="discountCompany", type="float", nullable=true)
      */
     private $discountCompany;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="discountInsurance", type="float")
+     * @ORM\Column(name="discountInsurance", type="float", nullable=true)
      */
     private $discountInsurance;
 
