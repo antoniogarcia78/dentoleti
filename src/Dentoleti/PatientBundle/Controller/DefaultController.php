@@ -59,7 +59,7 @@ class DefaultController extends Controller
     /**
      * View the patient with the $id given in the params
      */
-    public function editAction($id)
+    public function editAction($id, Request $request)
     {
         $petition = $this->getRequest();
 
@@ -79,10 +79,12 @@ class DefaultController extends Controller
         $em->persist($patient);
         $em->flush();
 
-        $this->get('session')->getFlashBag()->add(
-            'notice',
-            'El paciente se ha actualizado correctamente'
-        );
+        if ($request->isMethod('POST')) {
+            $this->get('session')->getFlashBag()->add(
+                'notice',
+                'El doctor se ha actualizado correctamente'
+            );
+        }
         
         return $this->render('DentoletiPatientBundle:Default:patient.html.twig', array(
             'form' => $form->createView()
