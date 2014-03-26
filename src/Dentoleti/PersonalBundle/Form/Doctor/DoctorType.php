@@ -19,6 +19,8 @@ class DoctorType extends AbstractType
 			'required' => false
 		));
 		$builder->add('referee', 'text', array(
+			'label' => 'Nº de colegiado', //TODO Traducir bien. 
+										  //Esto es un workaround Issue #140
 			'required' => false
 		));
 		$builder->add('observations', 'textarea', array(
