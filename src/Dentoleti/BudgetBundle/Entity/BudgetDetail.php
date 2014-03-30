@@ -52,7 +52,7 @@ class BudgetDetail
     /**
      * @var string
      *
-     * @ORM\Column(name="tooth", type="string", length=50)
+     * @ORM\Column(name="tooth", type="string", length=50, nullable=true)
      */
     private $tooth;
 
