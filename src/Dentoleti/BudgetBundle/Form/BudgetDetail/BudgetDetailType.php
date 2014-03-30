@@ -21,11 +21,11 @@ class BudgetDetailType extends AbstractType
 		));
 
 		$builder->add('price', 'number', array(
-			'required' => false
+			'required' => true
 		));
 		
 		$builder->add('amount', 'number', array(
-			'required' => false
+			'required' => true
 		));
 
 		$builder->add('tooth', 'text', array(
