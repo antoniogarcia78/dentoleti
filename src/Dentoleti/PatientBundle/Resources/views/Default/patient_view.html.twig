@@ -194,6 +194,24 @@
 		</div>
 		</fieldset>
 	</div>
+	<div id="not-confirmed">
+		<fieldset>
+			<legend>Presupuestos pendientes de confirmación</legend>
+			<div class="col1-three">
+				<div class="label">
+					Presupuestos:
+				</div>
+				<div class="data">
+					<ul>
+					{% for budget in budgets_not_confirmed %}
+						<li><a href="{{ path('budget_view', { 'id' : budget.id }) }}">{{ budget.id }}</a></li>
+						<li><a href="{{ path('budget_confirmation', { 'budgetId' : budget.id }) }}" target="_blank">Confirmar</a></li>
+					{% endfor %}
+					</ul>
+				</div>
+			</div>
+		</fieldset>
+	</div>
 	<div id="treatments">
 		<fieldset>
 		<legend>Tratamientos en curso</legend>
