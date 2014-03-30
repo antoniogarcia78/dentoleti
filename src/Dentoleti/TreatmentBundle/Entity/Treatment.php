@@ -29,13 +29,6 @@ class Treatment
     private $treatmentDate;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="state", type="string", length=15)
-     */
-    private $state;
-
-    /**
      * @ORM\OneToOne(targetEntity="Dentoleti\BudgetBundle\Entity\Budget")
      * @ORM\JoinColumn(name="budget_id", referencedColumnName="id", nullable=true)
      */
@@ -95,30 +88,6 @@ class Treatment
     public function getTreatmentDate()
     {
         return $this->treatmentDate;
-    }
-
-    /**
-     * Set state
-     *
-     * @param string $state
-     *
-     * @return Treatment
-     */
-    public function setState($state)
-    {
-        $this->state = $state;
-
-        return $this;
-    }
-
-    /**
-     * Get state
-     *
-     * @return string 
-     */
-    public function getState()
-    {
-        return $this->state;
     }
 
     /**
@@ -225,4 +194,3 @@ class Treatment
         return $this->getBudget();
     }
 }
-
