@@ -105,6 +105,9 @@ class DefaultController extends Controller
         $treatments = $em->getRepository('DentoletiTreatmentBundle:Treatment')
             ->findTreatmentsByPatient($patient->getId());
 
+        $budgets_not_confirmed = $em->getRepository('DentoletiBudgetBundle:Budget')
+            ->findNotConfirmed($id);
+
         $debts = $em->getRepository('DentoletiAccountingBundle:Debt')
             ->findDebtsForPatient($patient->getId());
 
@@ -115,7 +118,8 @@ class DefaultController extends Controller
         return $this->render('DentoletiPatientBundle:Default:patient_view.html.twig', array(
             'patient' => $patient,
             'treatments' => $treatments,
-            'debts' => $debts
+            'debts' => $debts,
+            'budgets_not_confirmed' => $budgets_not_confirmed
         ));
     }
 

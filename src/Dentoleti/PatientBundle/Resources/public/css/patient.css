@@ -29,6 +29,12 @@
 	padding-top: 7px;
 }
 
+#not-confirmed {
+	clear: both;
+	float: left;
+	padding-top: 7px;
+}
+
 #treatments {
 	clear: both;
 	float: left;

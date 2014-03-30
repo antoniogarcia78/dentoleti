@@ -26,9 +26,9 @@ budget_erase:
     pattern: /erase/{id}
     defaults: { _controller: DentoletiBudgetBundle:Default:erase }
 
-budget_complete_view:
-    pattern: /confirm/{budgetId}
-    defaults: { _controller: DentoletiBudgetBundle:Default:confirm }
+budget_pdf_view:
+    pattern: /pdf/{budgetId}
+    defaults: { _controller: DentoletiBudgetBundle:Default:pdf }
 
 budget_details_add:
     pattern: /details/add/{budgetId}
@@ -45,3 +45,7 @@ budget_details_list:
 budget_details_delete:
     pattern: /details/delete/{budgetId}/{budgetDetailId}
     defaults: { _controller: DentoletiBudgetBundle:Details:delete }
+
+budget_confirmation:
+    pattern: /budget/confirmation/{budgetId}
+    defaults: { _controller: DentoletiBudgetBundle:Default:budgetConfirmation }

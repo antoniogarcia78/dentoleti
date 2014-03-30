@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Budget
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Dentoleti\BudgetBundle\Entity\BudgetRepository")
  * @ORM\HasLifecycleCallbacks
  */
 class Budget
@@ -82,6 +82,13 @@ class Budget
      * @ORM\OneToMany(targetEntity="BudgetDetail", mappedBy="budget")
      */
     private $budgetDetails;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="confirmed", type="boolean")
+     */
+    private $confirmed;
 
     /**
      * Get id
@@ -331,5 +338,29 @@ class Budget
     public function preSetDate()
     {
         $this->setBudgetDate(new \DateTime());
+    }
+
+    /**
+     * Set confirmed
+     *
+     * @param boolean $confirmed
+     *
+     * @return Budget
+     */
+    public function setConfirmed($confirmed)
+    {
+        $this->confirmed = $confirmed;
+
+        return $this;
+    }
+
+    /**
+     * Get confirmed
+     *
+     * @return boolean 
+     */
+    public function getConfirmed()
+    {
+        return $this->confirmed;
     }
 }

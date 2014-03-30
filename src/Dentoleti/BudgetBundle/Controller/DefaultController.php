@@ -24,6 +24,7 @@ class DefaultController extends Controller
 		$form = $this->createForm(new BudgetType(), $budget);
 		
 		$budget->setBudgetDate(new \DateTime());
+        $budget->setConfirmed(false);
 
 		$form->handleRequest($petition);
 
@@ -236,7 +237,7 @@ class DefaultController extends Controller
     /**
      * @Pdf()
      */
-    public function confirmAction($budgetId)
+    public function pdfAction($budgetId)
     {
         $facade = $this->get('ps_pdf.facade');
         $response = new Response();
@@ -280,5 +281,21 @@ class DefaultController extends Controller
         file_put_contents('/tmp/'.$budgetId.'.pdf', $content);
 
         return new Response($content, 200, array('content-type' => 'application/pdf'));
+    }
+
+    public function budgetConfirmationAction($budgetId)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $budget = $em->getRepository('DentoletiBudgetBundle:Budget')
+            ->findOneById($budgetId);
+
+        $budget->setConfirmed(true);
+        $em->persist($budget);
+        $em->flush();
+
+        return $this->forward('DentoletiBudgetBundle:Default:pdf', array(
+            'budgetId' => $budget->getId()
+        ));
     }
 }
