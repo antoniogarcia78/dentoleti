@@ -14,13 +14,17 @@
  		<strong>Paciente Nº: </strong>{{ budget.patient.id }}
  		<br/>
  		{{ budget.patient.name | upper}} {{ budget.patient.surname1 | upper }} {{ budget.patient.surname2 | upper }}
- 		<br/>
- 		{{ budget.patient.nif }}
- 		<br/>
+ 		<br />
+ 		<span>{{ budget.patient.nif }}</span>
+    <br />
+    {{ budget.patient.phone1 }} {% if budget.patient.phone2 is not empty %}| {{ budget.patient.phone2}}{% endif %}
+ 		<br />
  		{{ budget.patient.postalCode }} - {{ budget.patient.town }}
  	</div>
  	<div>
  		<p>Avd, de Sevilla, 108</p>
+    <br />
+    <span>Tlf: 955 810 426</span>
  	</div>
  	<div>
  		<stylesheet>
