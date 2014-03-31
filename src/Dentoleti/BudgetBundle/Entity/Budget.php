@@ -50,13 +50,6 @@ class Budget
      */
     private $discount;
 
-     /**
-     * @var string
-     *
-     * @ORM\Column(name="noTooth", type="text", nullable=true)
-     */
-    private $noTooth;
-
     /**
      * @var string
      *
@@ -190,29 +183,6 @@ class Budget
     public function getDiscount()
     {
         return $this->discount;
-    }
-
-    /**
-     * Set noTooth
-     *
-     * @param string $noTooth
-     * @return Budget
-     */
-    public function setNoTooth($noTooth)
-    {
-        $this->noTooth = $noTooth;
-
-        return $this;
-    }
-
-    /**
-     * Get noTooth
-     *
-     * @return string 
-     */
-    public function getNoTooth()
-    {
-        return $this->noTooth;
     }
 
     /**

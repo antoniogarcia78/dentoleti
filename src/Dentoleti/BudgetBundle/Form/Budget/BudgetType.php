@@ -30,10 +30,6 @@ class BudgetType extends AbstractType
 			'required' => false
 		));
 
-		$builder->add('noTooth', 'textarea', array(
-			'required' => false
-		));
-
 		$builder->add('observations', 'textarea', array(
 			'required' => false
 		));
