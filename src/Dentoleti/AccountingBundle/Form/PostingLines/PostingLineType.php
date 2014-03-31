@@ -14,7 +14,14 @@ class PostingLineType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('amount', 'text', array(
-            'required' => false
+            'required' => true
+        ));
+
+        $builder->add('method', 'entity', array(
+            'class' => 'DentoletiAccountingBundle:PaymentMethod',
+            'property' => 'methodName',
+            'empty_value' => '-- Método --',
+            'required' => true
         ));
         
         $builder->add('add', 'submit');

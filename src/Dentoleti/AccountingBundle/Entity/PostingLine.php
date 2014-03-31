@@ -41,6 +41,12 @@ class PostingLine
      */
     private $treatment;
 
+    /**
+     * @ORM\OneToOne(targetEntity="Dentoleti\AccountingBundle\Entity\PaymentMethod")
+     * @ORM\JoinColumn(name="payment_method_id", referencedColumnName="id")
+     */
+    private $method;
+
 
     /**
      * Get id
@@ -122,5 +128,29 @@ class PostingLine
     public function getTreatment()
     {
         return $this->treatment;
+    }
+
+    /**
+     * Set method
+     *
+     * @param string $method
+     *
+     * @return PostingLine
+     */
+    public function setMethod($method)
+    {
+        $this->method = $method;
+
+        return $this;
+    }
+
+    /**
+     * Get method
+     *
+     * @return string 
+     */
+    public function getMethod()
+    {
+        return $this->method;
     }
 }
