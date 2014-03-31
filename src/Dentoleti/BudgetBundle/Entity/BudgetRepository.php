@@ -17,9 +17,12 @@ class BudgetRepository extends EntityRepository
 		$em = $this->getEntityManager();
 
 		$queryBuilder = $em->createQueryBuilder()
-			->select('b')
+			->select('b', 'p')
 			->from('DentoletiBudgetBundle:Budget', 'b')
+			->join('b.patient', 'p')
 			->where('b.confirmed = 0')
+			->andwhere('p.id = :id')
+			->setParameter('id', $id)
 			->getQuery();
 
 		return $queryBuilder->getResult();

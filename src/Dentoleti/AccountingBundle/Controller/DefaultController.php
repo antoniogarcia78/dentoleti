@@ -8,7 +8,8 @@ use Dentoleti\AccountingBundle\Form\PostingLines\PostingLineType;
 
 class DefaultController extends Controller
 {
-    public function addAction($treatment_id, $debt_id)
+  //TODO revisar el flujo cuando se hace un ingreso a cuenta
+  public function addFoundAction($treatment_id, $debt_id)
     {
     	$petition = $this->getRequest();
 
@@ -32,21 +33,20 @@ class DefaultController extends Controller
   			$postingLine->setTreatment($treatment);
   			$em->persist($postingLine);
   			$em->persist($debt);
-  		  	$em->flush();
+  		  $em->flush();
 
-        	$this->get('session')->getFlashBag()->add(
-          		'notice',
-          		'El artículo se ha guardado correctamente'
-        	);
+      	$this->get('session')->getFlashBag()->add(
+        		'notice',
+        		'El artículo se ha guardado correctamente'
+      	);
 
-        	return $this->forward('DentoletiPatientBundle:Default:view', array(
-        		'id' => $treatment->getBudget()->getPatient()->getId()
-        	));
-     	}
+      	return $this->forward('DentoletiPatientBundle:Default:view', array(
+      		'id' => $treatment->getBudget()->getPatient()->getId()
+      	));
+    }
 
-     	return $this->render('DentoletiAccountingBundle:Default:add.html.twig', array(
-        	'form' => $form->createView()
-        ));
-      
+   	return $this->render('DentoletiAccountingBundle:Default:add.html.twig', array(
+      	'form' => $form->createView()
+      ));
     }
 }

@@ -103,13 +103,13 @@ class DefaultController extends Controller
             ->findOneById($id);
 
         $treatments = $em->getRepository('DentoletiTreatmentBundle:Treatment')
-            ->findTreatmentsByPatient($patient->getId());
+            ->findTreatmentsByPatient($id);
 
         $budgets_not_confirmed = $em->getRepository('DentoletiBudgetBundle:Budget')
             ->findNotConfirmed($id);
 
         $debts = $em->getRepository('DentoletiAccountingBundle:Debt')
-            ->findDebtsForPatient($patient->getId());
+            ->findDebtsForPatient($id);
 
         if (!$patient) {
             throw $this->createNotFoundException('No existe el paciente');
