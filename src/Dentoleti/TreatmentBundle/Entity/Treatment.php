@@ -35,23 +35,16 @@ class Treatment
     private $budget;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="noTooth", type="text")
-     */
-    private $noTooth;
-
-    /**
      * @var float
      *
-     * @ORM\Column(name="financingCosts", type="float")
+     * @ORM\Column(name="financingCosts", type="float", nullable=true)
      */
     private $financingCosts;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="funded", type="boolean")
+     * @ORM\Column(name="funded", type="boolean", nullable=true)
      */
     private $funded;
 
@@ -112,30 +105,6 @@ class Treatment
     public function getBudget()
     {
         return $this->budget;
-    }
-
-    /**
-     * Set noTooth
-     *
-     * @param string $noTooth
-     *
-     * @return Treatment
-     */
-    public function setNoTooth($noTooth)
-    {
-        $this->noTooth = $noTooth;
-
-        return $this;
-    }
-
-    /**
-     * Get noTooth
-     *
-     * @return string 
-     */
-    public function getNoTooth()
-    {
-        return $this->noTooth;
     }
 
     /**
