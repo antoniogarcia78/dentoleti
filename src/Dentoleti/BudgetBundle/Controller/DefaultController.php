@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Ps\PdfBundle\Annotation\Pdf;
+use Dentoleti\TreatmentBundle\Entity\Treatment;
+use Dentoleti\AccountingBundle\Entity\Debt;
 use Dentoleti\BudgetBundle\Entity\Budget;
 use Dentoleti\BudgetBundle\Form\Budget\BudgetType;
 use Dentoleti\BudgetBundle\Helper\BudgetsUtils;
@@ -292,6 +294,41 @@ class DefaultController extends Controller
 
         $budget->setConfirmed(true);
         $em->persist($budget);
+
+        //Create the new treatment
+        $treatment = new Treatment();
+        $treatment->setTreatmentDate(new \DateTime());
+        $treatment->setBudget($budget);
+        $em->persist($treatment);
+
+        //Generate the new debt
+        $debt = new Debt();
+
+        $budgetDetailsList = $em->getRepository('DentoletiBudgetBundle:BudgetDetail')
+          ->findArticlesOfBudget($budget);
+
+        $partialTotals = array();
+        $subTotals = array();
+        $ivas = array();
+
+        $total = 0;
+        foreach ($budgetDetailsList as $budgetDetail) {
+          $partial = $budgetDetail->getAmount() * $budgetDetail->getPrice();
+          $ivas[$budgetDetail->getId()] = 
+              $budgetDetail->getArticle()->getVat() * $partial;
+          
+          $partialTotals[$budgetDetail->getId()] = $partial;
+          $subTotals[$budgetDetail->getId()] =
+              $partial + $ivas[$budgetDetail->getId()];
+          $total = $total + $subTotals[$budgetDetail->getId()];
+          
+        }
+        $debt->setTreatment($treatment);
+        $debt->setAmount($total);
+        //persist
+        $em->persist($debt);
+
+        //flush the changes
         $em->flush();
 
         return $this->forward('DentoletiBudgetBundle:Default:pdf', array(
