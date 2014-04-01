@@ -113,6 +113,9 @@ class DefaultController extends Controller
         $budget_details = $em->getRepository('DentoletiBudgetBundle:BudgetDetail')
           ->findBudgetDetails($treatment->getBudget());
 
+        $posting_lines = $em->getRepository('DentoletiAccountingBundle:PostingLine')
+          ->findPostingLineForTreatment($id);
+
         $articles = array();
         foreach ($budget_details as $budget_detail) {
           $articles[] = $budget_detail->getArticle();
@@ -122,9 +125,33 @@ class DefaultController extends Controller
             throw $this->createNotFoundException('No existe el tratamiento');
         }
 
+        $partialTotals = array();
+        $subTotals = array();
+        $ivas = array();
+
+        $total = 0;
+        foreach ($budget_details as $budgetDetail) {
+            $partial = $budgetDetail->getAmount() * $budgetDetail->getPrice();
+            $ivas[$budgetDetail->getId()] = 
+                $budgetDetail->getArticle()->getVat() * $partial;
+
+            $partialTotals[$budgetDetail->getId()] = $partial;
+            $subTotals[$budgetDetail->getId()] =
+                $partial + $ivas[$budgetDetail->getId()];
+            $total = $total + $subTotals[$budgetDetail->getId()];
+        }
+
+        $paid = 0;
+        foreach ($posting_lines as $pl) {
+          $paid = $pl->getAmount();
+        }
+
         return $this->render('DentoletiTreatmentBundle:Default:treatment_view.html.twig', array(
             'treatment' => $treatment,
-            'articles' => $articles
+            'articles' => $articles,
+            'postingLines' => $posting_lines,
+            'total' => $total,
+            'paid' => $paid
         ));
     }
 
