@@ -62,5 +62,13 @@ class PaymentMethod
     {
         return $this->methodName;
     }
+
+    /**
+     * Method toString
+     */
+    public function __toString()
+    {
+        return $this->getMethodName();
+    }
 }
 

@@ -42,7 +42,7 @@ class PostingLine
     private $treatment;
 
     /**
-     * @ORM\OneToOne(targetEntity="Dentoleti\AccountingBundle\Entity\PaymentMethod")
+     * @ORM\ManyToOne(targetEntity="Dentoleti\AccountingBundle\Entity\PaymentMethod")
      * @ORM\JoinColumn(name="payment_method_id", referencedColumnName="id")
      */
     private $method;
