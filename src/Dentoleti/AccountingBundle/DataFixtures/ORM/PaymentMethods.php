@@ -24,6 +24,7 @@ class PaymentMethods extends AbstractFixture implements OrderedFixtureInterface
 			'Efectivo',
 			'Tarjeta',
 			'Transferencia',
+			'Financiado',
 			'Cheque'
 		);
 

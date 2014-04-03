@@ -16,6 +16,9 @@ class PostingLineType extends AbstractType
         $builder->add('amount', 'text', array(
             'required' => true
         ));
+        $builder->add('concept', 'text', array(
+            'required' => true
+        ));
 
         $builder->add('method', 'entity', array(
             'class' => 'DentoletiAccountingBundle:PaymentMethod',

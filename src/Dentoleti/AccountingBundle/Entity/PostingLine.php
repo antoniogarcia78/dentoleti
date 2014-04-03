@@ -29,6 +29,13 @@ class PostingLine
     private $amount;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="concept", type="string")
+     */
+    private $concept;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="postingLineDate", type="datetime")
@@ -37,7 +44,7 @@ class PostingLine
 
     /**
      * @ORM\ManyToOne(targetEntity="Dentoleti\TreatmentBundle\Entity\Treatment")
-     * @ORM\JoinColumn(name="treatment_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="treatment_id", referencedColumnName="id", nullable=true)
      */
     private $treatment;
 
@@ -46,7 +53,6 @@ class PostingLine
      * @ORM\JoinColumn(name="payment_method_id", referencedColumnName="id")
      */
     private $method;
-
 
     /**
      * Get id
@@ -152,5 +158,29 @@ class PostingLine
     public function getMethod()
     {
         return $this->method;
+    }
+
+    /**
+     * Set concept
+     *
+     * @param string $concept
+     *
+     * @return PostingLine
+     */
+    public function setConcept($concept)
+    {
+        $this->concept = $concept;
+
+        return $this;
+    }
+
+    /**
+     * Get concept
+     *
+     * @return string 
+     */
+    public function getConcept()
+    {
+        return $this->concept;
     }
 }

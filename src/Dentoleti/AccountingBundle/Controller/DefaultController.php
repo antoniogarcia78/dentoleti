@@ -54,19 +54,50 @@ class DefaultController extends Controller
     {
       $em = $this->getDoctrine()->getManager();
 
-      $postingLines = $em->getRepository('DentoletiAccountingBundle:PostingLine')
-        ->findTodayPostingLines();
+      $postingLinesIncomes = $em->getRepository('DentoletiAccountingBundle:PostingLine')
+        ->findTodayPostingLinesIncomes();
+      $postingLinesExpenses = $em->getRepository('DentoletiAccountingBundle:PostingLine')
+        ->findTodayPostingLinesExpenses();
+      $postingLinesFinanced = $em->getRepository('DentoletiAccountingBundle:PostingLine')
+        ->findTodayPostingLinesFinanced();
+      $postingLinesTPV = $em->getRepository('DentoletiAccountingBundle:PostingLine')
+        ->findTodayPostingLinesTPV();
 
-      $total = 0;
-      foreach ($postingLines as $pl) {
-        $total = $total + $pl->getAmount();
+      $total_incomes = 0;
+      foreach ($postingLinesIncomes as $pl) {
+        $total_incomes = $total_incomes + $pl->getAmount();
       }
+
+      $total_expenses = 0;
+      foreach ($postingLinesExpenses as $pl) {
+        $total_expenses = $total_expenses + $pl->getAmount();
+      }
+
+      $total_financed = 0;
+      foreach ($postingLinesFinanced as $pl) {
+        $total_financed = $total_financed + $pl->getAmount();
+      }
+
+      $total_tpv = 0;
+      foreach ($postingLinesTPV as $pl) {
+        $total_tpv = $total_tpv + $pl->getAmount();
+      }
+
+      $total = $total_incomes + $total_expenses + $total_financed + $total_tpv;
 
       $facade = $this->get('ps_pdf.facade');
       $response = new Response();
 
       $this->render('DentoletiAccountingBundle:Default:daily.pdf.twig', array(
-        'postingLines' => $postingLines,
+        'postingLinesIncomes' => $postingLinesIncomes,
+        'postingLinesExpenses' => $postingLinesExpenses,
+        'postingLinesFinanced' => $postingLinesFinanced,
+        'postingLinesTPV' => $postingLinesTPV,
+        'total_incomes' => $total_incomes,
+        'total_expenses' => $total_expenses,
+        'sum' => $total_incomes + $total_expenses,
+        'total_financed' => $total_financed,
+        'total_tpv' => $total_tpv,
         'total' => $total
       ), $response);
 

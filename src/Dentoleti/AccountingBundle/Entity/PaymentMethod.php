@@ -71,4 +71,3 @@ class PaymentMethod
         return $this->getMethodName();
     }
 }
-

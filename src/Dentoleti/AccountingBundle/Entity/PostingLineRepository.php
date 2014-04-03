@@ -24,17 +24,81 @@ class PostingLineRepository extends EntityRepository
 		return $queryBuilder->getResult();
 	}
 
-	public function findTodayPostingLines()
+	public function findTodayPostingLinesIncomes()
 	{
 		$em = $this->getEntityManager();
 
 		$datetime = new \DateTime("yesterday");
 
 		$queryBuilder = $em->createQueryBuilder()
-			->select('pl')
+			->select('pl', 'm')
 			->from('DentoletiAccountingBundle:PostingLine', 'pl')
+			->join('pl.method', 'm')
 			->where('pl.postingLineDate > :today_date')
+			->andWhere('pl.amount >= 0')
+			->andWhere('m.methodName = :method')
 			->setParameter('today_date', $datetime, \Doctrine\DBAL\Types\Type::DATETIME)
+			->setParameter('method', 'Efectivo')
+			->getQuery();
+
+		return $queryBuilder->getResult();
+	}
+
+	public function findTodayPostingLinesExpenses()
+	{
+		$em = $this->getEntityManager();
+
+		$datetime = new \DateTime("yesterday");
+
+		$queryBuilder = $em->createQueryBuilder()
+			->select('pl', 'm')
+			->from('DentoletiAccountingBundle:PostingLine', 'pl')
+			->join('pl.method', 'm')
+			->where('pl.postingLineDate > :today_date')
+			->andWhere('pl.amount < 0')
+			->andWhere('m.methodName = :method')
+			->setParameter('today_date', $datetime, \Doctrine\DBAL\Types\Type::DATETIME)
+			->setParameter('method', 'Efectivo')
+			->getQuery();
+
+		return $queryBuilder->getResult();
+	}
+
+	public function findTodayPostingLinesFinanced()
+	{
+		$em = $this->getEntityManager();
+
+		$datetime = new \DateTime("yesterday");
+
+		$queryBuilder = $em->createQueryBuilder()
+			->select('pl', 'm')
+			->from('DentoletiAccountingBundle:PostingLine', 'pl')
+			->join('pl.method', 'm')
+			->where('pl.postingLineDate > :today_date')
+			->andWhere('pl.amount >= 0')
+			->andWhere('m.methodName = :method')
+			->setParameter('today_date', $datetime, \Doctrine\DBAL\Types\Type::DATETIME)
+			->setParameter('method', 'Financiado')
+			->getQuery();
+
+		return $queryBuilder->getResult();
+	}
+
+	public function findTodayPostingLinesTPV()
+	{
+		$em = $this->getEntityManager();
+
+		$datetime = new \DateTime("yesterday");
+
+		$queryBuilder = $em->createQueryBuilder()
+			->select('pl', 'm')
+			->from('DentoletiAccountingBundle:PostingLine', 'pl')
+			->join('pl.method', 'm')
+			->where('pl.postingLineDate > :today_date')
+			->andWhere('pl.amount >= 0')
+			->andWhere('m.methodName = :method')
+			->setParameter('today_date', $datetime, \Doctrine\DBAL\Types\Type::DATETIME)
+			->setParameter('method', 'Tarjeta')
 			->getQuery();
 
 		return $queryBuilder->getResult();
