@@ -204,7 +204,12 @@
 				<div class="data">
 					<ul>
 					{% for budget in budgets_not_confirmed %}
+						{% set total = 0 %}
+						{% for detail in budget.budgetDetails %}
+							{% set total = total + (detail.amount * detail.price) %}
+						{% endfor %}
 						<li><a href="{{ path('budget_view', { 'id' : budget.id }) }}">{{ budget.id }}</a></li>
+						<li><span>Importe: {{ total }}</span></li>
 						<li><a href="{{ path('budget_confirmation', { 'budgetId' : budget.id }) }}" target="_blank">Confirmar</a></li>
 					{% endfor %}
 					</ul>
