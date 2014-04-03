@@ -1,3 +1,7 @@
 dentoleti_accounting_add_fund:
     path:  /add/{treatment_id}/{debt_id}
     defaults: { _controller: DentoletiAccountingBundle:Default:addFound }
+
+dentoleti_accounting_daily:
+    path: /daily
+    defaults: { _controller: DentoletiAccountingBundle:Default:dailyPDF }

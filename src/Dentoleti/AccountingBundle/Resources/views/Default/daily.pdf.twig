@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf SYSTEM "%resources%/dtd/doctype.dtd">
+
+<pdf>
+    <dynamic-page>
+    	<div>
+      	<img src="{{ pdf_image('DentoletiGeneralBundle:logo.png') }}" />
+      </div>
+ 	<div>
+ 		<p>Avd, de Sevilla, 108</p>
+    <br />
+    <span>Tlf: 955 810 426</span>
+ 	</div>
+ 	<div>
+ 		<stylesheet>
+ 			<attribute name="float" value="right" />
+ 			<attribute name="width" value="80%" />
+ 			<attribute name="text-align" value="center" />
+ 		</stylesheet>
+ 		<p><strong>Cierre de caja del día </strong> {{ "now" | date('d-m-Y') }} </p>
+ 	</div>
+ 	<div height="67%" width="100%">
+		<table>
+			<tr>
+				<td border.type="none" width="65%">Descripción</td>
+        <td border.type="none" width="10%" text-align="center">Cantidad</td>
+			</tr>
+			<tr>
+        <td border.type="none" colspan="2">
+          <hr/>
+        </td>
+      </tr>
+      {% for postingLine in postingLines %}
+      <tr>
+        <td border.type="none">Tratamiento {{ postingLine.treatment }}</td>
+        <td border.type="none" text-align="center">{{ postingLine.amount }}€</td>
+      </tr>
+      {% endfor %}
+		</table>  
+ 	</div>
+ 	<div>
+		<hr/>
+	</div>
+	<div text-align="right">
+		<strong font-size="16px">TOTAL {{ total }}€</strong>
+	</div>
+    </dynamic-page>
+</pdf>

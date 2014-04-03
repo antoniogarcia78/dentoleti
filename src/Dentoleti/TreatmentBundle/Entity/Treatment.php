@@ -160,6 +160,6 @@ class Treatment
      */
     public function __toString()
     {
-        return $this->getBudget();
+        return strval($this->getBudget());
     }
 }

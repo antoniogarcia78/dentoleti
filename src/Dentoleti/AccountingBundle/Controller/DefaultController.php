@@ -3,12 +3,12 @@
 namespace Dentoleti\AccountingBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 use Dentoleti\AccountingBundle\Entity\PostingLine;
 use Dentoleti\AccountingBundle\Form\PostingLines\PostingLineType;
 
 class DefaultController extends Controller
 {
-  //TODO revisar el flujo cuando se hace un ingreso a cuenta
   public function addFoundAction($treatment_id, $debt_id)
     {
     	$petition = $this->getRequest();
@@ -48,5 +48,34 @@ class DefaultController extends Controller
    	return $this->render('DentoletiAccountingBundle:Default:add.html.twig', array(
       	'form' => $form->createView()
       ));
+    }
+
+    public function dailyPDFAction()
+    {
+      $em = $this->getDoctrine()->getManager();
+
+      $postingLines = $em->getRepository('DentoletiAccountingBundle:PostingLine')
+        ->findTodayPostingLines();
+
+      $total = 0;
+      foreach ($postingLines as $pl) {
+        $total = $total + $pl->getAmount();
+      }
+
+      $facade = $this->get('ps_pdf.facade');
+      $response = new Response();
+
+      $this->render('DentoletiAccountingBundle:Default:daily.pdf.twig', array(
+        'postingLines' => $postingLines,
+        'total' => $total
+      ), $response);
+
+      $xml = $response->getContent();
+      
+      $datetime = new \DateTime();
+      $content = $facade->render($xml);
+      file_put_contents('/tmp/daily-'.$datetime->format('Ymd').'.pdf', $content);
+
+      return new Response($content, 200, array('content-type' => 'application/pdf'));
     }
 }
