@@ -23,4 +23,20 @@ class PostingLineRepository extends EntityRepository
 
 		return $queryBuilder->getResult();
 	}
+
+	public function findTodayPostingLines()
+	{
+		$em = $this->getEntityManager();
+
+		$datetime = new \DateTime("yesterday");
+
+		$queryBuilder = $em->createQueryBuilder()
+			->select('pl')
+			->from('DentoletiAccountingBundle:PostingLine', 'pl')
+			->where('pl.postingLineDate > :today_date')
+			->setParameter('today_date', $datetime, \Doctrine\DBAL\Types\Type::DATETIME)
+			->getQuery();
+
+		return $queryBuilder->getResult();
+	}
 }
