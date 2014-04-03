@@ -113,7 +113,7 @@ class DefaultController extends Controller
       $em = $this->getDoctrine()->getManager();
 
       $articlesList = $em->getRepository('DentoletiArticlesBundle:Article')
-        ->findAll();
+        ->findActives();
 
       return $this->render('DentoletiArticlesBundle:Default:list.html.twig', array(
         'articlesList' => $articlesList

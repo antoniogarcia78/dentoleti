@@ -20,4 +20,18 @@ class ArticleRepository extends EntityRepository
 
 		return $query->getResult();
 	}
+
+	public function findActives()
+	{
+		$em = $this->getEntityManager();
+
+		$queryBuilder = $em->createQueryBuilder()
+			->select('a')
+			->from('DentoletiArticlesBundle:Article', 'a')
+			->where('a.description != :desc')
+			->setParameter('desc', '')
+			->getQuery();
+
+		return $queryBuilder->getResult();
+	}
 }
