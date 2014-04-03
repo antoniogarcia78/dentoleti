@@ -40,7 +40,7 @@ class PatientType extends AbstractType
 		  'required' => false
 		));
 		$builder->add('phone1', 'text', array(
-			'required' => false
+			'required' => true
 		));
 		$builder->add('phone2', 'text', array(
 			'required' => false
