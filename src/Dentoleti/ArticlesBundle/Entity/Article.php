@@ -38,7 +38,7 @@ class Article
     /**
      * @var float
      *
-     * @ORM\Column(name="vat", type="float")
+     * @ORM\Column(name="vat", type="float", nullable=true)
      */
     private $vat;
 
