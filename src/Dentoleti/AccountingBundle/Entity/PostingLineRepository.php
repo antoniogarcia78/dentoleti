@@ -28,7 +28,7 @@ class PostingLineRepository extends EntityRepository
 	{
 		$em = $this->getEntityManager();
 
-		$datetime = new \DateTime("yesterday");
+		$datetime = new \DateTime("today");
 
 		$queryBuilder = $em->createQueryBuilder()
 			->select('pl', 'm')
@@ -48,7 +48,7 @@ class PostingLineRepository extends EntityRepository
 	{
 		$em = $this->getEntityManager();
 
-		$datetime = new \DateTime("yesterday");
+		$datetime = new \DateTime("today");
 
 		$queryBuilder = $em->createQueryBuilder()
 			->select('pl', 'm')
@@ -68,7 +68,7 @@ class PostingLineRepository extends EntityRepository
 	{
 		$em = $this->getEntityManager();
 
-		$datetime = new \DateTime("yesterday");
+		$datetime = new \DateTime("today");
 
 		$queryBuilder = $em->createQueryBuilder()
 			->select('pl', 'm')
@@ -88,7 +88,7 @@ class PostingLineRepository extends EntityRepository
 	{
 		$em = $this->getEntityManager();
 
-		$datetime = new \DateTime("yesterday");
+		$datetime = new \DateTime("today");
 
 		$queryBuilder = $em->createQueryBuilder()
 			->select('pl', 'm')

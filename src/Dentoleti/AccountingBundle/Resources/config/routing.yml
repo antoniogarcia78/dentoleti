@@ -5,3 +5,7 @@ dentoleti_accounting_add_fund:
 dentoleti_accounting_daily:
     path: /daily
     defaults: { _controller: DentoletiAccountingBundle:Default:dailyPDF }
+
+dentoleti_accounting_expense:
+    path: /add/expense
+    defaults: {  _controller: DentoletiAccountingBundle:Default:expense }

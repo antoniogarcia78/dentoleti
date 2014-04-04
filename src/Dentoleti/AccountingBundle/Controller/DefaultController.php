@@ -109,4 +109,36 @@ class DefaultController extends Controller
 
       return new Response($content, 200, array('content-type' => 'application/pdf'));
     }
+
+    public function expenseAction()
+    {
+      $petition = $this->getRequest();
+
+      $postingLine = new PostingLine();
+
+      $form = $this->createForm(new PostingLineType(), $postingLine);
+
+      $form->handleRequest($petition);
+
+      if ($form->isValid()){
+        //save the form
+        $em = $this->getDoctrine()->getManager();
+
+        $postingLine->setPostingLineDate(new \DateTime());
+        $postingLine->setTreatment(null);
+        $postingLine->setAmount($postingLine->getAmount()*(-1));
+        $em->persist($postingLine);
+        $em->flush();
+
+        $this->get('session')->getFlashBag()->add(
+            'notice',
+            'El gasto se ha registrado correctamente'
+        );
+
+      }
+
+      return $this->render('DentoletiAccountingBundle:Default:add.html.twig', array(
+        'form' => $form->createView()
+      ));
+  }
 }
