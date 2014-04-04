@@ -103,4 +103,44 @@ class PostingLineRepository extends EntityRepository
 
 		return $queryBuilder->getResult();
 	}
+
+	public function findTodayPostingLinesTransferIncomes()
+	{
+		$em = $this->getEntityManager();
+
+		$datetime = new \DateTime("today");
+
+		$queryBuilder = $em->createQueryBuilder()
+			->select('pl', 'm')
+			->from('DentoletiAccountingBundle:PostingLine', 'pl')
+			->join('pl.method', 'm')
+			->where('pl.postingLineDate > :today_date')
+			->andWhere('pl.amount >= 0')
+			->andWhere('m.methodName = :method')
+			->setParameter('today_date', $datetime, \Doctrine\DBAL\Types\Type::DATETIME)
+			->setParameter('method', 'Transferencia')
+			->getQuery();
+
+		return $queryBuilder->getResult();
+	}
+
+	public function findTodayPostingLinesTransferExpenses()
+	{
+		$em = $this->getEntityManager();
+
+		$datetime = new \DateTime("today");
+
+		$queryBuilder = $em->createQueryBuilder()
+			->select('pl', 'm')
+			->from('DentoletiAccountingBundle:PostingLine', 'pl')
+			->join('pl.method', 'm')
+			->where('pl.postingLineDate > :today_date')
+			->andWhere('pl.amount < 0')
+			->andWhere('m.methodName = :method')
+			->setParameter('today_date', $datetime, \Doctrine\DBAL\Types\Type::DATETIME)
+			->setParameter('method', 'Transferencia')
+			->getQuery();
+
+		return $queryBuilder->getResult();
+	}
 }
