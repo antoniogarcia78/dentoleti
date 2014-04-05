@@ -42,17 +42,6 @@
 						</div>
 					</div>
 				</div>
-				<div class="col2-two">
-					<div class="label">
-						{{ form_label(form.position) }}
-					</div>
-					<div class="data">
-						{{ form_widget(form.position) }}
-						<div class="error">
-							{{ form_errors(form.position) }}
-						</div>
-					</div>
-				</div>
 				<div class="col1-two">
 					<div class="label">
 						{{ form_label(form.phone1) }}
@@ -105,4 +94,25 @@
 	{{ form_rest(form) }}
 	{{ form_end(form) }}
 </div>
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script type="text/javascript">
+	var path = '{{ path('load_provinces') }}';
+	// When cp change
+	$("#personal_postalCode").change(function() {
+		var data = {
+			cp_id: $(this).val()
+		};
+		$.ajax({
+			type: 'POST',
+			url: path,
+			data: data,
+			success: function(data) {
+				$('#personal_town').html(data);
+			}
+		});
+	});
+	</script>
 {% endblock %}
