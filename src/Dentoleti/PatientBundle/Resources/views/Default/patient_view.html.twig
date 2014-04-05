@@ -210,7 +210,7 @@
 						{% endfor %}
 						<li><a href="{{ path('budget_view', { 'id' : budget.id }) }}">{{ budget.id }}</a></li>
 						<li><span>Importe: {{ total }}</span></li>
-						<li><a href="{{ path('budget_confirmation', { 'budgetId' : budget.id }) }}" target="_blank">Confirmar</a></li>
+						<li><a href="{{ path('treatment_add', { 'budgetId' : budget.id }) }}" target="_blank">Confirmar</a></li>
 					{% endfor %}
 					</ul>
 				</div>

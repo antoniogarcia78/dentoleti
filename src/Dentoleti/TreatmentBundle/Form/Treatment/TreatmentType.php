@@ -14,17 +14,6 @@ class TreatmentType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('budget', 'entity', array(
-            'class' => 'DentoletiBudgetBundle:Budget',
-            'property' => 'id',
-            'empty_value' => '-- Presupuesto --',
-            'required' => false
-        ));
-        
-        $builder->add('noTooth', 'textarea', array(
-            'required' => false
-        ));
-
         $builder->add('financingCosts', 'number', array(
             'required' => false
         ));

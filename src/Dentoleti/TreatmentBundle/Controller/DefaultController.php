@@ -13,7 +13,7 @@ class DefaultController extends Controller
     /**
      * Add a new treatment in the system
      */
-    public function addAction()
+    public function addAction($budgetId)
     {
       $petition = $this->getRequest();
       $treatment = new Treatment();
@@ -30,7 +30,12 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $budget = $em->getRepository('DentoletiBudgetBundle:Budget')
-          ->findOneById($treatment->getBudget()->getId());
+          ->findOneById($budgetId);
+        $budget->setConfirmed(true);
+        $em->persist($budget);
+
+        $treatment->setBudget($budget);
+        $em->persist($treatment);
 
         $budgetDetailsList = $em->getRepository('DentoletiBudgetBundle:BudgetDetail')
           ->findArticlesOfBudget($budget);
@@ -66,12 +71,12 @@ class DefaultController extends Controller
         );
 
         $nextAction = $form->get('save')->isClicked()
-          ? 'treatment_add' //TODO cambiar por treatment_details_add
+          ? 'treatment_view' //TODO cambiar por treatment_details_add
           : 'treatment_add';
 
-        if ('budget_details_add' == $nextAction){
+        if ('treatment_view' == $nextAction){
           return $this->redirect($this->generateUrl($nextAction, array(
-            'budgetId' => $treatment->getId())));
+            'id' => $treatment->getId())));
         }
 
         return $this->redirect($this->generateUrl($nextAction));
