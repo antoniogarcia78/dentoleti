@@ -17,4 +17,11 @@ class ArticlesUtils
 		
 		return $article;
 	}
+
+	public function eraseFamily($family)
+	{
+		$family->setName(null);
+
+		return $family;
+	}
 }

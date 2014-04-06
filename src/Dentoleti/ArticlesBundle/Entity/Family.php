@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Family
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Dentoleti\ArticlesBundle\Entity\FamilyRepository")
  */
 class Family
 {

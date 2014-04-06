@@ -6,32 +6,19 @@ use Doctrine\ORM\EntityRepository;
 class ArticleRepository extends EntityRepository
 {
 
-	public function findSearchedArticles($description)
+	public function findSearchedArticles($name)
 	{
 		$em = $this->getEntityManager();
 
 		$query = $em->createQuery('
-			SELECT a
-			FROM DentoletiArticlesBundle:Article a
-			WHERE a.description = :description
+			SELECT f
+			FROM DentoletiArticlesBundle:Family f
+			WHERE f.name = :name
 			');
 
-		$query->setParameter('description', $description);
+		$query->setParameter('name', $name);
 
 		return $query->getResult();
 	}
 
-	public function findActives()
-	{
-		$em = $this->getEntityManager();
-
-		$queryBuilder = $em->createQueryBuilder()
-			->select('a')
-			->from('DentoletiArticlesBundle:Article', 'a')
-			->where('a.description != :desc')
-			->setParameter('desc', '')
-			->getQuery();
-
-		return $queryBuilder->getResult();
-	}
 }

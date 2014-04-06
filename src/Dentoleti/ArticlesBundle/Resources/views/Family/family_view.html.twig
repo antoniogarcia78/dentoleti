@@ -1,0 +1,32 @@
+{% extends '::frontend.html.twig' %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletiarticles/css/articles.css') }}">
+	{{ parent() }}
+{% endblock %}
+
+{% block article %}
+<div id="article-item">
+	<div id="item">
+		<fieldset>
+			<legend>Datos de la familia</legend>
+			<div class="col1-two">
+				<div class="label">
+					Id: 
+				</div>
+				<div class="data">
+					<span>{{ family.id }}</span>
+				</div>
+			</div>
+			<div class="col2-two">
+				<div class="label">
+					Nombre: 
+				</div>
+				<div class="data">
+					<span>{{ family.name }}</span>
+				</div>
+			</div>
+		</fieldset>
+	</div>
+</div>
+{% endblock %}
