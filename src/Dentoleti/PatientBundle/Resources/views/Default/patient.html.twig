@@ -29,7 +29,6 @@
 							{{ form_errors(form.nif) }}
 						</div>
 					</div>
-					
 				</div>
 				<div class="col2-two">
 					<div class="label">
@@ -215,6 +214,17 @@
 						<div class="error">
 							{{ form_errors(form.smoker) }}
 						</div>					
+					</div>
+				</div>
+				<div class="col2-two">
+					<div class="label">
+						{{ form_label(form.doctor) }}
+					</div>
+					<div class="data">				
+						{{ form_widget(form.doctor) }}
+						<div class="error">
+							{{ form_errors(form.doctor) }}
+						</div>
 					</div>
 				</div>
 				{# Como no hay más elementos en las otras columnas, volvemos a poner un col1-three #}

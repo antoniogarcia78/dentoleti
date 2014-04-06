@@ -16,16 +16,6 @@ class BudgetType extends AbstractType
 			'required' => false
 		));
 
-		$builder->add('doctor', 'entity', array(
-			'class' => 'DentoletiPersonalBundle:Doctor',
-			'property' => 'personal',
-			'empty_value' => '-- Doctor --',
-			'required' => false,
-			'query_builder' => function(\Dentoleti\PersonalBundle\Entity\DoctorRepository $er) {
-        		return $er->queryActiveDoctors();
-    		},
-		));
-
 		$builder->add('discount', 'number', array(
 			'required' => false
 		));

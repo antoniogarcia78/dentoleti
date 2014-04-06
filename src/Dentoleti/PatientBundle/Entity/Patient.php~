@@ -97,6 +97,12 @@ class Patient
      */
     private $address;
     
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="Dentoleti\PersonalBundle\Entity\Doctor",cascade={"persist"})
+     * @ORM\JoinColumn(name="doctor_id", referencedColumnName="id", nullable=true, unique=false)
+     */
+    private $doctor;
 
     /**
      * @ORM\ManyToOne(targetEntity="Dentoleti\GeneralBundle\Entity\Town")
@@ -197,7 +203,8 @@ class Patient
      */
     public function setNif($nif)
     {
-        $this->nif = $nif;
+        //upper the letter of the DNI
+        $this->nif = strtoupper($nif);
 
         return $this;
     }
@@ -798,4 +805,28 @@ class Patient
         return $sum;
     }
 
+
+    /**
+     * Set smoker
+     *
+     * @param boolean $smoker
+     *
+     * @return Patient
+     */
+    public function setSmoker($smoker)
+    {
+        $this->smoker = $smoker;
+
+        return $this;
+    }
+
+    /**
+     * Get smoker
+     *
+     * @return boolean 
+     */
+    public function getSmoker()
+    {
+        return $this->smoker;
+    }
 }

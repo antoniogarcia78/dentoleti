@@ -19,6 +19,7 @@
 			<th>Apellidos</th>
 			<th>Email</th>
 			<th>Teléfono</th>
+			<th>Doctor</th>
 			<th>Ver</th>
 			<th>Editar</th>
 			<th>Eliminar</th>
@@ -32,6 +33,7 @@
 			<td>{{ patient.surname1 }} {{ patient.surname2 }}</td>
 			<td>{{ patient.email }}</td>
 			<td>{{ patient.phone1 }}</td>
+			<td>{{ patient.doctor }}</td>
 			<td><a href="{{ path('patient_view', { 'id': patient.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/eye.png') }}"></a></td>
 			<td><a href="{{ path('patient_edit', { 'id': patient.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/edit.png') }}"></a></td>
 			<td><a href="{{ path('patient_erase', { 'id': patient.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/erase.png') }}"></a></td>

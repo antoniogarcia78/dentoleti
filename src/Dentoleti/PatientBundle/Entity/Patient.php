@@ -97,6 +97,12 @@ class Patient
      */
     private $address;
     
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="Dentoleti\PersonalBundle\Entity\Doctor",cascade={"persist"})
+     * @ORM\JoinColumn(name="doctor_id", referencedColumnName="id", nullable=true, unique=false)
+     */
+    private $doctor;
 
     /**
      * @ORM\ManyToOne(targetEntity="Dentoleti\GeneralBundle\Entity\Town")
@@ -822,5 +828,29 @@ class Patient
     public function getSmoker()
     {
         return $this->smoker;
+    }
+
+    /**
+     * Set doctor
+     *
+     * @param \Dentoleti\PersonalBundle\Entity\Doctor $doctor
+     *
+     * @return Patient
+     */
+    public function setDoctor(\Dentoleti\PersonalBundle\Entity\Doctor $doctor = null)
+    {
+        $this->doctor = $doctor;
+
+        return $this;
+    }
+
+    /**
+     * Get doctor
+     *
+     * @return \Dentoleti\PersonalBundle\Entity\Doctor 
+     */
+    public function getDoctor()
+    {
+        return $this->doctor;
     }
 }
