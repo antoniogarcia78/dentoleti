@@ -1,0 +1,41 @@
+{% extends '::frontend.html.twig' %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletipatient/css/patient.css') }}">
+	{{ parent() }}
+{% endblock %}
+
+{% block article %}
+<div id="consultation">
+	{{ form_start(form) }}
+		{{ form_errors(form) }}
+		{% for flashMessage in app.session.flashbag.get('notice') %}
+    		<div class="flash-notice">
+        		{{ flashMessage }}
+    		</div>
+		{% endfor %}
+
+		<br>
+		<div id="personal">
+			<fieldset>
+				<legend>Datos personales</legend>
+				<div class="col1-two">
+					<div class="label">
+						{{ form_label(form.patient) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.patient) }}
+						<div class="error">
+							{{ form_errors(form.patient) }}
+						</div>
+					</div>
+				</div>
+			</fieldset>
+		</div>
+		<div id="buttons">
+			{{ form_widget(form.save) }}
+		</div>
+	{{ form_rest(form) }}
+	{{ form_end(form) }}
+</div>
+{% endblock %}

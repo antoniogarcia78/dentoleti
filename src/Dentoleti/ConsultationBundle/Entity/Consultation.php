@@ -80,9 +80,9 @@ class Consultation
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="consultationDate", type="datetime")
+     * @ORM\Column(name="concertationDate", type="datetime")
      */
-    private $consultationDate;
+    private $concertationDate;
 
     /**
      * @var boolean
@@ -294,29 +294,6 @@ class Consultation
     }
 
     /**
-     * Set consultationDate
-     *
-     * @param \DateTime $consultationDate
-     * @return Consultation
-     */
-    public function setConsultationDate($consultationDate)
-    {
-        $this->consultationDate = $consultationDate;
-
-        return $this;
-    }
-
-    /**
-     * Get consultationDate
-     *
-     * @return \DateTime 
-     */
-    public function getConsultationDate()
-    {
-        return $this->consultationDate;
-    }
-
-    /**
      * Set assists
      *
      * @param boolean $assists
@@ -360,5 +337,29 @@ class Consultation
     public function getState()
     {
         return $this->state;
+    }
+
+    /**
+     * Set concertationDate
+     *
+     * @param \DateTime $concertationDate
+     *
+     * @return Consultation
+     */
+    public function setConcertationDate($concertationDate)
+    {
+        $this->concertationDate = $concertationDate;
+
+        return $this;
+    }
+
+    /**
+     * Get concertationDate
+     *
+     * @return \DateTime 
+     */
+    public function getConcertationDate()
+    {
+        return $this->concertationDate;
     }
 }
