@@ -33,7 +33,7 @@ class ConsultationType extends AbstractType
         		'first_meeting' => 'First meeting',
         		'other' => 'Normal',
     		),
-    		'data' => 'other',
+    		'data' => 'first_meeting',
     		'expanded' => true,
     		'multiple'  => false,
 		));

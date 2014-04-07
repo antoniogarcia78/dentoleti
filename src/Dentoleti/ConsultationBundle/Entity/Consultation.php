@@ -66,21 +66,21 @@ class Consultation
     /**
      * @var string
      *
-     * @ORM\Column(name="observations", type="text")
+     * @ORM\Column(name="observations", type="text", nullable=true)
      */
     private $observations;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="price", type="float")
+     * @ORM\Column(name="price", type="float", nullable=true)
      */
     private $price;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="concertationDate", type="datetime")
+     * @ORM\Column(name="concertationDate", type="datetime", nullable=true)
      */
     private $concertationDate;
 
@@ -94,7 +94,7 @@ class Consultation
     /**
      * @var string
      *
-     * @ORM\Column(name="state", type="string", length=255)
+     * @ORM\Column(name="state", type="string", length=255, nullable=true)
      */
     private $state;
 
