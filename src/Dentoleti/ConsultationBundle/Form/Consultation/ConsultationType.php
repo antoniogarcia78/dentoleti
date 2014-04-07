@@ -15,6 +15,64 @@ class ConsultationType extends AbstractType
 			'empty_value' => '-- Paciente --',
 			'required' => false
 		));
+
+		$builder->add('startDate', 'date', array(
+		  'widget' => 'single_text',
+		  'format' => 'd/MM/y',
+		  'required' => false
+		));
+
+		$builder->add('endDate', 'date', array(
+		  'widget' => 'single_text',
+		  'format' => 'd/MM/y',
+		  'required' => false
+		));
+
+		$builder->add('type', 'choice', array(
+    		'choices'   => array(
+        		'first_meeting' => 'First meeting',
+        		'other' => 'Normal',
+    		),
+    		'data' => 'other',
+    		'expanded' => true,
+    		'multiple'  => false,
+		));
+		
+		$builder->add('doctor', 'entity', array(
+			'class' => 'DentoletiPersonalBundle:Doctor',
+			'property' => 'personal',
+			'empty_value' => '-- Doctor --',
+			'required' => false,
+			'query_builder' => function(\Dentoleti\PersonalBundle\Entity\DoctorRepository $er) {
+        		return $er->queryActiveDoctors();
+    		},
+		));
+
+		$builder->add('motivation', 'textarea', array(
+			'required' => false
+		));
+
+		$builder->add('observations', 'textarea', array(
+			'required' => false
+		));
+
+		$builder->add('price', 'number', array(
+			'required' => false
+		));
+
+		$builder->add('concertationDate', 'date', array(
+		  'widget' => 'single_text',
+		  'format' => 'd/MM/y',
+		  'required' => false
+		));
+
+		$builder->add('assists', 'checkbox', array(
+			'required' => false
+		));
+
+		$builder->add('state', 'text', array(
+			'required' => false
+		));
 		
 		$builder->add('save', 'submit');
 	}
