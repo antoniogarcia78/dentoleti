@@ -18,7 +18,7 @@
 		<br>
 		<div id="personal">
 			<fieldset>
-				<legend>Datos personales</legend>
+				<legend>Datos de la cita</legend>
 				<div class="col1-two">
 					<div class="label">
 						{{ form_label(form.patient) }}
@@ -27,6 +27,116 @@
 						{{ form_widget(form.patient) }}
 						<div class="error">
 							{{ form_errors(form.patient) }}
+						</div>
+					</div>
+				</div>
+				<div class="col2-two">
+					<div class="label">
+						{{ form_label(form.startDate) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.startDate) }}
+						<div class="error">
+							{{ form_errors(form.startDate) }}
+						</div>
+					</div>
+				</div>
+				<div class="col1-two">
+					<div class="label">
+						{{ form_label(form.endDate) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.endDate) }}
+						<div class="error">
+							{{ form_errors(form.endDate) }}
+						</div>
+					</div>
+				</div>
+				<div class="col2-two">
+					<div class="label">
+						{{ form_label(form.type) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.type) }}
+						<div class="error">
+							{{ form_errors(form.type) }}
+						</div>
+					</div>
+				</div>
+				<div class="col1-two">
+					<div class="label">
+						{{ form_label(form.doctor) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.doctor) }}
+						<div class="error">
+							{{ form_errors(form.doctor) }}
+						</div>
+					</div>
+				</div>
+				<div class="col2-two">
+					<div class="label">
+						{{ form_label(form.motivation) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.motivation) }}
+						<div class="error">
+							{{ form_errors(form.motivation) }}
+						</div>
+					</div>
+				</div>
+				<div class="col1-two">
+					<div class="label">
+						{{ form_label(form.observations) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.observations) }}
+						<div class="error">
+							{{ form_errors(form.observations) }}
+						</div>
+					</div>
+				</div>
+				<div class="col2-two">
+					<div class="label">
+						{{ form_label(form.price) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.price) }}
+						<div class="error">
+							{{ form_errors(form.price) }}
+						</div>
+					</div>
+				</div>
+				<div class="col1-two">
+					<div class="label">
+						{{ form_label(form.concertationDate) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.concertationDate) }}
+						<div class="error">
+							{{ form_errors(form.concertationDate) }}
+						</div>
+					</div>
+				</div>
+				<div class="col2-two">
+					<div class="label">
+						{{ form_label(form.assists) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.assists) }}
+						<div class="error">
+							{{ form_errors(form.assists) }}
+						</div>
+					</div>
+				</div>
+				<div class="col1-two">
+					<div class="label">
+						{{ form_label(form.state) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.state) }}
+						<div class="error">
+							{{ form_errors(form.state) }}
 						</div>
 					</div>
 				</div>
