@@ -1,0 +1,52 @@
+{% extends '::frontend.html.twig' %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoleticonsultation/css/consultation.css') }}">
+	{{ parent() }}
+{% endblock %}
+
+{% block article %}
+	{% for flashMessage in app.session.flashbag.get('notice') %}
+    	<div class="flash-notice">
+       		{{ flashMessage }}
+    	</div>
+	{% endfor %}
+	<table id="list">
+		<tr>
+			<th>id</th>
+			<th>Paciente</th>
+			<th>Doctor</th>
+			<th>Fecha de inicio</th>
+			<th>Fecha de fin</th>
+			<th>Tipo</th>
+			<th>Motivo</th>
+			<th>Observaciones</th>
+			<th>Precio</th>
+			<th>Fecha de concertación</th>
+			<th>Asiste</th>
+			<th>Estado</th>
+			<th>Ver</th>
+			<th>Editar</th>
+			<th>Eliminar</th>
+		</tr>
+		{% for consultation in consultationList %}
+		<tr>
+			<td>{{ consultation.id }}</td>
+			<td>{{ consultation.patient }}</td>
+			<td>{{ consultation.doctor }}</td>
+			<td>{{ consultation.startDate | date('d-m-Y')  }}</td>
+			<td>{{ consultation.endDate | date('d-m-Y')  }}</td>
+			<td>{{ consultation.type }}</td>
+			<td>{{ consultation.motivation }}</td>
+			<td>{{ consultation.observations }}</td>
+			<td>{{ consultation.price }}</td>
+			<td>{{ consultation.concertationDate | date('d-m-Y')  }}</td>
+			<td>{{ consultation.assists }}</td>
+			<td>{{ consultation.state }}</td>
+			<td><a href="{{ path('family_view', { 'id': consultation.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/eye.png') }}"></a></td>
+			<td><a href="{{ path('consultation_edit', { 'id': consultation.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/edit.png') }}"></a></td>
+			<td><a href="{{ path('family_erase', { 'id': consultation.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/erase.png') }}"></a></td>
+		</tr>
+		{% endfor %}		
+	</table>
+{% endblock %}
