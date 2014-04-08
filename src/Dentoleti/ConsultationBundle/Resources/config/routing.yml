@@ -13,3 +13,11 @@ consultation_list:
 consultation_view:
     path: /view/{id}
     defaults: { _controller:DentoletiConsultationBundle:Default:view }
+
+consultation_delete:
+    path: /delete/{id}
+    defaults: { _controller:DentoletiConsultationBundle:Default:delete }
+
+consultation_erase:
+    path: /erase/{id}
+    defaults: { _controller:DentoletiConsultationBundle:Default:erase }

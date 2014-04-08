@@ -5,6 +5,7 @@ namespace Dentoleti\ConsultationBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Dentoleti\ConsultationBundle\Entity\Consultation;
 use Dentoleti\ConsultationBundle\Form\Consultation\ConsultationType;
+use Dentoleti\ConsultationBundle\Helper\ConsultationUtils;
 
 class DefaultController extends Controller
 {
@@ -73,7 +74,7 @@ class DefaultController extends Controller
     $em = $this->getDoctrine()->getManager();
 
     $consultationList = $em->getRepository('DentoletiConsultationBundle:Consultation')
-      ->findAll();
+      ->findAllConsultations();
 
     return $this->render('DentoletiConsultationBundle:Default:list.html.twig', array(
       'consultationList' => $consultationList
@@ -95,4 +96,57 @@ class DefaultController extends Controller
           'consultation' => $consultation
       ));
   }
+
+  /**
+     * ATTENTION
+     *
+     * Delete method for deleting one consultation given by the id.
+     * This will delete the record and all the relations with other entities
+     * so that, USE IT WITH CAREFULL
+     */
+    public function deleteAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $consultation = $em->getRepository('DentoletiConsultationBundle:Consultation')
+            ->findOneById($id);
+
+        if (!$consultation) {
+            throw $this->createNotFoundException('No existe la cita');
+        }
+        else {
+            $em->remove($consultation);
+            $em->flush();
+        }
+
+        //TODO Pendiente de ver donde redirigir la petición
+        return $this->forward('DentoletiConsultationBundle:Default:list');
+    }
+
+    /**
+     * This method is used to set the family's information to default values
+     * The intention of this method is to delete the information but not its relationships
+     */
+    public function eraseAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $consultation = $em->getRepository('DentoletiConsultationBundle:Consultation')
+            ->findOneById($id);
+
+        if (!$consultation) {
+            throw $this->createNotFoundException('No existe la cita');
+        }
+
+        //Nuevo helper
+        $utils = new ConsultationUtils();
+
+        $consultation = $utils->eraseConsultation($consultation);
+
+        $em->persist($consultation);
+        $em->flush();
+
+        //TODO Pendiente de ver donde redirigir la petición
+        return $this->forward('DentoletiConsultationBundle:Default:list');
+    }
 }
