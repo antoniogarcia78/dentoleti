@@ -92,7 +92,7 @@ class Consultation
     private $assists;
 
      /**
-     * @ORM\ManyToOne(targetEntity="Dentoleti\ConsultationBundle\Entity\Consultation")
+     * @ORM\ManyToOne(targetEntity="Dentoleti\ConsultationBundle\Entity\ConsultationState")
      * @ORM\JoinColumn(name="consultation_state_id", referencedColumnName="id", nullable=true)
      */
     private $state;
@@ -342,11 +342,11 @@ class Consultation
     /**
      * Set state
      *
-     * @param \Dentoleti\ConsultationBundle\Entity\Consultation $state
+     * @param \Dentoleti\ConsultationBundle\Entity\ConsultationState $state
      *
      * @return Consultation
      */
-    public function setState(\Dentoleti\ConsultationBundle\Entity\Consultation $state = null)
+    public function setState(\Dentoleti\ConsultationBundle\Entity\ConsultationState $state = null)
     {
         $this->state = $state;
 
@@ -356,7 +356,7 @@ class Consultation
     /**
      * Get state
      *
-     * @return \Dentoleti\ConsultationBundle\Entity\Consultation 
+     * @return \Dentoleti\ConsultationBundle\Entity\ConsultationState 
      */
     public function getState()
     {

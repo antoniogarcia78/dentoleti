@@ -62,4 +62,12 @@ class ConsultationState
     {
         return $this->state;
     }
+
+    /**
+     * Method toString
+     */
+    public function __toString()
+    {
+        return $this->getState();
+    }
 }
