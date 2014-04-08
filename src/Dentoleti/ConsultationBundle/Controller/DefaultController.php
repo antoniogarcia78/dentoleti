@@ -79,4 +79,20 @@ class DefaultController extends Controller
       'consultationList' => $consultationList
     ));
   }
+
+  public function viewAction($id)
+  {
+      $em = $this->getDoctrine()->getManager();
+
+      $consultation = $em->getRepository('DentoletiConsultationBundle:Consultation')
+        ->findOneById($id);
+
+      if (!$consultation) {
+          throw $this->createNotFoundException('No existe la cita');
+      }
+
+      return $this->render('DentoletiConsultationBundle:Default:consultation_view.html.twig', array(
+          'consultation' => $consultation
+      ));
+  }
 }

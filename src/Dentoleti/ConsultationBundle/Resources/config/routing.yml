@@ -9,3 +9,7 @@ consultation_edit:
 consultation_list:
     path: /list
     defaults: { _controller:DentoletiConsultationBundle:Default:list }
+
+consultation_view:
+    path: /view/{id}
+    defaults: { _controller:DentoletiConsultationBundle:Default:view }

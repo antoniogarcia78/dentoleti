@@ -1,0 +1,115 @@
+{% extends '::frontend.html.twig' %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoleticonsultation/css/consultation.css') }}">
+	{{ parent() }}
+{% endblock %}
+
+{% block article %}
+<div id="article-item">
+	<div id="item">
+		<fieldset>
+			<legend>Datos de la cita</legend>
+			<div class="col1-two">
+				<div class="label">
+					Id: 
+				</div>
+				<div class="data">
+					<span>{{ consultation.id }}</span>
+				</div>
+			</div>
+			<div class="col2-two">
+				<div class="label">
+					Paciente: 
+				</div>
+				<div class="data">
+					<span>{{ consultation.patient }}</span>
+				</div>
+			</div>
+			<div class="col1-two">
+				<div class="label">
+					Doctor: 
+				</div>
+				<div class="data">
+					<span>{{ consultation.doctor }}</span>
+				</div>
+			</div>
+			<div class="col2-two">
+				<div class="label">
+					Fecha de inicio: 
+				</div>
+				<div class="data">
+					<span>{{ consultation.startDate | date('d-m-Y') }}</span>
+				</div>
+			</div><div class="col1-two">
+				<div class="label">
+					Fecha de fin: 
+				</div>
+				<div class="data">
+					<span>{{ consultation.endDate | date('d-m-Y') }}</span>
+				</div>
+			</div>
+			<div class="col2-two">
+				<div class="label">
+					Tipo de cita: 
+				</div>
+				<div class="data">
+					<span>{{ consultation.type }}</span>
+				</div>
+			</div><div class="col1-two">
+				<div class="label">
+					Doctor: 
+				</div>
+				<div class="data">
+					<span>{{ consultation.doctor }}</span>
+				</div>
+			</div>
+			<div class="col2-two">
+				<div class="label">
+					Motivo: 
+				</div>
+				<div class="data">
+					<span>{{ consultation.motivation }}</span>
+				</div>
+			</div><div class="col1-two">
+				<div class="label">
+					Observaciones: 
+				</div>
+				<div class="data">
+					<span>{{ consultation.observations }}</span>
+				</div>
+			</div>
+			<div class="col2-two">
+				<div class="label">
+					Precio: 
+				</div>
+				<div class="data">
+					<span>{{ consultation.price }}</span>
+				</div>
+			</div><div class="col1-two">
+				<div class="label">
+					Fecha de concertación: 
+				</div>
+				<div class="data">
+					<span>{{ consultation.concertationDate | date('d-m-Y') }}</span>
+				</div>
+			</div>
+			<div class="col2-two">
+				<div class="label">
+					Asiste: 
+				</div>
+				<div class="data">
+					<span>{{ consultation.assists }}</span>
+				</div>
+			</div><div class="col1-two">
+				<div class="label">
+					Estado: 
+				</div>
+				<div class="data">
+					<span>{{ consultation.state }}</span>
+				</div>
+			</div>
+		</fieldset>
+	</div>
+</div>
+{% endblock %}
