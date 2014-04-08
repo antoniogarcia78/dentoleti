@@ -43,7 +43,7 @@
 			<td>{{ consultation.concertationDate | date('d-m-Y')  }}</td>
 			<td>{{ consultation.assists }}</td>
 			<td>{{ consultation.state }}</td>
-			<td><a href="{{ path('family_view', { 'id': consultation.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/eye.png') }}"></a></td>
+			<td><a href="{{ path('consultation_view', { 'id': consultation.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/eye.png') }}"></a></td>
 			<td><a href="{{ path('consultation_edit', { 'id': consultation.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/edit.png') }}"></a></td>
 			<td><a href="{{ path('family_erase', { 'id': consultation.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/erase.png') }}"></a></td>
 		</tr>
