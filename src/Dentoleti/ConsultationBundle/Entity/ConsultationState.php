@@ -63,4 +63,3 @@ class ConsultationState
         return $this->state;
     }
 }
-

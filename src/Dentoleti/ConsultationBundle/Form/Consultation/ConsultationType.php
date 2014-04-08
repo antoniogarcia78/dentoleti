@@ -70,10 +70,13 @@ class ConsultationType extends AbstractType
 			'required' => false
 		));
 
-		$builder->add('state', 'text', array(
+		$builder->add('state', 'entity', array(
+			'class' => 'DentoletiConsultationBundle:ConsultationState',
+			'property' => 'state',
+			'empty_value' => '-- Estado --',
 			'required' => false
 		));
-		
+
 		$builder->add('save', 'submit');
 	}
 

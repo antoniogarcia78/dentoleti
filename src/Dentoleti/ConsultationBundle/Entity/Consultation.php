@@ -91,10 +91,9 @@ class Consultation
      */
     private $assists;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="state", type="string", length=255, nullable=true)
+     /**
+     * @ORM\ManyToOne(targetEntity="Dentoleti\ConsultationBundle\Entity\Consultation")
+     * @ORM\JoinColumn(name="consultation_state_id", referencedColumnName="id", nullable=true)
      */
     private $state;
 
@@ -317,29 +316,6 @@ class Consultation
     }
 
     /**
-     * Set state
-     *
-     * @param string $state
-     * @return Consultation
-     */
-    public function setState($state)
-    {
-        $this->state = $state;
-
-        return $this;
-    }
-
-    /**
-     * Get state
-     *
-     * @return string 
-     */
-    public function getState()
-    {
-        return $this->state;
-    }
-
-    /**
      * Set concertationDate
      *
      * @param \DateTime $concertationDate
@@ -361,5 +337,29 @@ class Consultation
     public function getConcertationDate()
     {
         return $this->concertationDate;
+    }
+
+    /**
+     * Set state
+     *
+     * @param \Dentoleti\ConsultationBundle\Entity\Consultation $state
+     *
+     * @return Consultation
+     */
+    public function setState(\Dentoleti\ConsultationBundle\Entity\Consultation $state = null)
+    {
+        $this->state = $state;
+
+        return $this;
+    }
+
+    /**
+     * Get state
+     *
+     * @return \Dentoleti\ConsultationBundle\Entity\Consultation 
+     */
+    public function getState()
+    {
+        return $this->state;
     }
 }
