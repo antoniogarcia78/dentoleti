@@ -77,3 +77,23 @@
 	{{ form_end(form) }}
 </div>
 {% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	<script type="text/javascript">
+	var path = '{{ path('load_provinces') }}';
+	// When cp change
+	$("#doctor_personal_postalCode").change(function() {
+		var data = {
+			cp_id: $(this).val()
+		};
+		$.ajax({
+			type: 'POST',
+			url: path,
+			data: data,
+			success: function(data) {
+				$('#doctor_personal_town').html(data);
+			}
+		});
+	});
+	</script>
+{% endblock %}

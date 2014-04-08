@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Dentoleti\PersonalBundle\Form\Doctor\DoctorType;
 use Dentoleti\PersonalBundle\Entity\Doctor;
+use Dentoleti\PersonalBundle\Entity\Personal;
 use Dentoleti\PersonalBundle\Helper\PersonalUtils;
 
 class DoctorController extends Controller
@@ -19,6 +20,8 @@ class DoctorController extends Controller
         $petition = $this->getRequest();
 
     	$doctor = new Doctor();
+        $personal = new Personal();
+        $doctor->setPersonal($personal);
 		
 		$form = $this->createForm(new DoctorType(), $doctor);
 		
