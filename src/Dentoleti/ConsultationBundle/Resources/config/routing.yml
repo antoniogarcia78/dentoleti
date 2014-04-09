@@ -21,3 +21,7 @@ consultation_delete:
 consultation_erase:
     path: /erase/{id}
     defaults: { _controller:DentoletiConsultationBundle:Default:erase }
+
+consultation_search:
+    path: /search
+    defaults: { _controller:DentoletiConsultationBundle:Default:search }

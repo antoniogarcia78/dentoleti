@@ -3,6 +3,7 @@
 namespace Dentoleti\ConsultationBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Dentoleti\ConsultationBundle\Entity\Consultation;
 use Dentoleti\ConsultationBundle\Form\Consultation\ConsultationType;
 use Dentoleti\ConsultationBundle\Helper\ConsultationUtils;
@@ -148,5 +149,49 @@ class DefaultController extends Controller
 
         //TODO Pendiente de ver donde redirigir la petición
         return $this->forward('DentoletiConsultationBundle:Default:list');
+    }
+
+    /**
+     * This method search an article by the name
+     */
+    public function searchAction(Request $request)
+    {
+        $searchData = array();
+        $form = $this->createFormBuilder($searchData)
+            ->add('date', 'text')
+            ->add('search', 'submit')
+            ->getForm();
+
+        if ($request->isMethod('POST')) {
+            // The search params has been submited and we will search the data and 
+            // redirect to the list view
+            $form->bind($request);
+
+            $searchData = $form->getData();
+
+            $em = $this->getDoctrine()->getManager();
+
+            $consultationList = $em->getRepository('DentoletiConsultationBundle:Consultation')
+            ->findAll();
+
+            // If the list is empty, send also a flashmessage to indicate it
+            if (count($consultationList) == 0) {
+
+                $this->get('session')->getFlashBag()->add(
+                    'notice',
+                    'No hay citas'
+                );
+            }
+
+            return $this->render('DentoletiConsultationBundle:Default:list.html.twig', array(
+                'consultationList' => $consultationList
+            ));
+            
+        }
+        
+        // This wil render the search form
+        return $this->render('DentoletiConsultationBundle:Default:search.html.twig', array(
+            'form' => $form->createView()
+        ));
     }
 }
