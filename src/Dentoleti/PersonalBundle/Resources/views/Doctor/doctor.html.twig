@@ -16,6 +16,22 @@
 		{% endfor %}
 
 		<br>
+		<div id="personal-data">
+			<fieldset>
+				<legend>Datos del personal</legend>
+				<div>
+					<div class="label">
+						{{ form_label(form.personal) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.personal) }}
+						<div class="error">
+							{{ form_errors(form.personal) }}
+						</div>
+					</div>
+				</div>
+			</fieldset>
+		</div>
 		<div id="info">
 			<fieldset>
 				<legend>Datos del doctor</legend>
@@ -49,22 +65,6 @@
 						{{ form_widget(form.commission) }}
 						<div class="error">
 							{{ form_errors(form.commission) }}
-						</div>
-					</div>
-				</div>
-			</fieldset>
-		</div>
-		<div id="personal-data">
-			<fieldset>
-				<legend>Datos del personal</legend>
-				<div>
-					<div class="label">
-						{{ form_label(form.personal) }}
-					</div>
-					<div class="data">
-						{{ form_widget(form.personal) }}
-						<div class="error">
-							{{ form_errors(form.personal) }}
 						</div>
 					</div>
 				</div>
