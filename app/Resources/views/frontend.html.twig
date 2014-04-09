@@ -13,7 +13,6 @@
         <nav>
             <div id='cssmenu'>
                 <ul>
-                    <li class='active'><a href="{{ path('portada') }}"><span>Inicio</span></a></li>
                     <li class='has-sub'><a href='#'><span>Pacientes</span></a>
                         <ul>
                             <li><a href="{{ path('patient_add') }}"><span>Agregar</span></a></li>
@@ -47,7 +46,13 @@
                             <li><a href='{{ path('dentoleti_accounting_daily') }}'><span>Cierre de caja</span></a></li>
                         </ul>
                     </li>
-                    <li class='last'><a href='#'><span>Contact</span></a></li>
+                    <li class='last has-sub'><a href='#'><span>Citas</span></a>
+                        <ul>
+                            <li><a href="{{ path('consultation_add') }}"><span>Agregar</span></a></li>
+                            <li><a href='{{ path('consultation_list') }}'><span>Listado</span></a></li>
+                            <li class='last'><a href='{{ path('budget_search') }}'><span>Búsqueda</span></a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </nav>
