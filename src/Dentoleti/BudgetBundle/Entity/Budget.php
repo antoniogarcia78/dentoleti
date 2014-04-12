@@ -1,3 +1,4 @@
+<?php
 /*
  *  This file is part of Dentoleti.
  *
@@ -15,14 +16,20 @@
  *  along with Dentoleti. Read COPYING.txt file for more information.
  *  If it is not present, see <http://www.gnu.org/licenses/>. 
  *
- *  
- *  @Author: Luis González Rodríguez
- *  @Date:   2014-04-06 07:19:51
- *  @Last Modified by:   Luis González Rodríguez
- *  @Last Modified time: 2014-04-12 08:33:19
+ *  You should find all the information about Dentoleti in http://dentoleti.es
+ *
+ *  Author Information:
+ *      @Author: Luis González Rodríguez
+ *      @Email: desarrollo@luismagonzalez.es
+ *      @Github: https://github.com/luismagr
+ *      @Author web: http://luismagonzalez.es
+ *
+ *  File Information:
+ *      @Date:   2014-04-12 09:26:50
+ *      @Last Modified by:   Luis González Rodríguez
+ *      @Last Modified time: 2014-04-12 09:26:50
  * 
  */
-<?php
 namespace Dentoleti\BudgetBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;

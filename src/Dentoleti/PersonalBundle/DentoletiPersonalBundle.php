@@ -1,3 +1,4 @@
+<?php
 /*
  *	This file is part of Dentoleti.
  *
@@ -17,12 +18,11 @@
  *
  *	
  *  @Author: Luis González Rodríguez
- *  @Date:   2014-03-30 12:49:00
+ *  @Date:   2014-04-12 08:47:28
  *  @Last Modified by:   Luis González Rodríguez
- *  @Last Modified time: 2014-04-12 08:47:28
+ *  @Last Modified time: 2014-04-12 09:22:10
  * 
  */
-<?php
 namespace Dentoleti\PersonalBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;

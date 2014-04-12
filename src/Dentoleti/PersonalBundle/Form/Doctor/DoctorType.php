@@ -1,3 +1,4 @@
+<?php
 /*
  *	This file is part of Dentoleti.
  *
@@ -15,14 +16,20 @@
  *  along with Dentoleti. Read COPYING.txt file for more information.
  *  If it is not present, see <http://www.gnu.org/licenses/>. 
  *
- *	
- *  @Author: Luis González Rodríguez
- *  @Date:   2014-04-09 10:05:20
- *  @Last Modified by:   Luis González Rodríguez
- *  @Last Modified time: 2014-04-12 08:47:24
+ *  You should find all the information about Dentoleti in http://dentoleti.es
+ *
+ *	Author Information:
+ *		@Author: Luis González Rodríguez
+ *		@Email: desarrollo@luismagonzalez.es
+ *		@Github: https://github.com/luismagr
+ *  	@Author web: http://luismagonzalez.es
+ *
+ *  File Information:
+ *  	@Date:   2014-04-12 09:23:04
+ *  	@Last Modified by:   Luis González Rodríguez
+ *  	@Last Modified time: 2014-04-12 10:34:57
  * 
  */
-<?php
 namespace Dentoleti\PersonalBundle\Form\Doctor;
 
 use Symfony\Component\Form\AbstractType;
