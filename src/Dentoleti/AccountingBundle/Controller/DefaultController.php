@@ -95,7 +95,9 @@ class DefaultController extends Controller
         ->findTodayPostingLinesFinanced();
       $postingLinesTPV = $em->getRepository('DentoletiAccountingBundle:PostingLine')
         ->findTodayPostingLinesTPV();
-
+      $initialAccounting = $em->getRepository(
+        'DentoletiAccountingBundle:InitialAccounting')
+          ->findInitialAccounting();
       $total_incomes = 0;
       foreach ($postingLinesIncomes as $pl) {
         $total_incomes = $total_incomes + $pl->getAmount();
@@ -131,10 +133,12 @@ class DefaultController extends Controller
         'postingLinesTPV' => $postingLinesTPV,
         'total_incomes' => $total_incomes,
         'total_expenses' => $total_expenses,
-        'sum' => $total_incomes - $total_expenses,
+        'sum' => $total_incomes - $total_expenses + 
+            $initialAccounting[0]->getAmount(),
         'total_financed' => $total_financed,
         'total_tpv' => $total_tpv,
-        'total' => $total
+        'total' => $total,
+        'initial' => $initialAccounting[0]
       ), $response);
 
       $xml = $response->getContent();

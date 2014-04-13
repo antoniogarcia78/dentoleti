@@ -123,5 +123,13 @@ class InitialAccounting
     {
         return $this->accountingDate;
     }
+
+    /**
+     * Method toString
+     */
+    public function __toString()
+    {
+        return strval($this->getAmount());
+    }
 }
 

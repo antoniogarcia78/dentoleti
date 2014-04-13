@@ -27,7 +27,7 @@
  *  File Information:
  *  	@Date:   2014-04-13 10:15:13
  *  	@Last Modified by:   Luis González Rodríguez
- *  	@Last Modified time: 2014-04-13 12:22:23
+ *  	@Last Modified time: 2014-04-13 13:22:49
  * 
  */
 namespace Dentoleti\AccountingBundle\Entity;
@@ -42,14 +42,26 @@ use Doctrine\ORM\EntityRepository;
 class InitialAccountingRepository extends EntityRepository
 {
 	/**
-	 * This method find the accounting value for yesterday. It's needed by
-	 * controller for setting the default initial value for the dayly
-	 * accounting PDF
+	 * This method finds the initial accounting value. It's 
+	 * suppoused that the value has been configured before and its set when
+	 * the controller call this method for setting the default initial value 
+	 * for the dayly PDF
 	 *
-	 * @return The accounting for yesterday
+	 * @return The initial accounting
 	 */
-	public function findYesterdayAccounting()
+	public function findInitialAccounting()
 	{
+		$em = $this->getEntityManager();
 
+		$datetime = new \DateTime("today");
+
+		$queryBuilder = $em->createQueryBuilder()
+			->select('i')
+			->from('DentoletiAccountingBundle:InitialAccounting', 'i')
+			->where('i.accountingDate >= :today_date')
+			->setParameter('today_date', $datetime, \Doctrine\DBAL\Types\Type::DATETIME)
+			->getQuery();
+		
+		return $queryBuilder->getResult();
 	}
 }
