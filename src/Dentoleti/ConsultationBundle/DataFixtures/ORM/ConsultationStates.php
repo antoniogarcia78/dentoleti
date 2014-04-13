@@ -27,7 +27,7 @@
  *  File Information:
  *  	@Date:   2014-04-12 09:24:15
  *  	@Last Modified by:   Luis González Rodríguez
- *  	@Last Modified time: 2014-04-12 10:27:27
+ *  	@Last Modified time: 2014-04-13 08:54:51
  * 
  */
 namespace Dentoleti\ConsultationBundle\DataFixtures\ORM;
@@ -51,7 +51,7 @@ class ConsultationStates extends AbstractFixture implements OrderedFixtureInterf
 			'Solicitada',
 			'Confirmada',
 			'Cancelada por doctor',
-			'Cancelada por usuario',
+			'Cancelada por paciente',
 			'Paciente en espera',
 			'Paciente en consulta',
 			'Finalizada',
