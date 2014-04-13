@@ -40,7 +40,7 @@ use Dentoleti\ConsultationBundle\Helper\ConsultationUtils;
 
 class DefaultController extends Controller
 {
-  public function addAction()
+  public function addAction($doctorId)
   {
     $petition = $this->getRequest();
 
@@ -54,6 +54,10 @@ class DefaultController extends Controller
 
 	  if ($form->isValid()){
   		$em = $this->getDoctrine()->getManager();
+
+      $doctor = $em->getRepository('DentoletiPersonalBundle:Doctor')
+        ->findOneById($doctorId);
+      $consultation->setDoctor($doctor);
   		
   		$em->persist($consultation);
   		$em->flush();

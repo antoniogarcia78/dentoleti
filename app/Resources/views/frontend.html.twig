@@ -48,7 +48,7 @@
                     </li>
                     <li class='last has-sub'><a href='#'><span>Citas</span></a>
                         <ul>
-                            <li><a href="{{ path('consultation_add') }}"><span>Agregar</span></a></li>
+                            <li><a href="{{ path('consultation_add', { 'doctorId': 1 }) }}"><span>Agregar</span></a></li> {# TODO Put here the real doctorId #}
                             <li><a href='{{ path('consultation_list') }}'><span>Listado</span></a></li>
                             <li class='last'><a href='{{ path('consultation_search') }}'><span>Búsqueda</span></a></li>
                         </ul>

@@ -27,7 +27,7 @@
  *  File Information:
  *  	@Date:   2014-04-12 09:24:22
  *  	@Last Modified by:   Luis González Rodríguez
- *  	@Last Modified time: 2014-04-13 08:58:15
+ *  	@Last Modified time: 2014-04-13 09:23:40
  * 
  */
 namespace Dentoleti\ConsultationBundle\Form\Consultation;
@@ -69,16 +69,6 @@ class ConsultationType extends AbstractType
     		'multiple'  => false,
 		));
 		
-		$builder->add('doctor', 'entity', array(
-			'class' => 'DentoletiPersonalBundle:Doctor',
-			'property' => 'personal',
-			'empty_value' => '-- Doctor --',
-			'required' => false,
-			'query_builder' => function(\Dentoleti\PersonalBundle\Entity\DoctorRepository $er) {
-        		return $er->queryActiveDoctors();
-    		},
-		));
-
 		$builder->add('motivation', 'textarea', array(
 			'required' => false
 		));

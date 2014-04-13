@@ -1,5 +1,5 @@
 consultation_add:
-    path: /add
+    path: /add/{doctorId}
     defaults: { _controller:DentoletiConsultationBundle:Default:add }
 
 consultation_edit:
