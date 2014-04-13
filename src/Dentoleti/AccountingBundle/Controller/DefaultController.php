@@ -36,6 +36,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Dentoleti\AccountingBundle\Entity\PostingLine;
 use Dentoleti\AccountingBundle\Form\PostingLines\PostingLineType;
+use Dentoleti\AccountingBundle\Helper\AccountingUtils;
 
 class DefaultController extends Controller
 {
@@ -99,6 +100,9 @@ class DefaultController extends Controller
       }
 
       $total_expenses = 0;
+      $accountingUtils = new AccountingUtils();
+      $postingLinesExpenses = $accountingUtils->getPositiveExpenses(
+          $postingLinesExpenses);
       foreach ($postingLinesExpenses as $pl) {
         $total_expenses = $total_expenses + $pl->getAmount();
       }
@@ -113,7 +117,7 @@ class DefaultController extends Controller
         $total_tpv = $total_tpv + $pl->getAmount();
       }
 
-      $total = $total_incomes + $total_expenses + $total_financed + $total_tpv;
+      $total = $total_incomes - $total_expenses + $total_financed + $total_tpv;
 
       $facade = $this->get('ps_pdf.facade');
       $response = new Response();
@@ -125,7 +129,7 @@ class DefaultController extends Controller
         'postingLinesTPV' => $postingLinesTPV,
         'total_incomes' => $total_incomes,
         'total_expenses' => $total_expenses,
-        'sum' => $total_incomes + $total_expenses,
+        'sum' => $total_incomes - $total_expenses,
         'total_financed' => $total_financed,
         'total_tpv' => $total_tpv,
         'total' => $total
