@@ -27,7 +27,7 @@
  *  File Information:
  *  	@Date:   2014-04-12 09:25:40
  *  	@Last Modified by:   Luis González Rodríguez
- *  	@Last Modified time: 2014-04-12 10:21:27
+ *  	@Last Modified time: 2014-04-13 12:49:39
  * 
  */
 namespace Dentoleti\AccountingBundle\Entity;
@@ -54,11 +54,11 @@ class PostingLineRepository extends EntityRepository
 		return $queryBuilder->getResult();
 	}
 
-	public function findTodayPostingLinesIncomes()
+	public function findPostingLinesIncomes($when)
 	{
 		$em = $this->getEntityManager();
 
-		$datetime = new \DateTime("today");
+		$datetime = new \DateTime($when);
 
 		$queryBuilder = $em->createQueryBuilder()
 			->select('pl', 'm')
@@ -74,11 +74,11 @@ class PostingLineRepository extends EntityRepository
 		return $queryBuilder->getResult();
 	}
 
-	public function findTodayPostingLinesExpenses()
+	public function findPostingLinesExpenses($when)
 	{
 		$em = $this->getEntityManager();
 
-		$datetime = new \DateTime("today");
+		$datetime = new \DateTime($when);
 
 		$queryBuilder = $em->createQueryBuilder()
 			->select('pl', 'm')

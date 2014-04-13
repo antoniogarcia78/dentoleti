@@ -35,7 +35,9 @@ namespace Dentoleti\AccountingBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Dentoleti\AccountingBundle\Entity\PostingLine;
+use Dentoleti\AccountingBundle\Entity\InitialAccounting;
 use Dentoleti\AccountingBundle\Form\PostingLines\PostingLineType;
+use Dentoleti\AccountingBundle\Form\InitialAccounting\InitialAccountingType;
 use Dentoleti\AccountingBundle\Helper\AccountingUtils;
 
 class DefaultController extends Controller
@@ -86,9 +88,9 @@ class DefaultController extends Controller
       $em = $this->getDoctrine()->getManager();
 
       $postingLinesIncomes = $em->getRepository('DentoletiAccountingBundle:PostingLine')
-        ->findTodayPostingLinesIncomes();
+        ->findPostingLinesIncomes('today');
       $postingLinesExpenses = $em->getRepository('DentoletiAccountingBundle:PostingLine')
-        ->findTodayPostingLinesExpenses();
+        ->findPostingLinesExpenses('today');
       $postingLinesFinanced = $em->getRepository('DentoletiAccountingBundle:PostingLine')
         ->findTodayPostingLinesFinanced();
       $postingLinesTPV = $em->getRepository('DentoletiAccountingBundle:PostingLine')
@@ -144,6 +146,10 @@ class DefaultController extends Controller
       return new Response($content, 200, array('content-type' => 'application/pdf'));
     }
 
+    /**
+     * This method save an expense in the system. The form will present a field
+     * for the amount, and this method save this amount but in negative
+     */
     public function expenseAction()
     {
       $petition = $this->getRequest();
@@ -174,5 +180,57 @@ class DefaultController extends Controller
       return $this->render('DentoletiAccountingBundle:Default:add.html.twig', array(
         'form' => $form->createView()
       ));
-  }
+    }
+
+    public function initialAction()
+    {
+
+      $petition = $this->getRequest();
+
+      $em = $this->getDoctrine()->getManager();
+
+      $postingLinesIncomes = $em->getRepository('DentoletiAccountingBundle:PostingLine')
+        ->findPostingLinesIncomes('yesterday');
+      $postingLinesExpenses = $em->getRepository('DentoletiAccountingBundle:PostingLine')
+        ->findPostingLinesExpenses('yesterday');
+
+      $total_yesterday = 0;
+      foreach ($postingLinesIncomes as $pl) {
+        $total_yesterday = $total_yesterday + $pl->getAmount();
+      }
+      foreach ($postingLinesExpenses as $pl) {
+        $total_yesterday = $total_yesterday + $pl->getAmount();
+      }
+
+      if ($total_yesterday < 0) {
+        $this->get('session')->getFlashBag()->add(
+          'notice',
+          'La caja tiene saldo negativo. Revisa el valor'
+        );
+      } 
+      else
+      {
+        $this->get('session')->getFlashBag()->add(
+          'notice',
+          'La caja comienza con ' . $total_yesterday . '. Revisa el valor'
+        );
+      }
+
+      $initialAccounting = new InitialAccounting();
+      $initialAccounting->setAmount($total_yesterday);
+      $form = $this->createForm(new InitialAccountingType(), $initialAccounting);
+      
+      $form->handleRequest($petition);
+
+      if ($form->isValid()){
+
+        $initialAccounting->setAccountingDate(new \DateTime());
+        $em->persist($initialAccounting);
+        $em->flush();
+      }
+      
+      return $this->render('DentoletiAccountingBundle:Default:initial.html.twig', array(
+          'form' => $form->createView()
+      ));
+    }
 }
