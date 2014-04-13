@@ -27,7 +27,7 @@
  *  File Information:
  *  	@Date:   2014-04-12 09:17:17
  *  	@Last Modified by:   Luis González Rodríguez
- *  	@Last Modified time: 2014-04-12 10:33:18
+ *  	@Last Modified time: 2014-04-13 09:07:10
  * 
  */
 namespace Dentoleti\PatientBundle\Form\Patient;
@@ -47,16 +47,16 @@ class PatientType extends AbstractType
 	{
 
 		$builder->add('nif', 'text', array(
-			'required' => false
+			'required' => true
 		));
 		$builder->add('name', 'text', array(
-			'required' => false
+			'required' => true
 		));
 		$builder->add('surname1', 'text', array(
-			'required' => false
+			'required' => true
 		));
 		$builder->add('surname2', 'text', array(
-			'required' => false
+			'required' => true
 		));
 		$builder->add('civil_status', 'entity', array(
 			'class' => 'DentoletiGeneralBundle:CivilStatus',
@@ -164,7 +164,8 @@ class PatientType extends AbstractType
 		$builder->add('meeting', 'entity', array(
 			'class' => 'DentoletiGeneralBundle:Meeting',
 			'property' => 'theway',
-			'required' => false
+			'empty_value' => '-- Forma de conocernos --',
+			'required' => true
 		));
 
 		$builder->add('save', 'submit');

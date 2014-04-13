@@ -61,28 +61,28 @@ class Patient
     /**
      * @var string
      *
-     * @ORM\Column(name="nif", type="string", length=9, nullable=true)
+     * @ORM\Column(name="nif", type="string", length=9)
      */
     private $nif;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=50, nullable=true)
+     * @ORM\Column(name="name", type="string", length=50)
      */
     private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="surname1", type="string", length=50, nullable=true)
+     * @ORM\Column(name="surname1", type="string", length=50)
      */
     private $surname1;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="surname2", type="string", length=50, nullable=true)
+     * @ORM\Column(name="surname2", type="string", length=50)
      */
     private $surname2;
 
@@ -102,7 +102,7 @@ class Patient
     /**
      * @var string
      *
-     * @ORM\Column(name="phone1", type="string", length=15, nullable=true)
+     * @ORM\Column(name="phone1", type="string", length=15)
      */
     private $phone1;
 
@@ -211,7 +211,7 @@ class Patient
 
     /**
      * @ORM\ManyToOne(targetEntity="Dentoleti\GeneralBundle\Entity\Meeting")
-     * @ORM\JoinColumn(name="meeting_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="meeting_id", referencedColumnName="id")
      */
     private $meeting;
 
