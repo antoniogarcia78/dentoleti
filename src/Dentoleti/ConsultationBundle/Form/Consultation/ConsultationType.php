@@ -27,7 +27,7 @@
  *  File Information:
  *  	@Date:   2014-04-12 09:24:22
  *  	@Last Modified by:   Luis González Rodríguez
- *  	@Last Modified time: 2014-04-13 08:52:50
+ *  	@Last Modified time: 2014-04-13 08:58:15
  * 
  */
 namespace Dentoleti\ConsultationBundle\Form\Consultation;
@@ -84,10 +84,6 @@ class ConsultationType extends AbstractType
 		));
 
 		$builder->add('observations', 'textarea', array(
-			'required' => false
-		));
-
-		$builder->add('price', 'number', array(
 			'required' => false
 		));
 

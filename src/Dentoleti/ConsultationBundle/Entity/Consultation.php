@@ -101,13 +101,6 @@ class Consultation
     private $observations;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(name="price", type="float", nullable=true)
-     */
-    private $price;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="concertationDate", type="datetime", nullable=true)
@@ -297,29 +290,6 @@ class Consultation
     public function getObservations()
     {
         return $this->observations;
-    }
-
-    /**
-     * Set price
-     *
-     * @param float $price
-     * @return Consultation
-     */
-    public function setPrice($price)
-    {
-        $this->price = $price;
-
-        return $this;
-    }
-
-    /**
-     * Get price
-     *
-     * @return float 
-     */
-    public function getPrice()
-    {
-        return $this->price;
     }
 
     /**
