@@ -27,7 +27,7 @@
  *  File Information:
  *  	@Date:   2014-04-12 09:24:22
  *  	@Last Modified by:   Luis González Rodríguez
- *  	@Last Modified time: 2014-04-12 10:28:14
+ *  	@Last Modified time: 2014-04-13 08:52:50
  * 
  */
 namespace Dentoleti\ConsultationBundle\Form\Consultation;
@@ -62,7 +62,7 @@ class ConsultationType extends AbstractType
 		$builder->add('type', 'choice', array(
     		'choices'   => array(
         		'first_meeting' => 'First meeting',
-        		'other' => 'Normal',
+        		'other' => 'Consulta',
     		),
     		'data' => 'first_meeting',
     		'expanded' => true,
