@@ -92,10 +92,6 @@ class DefaultController extends Controller
         ->findTodayPostingLinesFinanced();
       $postingLinesTPV = $em->getRepository('DentoletiAccountingBundle:PostingLine')
         ->findTodayPostingLinesTPV();
-      $postingLinesTransferIncomes = $em->getRepository('DentoletiAccountingBundle:PostingLine')
-        ->findTodayPostingLinesTransferIncomes();
-      $postingLinesTransferExpenses = $em->getRepository('DentoletiAccountingBundle:PostingLine')
-        ->findTodayPostingLinesTransferExpenses();
 
       $total_incomes = 0;
       foreach ($postingLinesIncomes as $pl) {
@@ -117,18 +113,7 @@ class DefaultController extends Controller
         $total_tpv = $total_tpv + $pl->getAmount();
       }
 
-      $total_transfer_incomes = 0;
-      foreach ($postingLinesTransferIncomes as $pl) {
-        $total_transfer_incomes = $total_transfer_incomes + $pl->getAmount();
-      }
-
-      $total_transfer_expenses = 0;
-      foreach ($postingLinesTransferExpenses as $pl) {
-        $total_transfer_expenses = $total_transfer_expenses + $pl->getAmount();
-      }
-
-      $total = $total_incomes + $total_expenses + $total_financed + $total_tpv +
-        $total_transfer_incomes + $total_transfer_expenses;
+      $total = $total_incomes + $total_expenses + $total_financed + $total_tpv;
 
       $facade = $this->get('ps_pdf.facade');
       $response = new Response();
@@ -138,15 +123,11 @@ class DefaultController extends Controller
         'postingLinesExpenses' => $postingLinesExpenses,
         'postingLinesFinanced' => $postingLinesFinanced,
         'postingLinesTPV' => $postingLinesTPV,
-        'postingLinesTransferIncomes' => $postingLinesTransferIncomes,
-        'postingLinesTransferExpenses' => $postingLinesTransferExpenses,
         'total_incomes' => $total_incomes,
         'total_expenses' => $total_expenses,
         'sum' => $total_incomes + $total_expenses,
         'total_financed' => $total_financed,
         'total_tpv' => $total_tpv,
-        'total_transfer_incomes' => $total_transfer_incomes,
-        'total_transfer_expenses' => $total_transfer_expenses,
         'total' => $total
       ), $response);
 

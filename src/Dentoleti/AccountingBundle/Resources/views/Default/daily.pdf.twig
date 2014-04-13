@@ -165,68 +165,6 @@
             </td>
           </tr>
           <tr>
-            <stylesheet>
-                  <attribute name="margin-top" value="15px" />
-            </stylesheet>
-            <td border.type="none" width="85%">Ingresos Transferencias</td>
-            <td border.type="none" width="10%" text-align="center">Cantidad</td>
-          </tr>
-          <tr>
-            <td border.type="none" colspan="2">
-              <hr/>
-            </td>
-          </tr>
-          {% for postingLinesTransferIncome in postingLinesTransferIncomes %}
-          <tr>
-            <td border.type="none">Gasto {{ postingLinesTransferIncome.concept }}</td>
-            <td border.type="none" text-align="center">{{ postingLinesTransferIncome.amount }}€</td>
-          </tr>
-          {% endfor %}
-          <tr>
-            <td border.type="none" colspan="2">
-              <div text-align="right" border.color="black">
-                <stylesheet>
-                  <attribute name="margin-top" value="15px" />
-                  <attribute name="padding" value="5px" />
-                  <attribute name="float" value="right" />
-                  <attribute name="width" value="auto" />
-                </stylesheet>
-                <strong font-size="16px">Gastos {{ total_transfer_incomes }}€</strong>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <stylesheet>
-                  <attribute name="margin-top" value="15px" />
-            </stylesheet>
-            <td border.type="none" width="85%">Gastos Transferencias</td>
-            <td border.type="none" width="10%" text-align="center">Cantidad</td>
-          </tr>
-          <tr>
-            <td border.type="none" colspan="2">
-              <hr/>
-            </td>
-          </tr>
-          {% for postingLinesTransferExpense in postingLinesTransferExpenses %}
-          <tr>
-            <td border.type="none">Gasto {{ postingLinesTransferExpense.concept }}</td>
-            <td border.type="none" text-align="center">{{ postingLinesTransferExpense.amount }}€</td>
-          </tr>
-          {% endfor %}
-          <tr>
-            <td border.type="none" colspan="2">
-              <div text-align="right" border.color="black">
-                <stylesheet>
-                  <attribute name="margin-top" value="15px" />
-                  <attribute name="padding" value="5px" />
-                  <attribute name="float" value="right" />
-                  <attribute name="width" value="auto" />
-                </stylesheet>
-                <strong font-size="16px">Gastos {{ total_transfer_expenses }}€</strong>
-              </div>
-            </td>
-          </tr>
-          <tr>
             <td border.type="none" colspan="2">
               <div text-align="right" border.color="black">
                 <stylesheet>
