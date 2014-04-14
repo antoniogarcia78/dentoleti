@@ -96,9 +96,9 @@ class Consultation
     /**
      * @var string
      *
-     * @ORM\Column(name="observations", type="text", nullable=true)
+     * @ORM\Column(name="treatmentSheet", type="text", nullable=true)
      */
-    private $observations;
+    private $treatmentSheet;
 
     /**
      * @var \DateTime
@@ -270,29 +270,6 @@ class Consultation
     }
 
     /**
-     * Set observations
-     *
-     * @param string $observations
-     * @return Consultation
-     */
-    public function setObservations($observations)
-    {
-        $this->observations = $observations;
-
-        return $this;
-    }
-
-    /**
-     * Get observations
-     *
-     * @return string 
-     */
-    public function getObservations()
-    {
-        return $this->observations;
-    }
-
-    /**
      * Set assists
      *
      * @param boolean $assists
@@ -361,5 +338,29 @@ class Consultation
     public function getState()
     {
         return $this->state;
+    }
+
+    /**
+     * Set treatmentSheet
+     *
+     * @param string $treatmentSheet
+     *
+     * @return Consultation
+     */
+    public function setTreatmentSheet($treatmentSheet)
+    {
+        $this->treatmentSheet = $treatmentSheet;
+
+        return $this;
+    }
+
+    /**
+     * Get treatmentSheet
+     *
+     * @return string 
+     */
+    public function getTreatmentSheet()
+    {
+        return $this->treatmentSheet;
     }
 }
