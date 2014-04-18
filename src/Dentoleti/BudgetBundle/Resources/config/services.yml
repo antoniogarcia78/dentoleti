@@ -1,7 +1,7 @@
 parameters:
-#    dentoleti_budget.example.class: Dentoleti\BudgetBundle\Example
+  dentoleti_budget.service.class: Dentoleti\BudgetBundle\Services\BudgetService
 
 services:
-#    dentoleti_budget.example:
-#        class: %dentoleti_budget.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    dentoleti_budget.service:
+        class: %dentoleti_budget.service.class%
+        arguments: [@doctrine]

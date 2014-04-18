@@ -1,0 +1,20 @@
+<div id="treatments">
+	<ul>
+	{% for info, details in treatmentsInfo %}
+		<li>
+			<div class="treatment_details">
+				<span>Treatment {{ info }}</span>
+				<ul>
+					{% for item in details %}
+						<li>{{ item.article }}</li>
+						<li>
+							<input class="setter" id={{'check-' ~ item }} type="checkbox" name="done" value={{ item }} 
+								{% if item.done == 1 %} checked {% endif %}><br>
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</li>
+	{% endfor %}
+	</ul>
+</div>

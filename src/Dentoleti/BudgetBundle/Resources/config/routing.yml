@@ -49,3 +49,7 @@ budget_details_delete:
 budget_confirmation:
     pattern: /budget/confirmation/{budgetId}
     defaults: { _controller: DentoletiBudgetBundle:Default:budgetConfirmation }
+
+budget_details_set_unset:
+    pattern:   /set_unset
+    defaults: { _controller: DentoletiBudgetBundle:Details:setUnsetDone }

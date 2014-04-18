@@ -163,7 +163,7 @@ class DefaultController extends Controller
         }
 
         return $this->render('DentoletiBudgetBundle:Default:budget_view.html.twig', array(
-            'budget' => $budget
+            'budget' => $budget,
         ));
     }
 

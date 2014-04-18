@@ -105,4 +105,31 @@
 		</fieldset>
 	</div>
 </div>
+{% include 'DentoletiConsultationBundle:Default:includes/treatments_details.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script type="text/javascript">
+	var path = '{{ path('budget_details_set_unset') }}';
+	//Add handler for click event to all the elements with class "setter"
+	//This class is used for a elements in the 
+	//include/treatments_details.html.twig
+	$(document).ready(function(){
+		$(".setter").click(function() {
+			var data = {
+				bd_id : $(this).val()
+			};
+			$.ajax({
+				type: 'POST',
+				url: path,
+				data: data,
+				success: function(data) {
+					$("#check-" + bd_id).html(data);
+					location.reload();
+				}
+			});
+		});
+	});
+	</script>
 {% endblock %}

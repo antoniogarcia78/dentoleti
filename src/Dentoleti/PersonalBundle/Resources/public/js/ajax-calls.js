@@ -19,12 +19,11 @@
  *  @Author: Luis González Rodríguez
  *  @Date:   2014-04-08 19:20:05
  *  @Last Modified by:   Luis González Rodríguez
- *  @Last Modified time: 2014-04-12 08:47:31
+ *  @Last Modified time: 2014-04-18 11:38:06
  * 
  */
 
 function ajax_reload(path) {
-	alert(path);
 	// When cp change
 	$("#patient_postalCode").change(function() {
 		var data = {

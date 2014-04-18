@@ -190,4 +190,51 @@ class DetailsController extends Controller
             'budget' => $budgetDetail->getBudget()
         ));
     }
+
+    /**
+     * Set/unset the done attribute for a budgetDetail. If it's true it will be
+     * set to false and if it's set to false, it will be set to true.
+     *
+     * This method has been thinked for use with ajax.
+     *
+     * @return the response to the view
+     */
+    public function setUnsetDoneAction(Request $request)
+    {
+      //The logger
+      $log = $this->get('monolog.logger.dentoleti');
+      $log->info("/setUnset: Starts.");
+
+
+      $budgetDetailId = $request->get('bd_id');
+      $log->info("setUnset: BudgetDetail -> " . $budgetDetailId);
+      if ($request->isXmlHttpRequest()) {
+          $em = $this->getDoctrine()->getManager();
+
+          $budgetDetail = $em->getRepository('DentoletiBudgetBundle:BudgetDetail')
+            ->findOneById($budgetDetailId);
+          $log->info("setUnset: Done value before change it -> " 
+              . $budgetDetail->getDone());
+
+          if (null == $budgetDetail->getDone()){
+            $budgetDetail->setDone(false);
+          }
+          $budgetDetail->setDone(!$budgetDetail->getDone());
+          $log->info("setUnset: Done value after change it -> " 
+            . $budgetDetail->getDone());
+
+          $em->persist($budgetDetail);
+          $em->flush();
+
+          $response = new Response($budgetDetail->getDone());
+
+          $log->info("\\setUnset: Ends.");
+    
+          return $response;
+          
+      }
+      else {
+          return new Response();
+      }
+    }
 }

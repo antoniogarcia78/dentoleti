@@ -127,8 +127,27 @@ class DefaultController extends Controller
           throw $this->createNotFoundException('No existe la cita');
       }
 
+      //Call the service to get the treatments for the patient associated to
+      //the budget
+      $treatmentService = $this->get('dentoleti_treatment.service');
+
+      $treatments = $treatmentService->getTreatmentsForPatient(
+          $consultation->getPatient()->getId());
+
+      //Get the budgetDetails
+      $budgetService = $this->get('dentoleti_budget.service');
+
+      $treatmentsInfo = array();
+      foreach ($treatments as $treatment) {
+        $budgetDetails = $budgetService->getBudgetDetailsForBudget(
+            $treatment->getBudget()->getId());
+        
+        $treatmentsInfo[$treatment->getBudget()->getId()] = $budgetDetails;
+      }
+
       return $this->render('DentoletiConsultationBundle:Default:consultation_view.html.twig', array(
-          'consultation' => $consultation
+          'consultation' => $consultation,
+          'treatmentsInfo' => $treatmentsInfo
       ));
   }
 

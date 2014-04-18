@@ -86,6 +86,13 @@ class BudgetDetail
      */
     private $tooth;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="done", type="boolean", nullable=true)
+     */
+    private $done;
+
 
     /**
      * Get id
@@ -218,5 +225,29 @@ class BudgetDetail
     public function __toString()
     {
         return "{$this->getId()}";
+    }
+
+    /**
+     * Set done
+     *
+     * @param boolean $done
+     *
+     * @return BudgetDetail
+     */
+    public function setDone($done)
+    {
+        $this->done = $done;
+
+        return $this;
+    }
+
+    /**
+     * Get done
+     *
+     * @return boolean 
+     */
+    public function getDone()
+    {
+        return $this->done;
     }
 }

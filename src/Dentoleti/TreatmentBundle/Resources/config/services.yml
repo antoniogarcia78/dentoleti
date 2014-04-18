@@ -1,7 +1,7 @@
 parameters:
-#    dentoleti_treatment.example.class: Dentoleti\TreatmentBundle\Example
+    dentoleti_treatment.service.class: Dentoleti\TreatmentBundle\Services\TreatmentService
 
 services:
-#    dentoleti_treatment.example:
-#        class: %dentoleti_treatment.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    dentoleti_treatment.service:
+        class: %dentoleti_treatment.service.class%
+        arguments: [@doctrine]
