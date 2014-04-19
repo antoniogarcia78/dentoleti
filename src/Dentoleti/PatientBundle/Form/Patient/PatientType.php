@@ -27,7 +27,7 @@
  *  File Information:
  *  	@Date:   2014-04-12 09:17:17
  *  	@Last Modified by:   Luis González Rodríguez
- *  	@Last Modified time: 2014-04-13 09:07:10
+ *  	@Last Modified time: 2014-04-19 11:00:34
  * 
  */
 namespace Dentoleti\PatientBundle\Form\Patient;
@@ -40,11 +40,13 @@ use Symfony\Component\Form\FormEvents;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\FormInterface;
 use Dentoleti\GeneralBundle\Entity\PostalCode;
+use Dentoleti\GeneralBundle\Form\DataTransformer\PostalCodeToStringTransformer;
 
 class PatientType extends AbstractType
 {
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
+		$builder->add('postalCode', 'postal_code_selector');
 
 		$builder->add('nif', 'text', array(
 			'required' => true
@@ -91,14 +93,14 @@ class PatientType extends AbstractType
         		return $er->queryActiveDoctors();
     		},
 		));
-
+/*
 		$builder->add('postalCode', 'entity', array(
 			'class' => 'DentoletiGeneralBundle:PostalCode',
 			'property' => 'postalCode',
 			'empty_value' => '-- Código postal --',
 			'required' => false
 		));
-
+*/
 		$formModifier = function(FormInterface $form, PostalCode $postalCode = null) {
 			$towns = null === $postalCode ? array() : $postalCode->getTowns();
 
@@ -179,9 +181,10 @@ class PatientType extends AbstractType
 	
 	public function setDefaultOptions(OptionsResolverInterface $resolver)
    	{
-   		$resolver->setDefaults(array(
-   		  'data_class' => 'Dentoleti\PatientBundle\Entity\Patient',
-    	));
+   		$resolver
+   			->setDefaults(array(
+   		  		'data_class' => 'Dentoleti\PatientBundle\Entity\Patient',
+    		));
    	}
 	
 }
