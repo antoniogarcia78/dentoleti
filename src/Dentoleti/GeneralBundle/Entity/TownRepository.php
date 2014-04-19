@@ -27,7 +27,7 @@
  *  File Information:
  *  	@Date:   2014-04-12 09:21:49
  *  	@Last Modified by:   Luis González Rodríguez
- *  	@Last Modified time: 2014-04-12 10:32:20
+ *  	@Last Modified time: 2014-04-19 12:24:20
  * 
  */
 namespace Dentoleti\GeneralBundle\Entity;
@@ -39,17 +39,17 @@ use Doctrine\ORM\EntityRepository;
  */
 class TownRepository extends EntityRepository
 {
-	public function getAllTownsForCP($cp)
+	public function findAllTownsForCP($pc)
 	{
 		$em = $this->getEntityManager();
 
 		$query = $em->createQuery('
-			SELECT t, cp
+			SELECT t, pc
 			FROM DentoletiGeneralBundle:Town t
-			JOIN t.postalcodes cp
-			WHERE cp.id = :cp_id
+			JOIN t.postalcodes pc
+			WHERE pc.postalCode = :pc_name
 			');
-		$query->setParameter('cp_id', $cp);
+		$query->setParameter('pc_name', $pc);
 
 		return $query->getResult();
 	}

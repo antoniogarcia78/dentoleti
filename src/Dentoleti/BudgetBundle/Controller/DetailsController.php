@@ -203,24 +203,24 @@ class DetailsController extends Controller
     {
       //The logger
       $log = $this->get('monolog.logger.dentoleti');
-      $log->info("/setUnset: Starts.");
+      $log->info("/setUnsetDoneAction: Starts.");
 
 
       $budgetDetailId = $request->get('bd_id');
-      $log->info("setUnset: BudgetDetail -> " . $budgetDetailId);
+      $log->info("setUnsetDoneAction: BudgetDetail -> " . $budgetDetailId);
       if ($request->isXmlHttpRequest()) {
           $em = $this->getDoctrine()->getManager();
 
           $budgetDetail = $em->getRepository('DentoletiBudgetBundle:BudgetDetail')
             ->findOneById($budgetDetailId);
-          $log->info("setUnset: Done value before change it -> " 
+          $log->info("setUnsetDoneAction: Done value before change it -> " 
               . $budgetDetail->getDone());
 
           if (null == $budgetDetail->getDone()){
             $budgetDetail->setDone(false);
           }
           $budgetDetail->setDone(!$budgetDetail->getDone());
-          $log->info("setUnset: Done value after change it -> " 
+          $log->info("setUnsetDoneAction: Done value after change it -> " 
             . $budgetDetail->getDone());
 
           $em->persist($budgetDetail);
@@ -228,7 +228,7 @@ class DetailsController extends Controller
 
           $response = new Response($budgetDetail->getDone());
 
-          $log->info("\\setUnset: Ends.");
+          $log->info("\\setUnsetDoneAction: Ends.");
     
           return $response;
           

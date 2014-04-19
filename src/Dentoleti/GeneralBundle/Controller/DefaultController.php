@@ -46,26 +46,40 @@ class DefaultController extends Controller
     public function loadProvincesAction(Request $request)
     {
         $log = $this->get('monolog.logger.dentoleti');
-        $log->info("invocado");
+        $log->info("/loadProvincesAction: Starts.");
 
         $cp = $request->get('cp_id');
+        $log->info("/loadProvincesAction: CP received-> " . $cp);
         if ($request->isXmlHttpRequest()) {
+            $log->info("/loadProvincesAction: Ajax petition");
             $em = $this->getDoctrine()->getManager();
+            $log->info("/loadProvincesAction: Obtained the EntityManager");
 
-            $towns = $em->getRepository('DentoletiGeneralBundle:Town')
-            	->getAllTownsForCP($cp);
+            try{
+                $towns = $em->getRepository('DentoletiGeneralBundle:Town')
+            	->findAllTownsForCP($cp);
+                $log->info("/loadProvincesAction: Obatained " . sizeof($towns)
+                    . " towns");
+            } catch (\Exception $e) {
+                $log->info("/loadProvincesAction: Error " . $e);
+            }
+            
 
             $html = "";
             foreach ($towns as $town) {
             	$html = "<option value=\"" . $town->getId() . "\">" . 
             		$town->getName() . "</option>" ;
             }
+            $log->info("/loadProvincesAction: Response to send-> " . $html);
             $response = new Response($html);
 			
+            $log->info("\\loadProvincesAction: Ends.");
             return $response;
             
         }
         else {
+            $log->info("/loadProvincesAction: Non ajax petition");
+            $log->info("\\loadProvincesAction: Ends.");
             return new Response();
         }
     }
