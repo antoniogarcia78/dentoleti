@@ -78,7 +78,7 @@ class PostalCodeToStringTransformer implements DataTransformerInterface
 	 */
 	public function reverseTransform($stringPostalCode)
 	{
-		if (!$postalCode) {
+		if (!$stringPostalCode) {
 			return null;
 		}
 
