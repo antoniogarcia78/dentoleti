@@ -52,4 +52,18 @@ class ArticleRepository extends EntityRepository
 		return $query->getResult();
 	}
 
+  //TODO este método es necesario pero hay que añadir un campo active a Article
+  //     y modificar la consulta
+  public function findActives()
+  {
+    $em = $this->getEntityManager();
+
+    $query = $em->createQuery('
+			SELECT a
+			FROM DentoletiArticlesBundle:Article a
+			');
+
+    return $query->getResult();
+  }
+
 }
