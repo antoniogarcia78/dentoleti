@@ -22,9 +22,9 @@
                     </li>
                     <li class='has-sub'><a href='#'><span>Agenda</span></a>
                         <ul>
-                            <li><a href="#"><span>Agregar</span></a></li>
-                            <li><a href='#'><span>Listado</span></a></li>
-                            <li class='last'><a href='#'><span>Búsqueda</span></a></li>
+                            <li><a href="{{ path('consultation_add', { 'doctorId': 1 }) }}"><span>Agregar</span></a></li> {# TODO Put here the real doctorId #}
+                            <li><a href='{{ path('consultation_list') }}'><span>Listado</span></a></li>
+                            <li class='last'><a href='{{ path('consultation_search') }}'><span>Búsqueda</span></a></li>
                         </ul>
                     </li>
                     <li class='has-sub'><a href='#'><span>Doctores</span></a>
@@ -48,13 +48,6 @@
                             <li class='last'><a href='{{ path('articles_search') }}'><span>Búsqueda</span></a></li>
                         </ul>
                     </li>
-                    <li class='has-sub'><a href='#'><span>Presupuestos</span></a>
-                        <ul>
-                            <li><a href="{{ path('budget_add') }}"><span>Agregar</span></a></li>
-                            <li><a href='{{ path('budget_list') }}'><span>Listado</span></a></li>
-                            <li class='last'><a href='{{ path('budget_search') }}'><span>Búsqueda</span></a></li>
-                        </ul>
-                    </li>
                     <li class='has-sub'><a href='#'><span>Caja</span></a>
                         <ul>
                             <li><a href='{{ path('dentoleti_accounting_daily') }}'><span>Cierre de caja</span></a></li>
@@ -62,9 +55,9 @@
                     </li>
                     <li class='last has-sub'><a href='#'><span>Citas</span></a>
                         <ul>
-                            <li><a href="{{ path('consultation_add', { 'doctorId': 1 }) }}"><span>Agregar</span></a></li> {# TODO Put here the real doctorId #}
-                            <li><a href='{{ path('consultation_list') }}'><span>Listado</span></a></li>
-                            <li class='last'><a href='{{ path('consultation_search') }}'><span>Búsqueda</span></a></li>
+                            <li><a href="#"><span>Agregar</span></a></li>
+                            <li><a href='#'><span>Listado</span></a></li>
+                            <li class='last'><a href='#'><span>Búsqueda</span></a></li>
                         </ul>
                     </li>
                 </ul>
