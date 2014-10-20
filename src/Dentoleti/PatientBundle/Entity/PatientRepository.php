@@ -38,45 +38,33 @@ class PatientRepository extends EntityRepository
 {
 	public function findPatients($searchParams)
 	{
-		$params = explode(" ", $searchParams);
-
-		$count = count($params);
+		$count = count($searchParams);
 
 		$em = $this->getEntityManager();
 
-		$patients;
+		$patients = array();
 
-		if ( $count == 1 ) {
-			// Suppouse we have the first surnname
-			$query = $em->createQuery('
-			SELECT p
-			FROM DentoletiPatientBundle:Patient p
-			WHERE p.surname1 = :surname
-			');
-			$query->setParameter('surname', $params[0]);
+    $query_str = 'SELECT p FROM DentoletiPatientBundle:Patient p';
+		if ( $count >= 1 ) {
+      $query_str .= ' WHERE ';
+      foreach ($searchParams as $param => $value) {
+        $query_str .= ' p.' . $param . '= :' . $param . ' AND';
+      }
+      $last_pos = strrpos($query_str, 'AND');
+      $query_str = substr($query_str, 0, $last_pos);
+      $query = $em->createQuery($query_str);
 
-			return $query->getResult();
-		}
-		else if ( $count == 2 ) {
-			// We have the two surnames
-			$query = $em->createQuery('
-			SELECT p
-			FROM DentoletiPatientBundle:Patient p
-			WHERE p.surname1 = :surname1
-			AND p.surname2 = :surname2
-			');
-			$query->setParameter('surname1', $params[0]);
-			$query->setParameter('surname2', $params[1]);
+      $query->setParameter('name', $searchParams['surname1']);
+      $query->setParameter('surname1', $searchParams['surname1']);
+      $query->setParameter('surname2', $searchParams['surname2']);
+      $query->setParameter('phone1', $searchParams['phone1']);
+      $query->setParameter('address', $searchParams['address']);
+      $query->setParameter('postalCode', $searchParams['postalCode']);
 
-			return $query->getResult();
-		}
-		else {
-			// We don't know what has been received
-			// We send an empty array
-			$patients = array();
-
-			return $patients;
-			// TODO: The best thing to do is thrown a new Exception
-		}
+      return $query->getResult();
+    }
+    else {
+      return $patients;
+    }
 	}
 }

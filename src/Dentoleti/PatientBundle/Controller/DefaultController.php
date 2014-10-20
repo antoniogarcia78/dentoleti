@@ -212,21 +212,38 @@ class DefaultController extends Controller
     {
         $searchData = array();
         $form = $this->createFormBuilder($searchData)
-            ->add('surnames', 'text')
+            ->add('name', 'text', array(
+                'required' => false,
+            ))
+            ->add('surname1', 'text', array(
+                'required' => false,
+            ))
+            ->add('surname2', 'text', array(
+                'required' => false,
+            ))
+            ->add('phone1', 'text', array(
+                'required' => false,
+            ))
+            ->add('address', 'text', array(
+                'required' => false,
+            ))
+            ->add('postalCode', 'text', array(
+                'required' => false,
+            ))
             ->add('search', 'submit')
             ->getForm();
 
         if ($request->isMethod('POST')) {
             // The search params has been submited and we will search the data and 
             // redirect to the list view
-            $form->bind($request);
+            $form->handleRequest($request);
 
             $searchData = $form->getData();
 
             $em = $this->getDoctrine()->getManager();
 
             $patients = $em->getRepository('DentoletiPatientBundle:Patient')
-            ->findPatients($searchData['surnames']);
+            ->findPatients($searchData);
 
             // If the list is empty, send also a flashmessage to indicate it
             if (count($patients) == 0) {
@@ -237,8 +254,9 @@ class DefaultController extends Controller
                 );
             }
 
-            return $this->render('DentoletiPatientBundle:Default:list.html.twig', array(
-                'patients' => $patients
+            return $this->render('DentoletiPatientBundle:Default:search.html.twig', array(
+                'patients' => $patients,
+                'form' => $form->createView(),
             ));
             
         }
