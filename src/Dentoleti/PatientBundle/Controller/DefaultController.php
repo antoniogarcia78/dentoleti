@@ -247,7 +247,6 @@ class DefaultController extends Controller
 
             // If the list is empty, send also a flashmessage to indicate it
             if (count($patients) == 0) {
-
                 $this->get('session')->getFlashBag()->add(
                     'notice',
                     'No hay pacientes'
