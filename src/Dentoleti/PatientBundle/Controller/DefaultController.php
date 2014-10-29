@@ -206,63 +206,55 @@ class DefaultController extends Controller
     }
 
     /**
-     * This method search a patient by the surnames
+     * This is the controller for searching patients
      */
     public function searchAction(Request $request)
     {
-        $searchData = array();
-        $form = $this->createFormBuilder($searchData)
-            ->add('name', 'text', array(
-                'required' => false,
-            ))
-            ->add('surname1', 'text', array(
-                'required' => false,
-            ))
-            ->add('surname2', 'text', array(
-                'required' => false,
-            ))
-            ->add('phone1', 'text', array(
-                'required' => false,
-            ))
-            ->add('address', 'text', array(
-                'required' => false,
-            ))
-            ->add('postalCode', 'text', array(
-                'required' => false,
-            ))
-            ->add('search', 'submit')
-            ->getForm();
+      //Array data for searching params
+      $searchData = array();
+      $form = $this->createFormBuilder($searchData)
+        ->add('name', 'text', array(
+          'required' => false,
+        ))
+        ->add('surname1', 'text', array(
+          'required' => false,
+        ))
+        ->add('surname2', 'text', array(
+          'required' => false,
+        ))
+        ->add('phone1', 'text', array(
+          'required' => false,
+        ))
+        ->add('address', 'text', array(
+          'required' => false,
+        ))
+        ->add('postalCode', 'text', array(
+          'required' => false,
+        ))
+        ->add('search', 'submit')
+        ->getForm();
 
-        if ($request->isMethod('POST')) {
-            // The search params has been submited and we will search the data and 
-            // redirect to the list view
-            $form->handleRequest($request);
+      $patients = array();
+      if ($request->isMethod('POST')) {
+        // The search params has been submited. We need to do the search and
+        //return again with the resutls
+        $form->handleRequest($request);
 
-            $searchData = $form->getData();
+        $searchData = $form->getData();
+        $em = $this->getDoctrine()->getManager();
+        $patients = $em->getRepository('DentoletiPatientBundle:Patient')
+          ->findPatients($searchData);
 
-            $em = $this->getDoctrine()->getManager();
-
-            $patients = $em->getRepository('DentoletiPatientBundle:Patient')
-            ->findPatients($searchData);
-
-            // If the list is empty, send also a flashmessage to indicate it
-            if (count($patients) == 0) {
-                $this->get('session')->getFlashBag()->add(
-                    'notice',
-                    'No hay pacientes'
-                );
-            }
-
-            return $this->render('DentoletiPatientBundle:Default:search.html.twig', array(
-                'patients' => $patients,
-                'form' => $form->createView(),
-            ));
-            
+        // If the list is empty, send also a flashmessage to indicate it
+        if (count($patients) == 0) {
+          $this->get('session')->getFlashBag()->add(
+            'notice', 'No hay pacientes');
         }
-        
-        // This wil render the search form
-        return $this->render('DentoletiPatientBundle:Default:search.html.twig', array(
-            'form' => $form->createView()
-        ));
+      }
+      // This wil render the search form
+      return $this->render('DentoletiPatientBundle:Default:search.html.twig', array(
+        'patients' => $patients,
+          'form' => $form->createView()
+      ));
     }
 }
