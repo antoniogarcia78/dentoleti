@@ -1,0 +1,7 @@
+parameters:
+    dentoleti_treatment.service.class: Dentoleti\TreatmentBundle\Services\TreatmentService
+
+services:
+    dentoleti_treatment.service:
+        class: %dentoleti_treatment.service.class%
+        arguments: [@doctrine]

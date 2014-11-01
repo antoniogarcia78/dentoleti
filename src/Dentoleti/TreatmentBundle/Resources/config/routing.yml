@@ -1,0 +1,20 @@
+treatment_add:
+    pattern:  /add/{budgetId}
+    defaults: { _controller: DentoletiTreatmentBundle:Default:add }
+
+treatment_list:
+    pattern: /list
+    defaults: { _controller: DentoletiTreatmentBundle:Default:list }
+
+treatment_view:
+    pattern: /view/{id}
+    defaults: { _controller: DentoletiTreatmentBundle:Default:view }
+
+treatment_edit:
+    pattern: /edit/{id}
+    defaults: { _controller: DentoletiTreatmentBundle:Default:edit }
+
+treatment_delete:
+    pattern: /delete/{id}
+    defaults: { _controller: DentoletiTreatmentBundle:Default:delete }
+

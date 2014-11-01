@@ -1,0 +1,315 @@
+{% extends '::frontend.html.twig' %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletipatient/css/patient.css') }}">
+	{{ parent() }}
+{% endblock %}
+
+{% block article %}
+<div id="patient">
+	{{ form_start(form) }}
+		{{ form_errors(form) }}
+		{% for flashMessage in app.session.flashbag.get('notice') %}
+    		<div class="flash-notice">
+        		{{ flashMessage }}
+    		</div>
+		{% endfor %}
+
+		<br>
+		<div id="personal">
+			<fieldset>
+				<legend>Datos personales</legend>
+				<div class="col1-two">
+					<div class="label">
+						{{ form_label(form.nif) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.nif) }}
+						<div class="error">
+							{{ form_errors(form.nif) }}
+						</div>
+					</div>
+				</div>
+				<div class="col2-two">
+					<div class="label">
+						{{ form_label(form.name) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.name) }}
+						<div class="error">
+							{{ form_errors(form.name) }}
+						</div>
+					</div>
+				</div>
+				<div class="col1-two">
+					<div class="label">
+						{{ form_label(form.surname1) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.surname1) }}
+						<div class="error">
+							{{ form_errors(form.surname1) }}
+						</div>
+					</div>
+				</div>
+				<div class="col2-two">
+					<div class="label">
+						{{ form_label(form.surname2) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.surname2) }}
+						<div class="error">
+							{{ form_errors(form.surname2) }}
+						</div>
+					</div>
+				</div>
+				<div class="col1-two">
+					<div class="label">
+						{{ form_label(form.civil_status) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.civil_status) }}
+						<div class="error">
+							{{ form_errors(form.civil_status) }}
+						</div>
+					</div>
+				</div>
+				<div class="col2-two">
+					<div class="label">
+						{{ form_label(form.birthday) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.birthday) }}
+						<div class="error">
+							{{ form_errors(form.birthday) }}
+						</div>
+					</div>
+				</div>
+				<div class="col1-two">
+					<div class="label">
+						{{ form_label(form.occupation) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.occupation) }}
+						<div class="error">
+							{{ form_errors(form.occupation) }}
+						</div>
+					</div>
+				</div>
+			</fieldset>
+		</div>
+		<div id="contact">
+			<fieldset>
+				<legend>Datos de contacto</legend>
+				<div class="col1-two">
+					<div class="label">
+						{{ form_label(form.phone1) }}
+					</div>
+					<div class="data">				
+						{{ form_widget(form.phone1) }}
+						<div class="error">
+							{{ form_errors(form.phone1) }}
+						</div>
+					</div>
+				</div>
+				<div class="col2-two">
+					<div class="label">
+						{{ form_label(form.phone2) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.phone2) }}
+						<div class="error">
+							{{ form_errors(form.phone2) }}
+						</div>
+					</div>
+				</div>
+				<div class="col1-two">
+					<div class="label">
+						{{ form_label(form.email) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.email) }}
+						<div class="error">
+							{{ form_errors(form.email) }}
+						</div>
+					</div>
+				</div>
+				<div class="col2-two">
+					<div class="label">
+						{{ form_label(form.address) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.address) }}
+						<div class="error">
+							{{ form_errors(form.address) }}
+						</div>
+					</div>
+				</div>
+				<div class="col1-two">
+					<div class="label">
+						{{ form_label(form.postalCode) }}
+					</div>
+					<div class="data" id="cp">
+						{{ form_widget(form.postalCode) }}
+						<div class="error">
+							{{ form_errors(form.postalCode) }}
+						</div>					
+					</div>
+				</div>
+				<div class="col2-two">
+					<div class="label">
+						{{ form_label(form.town) }}
+					</div>
+					<div class="data" id="town">
+						{{ form_widget(form.town) }}
+						<div class="error">
+							{{ form_errors(form.town) }}
+						</div>
+					</div>
+				</div>
+			</fieldset>
+		</div>
+		<div id="clinic">
+			<fieldset>
+				<legend>Datos clínicos</legend>
+				<div class="col1-three">
+					<div class="label">
+						{{ form_label(form.allergies) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.allergies) }}
+						<div class="error">
+							{{ form_errors(form.allergies) }}
+						</div>
+					</div>
+				</div>
+				<div class="col2-three">
+					<div class="label">
+						{{ form_label(form.diseases) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.diseases) }}
+						<div class="error">
+							{{ form_errors(form.diseases) }}
+						</div>
+					</div>
+				</div>
+				<div class="col3-three">
+					<div class="label">
+						{{ form_label(form.vih) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.vih) }}
+						<div class="error">
+							{{ form_errors(form.vih) }}
+						</div>					
+					</div>
+				</div>
+				<div class="col1-three">
+					<div class="label">
+						{{ form_label(form.smoker) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.smoker) }}
+						<div class="error">
+							{{ form_errors(form.smoker) }}
+						</div>					
+					</div>
+				</div>
+				<div class="col2-two">
+					<div class="label">
+						{{ form_label(form.doctor) }}
+					</div>
+					<div class="data">				
+						{{ form_widget(form.doctor) }}
+						<div class="error">
+							{{ form_errors(form.doctor) }}
+						</div>
+					</div>
+				</div>
+				{# Como no hay más elementos en las otras columnas, volvemos a poner un col1-three #}
+				<div class="col1-three">
+					<div class="label">
+						{{ form_label(form.lastVisit) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.lastVisit) }}
+						<div class="error">
+							{{ form_errors(form.lastVisit) }}
+						</div>
+					</div>
+				</div>
+				<div class="col2-three">
+					<div class="label">
+						{{ form_label(form.revisionFrequency) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.revisionFrequency) }}
+						<div class="error">
+							{{ form_errors(form.revisionFrequency) }}
+						</div>
+					</div>
+				</div>
+				<div class="col3-three">
+					<div class="label">
+						{{ form_label(form.meeting) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.meeting) }}
+						<div class="error">
+							{{ form_widget(form.meeting) }}
+						</div>
+					</div>
+				</div>
+				<div class="col1-three">
+					<div class="label">
+						{{ form_label(form.treatment) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.treatment) }}
+						<div class="error">
+							{{ form_errors(form.treatment) }}
+						</div>
+					</div>
+				</div>
+				<div class="col2-three">
+					<div class="label">
+						{{ form_label(form.observations) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.observations) }}
+						<div class="error">
+							{{ form_errors(form.observations) }}
+						</div>					
+					</div>
+				</div>
+			</fieldset>
+		</div>
+		<div id="buttons">
+			{{ form_widget(form.save) }}
+		</div>
+	{{ form_rest(form) }}
+	{{ form_end(form) }}
+</div>
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script type="text/javascript">
+	var path = '{{ path('load_provinces') }}';
+	// When cp change
+	$("#patient_postalCode").change(function() {
+		var data = {
+			cp_id: $(this).val()
+		};
+		$.ajax({
+			type: 'POST',
+			url: path,
+			data: data,
+			success: function(data) {
+				$('#patient_town').html(data);
+			}
+		});
+	});
+	</script>
+{% endblock %}

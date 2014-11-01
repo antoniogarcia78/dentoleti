@@ -1,0 +1,7 @@
+portada:
+    pattern:  /
+    defaults: { _controller: DentoletiGeneralBundle:Default:index }
+
+load_provinces:
+    pattern:   /load_provinces
+    defaults: { _controller: DentoletiGeneralBundle:Default:loadProvinces }

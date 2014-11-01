@@ -1,0 +1,34 @@
+{% extends '::frontend.html.twig' %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletiarticles/css/articles.css') }}">
+	{{ parent() }}
+{% endblock %}
+
+{% block article %}
+	{% for flashMessage in app.session.flashbag.get('notice') %}
+    	<div class="flash-notice">
+       		{{ flashMessage }}
+    	</div>
+	{% endfor %}
+	<table id="list">
+		<tr>
+			<th>id</th>
+			<th>Nombre</th>
+			<th>Ver</th>
+			<th>Editar</th>
+			<th>Eliminar</th>
+		</tr>
+		{% for family in familyList %}
+		<tr>
+
+			<td>{{ family.id }}</td>
+			<td>{{ family.name }}</td>
+			<td><a href="{{ path('family_view', { 'id': family.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/eye.png') }}"></a></td>
+			<td><a href="{{ path('family_edit', { 'id': family.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/edit.png') }}"></a></td>
+			<td><a href="{{ path('family_erase', { 'id': family.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/erase.png') }}"></a></td>
+		</tr>
+		{% endfor %}		
+	</table>
+	
+{% endblock %}

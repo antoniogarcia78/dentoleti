@@ -1,0 +1,86 @@
+{% extends '::frontend.html.twig' %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletibudget/css/budget.css') }}">
+	{{ parent() }}
+{% endblock %}
+
+{% block article %}
+<div id="budget">
+	{{ form_start(form) }}
+		{{ form_errors(form) }}
+		{% for flashMessage in app.session.flashbag.get('notice') %}
+    		<div class="flash-notice">
+        		{{ flashMessage }}
+    		</div>
+		{% endfor %}
+
+		<br>
+		<div id="info">
+			<fieldset>
+				<legend>Datos del presupuesto</legend>
+				<div class="col1-two">
+					<div class="label">
+						{{ form_label(form.patient) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.patient) }}
+						<div class="error">
+							{{ form_errors(form.patient) }}
+						</div>
+					</div>
+				</div>
+				<div class="col1-two">
+					<div class="label">
+						{{ form_label(form.discount) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.discount) }}
+						<div class="error">
+							{{ form_errors(form.discount) }}
+						</div>
+					</div>
+				</div>
+				<div class="col1-two">
+					<div class="label">
+						{{ form_label(form.observations) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.observations) }}
+						<div class="error">
+							{{ form_errors(form.observations) }}
+						</div>
+					</div>
+				</div>
+				<div class="col2-two">
+					<div class="label">
+						{{ form_label(form.discountCompany) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.discountCompany) }}
+						<div class="error">
+							{{ form_errors(form.discountCompany) }}
+						</div>
+					</div>
+				</div>
+				<div class="col1-two">
+					<div class="label">
+						{{ form_label(form.discountInsurance) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.discountInsurance) }}
+						<div class="error">
+							{{ form_errors(form.discountInsurance) }}
+						</div>
+					</div>
+				</div>
+			</fieldset>
+		</div>
+		<div id="buttons">
+			{{ form_widget(form.save) }}
+			{{ form_widget(form.addItem) }}
+		</div>
+	{{ form_rest(form) }}
+	{{ form_end(form) }}
+</div>
+{% endblock %}

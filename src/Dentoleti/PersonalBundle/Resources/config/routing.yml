@@ -1,0 +1,55 @@
+personal_add:
+    pattern:  /add
+    defaults: { _controller: DentoletiPersonalBundle:Default:add }
+
+personal_list:
+    pattern: /list
+    defaults: { _controller: DentoletiPersonalBundle:Default:list }
+
+personal_search:
+    pattern: /search
+    defaults: { _controller: DentoletiPersonalBundle:Default:search }
+
+personal_view:
+    pattern: /view/{id}
+    defaults: { _controller: DentoletiPersonalBundle:Default:view }
+
+personal_edit:
+    pattern: /edit/{id}
+    defaults: { _controller: DentoletiPersonalBundle:Default:edit }
+
+personal_delete:
+    pattern: /delete/{id}
+    defaults: { _controller: DentoletiPersonalBundle:Default:delete }
+
+personal_erase:
+    pattern: /erase/{id}
+    defaults: { _controller: DentoletiPersonalBundle:Default:erase }
+
+doctor_add:
+    pattern: /doctor/add
+    defaults: { _controller: DentoletiPersonalBundle:Doctor:add }
+
+doctor_list:
+    pattern: /doctor/list
+    defaults: { _controller: DentoletiPersonalBundle:Doctor:list }
+
+doctor_view:
+    pattern: /doctor/view/{id}
+    defaults: { _controller: DentoletiPersonalBundle:Doctor:view }
+
+doctor_edit:
+    pattern: /doctor/edit/{id}
+    defaults: { _controller:DentoletiPersonalBundle:Doctor:edit }
+
+doctor_search:
+    pattern: /doctor/serach
+    defaults: { _controller:DentoletiPersonalBundle:Doctor:search }
+
+doctor_delete:
+    pattern: /doctor/delete/{id}
+    defaults: { _controller: DentoletiPersonalBundle:Doctor:delete }
+
+doctor_erase:
+    pattern: /doctor/erase/{id}
+    defaults: { _controller: DentoletiPersonalBundle:Doctor:erase }

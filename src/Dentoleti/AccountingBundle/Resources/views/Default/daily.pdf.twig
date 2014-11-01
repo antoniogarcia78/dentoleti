@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf SYSTEM "%resources%/dtd/doctype.dtd">
+
+<pdf>
+    <dynamic-page>
+    	<div>
+      	<img src="{{ pdf_image('DentoletiGeneralBundle:logo.png') }}" />
+      </div>
+      <div>
+        <stylesheet>
+          <attribute name="float" value="right" />
+          <attribute name="width" value="30%" />
+          <attribute name="text-align" value="right" />
+        </stylesheet>
+        <p><strong>Fecha de cierre </strong> {{ "now" | date('d/m/Y') }} </p>
+      </div>
+     	<div>
+        <stylesheet>
+          <attribute name="float" value="left" />
+          <attribute name="width" value="20%" />
+          <attribute name="text-align" value="left" />
+        </stylesheet>
+     		<p>Avd, de Sevilla, 108</p>
+        <br />
+        <span>Tlf: 955 810 426</span>
+     	</div>
+      <span><br /></span>
+      <div>
+        <stylesheet>
+          <attribute name="float" value="none" />
+        </stylesheet>
+        <table>
+          <tr>
+            <td border.type="none" width="85%">Ingresos en efectivo</td>
+            <td border.type="none" width="10%" text-align="center">Cantidad</td>
+          </tr>
+          <tr>
+            <td border.type="none" colspan="2">
+              <hr/>
+            </td>
+          </tr>
+          {% for postingLineIncome in postingLinesIncomes %}
+          <tr>
+            <td border.type="none">{{ postingLineIncome.concept }}</td>
+            <td border.type="none" text-align="center">{{ postingLineIncome.amount }}€</td>
+          </tr>
+          {% endfor %}
+          <tr>
+            <td border.type="none" colspan="2">
+              <div text-align="right" border.color="black">
+                <stylesheet>
+                  <attribute name="margin-top" value="15px" />
+                  <attribute name="padding" value="5px" />
+                  <attribute name="float" value="right" />
+                  <attribute name="width" value="auto" />
+                </stylesheet>
+                <strong font-size="16px">{{ total_incomes }}€</strong>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <stylesheet>
+              <attribute name="margin-top" value="15px" />
+            </stylesheet>
+            <td border.type="none" width="85%">Gastos en efectivo</td>
+            <td border.type="none" width="10%" text-align="center">Cantidad</td>
+          </tr>
+          <tr>
+            <td border.type="none" colspan="2">
+             <hr/>
+            </td>
+          </tr>
+          {% for postingLineExpense in postingLinesExpenses %}
+          <tr>
+            <td border.type="none">Gasto {{ postingLineExpense.concept }}</td>
+            <td border.type="none" text-align="center">{{ postingLineExpense.amount }}€</td>
+          </tr>
+          {% endfor %}
+          <tr>
+            <td border.type="none" colspan="2">
+              <div text-align="right" border.color="black">
+                <stylesheet>
+                  <attribute name="margin-top" value="15px" />
+                  <attribute name="padding" value="5px" />
+                  <attribute name="float" value="right" />
+                  <attribute name="width" value="auto" />
+                </stylesheet>
+                <strong font-size="16px">{{ total_expenses }}€</strong>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td border.type="none" colspan="2">
+              <div text-align="right" border.color="black">
+                <stylesheet>
+                  <attribute name="margin-top" value="15px" />
+                  <attribute name="padding" value="5px" />
+                  <attribute name="float" value="right" />
+                  <attribute name="width" value="auto" />
+                </stylesheet>
+                <strong font-size="16px">Caja inicial {{ initial }}€</strong>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td border.type="none" colspan="2">
+              <div text-align="right" border.color="black">
+                <stylesheet>
+                  <attribute name="margin-top" value="15px" />
+                  <attribute name="padding" value="5px" />
+                  <attribute name="float" value="right" />
+                  <attribute name="width" value="auto" />
+                </stylesheet>
+                <strong font-size="16px">Caja {{ sum }}€</strong>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <stylesheet>
+                  <attribute name="margin-top" value="15px" />
+            </stylesheet>
+            <td border.type="none" width="85%">Ingresos financiados</td>
+            <td border.type="none" width="10%" text-align="center">Cantidad</td>
+          </tr>
+          <tr>
+            <td border.type="none" colspan="2">
+              <hr/>
+            </td>
+          </tr>
+          {% for postingLineFinanced in postingLinesFinanced %}
+          <tr>
+            <td border.type="none">Gasto {{ postingLineFinanced.concept }}</td>
+            <td border.type="none" text-align="center">{{ postingLineFinanced.amount }}€</td>
+          </tr>
+          {% endfor %}
+          <tr>
+            <td border.type="none" colspan="2">
+              <div text-align="right" border.color="black">
+                <stylesheet>
+                  <attribute name="margin-top" value="15px" />
+                  <attribute name="padding" value="5px" />
+                  <attribute name="float" value="right" />
+                  <attribute name="width" value="auto" />
+                </stylesheet>
+                <strong font-size="16px">{{ total_financed }}€</strong>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <stylesheet>
+                  <attribute name="margin-top" value="15px" />
+            </stylesheet>
+            <td border.type="none" width="85%">Ingresos TPV</td>
+            <td border.type="none" width="10%" text-align="center">Cantidad</td>
+          </tr>
+          <tr>
+            <td border.type="none" colspan="2">
+              <hr/>
+            </td>
+          </tr>
+          {% for postingLineTPV in postingLinesTPV %}
+          <tr>
+            <td border.type="none">Gasto {{ postingLineTPV.concept }}</td>
+            <td border.type="none" text-align="center">{{ postingLineTPV.amount }}€</td>
+          </tr>
+          {% endfor %}
+          <tr>
+            <td border.type="none" colspan="2">
+              <div text-align="right" border.color="black">
+                <stylesheet>
+                  <attribute name="margin-top" value="15px" />
+                  <attribute name="padding" value="5px" />
+                  <attribute name="float" value="right" />
+                  <attribute name="width" value="auto" />
+                </stylesheet>
+                <strong font-size="16px">{{ total_tpv }}€</strong>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td border.type="none" colspan="2">
+              <div text-align="right" border.color="black">
+                <stylesheet>
+                  <attribute name="margin-top" value="15px" />
+                  <attribute name="padding" value="5px" />
+                  <attribute name="float" value="right" />
+                  <attribute name="width" value="auto" />
+                </stylesheet>
+                <strong font-size="16px">Beneficio del día {{ total }}€</strong>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </dynamic-page>
+</pdf>

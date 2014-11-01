@@ -1,0 +1,66 @@
+{% extends '::frontend.html.twig' %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletiarticles/css/articles.css') }}">
+	{{ parent() }}
+{% endblock %}
+
+{% block article %}
+<div id="article-item">
+	<div id="item">
+		<fieldset>
+			<legend>Datos del artículo</legend>
+			<div class="col1-two">
+				<div class="label">
+					Id: 
+				</div>
+				<div class="data">
+					<span>{{ article.id }}</span>
+				</div>
+			</div>
+			<div class="col2-two">
+				<div class="label">
+					Fecha de registro: 
+				</div>
+				<div class="data">
+					<span>{{ article.registrationDate | date('d-m-Y') }}</span>
+				</div>
+			</div>
+			<div class="col1-two">
+				<div class="label">
+					Descripción: 
+				</div>
+				<div class="data">
+					<span>{{ article.description }}</span>
+				</div>
+			</div>
+			<br>
+			<div class="col2-two">
+				<div class="label">
+					Precio: 
+				</div>
+				<div class="data">
+					<span>{{ article.price }}</span>
+				</div>
+			</div>
+			<br>
+			<div class="col1-two">
+				<div class="label">
+					IVA: 
+				</div>
+				<div class="data">
+					<span>{{ article.vat }}</span>
+				</div>
+			</div>
+			<div class="col2-two">
+				<div class="label">
+					Familia: 
+				</div>
+				<div class="data">
+					<span>{{ article.family }}</span>
+				</div>
+			</div>
+		</fieldset>
+	</div>
+</div>
+{% endblock %}

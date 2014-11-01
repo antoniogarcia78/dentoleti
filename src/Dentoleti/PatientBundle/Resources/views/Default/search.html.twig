@@ -1,0 +1,127 @@
+{% extends '::frontend.html.twig' %}
+
+
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletipatient/css/patient.css') }}">
+	{{ parent() }}
+{% endblock %}
+
+{% block article %}
+<div id="search">
+	{{ form_start(form) }}
+		{{ form_errors(form) }}
+		{% for flashMessage in app.session.flashbag.get('notice') %}
+	    	<div class="flash-notice">
+	       		{{ flashMessage }}
+	    	</div>
+		{% endfor %}
+		<div class="col1-two">
+			<div class="label">
+				{{ form_label(form.name) }}
+			</div>
+			<div class="data">
+				{{ form_widget(form.name) }}
+				<div class="error">
+					{{ form_errors(form.name) }}
+				</div>
+			</div>
+		</div>
+        <div class="col2-two">
+            <div class="label">
+                {{ form_label(form.surname1) }}
+            </div>
+            <div class="data">
+                {{ form_widget(form.surname1) }}
+                <div class="error">
+                    {{ form_errors(form.surname1) }}
+                </div>
+            </div>
+        </div>
+        <div class="col1-two">
+            <div class="label">
+                {{ form_label(form.surname2) }}
+            </div>
+            <div class="data">
+                {{ form_widget(form.surname2) }}
+                <div class="error">
+                    {{ form_errors(form.surname2) }}
+                </div>
+            </div>
+        </div>
+        <div class="col2-two">
+            <div class="label">
+                {{ form_label(form.phone1) }}
+            </div>
+            <div class="data">
+                {{ form_widget(form.phone1) }}
+                <div class="error">
+                    {{ form_errors(form.phone1) }}
+                </div>
+            </div>
+        </div>
+        <div class="col1-two">
+            <div class="label">
+                {{ form_label(form.address) }}
+            </div>
+            <div class="data">
+                {{ form_widget(form.address) }}
+                <div class="error">
+                    {{ form_errors(form.address) }}
+                </div>
+            </div>
+        </div>
+        <div class="col2-two">
+            <div class="label">
+                {{ form_label(form.postalCode) }}
+            </div>
+            <div class="data">
+                {{ form_widget(form.postalCode) }}
+                <div class="error">
+                    {{ form_errors(form.postalCode) }}
+                </div>
+            </div>
+        </div>
+        <div id="buttons">
+			{{ form_widget(form.search) }}
+		</div>
+	{{ form_rest(form) }}
+	{{ form_end(form) }}
+</div>
+<div id="links">
+    <a href="{{ path('patient_add') }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/add-user.png') }}"></a>
+</div>
+<div id="results">
+    <table id="list">
+    <tr>
+        <th>Historia</th>
+        <th>NIF</th>
+        <th>Nombre</th>
+        <th>Apellidos</th>
+        <th>Email</th>
+        <th>Teléfono</th>
+        <th>Doctor</th>
+        <th>Ver</th>
+        <th>Editar</th>
+        <th>Eliminar</th>
+    </tr>
+    {%  if patients is defined %}
+        {% for patient in patients %}
+            <tr>
+
+                <td>{{ patient.id }}</td>
+                <td>{{ patient.nif }}</td>
+                <td>{{ patient.name }}</td>
+                <td>{{ patient.surname1 }} {{ patient.surname2 }}</td>
+                <td>{{ patient.email }}</td>
+                <td>{{ patient.phone1 }}</td>
+                <td>{{ patient.doctor }}</td>
+                <td><a href="{{ path('patient_view', { 'id': patient.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/eye.png') }}"></a></td>
+                <td><a href="{{ path('patient_edit', { 'id': patient.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/edit.png') }}"></a></td>
+                <td><a href="{{ path('patient_erase', { 'id': patient.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/erase.png') }}"></a></td>
+            </tr>
+        {% endfor %}
+     {% endif %}
+    </table>
+</div>
+
+{% endblock %}

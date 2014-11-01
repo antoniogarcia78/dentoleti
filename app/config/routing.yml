@@ -1,0 +1,32 @@
+dentoleti_accounting:
+    resource: "@DentoletiAccountingBundle/Resources/config/routing.yml"
+    prefix:   /accounting
+
+dentoleti_treatment:
+    resource: "@DentoletiTreatmentBundle/Resources/config/routing.yml"
+    prefix:   /treatment
+
+dentoleti_consultation:
+    resource: "@DentoletiConsultationBundle/Resources/config/routing.yml"
+    prefix:   /consultation
+
+dentoleti_budget:
+    resource: "@DentoletiBudgetBundle/Resources/config/routing.yml"
+    prefix:   /budget
+
+dentoleti_articles:
+    resource: "@DentoletiArticlesBundle/Resources/config/routing.yml"
+    prefix:   /articles
+
+dentoleti_personal:
+    resource: "@DentoletiPersonalBundle/Resources/config/routing.yml"
+    prefix:   /personal
+
+dentoleti_patient:
+    resource: "@DentoletiPatientBundle/Resources/config/routing.yml"
+    prefix:   /patients
+
+dentoleti_general:
+    resource: "@DentoletiGeneralBundle/Resources/config/routing.yml"
+    prefix:   /
+

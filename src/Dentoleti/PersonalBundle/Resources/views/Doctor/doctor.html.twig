@@ -1,0 +1,99 @@
+{% extends '::frontend.html.twig' %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletipersonal/css/personal.css') }}">
+	{{ parent() }}
+{% endblock %}
+
+{% block article %}
+<div id="personal">
+	{{ form_start(form) }}
+		{{ form_errors(form) }}
+		{% for flashMessage in app.session.flashbag.get('notice') %}
+    		<div class="flash-notice">
+        		{{ flashMessage }}
+    		</div>
+		{% endfor %}
+
+		<br>
+		<div id="personal-data">
+			<fieldset>
+				<legend>Datos del personal</legend>
+				<div>
+					<div class="label">
+						{{ form_label(form.personal) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.personal) }}
+						<div class="error">
+							{{ form_errors(form.personal) }}
+						</div>
+					</div>
+				</div>
+			</fieldset>
+		</div>
+		<div id="info">
+			<fieldset>
+				<legend>Datos del doctor</legend>
+				<div class="col1-two">
+					<div class="label">
+						{{ form_label(form.speciality) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.speciality) }}
+						<div class="error">
+							{{ form_errors(form.speciality) }}
+						</div>
+					</div>
+				</div>
+				<div class="col2-two">
+					<div class="label">
+						{{ form_label(form.referee) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.referee) }}
+						<div class="error">
+							{{ form_errors(form.referee) }}
+						</div>
+					</div>
+				</div>
+				<div class="col2-two">
+					<div class="label">
+						{{ form_label(form.commission) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.commission) }}
+						<div class="error">
+							{{ form_errors(form.commission) }}
+						</div>
+					</div>
+				</div>
+			</fieldset>
+		</div>
+		<div id="buttons">
+			{{ form_widget(form.save) }}
+		</div>
+	{{ form_rest(form) }}
+	{{ form_end(form) }}
+</div>
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	<script type="text/javascript">
+	var path = '{{ path('load_provinces') }}';
+	// When cp change
+	$("#doctor_personal_postalCode").change(function() {
+		var data = {
+			cp_id: $(this).val()
+		};
+		$.ajax({
+			type: 'POST',
+			url: path,
+			data: data,
+			success: function(data) {
+				$('#doctor_personal_town').html(data);
+			}
+		});
+	});
+	</script>
+{% endblock %}

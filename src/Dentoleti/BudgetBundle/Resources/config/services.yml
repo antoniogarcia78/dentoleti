@@ -1,0 +1,7 @@
+parameters:
+  dentoleti_budget.service.class: Dentoleti\BudgetBundle\Services\BudgetService
+
+services:
+    dentoleti_budget.service:
+        class: %dentoleti_budget.service.class%
+        arguments: [@doctrine]

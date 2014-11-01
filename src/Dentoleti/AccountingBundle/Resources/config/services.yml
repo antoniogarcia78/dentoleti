@@ -1,0 +1,7 @@
+parameters:
+    dentoleti_accounting.service.class: Dentoleti\AccountingBundle\Services\AccountingService
+
+services:
+    dentoleti_debts:
+        class: %dentoleti_accounting.service.class%
+        arguments: [@doctrine]

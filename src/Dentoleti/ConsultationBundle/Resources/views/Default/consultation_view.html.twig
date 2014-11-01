@@ -1,0 +1,135 @@
+{% extends '::frontend.html.twig' %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoleticonsultation/css/consultation.css') }}">
+	{{ parent() }}
+{% endblock %}
+
+{% block article %}
+<div id="article-item">
+	<div id="item">
+		<fieldset>
+			<legend>Datos de la cita</legend>
+			<div class="col1-two">
+				<div class="label">
+					Id: 
+				</div>
+				<div class="data">
+					<span>{{ consultation.id }}</span>
+				</div>
+			</div>
+			<div class="col2-two">
+				<div class="label">
+					Paciente: 
+				</div>
+				<div class="data">
+					<span>{{ consultation.patient }}</span>
+				</div>
+			</div>
+			<div class="col1-two">
+				<div class="label">
+					Doctor: 
+				</div>
+				<div class="data">
+					<span>{{ consultation.doctor }}</span>
+				</div>
+			</div>
+			<div class="col2-two">
+				<div class="label">
+					Fecha de inicio: 
+				</div>
+				<div class="data">
+					<span>{{ consultation.startDate | date('d-m-Y') }}</span>
+				</div>
+			</div><div class="col1-two">
+				<div class="label">
+					Fecha de fin: 
+				</div>
+				<div class="data">
+					<span>{{ consultation.endDate | date('d-m-Y') }}</span>
+				</div>
+			</div>
+			<div class="col2-two">
+				<div class="label">
+					Tipo de cita: 
+				</div>
+				<div class="data">
+					<span>{{ consultation.type }}</span>
+				</div>
+			</div><div class="col1-two">
+				<div class="label">
+					Doctor: 
+				</div>
+				<div class="data">
+					<span>{{ consultation.doctor }}</span>
+				</div>
+			</div>
+			<div class="col2-two">
+				<div class="label">
+					Motivo: 
+				</div>
+				<div class="data">
+					<span>{{ consultation.motivation }}</span>
+				</div>
+			</div><div class="col1-two">
+				<div class="label">
+					Hoja de tratamiento: 
+				</div>
+				<div class="data">
+					<span>{{ consultation.treatmentSheet }}</span>
+				</div>
+			</div>
+			<div class="col1-two">
+				<div class="label">
+					Fecha de concertación: 
+				</div>
+				<div class="data">
+					<span>{{ consultation.concertationDate | date('d-m-Y') }}</span>
+				</div>
+			</div>
+			<div class="col2-two">
+				<div class="label">
+					Asiste: 
+				</div>
+				<div class="data">
+					<span>{{ consultation.assists }}</span>
+				</div>
+			</div><div class="col1-two">
+				<div class="label">
+					Estado: 
+				</div>
+				<div class="data">
+					<span>{{ consultation.state }}</span>
+				</div>
+			</div>
+		</fieldset>
+	</div>
+</div>
+{% include 'DentoletiConsultationBundle:Default:includes/treatments_details.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script type="text/javascript">
+	var path = '{{ path('budget_details_set_unset') }}';
+	//Add handler for click event to all the elements with class "setter"
+	//This class is used for a elements in the 
+	//include/treatments_details.html.twig
+	$(document).ready(function(){
+		$(".setter").click(function() {
+			var data = {
+				bd_id : $(this).val()
+			};
+			$.ajax({
+				type: 'POST',
+				url: path,
+				data: data,
+				success: function(data) {
+					$("#check-" + bd_id).html(data);
+					location.reload();
+				}
+			});
+		});
+	});
+	</script>
+{% endblock %}

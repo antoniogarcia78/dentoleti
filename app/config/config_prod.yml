@@ -12,14 +12,23 @@ imports:
 #        query_cache_driver: apc
 
 monolog:
+    channels: ["dentoleti"]
     handlers:
         main:
             type:         fingers_crossed
             action_level: error
             handler:      nested
+            channels: ["!dentoleti"]
         nested:
             type:  stream
             path:  "%kernel.logs_dir%/%kernel.environment%.log"
             level: debug
+            channels: ["!dentoleti"]
         console:
             type:  console
+            channels: ["!dentoleti"]
+        dentoleti:
+            type:    stream
+            path:    "%kernel.logs_dir%/dentoleti.log"
+            level:   info
+            channels: ["dentoleti"]

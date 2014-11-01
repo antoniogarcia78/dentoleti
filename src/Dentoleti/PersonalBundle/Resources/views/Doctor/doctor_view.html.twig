@@ -1,0 +1,70 @@
+{% extends '::frontend.html.twig' %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletipersonal/css/personal.css') }}">
+	{{ parent() }}
+{% endblock %}
+
+{% block article %}
+<div id="personal">
+	<div id="info">
+		<fieldset>
+			<legend>Datos personales</legend>
+			<div class="col1-two">
+				<div class="label">
+					Nombre: 
+				</div>
+				<div class="data">
+					<span>{{ doctor.personal.name }}</span>
+				</div>
+			</div>
+			<div class="col2-two">
+				<div class="label">
+					Fecha de registro: 
+				</div>
+				<div class="data">
+					<span>{{ doctor.personal.registrationDate | date('d-m-Y') }}</span>
+				</div>
+			</div>
+			{% if doctor.speciality is not null  %}
+				<div class="col2-two">
+					<div class="label">
+						Especialidad: 
+					</div>
+					<div class="data">
+						<span>{{ doctor.speciality.name }}</span>
+					</div>
+				</div>
+			{% endif %}
+			<br>
+			<div class="col1-two">
+				<div class="label">
+					Nº de colegiado: 
+				</div>
+				<div class="data">
+					<span>{{ doctor.referee }}</span>
+				</div>
+			</div>
+			<br>
+			<div class="col1-two">
+				<div class="label">
+					Comisión: 
+				</div>
+				<div class="data">
+					<span>{{ doctor.commission }}</span>
+				</div>
+			</div>
+			<div class="col2-two">
+				<div class="label">
+					Días que viene: 
+				</div>
+				{% for day in doctor.days %}
+					<div class="data">
+						<span>{{ day.name }}</span>
+					</div>
+				{% endfor %}
+			</div>
+		</fieldset>
+	</div>
+</div>
+{% endblock %}

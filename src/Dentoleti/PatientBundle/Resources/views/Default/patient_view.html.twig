@@ -1,0 +1,267 @@
+{% extends '::frontend.html.twig' %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletipatient/css/patient.css') }}">
+	{{ parent() }}
+{% endblock %}
+
+{% block article %}
+<div id="patient">
+	<div id="personal">
+		<fieldset>
+			<legend>Datos personales</legend>
+			<div class="col1-two">
+				<div class="label">
+					Nif: 
+				</div>
+				<div class="data">
+					<span>{{ patient.nif }}</span>
+				</div>
+			</div>
+			<div class="col2-two">
+				<div class="label">
+					Nombre: 
+				</div>
+				<div class="data">
+					<span>{{ patient.name }}</span>
+				</div>
+			</div>
+			<br>
+			<div class="col1-two">
+				<div class="label">
+					Apellidos: 
+				</div>
+				<div class="data">
+					<span>{{ patient.surname1 }} {{ patient.surname2 }}</span>
+				</div>
+			</div>
+			<br>
+			<div class="col1-two">
+				<div class="label">
+					Estado civil: 
+				</div>
+				<div class="data">
+					<span>{{ patient.civilStatus }}</span>
+				</div>
+			</div>
+			<div class="col2-two">
+				<div class="label">
+					Fecha de nacimiento: 
+				</div>
+				<div class="data">
+					<span>{{ patient.birthday | date('d-m-Y') }}</span>
+				</div>
+			</div>
+			<br>
+			<div class="col1-two">
+				<div class="label">
+					Ocupación: 
+				</div>
+				<div class="data">
+					<span>{{ patient.occupation }}</span>
+				</div>
+			</div>
+		</fieldset>
+	</div>
+	<div id="contact">
+		<fieldset>
+			<legend>Datos de contacto</legend>
+			<div class="col1-two">
+				<div class="label">
+					Teléfono 1: 
+				</div>
+				<div class="data">
+					<span>{{ patient.phone1 }}</span>
+				</div>
+			</div>
+			<div class="col2-two">
+				<div class="label">
+					Teléfono 2: 
+				</div>
+				<div class="data">
+					<span>{{ patient.phone2 }}</span>
+				</div>
+			</div>
+			<div class="col1-two">
+				<div class="label">
+					Email: 
+				</div>
+				<div class="data">
+					<span>{{ patient.email }}</span>
+				</div>
+			</div>
+			<div class="col2-two">
+				<div class="label">
+					Dirección: 
+				</div>
+				<div class="data">
+					<span>{{ patient.address }}</span>
+				</div>
+			</div>
+			<div class="col1-two">
+				<div class="label">
+					Población: 
+				</div>
+				<div class="data">
+					<span>{{ patient.town }}</span>
+				</div>
+			</div>
+			<div class="col2-two">
+				<div class="label">
+					Código postal: 
+				</div>
+				<div class="data">
+					<span>{{ patient.postalCode }}</span>
+				</div>
+			</div>
+		</fieldset>
+	</div>
+	<div id="clinic">
+		<fieldset>
+		<legend>Datos clínicos</legend>
+		<div class="col1-three">
+			<div class="label">
+				Alergias: 
+			</div>
+			<div class="data">
+				<span>{{ patient.allergies }}</span>
+			</div>
+		</div>
+		<div class="col2-three">
+			<div class="label">
+				Enfermedades: 
+			</div>
+			<div class="data">
+				<span>{{ patient.diseases }}</span>
+			</div>
+		</div>
+		<div class="col3-three">
+			<div class="label">
+				Vih: 
+			</div>
+			<div class="data">
+				<span>{{ patient.vih }}</span>
+			</div>
+		</div>
+		<div class="col1-three">
+			<div class="label">
+				Vih: 
+			</div>
+			<div class="data">
+				<span>{{ patient.smoker }}</span>
+			</div>
+		</div>
+		<div class="col2-two">
+			<div class="label">
+				Doctor: 
+			</div>
+			<div class="data">
+				<span>{{ patient.doctor }}</span>
+			</div>
+		</div>
+		{# Como no hay más elementos en las otras columnas, volvemos a poner un col1-three #}
+		<div class="col1-three">
+			<div class="label">
+				Última visita: 
+			</div>
+			<div class="data">
+				<span>{{ patient.lastVisit }}</span>
+			</div>
+		</div>
+		<div class="col2-three">
+			<div class="label">
+				Frecuencia: 
+			</div>
+			<div class="data">
+				<span>{{ patient.revisionFrequency }}</span>
+			</div>
+		</div>
+		<div class="col3-three">
+			<div class="label">
+				Forma de conocernos: 
+			</div>
+			<div class="data">
+				<span>{{ patient.meeting }}</span>
+			</div>
+		</div>
+		<div class="col1-three">
+			<div class="label">
+				Tratamiento: 
+			</div>
+			<div class="data">
+				<span>{{ patient.treatment }}</span>
+			</div>
+		</div>
+		<div class="col2-three">
+			<div class="label">
+				Observaciones: 
+			</div>
+			<div class="data">
+				<span>{{ patient.observations }}</span>
+			</div>
+		</div>
+		</fieldset>
+	</div>
+	<div id="not-confirmed">
+		<fieldset>
+			<legend>Presupuestos pendientes de confirmación</legend>
+			<div class="col1-three">
+				<div class="label">
+					Presupuestos:
+				</div>
+				<div class="data">
+					<ul>
+					{% for budget in budgets_not_confirmed %}
+						{% set total = 0 %}
+						{% for detail in budget.budgetDetails %}
+							{% set total = total + (detail.amount * detail.price) %}
+						{% endfor %}
+						<li><a href="{{ path('budget_view', { 'id' : budget.id }) }}">{{ budget.id }}</a></li>
+						<li><span>Importe: {{ total }}</span></li>
+						<li><a href="{{ path('treatment_add', { 'budgetId' : budget.id }) }}" target="_blank">Confirmar</a></li>
+					{% endfor %}
+					</ul>
+				</div>
+			</div>
+		</fieldset>
+	</div>
+	<div id="treatments">
+		<fieldset>
+		<legend>Tratamientos en curso</legend>
+		<div class="col1-three">
+			<div class="label">
+				Listado de tratamientos:
+			</div>
+			<div class="data">
+				<ul>
+				{% for treatment in treatments %}
+					<li><a href="{{ path('treatment_view', { 'id' : treatment.id }) }}">{{ treatment.id }}</a></li>
+				{% endfor %}
+				</ul>
+			</div>
+		</div>
+		</fieldset>
+	</div>
+	{% if debts is not empty %}
+	<div id="debts">
+		<fieldset>
+		<legend>Tratamientos con producción pendiente</legend>
+		<div class="col1-three">
+			<div class="label">
+				Listado de tratamientos:
+			</div>
+			<div class="data">
+				<ul>
+				{% for debt in debts %}
+					<li><a href="{{ path('treatment_view', { 'id' : debt.treatment.id }) }}">{{ debt.treatment.id }}</a></li>
+					<li>{{ debt.amount }}€</a></li>
+					<li><a href="{{ path('dentoleti_accounting_add_fund', { 'treatment_id' : debt.treatment.id, 'debt_id' : debt.id }) }}">Añadir ingreso</a></li>
+				{% endfor %}
+				</ul>
+			</div>
+		</div>
+		</fieldset>
+	</div>
+	{% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,55 @@
+budget_add:
+    pattern:  /add
+    defaults: { _controller: DentoletiBudgetBundle:Default:add }
+
+budget_list:
+    pattern:  /list
+    defaults: { _controller: DentoletiBudgetBundle:Default:list }
+
+budget_search:
+    pattern:  /search
+    defaults: { _controller: DentoletiBudgetBundle:Default:search }
+
+budget_view:
+    pattern: /view/{id}
+    defaults: { _controller: DentoletiBudgetBundle:Default:view }
+
+budget_edit:
+    pattern: /edit/{id}
+    defaults: { _controller: DentoletiBudgetBundle:Default:edit }
+
+budget_delete:
+    pattern: /delete/{id}
+    defaults: { _controller: DentoletiBudgetBundle:Default:delete }
+
+budget_erase:
+    pattern: /erase/{id}
+    defaults: { _controller: DentoletiBudgetBundle:Default:erase }
+
+budget_pdf_view:
+    pattern: /pdf/{budgetId}
+    defaults: { _controller: DentoletiBudgetBundle:Default:pdf }
+
+budget_details_add:
+    pattern: /details/add/{budgetId}
+    defaults: { _controller: DentoletiBudgetBundle:Details:add }
+
+budget_details_edit:
+    pattern: /details/edit/{budgetDetailId}
+    defaults: { _controller: DentoletiBudgetBundle:Details:edit }
+
+budget_details_list:
+    pattern: /details/list/{budgetId}
+    defaults: { _controller: DentoletiBudgetBundle:Details:list }
+
+budget_details_delete:
+    pattern: /details/delete/{budgetId}/{budgetDetailId}
+    defaults: { _controller: DentoletiBudgetBundle:Details:delete }
+
+budget_confirmation:
+    pattern: /budget/confirmation/{budgetId}
+    defaults: { _controller: DentoletiBudgetBundle:Default:budgetConfirmation }
+
+budget_details_set_unset:
+    pattern:   /set_unset
+    defaults: { _controller: DentoletiBudgetBundle:Details:setUnsetDone }

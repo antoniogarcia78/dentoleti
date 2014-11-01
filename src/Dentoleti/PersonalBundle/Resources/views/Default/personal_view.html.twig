@@ -1,0 +1,90 @@
+{% extends '::frontend.html.twig' %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletipersonal/css/personal.css') }}">
+	{{ parent() }}
+{% endblock %}
+
+{% block article %}
+<div id="personal">
+	<div id="info">
+		<fieldset>
+			<legend>Datos personales</legend>
+			<div class="col1-two">
+				<div class="label">
+					Nif: 
+				</div>
+				<div class="data">
+					<span>{{ personal.id }}</span>
+				</div>
+			</div>
+			<div class="col2-two">
+				<div class="label">
+					Fecha de registro: 
+				</div>
+				<div class="data">
+					<span>{{ personal.registrationDate | date('d-m-Y') }}</span>
+				</div>
+			</div>
+			<div class="col2-two">
+				<div class="label">
+					Nombre: 
+				</div>
+				<div class="data">
+					<span>{{ personal.name }}</span>
+				</div>
+			</div>
+			<br>
+			<div class="col1-two">
+				<div class="label">
+					Estado civil: 
+				</div>
+				<div class="data">
+					<span>{{ personal.position }}</span>
+				</div>
+			</div>
+			<br>
+			<div class="col1-two">
+				<div class="label">
+					Ocupación: 
+				</div>
+				<div class="data">
+					<span>{{ personal.address }}</span>
+				</div>
+			</div>
+			<div class="col1-two">
+				<div class="label">
+					Teléfono 1: 
+				</div>
+				<div class="data">
+					<span>{{ personal.phone1 }}</span>
+				</div>
+			</div>
+			<div class="col2-two">
+				<div class="label">
+					Teléfono 2: 
+				</div>
+				<div class="data">
+					<span>{{ personal.phone2 }}</span>
+				</div>
+			</div>
+			<div class="col1-two">
+				<div class="label">
+					Email: 
+				</div>
+				<div class="data">
+					<span>{{ personal.postalCode }}</span>
+				</div>
+			</div>
+			<div class="col2-two">
+				<div class="label">
+					Dirección: 
+				</div>
+				<div class="data">
+					<span>{{ personal.town }}</span>
+				</div>
+			</div>
+		</fieldset>
+	</div>
+</div>
+{% endblock %}

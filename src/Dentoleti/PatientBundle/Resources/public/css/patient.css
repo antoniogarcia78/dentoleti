@@ -1,0 +1,188 @@
+/*
+ *	This file is part of Dentoleti.
+ *
+ *  Dentoleti is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  Dentoleti is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with Dentoleti. Read COPYING.txt file for more information.
+ *  If it is not present, see <http://www.gnu.org/licenses/>.
+ *
+ *  @Author: Luis González Rodríguez
+ *  @Date:   2014-03-30 20:49:15
+ *  @Last Modified by:   Luis González Rodríguez
+ *  @Last Modified time: 2014-04-12 08:45:34
+*/
+/* Add patient's form styles */
+#patient {
+	font-size: 2.2em;
+	padding-left: 2%;
+	padding-top: 4%;
+}
+
+#patient fieldset {
+	width: auto;
+	float: left;
+}
+
+#patient label {
+	padding: 5px;
+}
+
+#personal {
+	clear: both;
+	float: left;
+}
+
+#contact {
+	float: left;
+}
+
+#clinic {
+	clear: both;
+	float: left;
+	padding-top: 7px;
+}
+
+#not-confirmed {
+	clear: both;
+	float: left;
+	padding-top: 7px;
+}
+
+#treatments {
+	clear: both;
+	float: left;
+	padding-top: 7px;
+}
+
+#results {
+    clear: both;
+    float: left;
+}
+
+#results table {
+    margin: 30px;
+}
+
+#debts {
+	clear: both;
+	float: left;
+	padding-top: 7px;
+}
+
+#debts fieldset {
+	width: auto;
+	float: left;
+}
+
+#debts label {
+	padding: 5px;
+}
+
+#debts li {
+	display: inline;
+}
+
+#links {
+    clear: both;
+    float: left;
+    padding-top: 15px;
+    padding-left: 30px;
+}
+
+.col1-two {
+	clear: both;
+	float: left;
+	padding: 3px;
+}
+
+.col2-two {
+	float: left;
+	padding: 3px;
+}
+
+.col1-three {
+	clear: both;
+	float: left;
+}
+
+.col2-three {
+	float: left;
+}
+
+.col3-three {
+	float: left;
+}
+
+.label {
+	float: left;
+	top: 13px;
+	width: 150px;
+}
+
+.data {
+	float: left;
+	width: 180px;
+}
+
+.error {
+	clear: both;
+	text-align: left;
+}
+
+#buttons {
+	clear: both;
+	float: left;
+	padding-top: 7px;
+}
+
+#buttons button {
+	width: 50px;
+}
+
+/* Patients list styles */
+#list {
+	font-size: 2.2em;
+	margin-left: 2%;
+	margin-top: 4%;
+}
+
+#list,
+#list th {
+	border: 1px solid black;
+}
+
+#list th {
+	background-color: #333333;
+	color: #ffffff;
+	width: inherit;
+}
+
+#list td {
+	text-align: center;
+	font-size: 0.7em;
+	padding-right: 2px;
+	padding-left: 2px;
+}
+
+/* Patient's view styles 
+ * Some styles has been implemented before in the patient's form
+ */
+#patient span {
+	color: #09aca0;
+}
+
+/* Search styles */
+#search {
+	font-size: 1.8em;
+	padding-left: 2%;
+	padding-top: 4%;
+}

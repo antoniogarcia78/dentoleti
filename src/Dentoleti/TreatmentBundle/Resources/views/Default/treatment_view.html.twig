@@ -1,0 +1,106 @@
+{% extends '::frontend.html.twig' %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletitreatment/css/tratamiento.css') }}">
+	{{ parent() }}
+{% endblock %}
+
+{% block article %}
+<div id="treatment">
+	<div id="info">
+		<fieldset>
+			<legend>Datos del tratamiento</legend>
+			<div class="col1-two">
+				<div class="label">
+					Identificador: 
+				</div>
+				<div class="data">
+					<span>{{ treatment.id }}</span>
+				</div>
+			</div>
+			<div class="col2-two">
+				<div class="label">
+					Fecha de registro: 
+				</div>
+				<div class="data">
+					<span>{{ treatment.treatmentDate | date('d-m-Y') }}</span>
+				</div>
+			</div>
+			<div class="col2-two">
+				<div class="label">
+					Presupuesto: 
+				</div>
+				<div class="data">
+					<span>{{ treatment.budget }}</span>
+				</div>
+			</div>
+			<br>
+			<br>
+			<div class="col1-two">
+				<div class="label">
+					Costes de financiación: 
+				</div>
+				<div class="data">
+					<span>{{ treatment.financingCosts }}</span>
+				</div>
+			</div>
+			<div class="col1-two">
+				<div class="label">
+					Financiado: 
+				</div>
+				<div class="data">
+					<span>{{ treatment.funded }}</span>
+				</div>
+			</div>
+		</fieldset>
+	</div>
+	<div>
+		<fieldset>
+			<legend>Tratamientos pendientes</legend>
+			<div class="label">
+				Pendiente: 
+			</div>
+			<div class="data">
+				<ul>
+				{% for article in articles %}
+					<li>{{ article.description }}</li>
+				{% endfor %}
+				</ul>
+			</div>
+		</fieldset>
+	</div>
+	<div>
+		<fieldset>
+			<legend>Ingresos</legend>
+			<div class="label">
+				Realizados: 
+			</div>
+			<div class="data">
+				<ul>
+				{% for postingLine in postingLines %}
+					<li>{{ postingLine.amount }}</li>
+					<li>{{ postingLine.postingLineDate | date('d-m-Y') }}</li>
+					<li>{{ postingLine.method }}</li>
+				{% endfor %}
+				</ul>
+			</div>
+		</fieldset>
+	</div>
+	<div>
+		<fieldset>
+			<legend>Datos económicos</legend>
+			<div class="label">
+				Desglose: 
+			</div>
+			<div class="data">
+				<ul>
+					<li><b>Total </b>{{ total }}</li>
+					<li><b>Pagado </b>{{ paid }}</li>
+					<li><b>Producido </b>PENDIENTE DE CÁLCULO</li>
+					<li><b>Pendiente de producción </b>PENDIENTE DE CÁLCULO: (Total - producido)</li>
+				</ul>
+			</div>
+		</fieldset>
+	</div>
+</div>
+{% endblock %}

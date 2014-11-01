@@ -1,0 +1,55 @@
+article_add:
+    pattern:  /add
+    defaults: { _controller: DentoletiArticlesBundle:Default:add }
+
+articles_search:
+    pattern: /search
+    defaults: { _controller: DentoletiArticlesBundle:Default:search }
+
+article_view:
+    pattern: /view/{id}
+    defaults: { _controller: DentoletiArticlesBundle:Default:view }
+
+articles_list:
+    pattern: /list
+    defaults: { _controller: DentoletiArticlesBundle:Default:list }
+
+article_edit:
+    pattern: /edit/{id}
+    defaults: { _controller: DentoletiArticlesBundle:Default:edit }
+
+article_delete:
+    pattern: /delete/{id}
+    defaults: { _controller: DentoletiArticlesBundle:Default:delete }
+
+article_erase:
+    pattern: /erase/{id}
+    defaults: { _controller: DentoletiArticlesBundle:Default:erase }
+
+family_add:
+    path: /family/add
+    defaults: { _controller: DentoletiArticlesBundle:Family:add }
+
+family_search:
+    path: /family/search
+    defaults: { _controller: DentoletiArticlesBundle:Family:search }
+
+family_list:
+    path: /family/list
+    defaults: { _controller: DentoletiArticlesBundle:Family:list }
+
+family_view:
+    path: /family/view/{id}
+    defaults: { _controller: DentoletiArticlesBundle:Family:view }
+
+family_edit:
+    path: /family/edit/{id}
+    defaults: { _controller: DentoletiArticlesBundle:Family:edit }
+
+family_delete:
+    pattern: /family/delete/{id}
+    defaults: { _controller: DentoletiArticlesBundle:Family:delete }
+
+family_erase:
+    pattern: /family/erase/{id}
+    defaults: { _controller: DentoletiArticlesBundle:Family:erase }

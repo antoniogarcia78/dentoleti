@@ -1,0 +1,52 @@
+{% extends '::frontend.html.twig' %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletibudget/css/budget.css') }}">
+	{{ parent() }}
+{% endblock %}
+
+{% block article %}
+<div id="budget">
+	{{ form_start(form) }}
+		{{ form_errors(form) }}
+		{% for flashMessage in app.session.flashbag.get('notice') %}
+    		<div class="flash-notice">
+        		{{ flashMessage }}
+    		</div>
+		{% endfor %}
+
+		<br>
+		<div id="info">
+			<fieldset>
+				<legend>Datos del tratamiento</legend>
+				<div class="col2-two">
+					<div class="label">
+						{{ form_label(form.financingCosts) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.financingCosts) }}
+						<div class="error">
+							{{ form_errors(form.financingCosts) }}
+						</div>
+					</div>
+				</div>
+				<div class="col1-two">
+					<div class="label">
+						{{ form_label(form.funded) }}
+					</div>
+					<div class="data">
+						{{ form_widget(form.funded) }}
+						<div class="error">
+							{{ form_errors(form.funded) }}
+						</div>
+					</div>
+				</div>
+			</fieldset>
+		</div>
+		<div id="buttons">
+			{{ form_widget(form.save) }}
+		</div>
+	{{ form_rest(form) }}
+	{{ form_end(form) }}
+</div>
+{% endblock %}

@@ -16,6 +16,16 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
+            new Dentoleti\GeneralBundle\DentoletiGeneralBundle(),
+            new Dentoleti\PatientBundle\DentoletiPatientBundle(),
+            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            new Dentoleti\PersonalBundle\DentoletiPersonalBundle(),
+            new Dentoleti\ArticlesBundle\DentoletiArticlesBundle(),
+            new Dentoleti\BudgetBundle\DentoletiBudgetBundle(),
+            new Dentoleti\ConsultationBundle\DentoletiConsultationBundle(),
+            new Ps\PdfBundle\PsPdfBundle(),
+            new Dentoleti\TreatmentBundle\DentoletiTreatmentBundle(),
+            new Dentoleti\AccountingBundle\DentoletiAccountingBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

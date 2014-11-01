@@ -1,0 +1,75 @@
+{% extends '::frontend.html.twig' %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletibudget/css/budget.css') }}">
+	{{ parent() }}
+{% endblock %}
+
+{% block article %}
+<div id="budget">
+	<div id="info">
+		<fieldset>
+			<legend>Datos personales</legend>
+			<div class="col1-two">
+				<div class="label">
+					Id: 
+				</div>
+				<div class="data">
+					<span>{{ budget.id }}</span>
+				</div>
+			</div>
+			<div class="col2-two">
+				<div class="label">
+					Paciente: 
+				</div>
+				<div class="data">
+					<span>{{ budget.patient }}</span>
+				</div>
+			</div>
+			<br>
+			<div class="col1-two">
+				<div class="label">
+					Fecha del presupuesto: 
+				</div>
+				<div class="data">
+					<span>{{ budget.budgetDate | date('d-m-Y') }}</span>
+				</div>
+			</div>
+			<br>
+			<div class="col2-two">
+				<div class="label">
+					Descuento: 
+				</div>
+				<div class="data">
+					<span>{{ budget.discount }}</span>
+				</div>
+			</div>
+			<br>
+			<div class="col1-two">
+				<div class="label">
+					Observaciones: 
+				</div>
+				<div class="data">
+					<span>{{ budget.observations }}</span>
+				</div>
+			</div>
+			<div class="col2-two">
+				<div class="label">
+					Descuento de empresa: 
+				</div>
+				<div class="data">
+					<span>{{ budget.discountCompany }}</span>
+				</div>
+			</div>
+			<div class="col1-two">
+				<div class="label">
+					Descuento del seguro: 
+				</div>
+				<div class="data">
+					<span>{{ budget.discountInsurance }}</span>
+				</div>
+			</div>
+		</fieldset>
+	</div>
+</div>
+{% endblock %}

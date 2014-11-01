@@ -1,0 +1,9 @@
+parameters:
+    dentoleti_general.postalcode.type: Dentoleti\GeneralBundle\Form\Type\PostalCodeTextType
+
+services:
+    dentoleti_general.postalcode:
+        class: %dentoleti_general.postalcode.type%
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: postal_code_selector }

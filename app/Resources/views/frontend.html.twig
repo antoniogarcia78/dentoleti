@@ -1,0 +1,77 @@
+{% extends '::main.html.twig' %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletigeneral/css/fonts.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletigeneral/css/menu.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletigeneral/css/frontend.css') }}">
+{% endblock %}
+
+{% block body %}
+<div id="contendor">
+    <header>
+        <h1><a href="{{ path('portada') }}"><img src="{{ asset('bundles/dentoletigeneral/images/logo.png')}}"></a></h1>
+        <nav>
+            <div id='cssmenu'>
+                <ul>
+                    <li class='has-sub'><a href='#'><span>Pacientes</span></a>
+                        <ul>
+                            <li><a href="{{ path('patient_add') }}"><span>Agregar</span></a></li>
+                            <li><a href='{{ path('patients_list') }}'><span>Listado</span></a></li>
+                            <li class='last'><a href='{{ path('patient_search') }}'><span>Búsqueda</span></a></li>
+                        </ul>
+                    </li>
+                    <li class='has-sub'><a href='#'><span>Agenda</span></a>
+                        <ul>
+                            <li><a href="{{ path('consultation_add', { 'doctorId': 1 }) }}"><span>Agregar</span></a></li> {# TODO Put here the real doctorId #}
+                            <li><a href='{{ path('consultation_list') }}'><span>Listado</span></a></li>
+                            <li class='last'><a href='{{ path('consultation_search') }}'><span>Búsqueda</span></a></li>
+                        </ul>
+                    </li>
+                    <li class='has-sub'><a href='#'><span>Doctores</span></a>
+                        <ul>
+                            <li><a href="{{ path('doctor_add') }}"><span>Agregar</span></a></li>
+                            <li><a href='{{ path('doctor_list') }}'><span>Listado</span></a></li>
+                            <li class='last'><a href='{{ path('doctor_search') }}'><span>Búsqueda</span></a></li>
+                        </ul>
+                    </li>
+                    <li class='has-sub'><a href='#'><span>Tratamientos</span></a>
+                        <ul>
+                            <li><a href="#"><span>Agregar</span></a></li>
+                            <li><a href='#'><span>Listado</span></a></li>
+                            <li class='last'><a href='#'><span>Búsqueda</span></a></li>
+                        </ul>
+                    </li>
+                    <li class='has-sub'><a href='#'><span>Artículos</span></a>
+                        <ul>
+                            <li><a href="{{ path('article_add') }}"><span>Agregar</span></a></li>
+                            <li><a href='{{ path('articles_list') }}'><span>Listado</span></a></li>
+                            <li class='last'><a href='{{ path('articles_search') }}'><span>Búsqueda</span></a></li>
+                        </ul>
+                    </li>
+                    <li class='has-sub'><a href='#'><span>Caja</span></a>
+                        <ul>
+                            <li><a href='{{ path('dentoleti_accounting_daily') }}'><span>Cierre de caja</span></a></li>
+                        </ul>
+                    </li>
+                    <li class='last has-sub'><a href='#'><span>Citas</span></a>
+                        <ul>
+                            <li><a href="#"><span>Agregar</span></a></li>
+                            <li><a href='#'><span>Listado</span></a></li>
+                            <li class='last'><a href='#'><span>Búsqueda</span></a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <aside>
+        {% block aside %}{% endblock %}
+    </aside>
+    <section>
+        <article>
+            {# Quizás la portada lleve varios artículos con los últimos historiales vistos #}
+            {% block article %}{% endblock %}
+        </article>
+    </section>
+</div>
+{% endblock %}
