@@ -22,7 +22,6 @@
         "doctrine/doctrine-fixtures-bundle": "dev-master",
         "doctrine/data-fixtures": "dev-master",
         "psliwa/pdf-bundle": "dev-master",
-        "knplabs/knp-paginator-bundle": "~2.4"
     },
     "minimum-stability": "dev",
     "scripts": {
