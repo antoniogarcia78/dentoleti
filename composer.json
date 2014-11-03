@@ -21,7 +21,7 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "doctrine/doctrine-fixtures-bundle": "dev-master",
         "doctrine/data-fixtures": "dev-master",
-        "psliwa/pdf-bundle": "dev-master",
+        "psliwa/pdf-bundle": "dev-master"
     },
     "minimum-stability": "dev",
     "scripts": {
