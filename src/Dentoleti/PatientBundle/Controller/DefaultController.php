@@ -145,7 +145,7 @@ class DefaultController extends Controller
             throw $this->createNotFoundException('No existe el paciente');
         }
 
-        return $this->render('DentoletiPatientBundle:Default:patient_view.html.twig', array(
+        return $this->render('DentoletiPatientBundle:Default:data_tabs.html.twig', array(
             'patient' => $patient,
             'treatments' => $treatments,
             'debts' => $debts,

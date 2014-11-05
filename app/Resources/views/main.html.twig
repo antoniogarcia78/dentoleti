@@ -10,7 +10,7 @@
     {% block body %}{% endblock %}
     <footer>
         &copy; 2013 - {{ 'now' | date('Y') }} <br>
-        Luis González Rodríguez - Connect2tic
+        Luis González Rodríguez
     </footer>
 
     {% block javascripts %}
@@ -20,6 +20,10 @@
             <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
         #}
+        {% javascripts '@DentoletiPatientBundle/Resources/public/js/tabs.js'%}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+
     {% endblock %}
 </body>
 </html>

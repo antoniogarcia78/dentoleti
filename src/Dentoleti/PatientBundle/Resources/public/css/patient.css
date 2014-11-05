@@ -21,18 +21,17 @@
  *  @Last Modified time: 2014-04-12 08:45:34
 */
 /* Add patient's form styles */
-#patient {
+.patient {
 	font-size: 2.2em;
 	padding-left: 2%;
-	padding-top: 4%;
 }
 
-#patient fieldset {
+.patient fieldset {
 	width: auto;
 	float: left;
 }
 
-#patient label {
+.patient label {
 	padding: 5px;
 }
 
@@ -52,12 +51,16 @@
 }
 
 #not-confirmed {
+    font-size: 2.2em;
+    padding-left: 2%;
 	clear: both;
 	float: left;
 	padding-top: 7px;
 }
 
 #treatments {
+    font-size: 2.2em;
+    padding-left: 2%;
 	clear: both;
 	float: left;
 	padding-top: 7px;
