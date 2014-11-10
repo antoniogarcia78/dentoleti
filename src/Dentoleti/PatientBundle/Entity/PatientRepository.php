@@ -44,15 +44,21 @@ class PatientRepository extends EntityRepository
 
 		$patients = array();
 
-    $query_str = 'SELECT p FROM DentoletiPatientBundle:Patient p';
+    $query_str = 'SELECT p, pd FROM DentoletiPatientBundle:Patient p';
+    $query_str .=  ' JOIN p.postalCode pd';
 		if ( $count >= 1 ) {
       $query_str .= ' WHERE ';
       foreach ($searchParams as $param => $value) {
         if (isset($value)) {
-          $query_str .= ' p.' . $param . '= :' . $param . ' AND';
+          if ($param == "postalCode") {
+            $query_str .= ' pd.' . $param . '= :' . $param . ' OR';
+          }
+          else {
+            $query_str .= ' p.' . $param . '= :' . $param . ' OR';
+          }
         }
       }
-      $last_pos = strrpos($query_str, 'AND');
+      $last_pos = strrpos($query_str, 'OR');
       $query_str = substr($query_str, 0, $last_pos);
       $query = $em->createQuery($query_str);
 
@@ -72,7 +78,7 @@ class PatientRepository extends EntityRepository
         $query->setParameter('address', $searchParams['address']);
       }
       if (isset($searchParams['postalCode'])) {
-        $query->setParameter('postalCode', $searchParams['postalCode']);
+        $query->setParameter('postalCode', (int) $searchParams['postalCode']);
       }
 
       return $query->getResult();
