@@ -24,18 +24,27 @@
  *		@Github: https://github.com/luismagr
  *  	@Author web: http://luismagonzalez.es
  *
- *  File Information:
- *  	@Date:   2014-04-12 09:17:03
- *  	@Last Modified by:   Luis González Rodríguez
- *  	@Last Modified time: 2014-04-12 10:33:14
- * 
  */
 namespace Dentoleti\PatientBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 
+/**
+ * Class PatientRepository
+ *
+ * This class contains the logical implementation of searching related data to
+ * the Patient entity in the database
+ *
+ * @package Dentoleti\PatientBundle\Entity
+ */
 class PatientRepository extends EntityRepository
 {
+  /**
+   * This method find patients for the general search based on a set of params
+   * given to the method
+   * @param $searchParams Params data to search
+   * @return array The array of Patients
+   */
 	public function findPatients($searchParams)
 	{
 		$count = count($searchParams);
