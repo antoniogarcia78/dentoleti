@@ -51,34 +51,34 @@ class PatientRepository extends EntityRepository
       foreach ($searchParams as $param => $value) {
         if (isset($value)) {
           if ($param == "postalCode") {
-            $query_str .= ' pd.' . $param . '= :' . $param . ' OR';
+            $query_str .= ' pd.' . $param . ' LIKE :' . $param . ' AND';
           }
           else {
-            $query_str .= ' p.' . $param . '= :' . $param . ' OR';
+            $query_str .= ' p.' . $param . ' LIKE :' . $param . ' AND';
           }
         }
       }
-      $last_pos = strrpos($query_str, 'OR');
+      $last_pos = strrpos($query_str, 'AND');
       $query_str = substr($query_str, 0, $last_pos);
       $query = $em->createQuery($query_str);
 
       if (isset($searchParams['name'])) {
-        $query->setParameter('name', $searchParams['name']);
+        $query->setParameter('name', '%'.$searchParams['name'].'%');
       }
       if (isset($searchParams['surname1'])) {
-        $query->setParameter('surname1', $searchParams['surname1']);
+        $query->setParameter('surname1', '%'.$searchParams['surname1'].'%');
       }
       if(isset($searchParams['surname2'])) {
-        $query->setParameter('surname2', $searchParams['surname2']);
+        $query->setParameter('surname2', '%'.$searchParams['surname2'].'%');
       }
       if (isset($searchParams['phone1'])) {
-        $query->setParameter('phone1', $searchParams['phone1']);
+        $query->setParameter('phone1', '%'.$searchParams['phone1'].'%');
       }
       if (isset($searchParams['address'])) {
-        $query->setParameter('address', $searchParams['address']);
+        $query->setParameter('address', '%'.$searchParams['address'].'%');
       }
       if (isset($searchParams['postalCode'])) {
-        $query->setParameter('postalCode', (int) $searchParams['postalCode']);
+        $query->setParameter('postalCode', '%'.$searchParams['postalCode'].'%');
       }
 
       return $query->getResult();
