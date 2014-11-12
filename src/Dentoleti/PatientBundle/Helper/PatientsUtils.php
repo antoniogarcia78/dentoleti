@@ -74,5 +74,22 @@ class PatientsUtils
 
 		return $patient;
 	}
+
+
+  /**
+   * Checks if the array of params to search are empty or not
+   *
+   */
+  public function isEmptyParams($searchParams) {
+    $empty = false;
+    foreach ($searchParams as $param => $value) {
+      if (isset($value)){
+        $empty = true;
+        break;
+      }
+    }
+    return $empty;
+  }
 }
+
 

@@ -241,10 +241,12 @@ class DefaultController extends Controller
         $form->handleRequest($request);
 
         $searchData = $form->getData();
-        $em = $this->getDoctrine()->getManager();
-        $patients = $em->getRepository('DentoletiPatientBundle:Patient')
-          ->findPatients($searchData);
-
+        $utils = new PatientsUtils();
+        if ($utils->isEmptyParams($searchData)) {
+          $em = $this->getDoctrine()->getManager();
+          $patients = $em->getRepository('DentoletiPatientBundle:Patient')
+            ->findPatients($searchData);
+        }
         // If the list is empty, send also a flashmessage to indicate it
         if (count($patients) == 0) {
           $this->get('session')->getFlashBag()->add(
