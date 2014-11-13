@@ -254,7 +254,7 @@
 				<ul>
 				{% for debt in debts %}
 					<li><a href="{{ path('treatment_view', { 'id' : debt.treatment.id }) }}">{{ debt.treatment.id }}</a></li>
-					<li>{{ debt.amount }}€</a></li>
+					<li>{{ debt.amount }}€</li>
 					<li><a href="{{ path('dentoleti_accounting_add_fund', { 'treatment_id' : debt.treatment.id, 'debt_id' : debt.id }) }}">Añadir ingreso</a></li>
 				{% endfor %}
 				</ul>

@@ -14,12 +14,7 @@
         <nav>
             <div id='cssmenu'>
                 <ul>
-                    <li class='has-sub'><a href='#'><span>Pacientes</span></a>
-                        <ul>
-                            <li><a href="{{ path('patient_add') }}"><span>Agregar</span></a></li>
-                            <li><a href='{{ path('patients_list') }}'><span>Listado</span></a></li>
-                            <li class='last'><a href='{{ path('patient_search') }}'><span>Búsqueda</span></a></li>
-                        </ul>
+                    <li><a href='{{ path('patient_search') }}'><span>Pacientes</span></a>
                     </li>
                     <li class='has-sub'><a href='#'><span>Agenda</span></a>
                         <ul>
@@ -282,27 +277,33 @@
             {% block budgets %}
                 <article id="budgets">
                     <div id="not-confirmed">
-                        <fieldset>
-                            <legend>Presupuestos pendientes de confirmación</legend>
-                            <div class="col1-three">
-                                <div class="label">
-                                    Presupuestos:
-                                </div>
-                                <div class="data">
-                                    <ul>
-                                        {% for budget in budgets_not_confirmed %}
-                                            {% set total = 0 %}
-                                            {% for detail in budget.budgetDetails %}
-                                                {% set total = total + (detail.amount * detail.price) %}
-                                            {% endfor %}
-                                            <li><a href="{{ path('budget_view', { 'id' : budget.id }) }}">{{ budget.id }}</a></li>
-                                            <li><span>Importe: {{ total }}</span></li>
-                                            <li><a href="{{ path('treatment_add', { 'budgetId' : budget.id }) }}" target="_blank">Confirmar</a></li>
-                                        {% endfor %}
-                                    </ul>
-                                </div>
-                            </div>
-                        </fieldset>
+                        <table id="list">
+                            <tr>
+                                <th>Date</th>
+                                <th>Doctor</th>
+                                <th>Discount</th>
+                                <th>Discount Insurance</th>
+                                <th>Discount Commpany</th>
+                                <th>Observations</th>
+                            </tr>
+                            {% for budget in budgets_not_confirmed %}
+                            {% if budget.confirmed %}
+                            <tr class="confirmed">
+                            {% else %}
+                            <tr>
+                            {% endif %}
+                                <td>{{ budget.budgetDate | date('d/m/Y') }}</td>
+                                <td>{{ budget.doctor }}</td>
+                                <td>{{ budget.discount }}</td>
+                                <td>{{ budget.discountCompany }}</td>
+                                <td>{{ budget.discountInsurance }}</td>
+                                <td>{{ budget.observations }}</td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                        <div id="budgets-buttons">
+                            <a href="{{ path('budget_add') }}">Add budget</a>
+                        </div>
                     </div>
                 </article>
             {% endblock %}
