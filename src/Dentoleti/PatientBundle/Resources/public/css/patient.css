@@ -64,8 +64,9 @@
     float: left;
 }
 
-#treatments {
-    font-size: 1.2em;
+#treatments,
+#treatments-info {
+    font-size: 1.3em;
     padding-left: 2%;
 	clear: both;
 	float: left;

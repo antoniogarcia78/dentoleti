@@ -2,10 +2,6 @@ patient_add:
     pattern:  /add
     defaults: { _controller: DentoletiPatientBundle:Default:add }
 
-patients_list:
-    pattern: /list
-    defaults: { _controller: DentoletiPatientBundle:Default:list }
-
 patient_edit:
     pattern: /edit/{id}
     defaults: { _controller: DentoletiPatientBundle:Default:edit }
