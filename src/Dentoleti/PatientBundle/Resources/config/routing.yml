@@ -19,5 +19,5 @@ patient_erase:
     defaults: { _controller: DentoletiPatientBundle:Default:erase }
 
 patient_search:
-    pattern: /search
-    defaults: { _controller: DentoletiPatientBundle:Default:search }
+    pattern: /search/{page}
+    defaults: { _controller: DentoletiPatientBundle:Default:search, page: 1 }

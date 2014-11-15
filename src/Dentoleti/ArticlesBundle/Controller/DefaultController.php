@@ -145,8 +145,14 @@ class DefaultController extends Controller
       $articlesList = $em->getRepository('DentoletiArticlesBundle:Article')
         ->findActives();
 
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $articlesList,
+            $this->get('request')->query->get('page', 1),
+            5
+        );
       return $this->render('DentoletiArticlesBundle:Default:list.html.twig', array(
-        'articlesList' => $articlesList
+        'articlesList' => $pagination
       ));
     }
 

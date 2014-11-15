@@ -43,7 +43,7 @@ class DefaultController extends Controller {
    * Add a new patient in the system
    */
   public function addAction() {
-    $petition = $this->getRequest();
+    $petition = $this->container->get('request_stack')->getCurrentRequest();
 
     $patient = new Patient();
 
@@ -73,7 +73,7 @@ class DefaultController extends Controller {
    * View the patient with the $id given in the params
    */
   public function editAction($id, Request $request) {
-    $petition = $this->getRequest();
+    $petition = $this->container->get('request_stack')->getCurrentRequest();
 
     $em = $this->getDoctrine()->getManager();
 
@@ -187,7 +187,7 @@ class DefaultController extends Controller {
   /**
    * This is the controller for searching patients
    */
-  public function searchAction(Request $request) {
+  public function searchAction(Request $request, $page = 1) {
     //Array data for searching params
     $searchData = array();
     $form = $this->createFormBuilder($searchData)
@@ -231,9 +231,16 @@ class DefaultController extends Controller {
           'notice', 'No hay pacientes');
       }
     }
+
+    $paginator  = $this->get('knp_paginator');
+    $pagination = $paginator->paginate(
+      $patients,
+      $this->get('request')->query->get('page', 1),
+      5
+    );
     // This wil render the search form
     return $this->render('DentoletiPatientBundle:Default:search.html.twig', array(
-      'patients' => $patients,
+      'pagination' => $pagination,
       'form' => $form->createView()
     ));
   }
