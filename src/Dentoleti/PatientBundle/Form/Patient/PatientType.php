@@ -93,14 +93,7 @@ class PatientType extends AbstractType
         		return $er->queryActiveDoctors();
     		},
 		));
-/*
-		$builder->add('postalCode', 'entity', array(
-			'class' => 'DentoletiGeneralBundle:PostalCode',
-			'property' => 'postalCode',
-			'empty_value' => '-- Código postal --',
-			'required' => false
-		));
-*/
+
 		$formModifier = function(FormInterface $form, PostalCode $postalCode = null) {
 			$towns = null === $postalCode ? array() : $postalCode->getTowns();
 
