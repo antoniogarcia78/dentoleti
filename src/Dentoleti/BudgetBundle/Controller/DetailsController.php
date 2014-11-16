@@ -34,9 +34,11 @@ namespace Dentoleti\BudgetBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Ps\PdfBundle\Annotation\Pdf;
 use Dentoleti\BudgetBundle\Entity\BudgetDetail;
 use Dentoleti\BudgetBundle\Form\BudgetDetail\BudgetDetailType;
+use Dentoleti\ArticlesBundle\Entity\Article;
 
 class DetailsController extends Controller
 {
@@ -236,5 +238,41 @@ class DetailsController extends Controller
       else {
           return new Response();
       }
+    }
+
+    public function loadPricesAction(Request $request)
+    {
+        $log = $this->get('monolog.logger.dentoleti');
+        $log->info("/loadPricesAction: Starts.");
+
+        $article = new Article();
+        $article_id = $request->get('article');
+        $log->info("/loadPricesAction: Article received-> " . $article_id);
+        if ($request->isXmlHttpRequest()) {
+            $log->info("/loadPricesAction: Ajax petition");
+            $em = $this->getDoctrine()->getManager();
+            $log->info("/loadPricesAction: Obtained the EntityManager");
+
+            try{
+                $article = $em->getRepository('DentoletiArticlesBundle:Article')
+                    ->findOneById($article_id);
+                console.log($article_id);
+                $log->info("/loadPricesAction: Obatained " . $article->description);
+            } catch (\Exception $e) {
+                $log->info("/loadProvincesAction: Error " . $e);
+            }
+
+            $log->info("/loadPricesAction: Response to send-> " . $article->getPrice());
+            $response = new Response($article->getPrice());
+
+            $log->info("\\loadPricesAction: Ends.");
+            return $response;
+
+        }
+        else {
+            $log->info("/loadPricesAction: Non ajax petition");
+            $log->info("\\loadPricesAction: Ends.");
+            return new Response();
+        }
     }
 }

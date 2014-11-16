@@ -31,7 +31,7 @@
 					<div class="label">
 						{{ form_label(form.article) }}
 					</div>
-					<div class="data">				
+					<div id="article" class="data">
 						{{ form_widget(form.article) }}
 						<div class="error">
 							{{ form_errors(form.article) }}
@@ -42,7 +42,7 @@
 					<div class="label">
 						{{ form_label(form.price) }}
 					</div>
-					<div class="data">
+					<div id="price" class="data">
 						{{ form_widget(form.price) }}
 						<div class="error">
 							{{ form_errors(form.price) }}
@@ -80,4 +80,27 @@
 	{{ form_rest(form) }}
 	{{ form_end(form) }}
 </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(function() {
+            var path = '{{ path('load_prices') }}';
+            // When article changes
+            $("#article").change(function() {
+                var data = {
+                    article: $('#budgetDetail_article').val()
+                };
+                $.ajax({
+                    type: 'POST',
+                    url: path,
+                    data: data,
+                    success: function(data) {
+                        $('#budgetDetail_price').val(data);
+                    }
+                });
+            });
+        })
+    </script>
 {% endblock %}

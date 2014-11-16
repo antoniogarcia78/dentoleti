@@ -53,3 +53,7 @@ budget_confirmation:
 budget_details_set_unset:
     pattern:   /set_unset
     defaults: { _controller: DentoletiBudgetBundle:Details:setUnsetDone }
+
+load_prices:
+    pattern:   /load_prices
+    defaults: { _controller: DentoletiBudgetBundle:Details:loadPrices }
