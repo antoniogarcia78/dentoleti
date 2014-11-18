@@ -1,0 +1,27 @@
+<div id="results">
+    <table id="list">
+        <tr>
+            <th>id</th>
+            <th>Especialidad</th>
+            <th>Nombre</th>
+            <th>Nº colegiado</th>
+            <th>Comisión</th>
+            <th>Ver</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+        </tr>
+        {% for doctor in doctorsList %}
+            <tr>
+
+                <td>{{ doctor.id }}</td>
+                <td>{{ doctor.speciality }}</td>
+                <td>{{ doctor.personal.name }}</td>
+                <td>{{ doctor.referee }}</td>
+                <td>{{ doctor.commission }}</td>
+                <td><a href="{{ path('doctor_view', { 'id': doctor.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/eye.png') }}"></a></td>
+                <td><a href="{{ path('doctor_edit', { 'id': doctor.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/edit.png') }}"></a></td>
+                <td><a href="{{ path('doctor_erase', { 'id': doctor.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/erase.png') }}"></a></td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
