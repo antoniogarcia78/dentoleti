@@ -147,21 +147,32 @@ class DoctorController extends Controller {
   public function searchAction(Request $request) {
     $searchData = array();
     $form = $this->createFormBuilder($searchData)
-      ->add('name', 'text')
+      ->add('name', 'text', array(
+        'required' => FALSE,
+      ))
+      ->add('phone1', 'text', array(
+        'required' => FALSE,
+      ))
+      ->add('address', 'text', array(
+        'required' => FALSE,
+      ))
+      ->add('postalCode', 'text', array(
+        'required' => FALSE,
+      ))
       ->add('search', 'submit')
       ->getForm();
 
     if ($request->isMethod('POST')) {
       // The search params has been submited and we will search the data and
       // redirect to the list view
-      $form->bind($request);
+      $form->handleRequest($request);
 
       $searchData = $form->getData();
 
       $em = $this->getDoctrine()->getManager();
 
       $doctorsList = $em->getRepository('DentoletiPersonalBundle:Doctor')
-        ->findSearchedDoctor($searchData['name']);
+        ->findSearchedDoctor($searchData);
 
       // If the list is empty, send also a flashmessage to indicate it
       if (count($doctorsList) == 0) {

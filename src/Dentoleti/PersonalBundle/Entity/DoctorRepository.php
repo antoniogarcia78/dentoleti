@@ -64,19 +64,45 @@ class DoctorRepository extends EntityRepository
 		return $queryBuilder;
 
 	}
-	public function findSearchedDoctor($name)
+	public function findSearchedDoctor($params)
 	{
 		$em = $this->getEntityManager();
 
-		$query = $em->createQuery('
-			SELECT d
-			FROM DentoletiPersonalBundle:Doctor d
-			JOIN d.personal p
-			WHERE p.name = :name
-			');
+    $doctors = array();
 
-		$query->setParameter('name', $name);
+    if (count($params) > 0) {
+      $query_str = '
+        SELECT d
+        FROM DentoletiPersonalBundle:Doctor d
+        JOIN d.personal p
+        WHERE';
+      foreach($params as $param => $value) {
+        if (isset($value)) {
+          $query_str .= ' p.' . $param . ' LIKE :' . $param . ' AND';
+        }
+      }
+      $last_pos = strrpos($query_str, 'AND');
+      $query_str = substr($query_str, 0, $last_pos);
 
-		return $query->getResult();
+      $query = $em->createQuery($query_str);
+
+      if (isset($params['name'])) {
+        $query->setParameter('name', '%' . $params['name'] . '%');
+      }
+      if (isset($params['phone1'])) {
+        $query->setParameter('phone1', '%' . $params['phone1'] . '%');
+      }
+      if (isset($params['address'])) {
+        $query->setParameter('address', '%' . $params['address'] . '%');
+      }
+      if (isset($params['postalCode'])) {
+        $query->setParameter('postalCode', '%' . $params['postalCode'] . '%');
+      }
+
+      return $query->getResult();
+    }
+    else {
+      return $doctors;
+    }
 	}
 }
