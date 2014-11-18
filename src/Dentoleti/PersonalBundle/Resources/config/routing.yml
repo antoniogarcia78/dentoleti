@@ -43,7 +43,7 @@ doctor_edit:
     defaults: { _controller:DentoletiPersonalBundle:Doctor:edit }
 
 doctor_search:
-    pattern: /doctor/serach
+    pattern: /doctor/search
     defaults: { _controller:DentoletiPersonalBundle:Doctor:search }
 
 doctor_delete:
