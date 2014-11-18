@@ -39,207 +39,199 @@ use Dentoleti\PersonalBundle\Entity\Doctor;
 use Dentoleti\PersonalBundle\Entity\Personal;
 use Dentoleti\PersonalBundle\Helper\PersonalUtils;
 
-class DoctorController extends Controller
-{
+class DoctorController extends Controller {
 
-	/**
-     * Add a new doctor in the system
-     */
-    public function addAction()
-    {
-        $petition = $this->getRequest();
+  /**
+   * Add a new doctor in the system
+   */
+  public function addAction() {
+    $petition = $this->container->get('request_stack')->getCurrentRequest();
 
-    	$doctor = new Doctor();
-        $personal = new Personal();
-        $doctor->setPersonal($personal);
-		
-		$form = $this->createForm(new DoctorType(), $doctor);
-		
-		$form->handleRequest($petition);
+    $doctor = new Doctor();
+    $personal = new Personal();
+    $doctor->setPersonal($personal);
 
-		if ($form->isValid()){
-		  //save the form
-		  $em = $this->getDoctrine()->getManager();
-		  
-		  $doctor->getPersonal()->setRegistrationDate(new \DateTime());
-		  $doctor->getPersonal()->setActive(true);
-		  $em->persist($doctor);
-		  $em->flush();
+    $form = $this->createForm(new DoctorType(), $doctor);
 
-          $this->get('session')->getFlashBag()->add(
-            'notice',
-            'El doctor se ha guardado correctamente'
-          );
-      	}
+    $form->handleRequest($petition);
 
-        return $this->render('DentoletiPersonalBundle:Doctor:doctor.html.twig', array(
-        	'form' => $form->createView()
-        ));
+    if ($form->isValid()) {
+      //save the form
+      $em = $this->getDoctrine()->getManager();
+
+      $doctor->getPersonal()->setRegistrationDate(new \DateTime());
+      $doctor->getPersonal()->setActive(TRUE);
+      $em->persist($doctor);
+      $em->flush();
+
+      $this->get('session')->getFlashBag()->add(
+        'notice',
+        'El doctor se ha guardado correctamente'
+      );
     }
 
-    /**
-     * List all the doctors in the system
-     */
-    public function listAction()
-    {
+    return $this->render('DentoletiPersonalBundle:Doctor:doctor.html.twig', array(
+      'form' => $form->createView()
+    ));
+  }
+
+  /**
+   * List all the doctors in the system
+   */
+  public function listAction() {
+    $em = $this->getDoctrine()->getManager();
+
+    $doctorsList = $em->getRepository('DentoletiPersonalBundle:Doctor')
+      ->findActiveDoctors();
+
+    return $this->render('DentoletiPersonalBundle:Doctor:list.html.twig', array(
+      'doctorsList' => $doctorsList
+    ));
+  }
+
+  /**
+   * Method for view all the doctor's information
+   */
+  public function viewAction($id) {
+    $em = $this->getDoctrine()->getManager();
+
+    $doctor = $em->getRepository('DentoletiPersonalBundle:Doctor')
+      ->findOneById($id);
+
+    if (!$doctor) {
+      throw $this->createNotFoundException('No existe el doctor');
+    }
+
+    return $this->render('DentoletiPersonalBundle:Doctor:doctor_view.html.twig', array(
+      'doctor' => $doctor
+    ));
+  }
+
+  /**
+   * Edit the doctor with the $id given in the params
+   */
+  public function editAction($id, Request $request) {
+    $petition = $this->container->get('request_stack')->getCurrentRequest();
+
+    $em = $this->getDoctrine()->getManager();
+
+    $doctor = $em->getRepository('DentoletiPersonalBundle:Doctor')
+      ->findOneById($id);
+
+    if (!$doctor) {
+      throw $this->createNotFoundException('No existe el doctor');
+    }
+
+    $form = $this->createForm(new DoctorType(), $doctor);
+
+    $form->handleRequest($petition);
+
+    $em->persist($doctor);
+    $em->flush();
+
+    if ($request->isMethod('POST')) {
+      $this->get('session')->getFlashBag()->add(
+        'notice',
+        'El doctor se ha actualizado correctamente'
+      );
+    }
+
+    return $this->render('DentoletiPersonalBundle:Doctor:doctor.html.twig', array(
+      'form' => $form->createView()
+    ));
+  }
+
+  /**
+   * This method search a doctor by the name
+   */
+  public function searchAction(Request $request) {
+    $searchData = array();
+    $form = $this->createFormBuilder($searchData)
+      ->add('name', 'text')
+      ->add('search', 'submit')
+      ->getForm();
+
+    if ($request->isMethod('POST')) {
+      // The search params has been submited and we will search the data and
+      // redirect to the list view
+      $form->bind($request);
+
+      $searchData = $form->getData();
+
       $em = $this->getDoctrine()->getManager();
 
       $doctorsList = $em->getRepository('DentoletiPersonalBundle:Doctor')
-        ->findActiveDoctors();
+        ->findSearchedDoctor($searchData['name']);
+
+      // If the list is empty, send also a flashmessage to indicate it
+      if (count($doctorsList) == 0) {
+
+        $this->get('session')->getFlashBag()->add(
+          'notice',
+          'No existe ese doctor'
+        );
+      }
 
       return $this->render('DentoletiPersonalBundle:Doctor:list.html.twig', array(
         'doctorsList' => $doctorsList
       ));
+
     }
 
-    /**
-     * Method for view all the doctor's information
-     */
-    public function viewAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
+    // This wil render the search form. We can reuser the same that we used for
+    // the general Personal
+    return $this->render('DentoletiPersonalBundle:Default:search.html.twig', array(
+      'form' => $form->createView()
+    ));
+  }
 
-        $doctor = $em->getRepository('DentoletiPersonalBundle:Doctor')
-            ->findOneById($id);
+  /**
+   * ATTENTION
+   *
+   * Delete method for deleting one doctor given by the id.
+   * This will delete the record and all the relations with other entities
+   * so that, USE IT WITH CAREFULL
+   */
+  public function deleteAction($id) {
+    $em = $this->getDoctrine()->getManager();
 
-        if (!$doctor) {
-            throw $this->createNotFoundException('No existe el doctor');
-        }
+    $doctor = $em->getRepository('DentoletiPersonalBundle:Doctor')
+      ->findOneById($id);
 
-        return $this->render('DentoletiPersonalBundle:Doctor:doctor_view.html.twig', array(
-            'doctor' => $doctor
-        ));
+    if (!$doctor) {
+      throw $this->createNotFoundException('No existe el doctor');
+    }
+    else {
+      $em->remove($doctor);
+      $em->flush();
     }
 
-    /**
-     * Edit the doctor with the $id given in the params
-     */
-    public function editAction($id, Request $request)
-    {
-        $petition = $this->getRequest();
+    //TODO Pendiente de ver donde redirigir la petición
+    return $this->forward('DentoletiPersonalBundle:Doctor:list');
+  }
 
-        $em = $this->getDoctrine()->getManager();
+  /**
+   * This method is used to set the doctors's information to default values
+   * The intention of this method is to delete the information but not its relationships
+   */
+  public function eraseAction($id) {
+    $em = $this->getDoctrine()->getManager();
 
-        $doctor = $em->getRepository('DentoletiPersonalBundle:Doctor')
-            ->findOneById($id);
+    $doctor = $em->getRepository('DentoletiPersonalBundle:Doctor')
+      ->findOneById($id);
 
-        if (!$doctor) {
-            throw $this->createNotFoundException('No existe el doctor');
-        }
-
-        $form = $this->createForm(new DoctorType(), $doctor);
-        
-        $form->handleRequest($petition);
-
-        $em->persist($doctor);
-        $em->flush();
-        
-        if ($request->isMethod('POST')) {
-            $this->get('session')->getFlashBag()->add(
-                'notice',
-                'El doctor se ha actualizado correctamente'
-            );
-        }
-
-        return $this->render('DentoletiPersonalBundle:Doctor:doctor.html.twig', array(
-            'form' => $form->createView()
-        ));
+    if (!$doctor) {
+      throw $this->createNotFoundException('No existe el doctor');
     }
 
-    /**
-     * This method search a doctor by the name
-     */
-    public function searchAction(Request $request)
-    {
-        $searchData = array();
-        $form = $this->createFormBuilder($searchData)
-            ->add('name', 'text')
-            ->add('search', 'submit')
-            ->getForm();
+    $utils = new PersonalUtils();
 
-        if ($request->isMethod('POST')) {
-            // The search params has been submited and we will search the data and 
-            // redirect to the list view
-            $form->bind($request);
+    $doctor = $utils->eraseDoctor($doctor);
 
-            $searchData = $form->getData();
+    $em->persist($doctor);
+    $em->flush();
 
-            $em = $this->getDoctrine()->getManager();
-
-            $doctorsList = $em->getRepository('DentoletiPersonalBundle:Doctor')
-            ->findSearchedDoctor($searchData['name']);
-
-            // If the list is empty, send also a flashmessage to indicate it
-            if (count($doctorsList) == 0) {
-
-                $this->get('session')->getFlashBag()->add(
-                    'notice',
-                    'No existe ese doctor'
-                );
-            }
-
-            return $this->render('DentoletiPersonalBundle:Doctor:list.html.twig', array(
-                'doctorsList' => $doctorsList
-            ));
-            
-        }
-        
-        // This wil render the search form. We can reuser the same that we used for
-        // the general Personal
-        return $this->render('DentoletiPersonalBundle:Default:search.html.twig', array(
-            'form' => $form->createView()
-        ));
-    }
-
-    /**
-     * ATTENTION
-     *
-     * Delete method for deleting one doctor given by the id.
-     * This will delete the record and all the relations with other entities
-     * so that, USE IT WITH CAREFULL
-     */
-    public function deleteAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $doctor = $em->getRepository('DentoletiPersonalBundle:Doctor')
-            ->findOneById($id);
-
-        if (!$doctor) {
-            throw $this->createNotFoundException('No existe el doctor');
-        }
-        else {
-            $em->remove($doctor);
-            $em->flush();
-        }
-
-        //TODO Pendiente de ver donde redirigir la petición
-        return $this->forward('DentoletiPersonalBundle:Doctor:list');
-    }
-
-    /**
-     * This method is used to set the doctors's information to default values
-     * The intention of this method is to delete the information but not its relationships
-     */
-    public function eraseAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $doctor = $em->getRepository('DentoletiPersonalBundle:Doctor')
-            ->findOneById($id);
-
-        if (!$doctor) {
-            throw $this->createNotFoundException('No existe el doctor');
-        }
-
-        $utils = new PersonalUtils();
-
-        $doctor = $utils->eraseDoctor($doctor);
-
-        $em->persist($doctor);
-        $em->flush();
-
-        //TODO Pendiente de ver donde redirigir la petición
-        return $this->forward('DentoletiPersonalBundle:Default:list');
-    }
+    //TODO Pendiente de ver donde redirigir la petición
+    return $this->forward('DentoletiPersonalBundle:Default:list');
+  }
 }
