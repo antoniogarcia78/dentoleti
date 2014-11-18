@@ -90,39 +90,5 @@
 <div id="links">
     <a href="{{ path('patient_add') }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/add-user.png') }}"></a>
 </div>
-<div id="results">
-    <table id="list">
-    <tr>
-        <th>Historia</th>
-        <th>NIF</th>
-        <th>Nombre</th>
-        <th>Apellidos</th>
-        <th>Email</th>
-        <th>Teléfono</th>
-        <th>Doctor</th>
-        <th>Ver</th>
-        <th>Editar</th>
-        <th>Eliminar</th>
-    </tr>
-    {% for patient in pagination %}
-        <tr>
-            <td>{{ patient.id }}</td>
-            <td>{{ patient.nif }}</td>
-            <td>{{ patient.name }}</td>
-            <td>{{ patient.surname1 }} {{ patient.surname2 }}</td>
-            <td>{{ patient.email }}</td>
-            <td>{{ patient.phone1 }}</td>
-            <td>{{ patient.doctor }}</td>
-            <td><a href="{{ path('patient_view', { 'id': patient.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/eye.png') }}"></a></td>
-            <td><a href="{{ path('patient_edit', { 'id': patient.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/edit.png') }}"></a></td>
-            <td><a href="{{ path('patient_erase', { 'id': patient.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/erase.png') }}"></a></td>
-        </tr>
-    {% endfor %}
-    </table>
-    {# display navigation #}
-    <div class="navigation">
-        {{ knp_pagination_render(pagination) }}
-    </div>
-</div>
-
+{% include 'DentoletiPatientBundle:Default:results.html.twig' %}
 {% endblock %}
