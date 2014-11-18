@@ -162,6 +162,7 @@ class DoctorController extends Controller {
       ->add('search', 'submit')
       ->getForm();
 
+    $doctorsList = array();
     if ($request->isMethod('POST')) {
       // The search params has been submited and we will search the data and
       // redirect to the list view
@@ -183,15 +184,12 @@ class DoctorController extends Controller {
         );
       }
 
-      return $this->render('DentoletiPersonalBundle:Doctor:list.html.twig', array(
-        'doctorsList' => $doctorsList
-      ));
-
     }
 
     // This wil render the search form. We can reuser the same that we used for
     // the general Personal
     return $this->render('DentoletiPersonalBundle:Default:search.html.twig', array(
+      'doctorsList' => $doctorsList,
       'form' => $form->createView()
     ));
   }
