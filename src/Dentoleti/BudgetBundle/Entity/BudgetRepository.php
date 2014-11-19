@@ -73,7 +73,7 @@ class BudgetRepository extends EntityRepository
       $query_str = '
         SELECT b
         FROM DentoletiBudgetBundle:Budget b
-        WHERE';
+        WHERE b.confirmed = 0 AND';
       foreach($params as $param => $value) {
         if (isset($value)) {
           $query_str .= ' b.' . $param . ' = :' . $param . ' AND';

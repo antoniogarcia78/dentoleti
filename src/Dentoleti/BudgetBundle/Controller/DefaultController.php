@@ -136,7 +136,7 @@ class DefaultController extends Controller {
 
         $this->get('session')->getFlashBag()->add(
           'notice',
-          'No hay presupuesto'
+          'Sorry, but there is no budgets. Maybe a treatment?'
         );
       }
     }
