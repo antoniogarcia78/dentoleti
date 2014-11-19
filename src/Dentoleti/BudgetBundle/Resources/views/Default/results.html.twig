@@ -1,6 +1,7 @@
 <div id="results">
     <table id="list">
         <tr>
+            <th>Confirm</th>
             <th>id</th>
             <th>Patient</th>
             <th>Doctor</th>
@@ -10,7 +11,7 @@
         </tr>
         {% for budget in budget %}
             <tr>
-
+                <td><a href="{{ path('treatment_add', { 'budgetId': budget.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/eye.png') }}"></a></td>
                 <td>{{ budget.id }}</td>
                 <td>{{ budget.patient }}</td>
                 <td>{{ budget.doctor }}</td>
