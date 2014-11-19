@@ -57,4 +57,44 @@ class BudgetRepository extends EntityRepository
 
 		return $queryBuilder->getResult();
 	}
+
+  /**
+   * Method for the budgets searched by users from the interface of search
+   * @param $params The paprams
+   * @return array
+   */
+  public function findSearchedBudgets($params)
+	{
+		$em = $this->getEntityManager();
+
+    $budgets = array();
+
+    if (count($params) > 0) {
+      $query_str = '
+        SELECT b
+        FROM DentoletiBudgetBundle:Budget b
+        WHERE';
+      foreach($params as $param => $value) {
+        if (isset($value)) {
+          $query_str .= ' b.' . $param . ' = :' . $param . ' AND';
+        }
+      }
+      $last_pos = strrpos($query_str, 'AND');
+      $query_str = substr($query_str, 0, $last_pos);
+
+      $query = $em->createQuery($query_str);
+
+      if (isset($params['id'])) {
+        $query->setParameter('id', $params['id']);
+      }
+      if (isset($params['budgetDate'])) {
+        $query->setParameter('budgetDate', '%' . $params['budgetDate'] . '%');
+      }
+
+      return $query->getResult();
+    }
+    else {
+      return $budgets;
+    }
+	}
 }

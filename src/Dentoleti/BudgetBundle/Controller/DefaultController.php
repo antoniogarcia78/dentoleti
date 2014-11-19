@@ -42,327 +42,323 @@ use Dentoleti\BudgetBundle\Entity\Budget;
 use Dentoleti\BudgetBundle\Form\Budget\BudgetType;
 use Dentoleti\BudgetBundle\Helper\BudgetsUtils;
 
-class DefaultController extends Controller
-{
-    /**
-     * Add a new budget in the system
-     */
-    public function addAction()
-    {
-        $petition = $this->getRequest();
+class DefaultController extends Controller {
+  /**
+   * Add a new budget in the system
+   */
+  public function addAction() {
+    $petition = $this->getRequest();
 
-    	$budget = new Budget();
-		
-		$form = $this->createForm(new BudgetType(), $budget);
-		
-		$budget->setBudgetDate(new \DateTime());
-        $budget->setConfirmed(false);
+    $budget = new Budget();
 
-		$form->handleRequest($petition);
+    $form = $this->createForm(new BudgetType(), $budget);
 
-		if ($form->isValid()){
-            //save the form
-    		$em = $this->getDoctrine()->getManager();
-    		
-    		$em->persist($budget);
-    		$em->flush();
+    $budget->setBudgetDate(new \DateTime());
+    $budget->setConfirmed(FALSE);
 
-            $this->get('session')->getFlashBag()->add(
-              'notice',
-              'El presupuesto se ha guardado correctamente'
-            );
+    $form->handleRequest($petition);
 
-            $nextAction = $form->get('addItem')->isClicked()
-              ? 'budget_details_add'
-              : 'budget_add';
-
-            if ('budget_details_add' == $nextAction){
-                return $this->redirect($this->generateUrl($nextAction, array(
-                    'budgetId' => $budget->getId())));
-            }
-
-            return $this->redirect($this->generateUrl($nextAction));
-     	}
-
-        return $this->render('DentoletiBudgetBundle:Default:budget.html.twig', array(
-        	'form' => $form->createView()
-        ));
-    }
-
-    /**
-     * List all the budgets in the system
-     */
-    public function listAction()
-    {
+    if ($form->isValid()) {
+      //save the form
       $em = $this->getDoctrine()->getManager();
 
-      $budgetsList = $em->getRepository('DentoletiBudgetBundle:Budget')
-        ->findAll();
+      $em->persist($budget);
+      $em->flush();
 
-      return $this->render('DentoletiBudgetBundle:Default:list.html.twig', array(
-        'budgetsList' => $budgetsList
-      ));
+      $this->get('session')->getFlashBag()->add(
+        'notice',
+        'El presupuesto se ha guardado correctamente'
+      );
+
+      $nextAction = $form->get('addItem')->isClicked()
+        ? 'budget_details_add'
+        : 'budget_add';
+
+      if ('budget_details_add' == $nextAction) {
+        return $this->redirect($this->generateUrl($nextAction, array(
+          'budgetId' => $budget->getId()
+        )));
+      }
+
+      return $this->redirect($this->generateUrl($nextAction));
     }
 
-    /**
-     * This method search a budget by the id
-     */
-    public function searchAction(Request $request)
-    {
-        $searchData = array();
-        $form = $this->createFormBuilder($searchData)
-            ->add('id', 'text')
-            ->add('search', 'submit')
-            ->getForm();
+    return $this->render('DentoletiBudgetBundle:Default:budget.html.twig', array(
+      'form' => $form->createView()
+    ));
+  }
 
-        if ($request->isMethod('POST')) {
-            // The search params has been submited and we will search the data and 
-            // redirect to the list view
-            $form->bind($request);
+  /**
+   * List all the budgets in the system
+   */
+  public function listAction() {
+    $em = $this->getDoctrine()->getManager();
 
-            $searchData = $form->getData();
+    $budgetsList = $em->getRepository('DentoletiBudgetBundle:Budget')
+      ->findAll();
 
-            $em = $this->getDoctrine()->getManager();
+    return $this->render('DentoletiBudgetBundle:Default:list.html.twig', array(
+      'budgetsList' => $budgetsList
+    ));
+  }
 
-            $budget = $em->getRepository('DentoletiBudgetBundle:Budget')
-            ->findOneById($searchData['id']);
+  /**
+   * This method search a budget by the id
+   */
+  public function searchAction(Request $request) {
+    $searchData = array();
+    $form = $this->createFormBuilder($searchData)
+      ->add('id', 'text', array(
+        'required' => FALSE,
+      ))
+      ->add('budgetDate', 'date', array(
+        'widget' => 'single_text',
+        'format' => 'd/MM/y',
+        'required' => FALSE,
+      ))
+      ->add('search', 'submit')
+      ->getForm();
 
-            // If the list is empty, send also a flashmessage to indicate it
-            if (count($budget) == 0) {
+    $budgets = array();
+    if ($request->isMethod('POST')) {
+      // The search params has been submited and we will search the data and
+      // redirect to the list view
+      $form->handleRequest($request);
 
-                $this->get('session')->getFlashBag()->add(
-                    'notice',
-                    'No hay presupuesto'
-                );
-            }
+      $searchData = $form->getData();
 
-            return $this->render('DentoletiBudgetBundle:Default:budget_view.html.twig', array(
-                'budget' => $budget
-            ));
-            
-        }
-        
-        // This wil render the search form
-        return $this->render('DentoletiBudgetBundle:Default:search.html.twig', array(
-            'form' => $form->createView()
-        ));
+      $em = $this->getDoctrine()->getManager();
+
+      $budgets = $em->getRepository('DentoletiBudgetBundle:Budget')
+        ->findSearchedBudgets($searchData);
+      // If the list is empty, send also a flashmessage to indicate it
+      if (count($budgets) == 0) {
+
+        $this->get('session')->getFlashBag()->add(
+          'notice',
+          'No hay presupuesto'
+        );
+      }
     }
 
-    /**
-     * Method for view all the budget's information
-     */
-    public function viewAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
+    // This wil render the search form
+    return $this->render('DentoletiBudgetBundle:Default:search.html.twig', array(
+      'budget' => $budgets,
+      'form' => $form->createView()
+    ));
+  }
 
-        $budget = $em->getRepository('DentoletiBudgetBundle:Budget')
-            ->findOneById($id);
+  /**
+   * Method for view all the budget's information
+   */
+  public function viewAction($id) {
+    $em = $this->getDoctrine()->getManager();
 
-        if (!$budget) {
-            throw $this->createNotFoundException('No existe el presupuesto');
-        }
+    $budget = $em->getRepository('DentoletiBudgetBundle:Budget')
+      ->findOneById($id);
 
-        return $this->render('DentoletiBudgetBundle:Default:budget_view.html.twig', array(
-            'budget' => $budget,
-        ));
+    if (!$budget) {
+      throw $this->createNotFoundException('No existe el presupuesto');
     }
 
-    /**
-     * Edit the budget with the $id given in the params
-     */
-    public function editAction($id, Request $request)
-    {
-        $petition = $this->getRequest();
+    return $this->render('DentoletiBudgetBundle:Default:budget_view.html.twig', array(
+      'budget' => $budget,
+    ));
+  }
 
-        $em = $this->getDoctrine()->getManager();
+  /**
+   * Edit the budget with the $id given in the params
+   */
+  public function editAction($id, Request $request) {
+    $petition = $this->getRequest();
 
-        $budget = $em->getRepository('DentoletiBudgetBundle:Budget')
-            ->findOneById($id);
+    $em = $this->getDoctrine()->getManager();
 
-        if (!$budget) {
-            throw $this->createNotFoundException('No existe el presupuesto');
-        }
+    $budget = $em->getRepository('DentoletiBudgetBundle:Budget')
+      ->findOneById($id);
 
-        $form = $this->createForm(new BudgetType(), $budget);
-        
-        $form->handleRequest($petition);
-
-        $em->persist($budget);
-        $em->flush();
-
-        if ($request->isMethod('POST')) {
-            $this->get('session')->getFlashBag()->add(
-                'notice',
-                'El presupuesto se ha actualizado correctamente'
-            );
-
-            $nextAction = $form->get('addItem')->isClicked()
-                  ? 'budget_details_add'
-                  : 'budget_add';
-
-                if ('budget_details_add' == $nextAction){
-                    return $this->redirect($this->generateUrl($nextAction, array(
-                        'budgetId' => $budget->getId())));
-                }
-
-                return $this->redirect($this->generateUrl($nextAction));
-        }
-        
-        return $this->render('DentoletiBudgetBundle:Default:budget.html.twig', array(
-            'form' => $form->createView()
-        ));
-
+    if (!$budget) {
+      throw $this->createNotFoundException('No existe el presupuesto');
     }
 
-    /**
-     * ATTENTION
-     *
-     * Delete method for deleting one budget given by the id.
-     * This will delete the record and all the relations with other entities
-     * so that, USE IT WITH CAREFULL
-     */
-    public function deleteAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
+    $form = $this->createForm(new BudgetType(), $budget);
 
-        $budget = $em->getRepository('DentoletiBudgetBundle:Budget')
-            ->findOneById($id);
+    $form->handleRequest($petition);
 
-        if (!$budget) {
-            throw $this->createNotFoundException('No existe el presupuesto');
-        }
-        else {
-            $em->remove($budget);
-            $em->flush();
-        }
+    $em->persist($budget);
+    $em->flush();
 
-        //TODO Pendiente de ver donde redirigir la petición
-        return $this->forward('DentoletiBudgetBundle:Default:list');
+    if ($request->isMethod('POST')) {
+      $this->get('session')->getFlashBag()->add(
+        'notice',
+        'El presupuesto se ha actualizado correctamente'
+      );
+
+      $nextAction = $form->get('addItem')->isClicked()
+        ? 'budget_details_add'
+        : 'budget_add';
+
+      if ('budget_details_add' == $nextAction) {
+        return $this->redirect($this->generateUrl($nextAction, array(
+          'budgetId' => $budget->getId()
+        )));
+      }
+
+      return $this->redirect($this->generateUrl($nextAction));
     }
 
-    /**
-     * This method is used to set the budget's information to default values
-     * The intention of this method is to delete the information but not its relationships
-     */
-    public function eraseAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
+    return $this->render('DentoletiBudgetBundle:Default:budget.html.twig', array(
+      'form' => $form->createView()
+    ));
 
-        $budget = $em->getRepository('DentoletiBudgetBundle:Budget')
-            ->findOneById($id);
+  }
 
-        if (!$budget) {
-            throw $this->createNotFoundException('No existe el presupuesto');
-        }
+  /**
+   * ATTENTION
+   *
+   * Delete method for deleting one budget given by the id.
+   * This will delete the record and all the relations with other entities
+   * so that, USE IT WITH CAREFULL
+   */
+  public function deleteAction($id) {
+    $em = $this->getDoctrine()->getManager();
 
-        $utils = new BudgetsUtils();
+    $budget = $em->getRepository('DentoletiBudgetBundle:Budget')
+      ->findOneById($id);
 
-        $budget = $utils->setNullBudget($budget);
-
-        $em->persist($budget);
-        $em->flush();
-
-        //TODO Pendiente de ver donde redirigir la petición
-        return $this->forward('DentoletiBudgetBundle:Default:list');
+    if (!$budget) {
+      throw $this->createNotFoundException('No existe el presupuesto');
+    }
+    else {
+      $em->remove($budget);
+      $em->flush();
     }
 
-    /**
-     * @Pdf()
-     */
-    public function pdfAction($budgetId)
-    {
-        $facade = $this->get('ps_pdf.facade');
-        $response = new Response();
+    //TODO Pendiente de ver donde redirigir la petición
+    return $this->forward('DentoletiBudgetBundle:Default:list');
+  }
 
-        $em = $this->getDoctrine()->getManager();
+  /**
+   * This method is used to set the budget's information to default values
+   * The intention of this method is to delete the information but not its relationships
+   */
+  public function eraseAction($id) {
+    $em = $this->getDoctrine()->getManager();
 
-        //Obtain the budget
-        $budget = $em->getRepository('DentoletiBudgetBundle:Budget')
-            ->findOneById($budgetId);
-        $budgetDetailsList = $em->getRepository('DentoletiBudgetBundle:BudgetDetail')
-            ->findArticlesOfBudget($budget);
+    $budget = $em->getRepository('DentoletiBudgetBundle:Budget')
+      ->findOneById($id);
 
-        $partialTotals = array();
-        $subTotals = array();
-        $ivas = array();
-
-        $total = 0;
-        foreach ($budgetDetailsList as $budgetDetail) {
-            $partial = $budgetDetail->getAmount() * $budgetDetail->getPrice();
-            $ivas[$budgetDetail->getId()] = 
-                $budgetDetail->getArticle()->getVat() * $partial;
-
-            $partialTotals[$budgetDetail->getId()] = $partial;
-            $subTotals[$budgetDetail->getId()] =
-                $partial + $ivas[$budgetDetail->getId()];
-            $total = $total + $subTotals[$budgetDetail->getId()];
-        }
-
-        $this->render('DentoletiBudgetBundle:Default:budget.pdf.twig', array(
-            'budget' => $budget,
-            'budgetDetailsList' => $budgetDetailsList,
-            'partialTotals' => $partialTotals,
-            'total' => $total,
-            'budgetId' => $budget->getId(),
-            'subTotals' => $subTotals), $response);
-
-        $xml = $response->getContent();
-        
-        $content = $facade->render($xml);
-
-        file_put_contents('/tmp/'.$budgetId.'.pdf', $content);
-
-        return new Response($content, 200, array('content-type' => 'application/pdf'));
+    if (!$budget) {
+      throw $this->createNotFoundException('No existe el presupuesto');
     }
 
-    public function budgetConfirmationAction($budgetId)
-    {
-        $em = $this->getDoctrine()->getManager();
+    $utils = new BudgetsUtils();
 
-        $budget = $em->getRepository('DentoletiBudgetBundle:Budget')
-            ->findOneById($budgetId);
+    $budget = $utils->setNullBudget($budget);
 
-        $budget->setConfirmed(true);
-        $em->persist($budget);
+    $em->persist($budget);
+    $em->flush();
 
-        //Create the new treatment
-        $treatment = new Treatment();
-        $treatment->setTreatmentDate(new \DateTime());
-        $treatment->setBudget($budget);
-        $em->persist($treatment);
+    //TODO Pendiente de ver donde redirigir la petición
+    return $this->forward('DentoletiBudgetBundle:Default:list');
+  }
 
-        //Generate the new debt
-        $debt = new Debt();
+  /**
+   * @Pdf()
+   */
+  public function pdfAction($budgetId) {
+    $facade = $this->get('ps_pdf.facade');
+    $response = new Response();
 
-        $budgetDetailsList = $em->getRepository('DentoletiBudgetBundle:BudgetDetail')
-          ->findArticlesOfBudget($budget);
+    $em = $this->getDoctrine()->getManager();
 
-        $partialTotals = array();
-        $subTotals = array();
-        $ivas = array();
+    //Obtain the budget
+    $budget = $em->getRepository('DentoletiBudgetBundle:Budget')
+      ->findOneById($budgetId);
+    $budgetDetailsList = $em->getRepository('DentoletiBudgetBundle:BudgetDetail')
+      ->findArticlesOfBudget($budget);
 
-        $total = 0;
-        foreach ($budgetDetailsList as $budgetDetail) {
-          $partial = $budgetDetail->getAmount() * $budgetDetail->getPrice();
-          $ivas[$budgetDetail->getId()] = 
-              $budgetDetail->getArticle()->getVat() * $partial;
-          
-          $partialTotals[$budgetDetail->getId()] = $partial;
-          $subTotals[$budgetDetail->getId()] =
-              $partial + $ivas[$budgetDetail->getId()];
-          $total = $total + $subTotals[$budgetDetail->getId()];
-          
-        }
-        $debt->setTreatment($treatment);
-        $debt->setAmount($total);
-        //persist
-        $em->persist($debt);
+    $partialTotals = array();
+    $subTotals = array();
+    $ivas = array();
 
-        //flush the changes
-        $em->flush();
+    $total = 0;
+    foreach ($budgetDetailsList as $budgetDetail) {
+      $partial = $budgetDetail->getAmount() * $budgetDetail->getPrice();
+      $ivas[$budgetDetail->getId()] =
+        $budgetDetail->getArticle()->getVat() * $partial;
 
-        return $this->forward('DentoletiBudgetBundle:Default:pdf', array(
-            'budgetId' => $budget->getId()
-        ));
+      $partialTotals[$budgetDetail->getId()] = $partial;
+      $subTotals[$budgetDetail->getId()] =
+        $partial + $ivas[$budgetDetail->getId()];
+      $total = $total + $subTotals[$budgetDetail->getId()];
     }
+
+    $this->render('DentoletiBudgetBundle:Default:budget.pdf.twig', array(
+      'budget' => $budget,
+      'budgetDetailsList' => $budgetDetailsList,
+      'partialTotals' => $partialTotals,
+      'total' => $total,
+      'budgetId' => $budget->getId(),
+      'subTotals' => $subTotals
+    ), $response);
+
+    $xml = $response->getContent();
+
+    $content = $facade->render($xml);
+
+    file_put_contents('/tmp/' . $budgetId . '.pdf', $content);
+
+    return new Response($content, 200, array('content-type' => 'application/pdf'));
+  }
+
+  public function budgetConfirmationAction($budgetId) {
+    $em = $this->getDoctrine()->getManager();
+
+    $budget = $em->getRepository('DentoletiBudgetBundle:Budget')
+      ->findOneById($budgetId);
+
+    $budget->setConfirmed(TRUE);
+    $em->persist($budget);
+
+    //Create the new treatment
+    $treatment = new Treatment();
+    $treatment->setTreatmentDate(new \DateTime());
+    $treatment->setBudget($budget);
+    $em->persist($treatment);
+
+    //Generate the new debt
+    $debt = new Debt();
+
+    $budgetDetailsList = $em->getRepository('DentoletiBudgetBundle:BudgetDetail')
+      ->findArticlesOfBudget($budget);
+
+    $partialTotals = array();
+    $subTotals = array();
+    $ivas = array();
+
+    $total = 0;
+    foreach ($budgetDetailsList as $budgetDetail) {
+      $partial = $budgetDetail->getAmount() * $budgetDetail->getPrice();
+      $ivas[$budgetDetail->getId()] =
+        $budgetDetail->getArticle()->getVat() * $partial;
+
+      $partialTotals[$budgetDetail->getId()] = $partial;
+      $subTotals[$budgetDetail->getId()] =
+        $partial + $ivas[$budgetDetail->getId()];
+      $total = $total + $subTotals[$budgetDetail->getId()];
+
+    }
+    $debt->setTreatment($treatment);
+    $debt->setAmount($total);
+    //persist
+    $em->persist($debt);
+
+    //flush the changes
+    $em->flush();
+
+    return $this->forward('DentoletiBudgetBundle:Default:pdf', array(
+      'budgetId' => $budget->getId()
+    ));
+  }
 }

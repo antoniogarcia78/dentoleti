@@ -1,0 +1,23 @@
+<div id="results">
+    <table id="list">
+        <tr>
+            <th>id</th>
+            <th>Patient</th>
+            <th>Doctor</th>
+            <th>Ver</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+        </tr>
+        {% for budget in budget %}
+            <tr>
+
+                <td>{{ budget.id }}</td>
+                <td>{{ budget.patient }}</td>
+                <td>{{ budget.doctor }}</td>
+                <td><a href="{{ path('budget_view', { 'id': budget.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/eye.png') }}"></a></td>
+                <td><a href="{{ path('budget_edit', { 'id': budget.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/edit.png') }}"></a></td>
+                <td><a href="{{ path('budget_erase', { 'id': budget.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/erase.png') }}"></a></td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
