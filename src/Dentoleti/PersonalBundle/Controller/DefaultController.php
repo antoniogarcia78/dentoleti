@@ -38,202 +38,194 @@ use Dentoleti\PersonalBundle\Form\Personal\PersonalType;
 use Dentoleti\PersonalBundle\Entity\Personal;
 use Dentoleti\PersonalBundle\Helper\PersonalUtils;
 
-class DefaultController extends Controller
-{
-    /**
-     * Add a new personal in the system
-     */
-    public function addAction()
-    {
-        $petition = $this->getRequest();
+class DefaultController extends Controller {
+  /**
+   * Add a new personal in the system
+   */
+  public function addAction() {
+    $petition = $this->getRequest();
 
-    	$personal = new Personal();
-		
-		$form = $this->createForm(new PersonalType(), $personal);
-		
-		$personal->setRegistrationDate(new \DateTime());
-        $personal->setActive(true);
+    $personal = new Personal();
 
-		$form->handleRequest($petition);
+    $form = $this->createForm(new PersonalType(), $personal);
 
-		if ($form->isValid()){
-		  //save the form
-		  $em = $this->getDoctrine()->getManager();
-		  
-		  $em->persist($personal);
-		  $em->flush();
+    $personal->setRegistrationDate(new \DateTime());
+    $personal->setActive(TRUE);
 
-          $this->get('session')->getFlashBag()->add(
-            'notice',
-            'El personal se ha guardado correctamente'
-          );
-      	}
+    $form->handleRequest($petition);
 
-        return $this->render('DentoletiPersonalBundle:Default:personal.html.twig', array(
-        	'form' => $form->createView()
-        ));
+    if ($form->isValid()) {
+      //save the form
+      $em = $this->getDoctrine()->getManager();
+
+      $em->persist($personal);
+      $em->flush();
+
+      $this->get('session')->getFlashBag()->add(
+        'notice',
+        'El personal se ha guardado correctamente'
+      );
     }
 
-    /**
-     * List all the personal in the system
-     */
-    public function listAction()
-    {
+    return $this->render('DentoletiPersonalBundle:Default:personal.html.twig', array(
+      'form' => $form->createView()
+    ));
+  }
+
+  /**
+   * List all the personal in the system
+   */
+  public function listAction() {
+    $em = $this->getDoctrine()->getManager();
+
+    $personalList = $em->getRepository('DentoletiPersonalBundle:Personal')
+      ->findActivePersonal();
+
+    return $this->render('DentoletiPersonalBundle:Default:list.html.twig', array(
+      'personalList' => $personalList
+    ));
+  }
+
+  /**
+   * This method search a personal by the name
+   */
+  public function searchAction(Request $request) {
+    $searchData = array();
+    $form = $this->createFormBuilder($searchData)
+      ->add('name', 'text')
+      ->add('search', 'submit')
+      ->getForm();
+
+    if ($request->isMethod('POST')) {
+      // The search params has been submited and we will search the data and
+      // redirect to the list view
+      $form->bind($request);
+
+      $searchData = $form->getData();
+
       $em = $this->getDoctrine()->getManager();
 
       $personalList = $em->getRepository('DentoletiPersonalBundle:Personal')
-        ->findActivePersonal();
+        ->findSearchedPersonal($searchData['name']);
+
+      // If the list is empty, send also a flashmessage to indicate it
+      if (count($personalList) == 0) {
+
+        $this->get('session')->getFlashBag()->add(
+          'notice',
+          'No hay personal'
+        );
+      }
 
       return $this->render('DentoletiPersonalBundle:Default:list.html.twig', array(
         'personalList' => $personalList
       ));
+
     }
 
-    /**
-     * This method search a personal by the name
-     */
-    public function searchAction(Request $request)
-    {
-        $searchData = array();
-        $form = $this->createFormBuilder($searchData)
-            ->add('name', 'text')
-            ->add('search', 'submit')
-            ->getForm();
+    // This wil render the search form
+    return $this->render('DentoletiPersonalBundle:Default:search.html.twig', array(
+      'form' => $form->createView()
+    ));
+  }
 
-        if ($request->isMethod('POST')) {
-            // The search params has been submited and we will search the data and 
-            // redirect to the list view
-            $form->bind($request);
+  /**
+   * Method for view all the personal's information
+   */
+  public function viewAction($id) {
+    $em = $this->getDoctrine()->getManager();
 
-            $searchData = $form->getData();
+    $personal = $em->getRepository('DentoletiPersonalBundle:Personal')
+      ->findOneById($id);
 
-            $em = $this->getDoctrine()->getManager();
-
-            $personalList = $em->getRepository('DentoletiPersonalBundle:Personal')
-            ->findSearchedPersonal($searchData['name']);
-
-            // If the list is empty, send also a flashmessage to indicate it
-            if (count($personalList) == 0) {
-
-                $this->get('session')->getFlashBag()->add(
-                    'notice',
-                    'No hay personal'
-                );
-            }
-
-            return $this->render('DentoletiPersonalBundle:Default:list.html.twig', array(
-                'personalList' => $personalList
-            ));
-            
-        }
-        
-        // This wil render the search form
-        return $this->render('DentoletiPersonalBundle:Default:search.html.twig', array(
-            'form' => $form->createView()
-        ));
+    if (!$personal) {
+      throw $this->createNotFoundException('No existe el personal');
     }
 
-    /**
-     * Method for view all the personal's information
-     */
-    public function viewAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
+    return $this->render('DentoletiPersonalBundle:Default:personal_view.html.twig', array(
+      'personal' => $personal
+    ));
+  }
 
-        $personal = $em->getRepository('DentoletiPersonalBundle:Personal')
-            ->findOneById($id);
+  /**
+   * Edit the personal with the $id given in the params
+   */
+  public function editAction($id) {
+    $petition = $this->getRequest();
 
-        if (!$personal) {
-            throw $this->createNotFoundException('No existe el personal');
-        }
+    $em = $this->getDoctrine()->getManager();
 
-        return $this->render('DentoletiPersonalBundle:Default:personal_view.html.twig', array(
-            'personal' => $personal
-        ));
+    $personal = $em->getRepository('DentoletiPersonalBundle:Personal')
+      ->findOneById($id);
+
+    if (!$personal) {
+      throw $this->createNotFoundException('No existe el personal');
     }
 
-    /**
-     * Edit the personal with the $id given in the params
-     */
-    public function editAction($id)
-    {
-        $petition = $this->getRequest();
+    $form = $this->createForm(new PersonalType(), $personal);
 
-        $em = $this->getDoctrine()->getManager();
+    $form->handleRequest($petition);
 
-        $personal = $em->getRepository('DentoletiPersonalBundle:Personal')
-            ->findOneById($id);
+    $em->persist($personal);
+    $em->flush();
 
-        if (!$personal) {
-            throw $this->createNotFoundException('No existe el personal');
-        }
+    $this->get('session')->getFlashBag()->add(
+      'notice',
+      'El personal se ha actualizado correctamente'
+    );
 
-        $form = $this->createForm(new PersonalType(), $personal);
-        
-        $form->handleRequest($petition);
+    return $this->render('DentoletiPersonalBundle:Default:personal.html.twig', array(
+      'form' => $form->createView()
+    ));
+  }
 
-        $em->persist($personal);
-        $em->flush();
-        
-        $this->get('session')->getFlashBag()->add(
-            'notice',
-            'El personal se ha actualizado correctamente'
-        );
+  /**
+   * ATTENTION
+   *
+   * Delete method for deleting one personal given by the id.
+   * This will delete the record and all the relations with other entities
+   * so that, USE IT WITH CAREFULL
+   */
+  public function deleteAction($id) {
+    $em = $this->getDoctrine()->getManager();
 
-        return $this->render('DentoletiPersonalBundle:Default:personal.html.twig', array(
-            'form' => $form->createView()
-        ));
+    $personal = $em->getRepository('DentoletiPersonalBundle:Personal')
+      ->findOneById($id);
+
+    if (!$personal) {
+      throw $this->createNotFoundException('No existe el personal');
+    }
+    else {
+      $em->remove($personal);
+      $em->flush();
     }
 
-    /**
-     * ATTENTION
-     *
-     * Delete method for deleting one personal given by the id.
-     * This will delete the record and all the relations with other entities
-     * so that, USE IT WITH CAREFULL
-     */
-    public function deleteAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
+    //TODO Pendiente de ver donde redirigir la petición
+    return $this->forward('DentoletiPersonalBundle:Default:list');
+  }
 
-        $personal = $em->getRepository('DentoletiPersonalBundle:Personal')
-            ->findOneById($id);
+  /**
+   * This method is used to set the personal's information to default values
+   * The intention of this method is to delete the information but not its relationships
+   */
+  public function eraseAction($id) {
+    $em = $this->getDoctrine()->getManager();
 
-        if (!$personal) {
-            throw $this->createNotFoundException('No existe el personal');
-        }
-        else {
-            $em->remove($personal);
-            $em->flush();
-        }
+    $personal = $em->getRepository('DentoletiPersonalBundle:Personal')
+      ->findOneById($id);
 
-        //TODO Pendiente de ver donde redirigir la petición
-        return $this->forward('DentoletiPersonalBundle:Default:list');
+    if (!$personal) {
+      throw $this->createNotFoundException('No existe el personal');
     }
 
-    /**
-     * This method is used to set the personal's information to default values
-     * The intention of this method is to delete the information but not its relationships
-     */
-    public function eraseAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
+    $utils = new PersonalUtils();
 
-        $personal = $em->getRepository('DentoletiPersonalBundle:Personal')
-            ->findOneById($id);
+    $personal = $utils->erasePersonal($personal);
 
-        if (!$personal) {
-            throw $this->createNotFoundException('No existe el personal');
-        }
+    $em->persist($personal);
+    $em->flush();
 
-        $utils = new PersonalUtils();
-
-        $personal = $utils->erasePersonal($personal);
-
-        $em->persist($personal);
-        $em->flush();
-
-        //TODO Pendiente de ver donde redirigir la petición
-        return $this->forward('DentoletiPersonalBundle:Default:list');
-    }
+    //TODO Pendiente de ver donde redirigir la petición
+    return $this->forward('DentoletiPersonalBundle:Default:list');
+  }
 }
