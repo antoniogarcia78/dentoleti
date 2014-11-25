@@ -119,7 +119,9 @@ class DefaultController extends Controller {
       ->add('search', 'submit')
       ->getForm();
 
-    $budgets = array();
+    $em = $this->getDoctrine()->getManager();
+    $budgets = $em->getRepository('DentoletiBudgetBundle:Budget')
+      ->findAllBudgets();
     if ($request->isMethod('POST')) {
       // The search params has been submited and we will search the data and
       // redirect to the list view
@@ -127,13 +129,12 @@ class DefaultController extends Controller {
 
       $searchData = $form->getData();
 
-      $em = $this->getDoctrine()->getManager();
-
       $budgets = $em->getRepository('DentoletiBudgetBundle:Budget')
         ->findSearchedBudgets($searchData);
       // If the list is empty, send also a flashmessage to indicate it
       if (count($budgets) == 0) {
-
+        $budgets = $em->getRepository('DentoletiBudgetBundle:Budget')
+          ->findAllBudgets();
         $this->get('session')->getFlashBag()->add(
           'notice',
           'Sorry, but there is no budgets. Maybe a treatment?'

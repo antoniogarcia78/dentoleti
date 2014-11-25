@@ -42,6 +42,11 @@ use Doctrine\ORM\EntityRepository;
  */
 class BudgetRepository extends EntityRepository
 {
+  /**
+   * Find a not confirmated budget of a patient
+   * @param $id The patient ID
+   * @return array The budgets
+   */
 	public function findNotConfirmed($id)
 	{
 		$em = $this->getEntityManager();
@@ -97,4 +102,20 @@ class BudgetRepository extends EntityRepository
       return $budgets;
     }
 	}
+
+  /**
+   * Find all the not confirmed budgets in the system
+   */
+  public function findAllBudgets()
+  {
+    $em = $this->getEntityManager();
+
+    $queryBuilder = $em->createQueryBuilder()
+      ->select('b')
+      ->from('DentoletiBudgetBundle:Budget', 'b')
+      ->where('b.confirmed = 0')
+      ->getQuery();
+
+    return $queryBuilder->getResult();
+  }
 }
