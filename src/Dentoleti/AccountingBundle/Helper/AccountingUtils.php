@@ -32,20 +32,18 @@
  */
 namespace Dentoleti\AccountingBundle\Helper;
 
-class AccountingUtils
-{
-	/**
-	 *
-	 * This method returns a list of expenses given in positive accounts.
-	 * The intention is to avoid printing negative results in PDF files.
-	 *
-	 */
-	public function getPositiveExpenses($expensesList)
-	{
-		foreach ($expensesList as $pl) {
-        	$pl->setAmount(-1*$pl->getAmount());
-      	}
+class AccountingUtils {
+  /**
+   *
+   * This method returns a list of expenses given in positive accounts.
+   * The intention is to avoid printing negative results in PDF files.
+   *
+   */
+  public function getPositiveExpenses($expensesList) {
+    foreach ($expensesList as $pl) {
+      $pl->setAmount(-1 * $pl->getAmount());
+    }
 
-      	return $expensesList;
-	}
+    return $expensesList;
+  }
 }
