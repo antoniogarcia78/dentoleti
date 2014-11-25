@@ -162,7 +162,9 @@ class DoctorController extends Controller {
       ->add('search', 'submit')
       ->getForm();
 
-    $doctorsList = array();
+    $em = $this->getDoctrine()->getManager();
+    $doctorsList = $em->getRepository('DentoletiPersonalBundle:Doctor')
+      ->findActiveDoctors();
     if ($request->isMethod('POST')) {
       // The search params has been submited and we will search the data and
       // redirect to the list view
@@ -170,17 +172,16 @@ class DoctorController extends Controller {
 
       $searchData = $form->getData();
 
-      $em = $this->getDoctrine()->getManager();
-
       $doctorsList = $em->getRepository('DentoletiPersonalBundle:Doctor')
         ->findSearchedDoctor($searchData);
 
       // If the list is empty, send also a flashmessage to indicate it
       if (count($doctorsList) == 0) {
-
+        $doctorsList = $em->getRepository('DentoletiPersonalBundle:Doctor')
+          ->findActiveDoctors();
         $this->get('session')->getFlashBag()->add(
           'notice',
-          'No existe ese doctor'
+          'There is no doctors'
         );
       }
 
