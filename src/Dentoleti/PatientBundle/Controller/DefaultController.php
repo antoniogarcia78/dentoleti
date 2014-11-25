@@ -212,7 +212,9 @@ class DefaultController extends Controller {
       ->add('search', 'submit')
       ->getForm();
 
-    $patients = array();
+    $em = $this->getDoctrine()->getManager();
+    $patients = $em->getRepository('DentoletiPatientBundle:Patient')
+      ->findAllPatients();
     if ($request->isMethod('POST')) {
       // The search params has been submited. We need to do the search and
       //return again with the resutls
@@ -221,12 +223,13 @@ class DefaultController extends Controller {
       $searchData = $form->getData();
       $utils = new PatientsUtils();
       if ($utils->isEmptyParams($searchData)) {
-        $em = $this->getDoctrine()->getManager();
         $patients = $em->getRepository('DentoletiPatientBundle:Patient')
           ->findPatients($searchData);
       }
       // If the list is empty, send also a flashmessage to indicate it
       if (count($patients) == 0) {
+        $patients = $em->getRepository('DentoletiPatientBundle:Patient')
+          ->findAllPatients();
         $this->get('session')->getFlashBag()->add(
           'notice', 'No hay pacientes');
       }

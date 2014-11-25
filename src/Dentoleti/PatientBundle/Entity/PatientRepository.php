@@ -37,61 +37,74 @@ use Doctrine\ORM\EntityRepository;
  *
  * @package Dentoleti\PatientBundle\Entity
  */
-class PatientRepository extends EntityRepository
-{
-    /**
-     * This method find patients for the general search based on a set of params
-     * given to the method
-     * @param $searchParams Params data to search
-     * @return array The array of Patients
-     */
-    public function findPatients($searchParams)
-    {
-        $count = count($searchParams);
+class PatientRepository extends EntityRepository {
+  /**
+   * This method find patients for the general search based on a set of params
+   * given to the method
+   * @param $searchParams Params data to search
+   * @return array The array of Patients
+   */
+  public function findPatients($searchParams) {
+    $count = count($searchParams);
 
-        $em = $this->getEntityManager();
+    $em = $this->getEntityManager();
 
-        $patients = array();
+    $patients = array();
 
-        $query_str = 'SELECT p, pd FROM DentoletiPatientBundle:Patient p';
-        $query_str .= ' JOIN p.postalCode pd';
-        if ($count >= 1) {
-            $query_str .= ' WHERE ';
-            foreach ($searchParams as $param => $value) {
-                if (isset($value)) {
-                    if ($param == "postalCode") {
-                        $query_str .= ' pd.' . $param . ' LIKE :' . $param . ' AND';
-                    } else {
-                        $query_str .= ' p.' . $param . ' LIKE :' . $param . ' AND';
-                    }
-                }
-            }
-            $last_pos = strrpos($query_str, 'AND');
-            $query_str = substr($query_str, 0, $last_pos);
-            $query = $em->createQuery($query_str);
-
-            if (isset($searchParams['name'])) {
-                $query->setParameter('name', '%' . $searchParams['name'] . '%');
-            }
-            if (isset($searchParams['surname1'])) {
-                $query->setParameter('surname1', '%' . $searchParams['surname1'] . '%');
-            }
-            if (isset($searchParams['surname2'])) {
-                $query->setParameter('surname2', '%' . $searchParams['surname2'] . '%');
-            }
-            if (isset($searchParams['phone1'])) {
-                $query->setParameter('phone1', '%' . $searchParams['phone1'] . '%');
-            }
-            if (isset($searchParams['address'])) {
-                $query->setParameter('address', '%' . $searchParams['address'] . '%');
-            }
-            if (isset($searchParams['postalCode'])) {
-                $query->setParameter('postalCode', '%' . $searchParams['postalCode'] . '%');
-            }
-
-            return $query->getResult();
-        } else {
-            return $patients;
+    $query_str = 'SELECT p, pd FROM DentoletiPatientBundle:Patient p';
+    $query_str .= ' JOIN p.postalCode pd';
+    if ($count >= 1) {
+      $query_str .= ' WHERE ';
+      foreach ($searchParams as $param => $value) {
+        if (isset($value)) {
+          if ($param == "postalCode") {
+            $query_str .= ' pd.' . $param . ' LIKE :' . $param . ' AND';
+          }
+          else {
+            $query_str .= ' p.' . $param . ' LIKE :' . $param . ' AND';
+          }
         }
+      }
+      $last_pos = strrpos($query_str, 'AND');
+      $query_str = substr($query_str, 0, $last_pos);
+      $query = $em->createQuery($query_str);
+
+      if (isset($searchParams['name'])) {
+        $query->setParameter('name', '%' . $searchParams['name'] . '%');
+      }
+      if (isset($searchParams['surname1'])) {
+        $query->setParameter('surname1', '%' . $searchParams['surname1'] . '%');
+      }
+      if (isset($searchParams['surname2'])) {
+        $query->setParameter('surname2', '%' . $searchParams['surname2'] . '%');
+      }
+      if (isset($searchParams['phone1'])) {
+        $query->setParameter('phone1', '%' . $searchParams['phone1'] . '%');
+      }
+      if (isset($searchParams['address'])) {
+        $query->setParameter('address', '%' . $searchParams['address'] . '%');
+      }
+      if (isset($searchParams['postalCode'])) {
+        $query->setParameter('postalCode', '%' . $searchParams['postalCode'] . '%');
+      }
+
+      return $query->getResult();
     }
+    else {
+      return $patients;
+    }
+  }
+
+  /**
+   * This function retrieves all the patients in the system.
+   * @return array All the patients in the system
+   */
+  public function findAllPatients() {
+    $em = $this->getEntityManager();
+
+    $query_str = 'SELECT p FROM DentoletiPatientBundle:Patient p';
+    $query = $em->createQuery($query_str);
+
+    return $query->getResult();
+  }
 }
