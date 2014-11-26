@@ -106,6 +106,10 @@ class DefaultController extends Controller {
    * This method search a budget by the id
    */
   public function searchAction(Request $request) {
+    $confirmed = $request->query->get('confirmed');
+    if (!isset($confirmed)) {
+      $confirmed = 0;
+    }
     $searchData = array();
     $form = $this->createFormBuilder($searchData)
       ->add('id', 'text', array(
@@ -130,7 +134,7 @@ class DefaultController extends Controller {
       $searchData = $form->getData();
 
       $budgets = $em->getRepository('DentoletiBudgetBundle:Budget')
-        ->findSearchedBudgets($searchData);
+        ->findSearchedBudgets($searchData, $confirmed);
       // If the list is empty, send also a flashmessage to indicate it
       if (count($budgets) == 0) {
         $budgets = $em->getRepository('DentoletiBudgetBundle:Budget')

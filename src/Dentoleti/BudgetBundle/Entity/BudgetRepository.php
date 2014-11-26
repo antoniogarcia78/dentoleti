@@ -68,7 +68,7 @@ class BudgetRepository extends EntityRepository
    * @param $params The paprams
    * @return array
    */
-  public function findSearchedBudgets($params)
+  public function findSearchedBudgets($params, $confirmed)
 	{
 		$em = $this->getEntityManager();
 
@@ -78,7 +78,7 @@ class BudgetRepository extends EntityRepository
       $query_str = '
         SELECT b
         FROM DentoletiBudgetBundle:Budget b
-        WHERE b.confirmed = 0 AND';
+        WHERE b.confirmed = ' . $confirmed . ' AND';
       foreach($params as $param => $value) {
         if (isset($value)) {
           $query_str .= ' b.' . $param . ' = :' . $param . ' AND';

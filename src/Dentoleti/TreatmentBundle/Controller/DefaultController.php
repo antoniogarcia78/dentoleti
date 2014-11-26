@@ -244,4 +244,12 @@ class DefaultController extends Controller {
     //TODO Pendiente de ver donde redirigir la petición
     return $this->forward('DentoletiTreatmentBundle:Default:list');
   }
+
+  /**
+   * This method of the controller redirect the user to the budget search but
+   * looking for confirmed budgets in the system
+   */
+  public function searchAction() {
+    return $this->redirect($this->generateUrl('budget_search', array('confirmed' => 1)));
+  }
 }

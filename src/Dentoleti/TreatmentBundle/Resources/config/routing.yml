@@ -18,3 +18,6 @@ treatment_delete:
     pattern: /delete/{id}
     defaults: { _controller: DentoletiTreatmentBundle:Default:delete }
 
+treatment_search:
+    pattern: /search
+    defaults: { _controller: DentoletiTreatmentBundle:Default:search }
