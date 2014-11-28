@@ -32,4 +32,8 @@
 	{{ form_rest(form) }}
 	{{ form_end(form) }}
 </div>
+<div id="links">
+    <a href="{{ path('article_add') }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/add-user.png') }}"></a>
+</div>
+{% include 'DentoletiArticlesBundle:Default:results.html.twig' %}
 {% endblock %}

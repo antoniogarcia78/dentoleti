@@ -83,6 +83,7 @@ class DefaultController extends Controller
             ->add('search', 'submit')
             ->getForm();
 
+      $articlesList = array();
         if ($request->isMethod('POST')) {
             // The search params has been submited and we will search the data and 
             // redirect to the list view
@@ -104,15 +105,12 @@ class DefaultController extends Controller
                 );
             }
 
-            return $this->render('DentoletiArticlesBundle:Default:list.html.twig', array(
-                'articlesList' => $articlesList
-            ));
-            
         }
         
         // This wil render the search form
         return $this->render('DentoletiArticlesBundle:Default:search.html.twig', array(
-            'form' => $form->createView()
+          'articlesList' => $articlesList,
+          'form' => $form->createView()
         ));
     }
 

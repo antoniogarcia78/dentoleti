@@ -1,16 +1,4 @@
-{% extends '::frontend.html.twig' %}
-
-{% block stylesheets %}
-	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletiarticles/css/articles.css') }}">
-	{{ parent() }}
-{% endblock %}
-
-{% block article %}
-	{% for flashMessage in app.session.flashbag.get('notice') %}
-    	<div class="flash-notice">
-       		{{ flashMessage }}
-    	</div>
-	{% endfor %}
+<div id="results">
 	<table id="list">
 		<tr>
 			<th>id</th>
@@ -38,9 +26,4 @@
 		</tr>
 		{% endfor %}		
 	</table>
-    {# display navigation #}
-    <div class="navigation">
-        {{ knp_pagination_render(articlesList) }}
-    </div>
-	
-{% endblock %}
+</div>
