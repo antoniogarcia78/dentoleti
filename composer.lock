@@ -80,12 +80,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/cache.git",
-                "reference": "912e8a11ce3c75a630b225dd82aed83e00943ed5"
+                "reference": "85ff6118558d7b2501cd85b31bdc1ffc0cab731a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/cache/zipball/912e8a11ce3c75a630b225dd82aed83e00943ed5",
-                "reference": "912e8a11ce3c75a630b225dd82aed83e00943ed5",
+                "url": "https://api.github.com/repos/doctrine/cache/zipball/85ff6118558d7b2501cd85b31bdc1ffc0cab731a",
+                "reference": "85ff6118558d7b2501cd85b31bdc1ffc0cab731a",
                 "shasum": ""
             },
             "require": {
@@ -96,6 +96,7 @@
             },
             "require-dev": {
                 "phpunit/phpunit": ">=3.7",
+                "predis/predis": "~0.8",
                 "satooshi/php-coveralls": "~0.6"
             },
             "type": "library",
@@ -141,7 +142,7 @@
                 "cache",
                 "caching"
             ],
-            "time": "2014-10-20 19:28:25"
+            "time": "2014-11-27 00:22:12"
         },
         {
             "name": "doctrine/collections",
@@ -342,12 +343,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "e35ce0486a1d161e739bed38fde27b7cc921f5f0"
+                "reference": "40fd004725b4aa902aea170cd15152b06a6faba0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/e35ce0486a1d161e739bed38fde27b7cc921f5f0",
-                "reference": "e35ce0486a1d161e739bed38fde27b7cc921f5f0",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/40fd004725b4aa902aea170cd15152b06a6faba0",
+                "reference": "40fd004725b4aa902aea170cd15152b06a6faba0",
                 "shasum": ""
             },
             "require": {
@@ -405,7 +406,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2014-11-11 11:37:53"
+            "time": "2014-11-24 15:49:52"
         },
         {
             "name": "doctrine/doctrine-bundle",
@@ -413,12 +414,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineBundle.git",
-                "reference": "d9763ccbb637958133c42bdcc3d31c5a6821b9e2"
+                "reference": "3beb3a780485ab01f86941f4892cd23ef8c39c6b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/d9763ccbb637958133c42bdcc3d31c5a6821b9e2",
-                "reference": "d9763ccbb637958133c42bdcc3d31c5a6821b9e2",
+                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/3beb3a780485ab01f86941f4892cd23ef8c39c6b",
+                "reference": "3beb3a780485ab01f86941f4892cd23ef8c39c6b",
                 "shasum": ""
             },
             "require": {
@@ -484,7 +485,7 @@
                 "orm",
                 "persistence"
             ],
-            "time": "2014-10-04 16:13:24"
+            "time": "2014-11-28 08:32:03"
         },
         {
             "name": "doctrine/doctrine-cache-bundle",
@@ -493,12 +494,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineCacheBundle.git",
-                "reference": "5c5ee811ece1d79993cbee8bfa49ce2503adddd1"
+                "reference": "e4b6f810aa047f9cbfe41c3d6a3d7e83d7477a9d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineCacheBundle/zipball/5c5ee811ece1d79993cbee8bfa49ce2503adddd1",
-                "reference": "5c5ee811ece1d79993cbee8bfa49ce2503adddd1",
+                "url": "https://api.github.com/repos/doctrine/DoctrineCacheBundle/zipball/e4b6f810aa047f9cbfe41c3d6a3d7e83d7477a9d",
+                "reference": "e4b6f810aa047f9cbfe41c3d6a3d7e83d7477a9d",
                 "shasum": ""
             },
             "require": {
@@ -568,7 +569,7 @@
                 "cache",
                 "caching"
             ],
-            "time": "2014-11-10 16:08:53"
+            "time": "2014-11-28 09:43:36"
         },
         {
             "name": "doctrine/doctrine-fixtures-bundle",
@@ -809,12 +810,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/doctrine2.git",
-                "reference": "e7be0c4dc98715ab1154a11bafd1a3967ce6970c"
+                "reference": "c2ad33870746b4ae5fb11b4a67329c485e3f970c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/e7be0c4dc98715ab1154a11bafd1a3967ce6970c",
-                "reference": "e7be0c4dc98715ab1154a11bafd1a3967ce6970c",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/c2ad33870746b4ae5fb11b4a67329c485e3f970c",
+                "reference": "c2ad33870746b4ae5fb11b4a67329c485e3f970c",
                 "shasum": ""
             },
             "require": {
@@ -876,7 +877,7 @@
                 "database",
                 "orm"
             ],
-            "time": "2014-11-12 09:31:52"
+            "time": "2014-11-28 11:23:23"
         },
         {
             "name": "incenteev/composer-parameter-handler",
@@ -1116,12 +1117,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kriswallsmith/assetic.git",
-                "reference": "eb82167d176eb40078469ef9408ff56fd32a5d66"
+                "reference": "0db20de988b7adc79375d33b2a566183af83c930"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kriswallsmith/assetic/zipball/eb82167d176eb40078469ef9408ff56fd32a5d66",
-                "reference": "eb82167d176eb40078469ef9408ff56fd32a5d66",
+                "url": "https://api.github.com/repos/kriswallsmith/assetic/zipball/0db20de988b7adc79375d33b2a566183af83c930",
+                "reference": "0db20de988b7adc79375d33b2a566183af83c930",
                 "shasum": ""
             },
             "require": {
@@ -1182,7 +1183,7 @@
                 "compression",
                 "minification"
             ],
-            "time": "2014-10-30 11:33:12"
+            "time": "2014-11-25 17:50:26"
         },
         {
             "name": "monolog/monolog",
@@ -1506,12 +1507,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioGeneratorBundle.git",
-                "reference": "ca3ae93fbac413dedf9cda716d4f7b35a162e6e9"
+                "reference": "29e6fff09198f98196e6223fc78bf0c70a89ffac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/ca3ae93fbac413dedf9cda716d4f7b35a162e6e9",
-                "reference": "ca3ae93fbac413dedf9cda716d4f7b35a162e6e9",
+                "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/29e6fff09198f98196e6223fc78bf0c70a89ffac",
+                "reference": "29e6fff09198f98196e6223fc78bf0c70a89ffac",
                 "shasum": ""
             },
             "require": {
@@ -1545,7 +1546,7 @@
                 }
             ],
             "description": "This bundle generates code for you",
-            "time": "2014-09-26 05:59:17"
+            "time": "2014-11-29 10:12:05"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -1553,12 +1554,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "d0f361d88e5de851bbb8c542d3b6aa46d61a9ffc"
+                "reference": "2aa7f9da2af1cd1a8943df88bbdb7da7bc03852d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/d0f361d88e5de851bbb8c542d3b6aa46d61a9ffc",
-                "reference": "d0f361d88e5de851bbb8c542d3b6aa46d61a9ffc",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/2aa7f9da2af1cd1a8943df88bbdb7da7bc03852d",
+                "reference": "2aa7f9da2af1cd1a8943df88bbdb7da7bc03852d",
                 "shasum": ""
             },
             "require": {
@@ -1597,7 +1598,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2014-10-30 13:41:35"
+            "time": "2014-11-27 14:13:43"
         },
         {
             "name": "symfony/assetic-bundle",
@@ -1785,12 +1786,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "d94d837e9ea75d76eeb0a43e0535a5e7a7a01542"
+                "reference": "6619af8e42c6b68c2c55fa006e12d42933a83bab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/d94d837e9ea75d76eeb0a43e0535a5e7a7a01542",
-                "reference": "d94d837e9ea75d76eeb0a43e0535a5e7a7a01542",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/6619af8e42c6b68c2c55fa006e12d42933a83bab",
+                "reference": "6619af8e42c6b68c2c55fa006e12d42933a83bab",
                 "shasum": ""
             },
             "require": {
@@ -1854,7 +1855,7 @@
                 "ircmaxell/password-compat": "1.0.*",
                 "monolog/monolog": "~1.11",
                 "ocramius/proxy-manager": ">=0.3.1,<0.6-dev",
-                "propel/propel1": "1.6.*"
+                "propel/propel1": "~1.6"
             },
             "type": "library",
             "extra": {
@@ -1893,7 +1894,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2014-11-10 18:00:54"
+            "time": "2014-11-29 15:42:01"
         },
         {
             "name": "twig/extensions",
@@ -1953,12 +1954,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "b87cf88f88feee256c1e1ca85ec6677f38fcc238"
+                "reference": "efed4fa3b10f8ad6f856d817f4e4a6d9ac527915"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/b87cf88f88feee256c1e1ca85ec6677f38fcc238",
-                "reference": "b87cf88f88feee256c1e1ca85ec6677f38fcc238",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/efed4fa3b10f8ad6f856d817f4e4a6d9ac527915",
+                "reference": "efed4fa3b10f8ad6f856d817f4e4a6d9ac527915",
                 "shasum": ""
             },
             "require": {
@@ -2002,21 +2003,21 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2014-11-10 14:48:15"
+            "time": "2014-11-20 10:35:14"
         },
         {
             "name": "zendframework/zend-cache",
-            "version": "dev-master",
+            "version": "dev-develop",
             "target-dir": "Zend/Cache",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/Component_ZendCache.git",
-                "reference": "1966038a1568ebeaeeeaa78ce27bc7b340e30747"
+                "reference": "beeeb16557f6d41f6637bd0d72ed8c85d98bb7af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/Component_ZendCache/zipball/1966038a1568ebeaeeeaa78ce27bc7b340e30747",
-                "reference": "1966038a1568ebeaeeeaa78ce27bc7b340e30747",
+                "url": "https://api.github.com/repos/zendframework/Component_ZendCache/zipball/beeeb16557f6d41f6637bd0d72ed8c85d98bb7af",
+                "reference": "beeeb16557f6d41f6637bd0d72ed8c85d98bb7af",
                 "shasum": ""
             },
             "require": {
@@ -2040,8 +2041,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.3-dev",
-                    "dev-develop": "2.4-dev"
+                    "dev-master": "2.2-dev",
+                    "dev-develop": "2.3-dev"
                 }
             },
             "autoload": {
@@ -2054,37 +2055,36 @@
                 "BSD-3-Clause"
             ],
             "description": "provides a generic way to cache any data",
-            "homepage": "https://github.com/zendframework/zf2",
             "keywords": [
                 "cache",
                 "zf2"
             ],
-            "time": "2014-09-16 22:58:11"
+            "time": "2014-03-05 15:00:13"
         },
         {
             "name": "zendframework/zend-eventmanager",
-            "version": "dev-master",
+            "version": "dev-develop",
             "target-dir": "Zend/EventManager",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/Component_ZendEventManager.git",
-                "reference": "4110fe64b10616b9bb71429a206d8e9e6d99e3ba"
+                "reference": "e232aeeab9ae6545ac21c8fc2728d54297969658"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/Component_ZendEventManager/zipball/4110fe64b10616b9bb71429a206d8e9e6d99e3ba",
-                "reference": "4110fe64b10616b9bb71429a206d8e9e6d99e3ba",
+                "url": "https://api.github.com/repos/zendframework/Component_ZendEventManager/zipball/e232aeeab9ae6545ac21c8fc2728d54297969658",
+                "reference": "e232aeeab9ae6545ac21c8fc2728d54297969658",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.23",
+                "php": ">=5.3.3",
                 "zendframework/zend-stdlib": "self.version"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.3-dev",
-                    "dev-develop": "2.4-dev"
+                    "dev-master": "2.2-dev",
+                    "dev-develop": "2.3-dev"
                 }
             },
             "autoload": {
@@ -2096,30 +2096,29 @@
             "license": [
                 "BSD-3-Clause"
             ],
-            "homepage": "https://github.com/zendframework/zf2",
             "keywords": [
                 "eventmanager",
                 "zf2"
             ],
-            "time": "2014-09-16 22:58:11"
+            "time": "2014-01-04 13:01:02"
         },
         {
             "name": "zendframework/zend-memory",
-            "version": "dev-master",
+            "version": "dev-develop",
             "target-dir": "Zend/Memory",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/Component_ZendMemory.git",
-                "reference": "425d6f9ea833dd5c232269dc970e2a1ca3694391"
+                "reference": "585c89765d7f42968b23d83c14a0688e8b0ff294"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/Component_ZendMemory/zipball/425d6f9ea833dd5c232269dc970e2a1ca3694391",
-                "reference": "425d6f9ea833dd5c232269dc970e2a1ca3694391",
+                "url": "https://api.github.com/repos/zendframework/Component_ZendMemory/zipball/585c89765d7f42968b23d83c14a0688e8b0ff294",
+                "reference": "585c89765d7f42968b23d83c14a0688e8b0ff294",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.23"
+                "php": ">=5.3.3"
             },
             "require-dev": {
                 "zendframework/zend-cache": "self.version"
@@ -2130,8 +2129,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.3-dev",
-                    "dev-develop": "2.4-dev"
+                    "dev-master": "2.2-dev",
+                    "dev-develop": "2.3-dev"
                 }
             },
             "autoload": {
@@ -2143,30 +2142,29 @@
             "license": [
                 "BSD-3-Clause"
             ],
-            "homepage": "https://github.com/zendframework/zf2",
             "keywords": [
                 "memory",
                 "zf2"
             ],
-            "time": "2014-09-16 22:58:11"
+            "time": "2014-01-02 17:00:42"
         },
         {
             "name": "zendframework/zend-servicemanager",
-            "version": "dev-master",
+            "version": "dev-develop",
             "target-dir": "Zend/ServiceManager",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/Component_ZendServiceManager.git",
-                "reference": "559403e4fd10db2516641f20f129a568d7e6a993"
+                "reference": "4911c6c6f58d7058e351e6fe8ecff14666da1259"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/Component_ZendServiceManager/zipball/559403e4fd10db2516641f20f129a568d7e6a993",
-                "reference": "559403e4fd10db2516641f20f129a568d7e6a993",
+                "url": "https://api.github.com/repos/zendframework/Component_ZendServiceManager/zipball/4911c6c6f58d7058e351e6fe8ecff14666da1259",
+                "reference": "4911c6c6f58d7058e351e6fe8ecff14666da1259",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.23"
+                "php": ">=5.3.3"
             },
             "require-dev": {
                 "zendframework/zend-di": "self.version"
@@ -2177,8 +2175,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.3-dev",
-                    "dev-develop": "2.4-dev"
+                    "dev-master": "2.2-dev",
+                    "dev-develop": "2.3-dev"
                 }
             },
             "autoload": {
@@ -2190,12 +2188,11 @@
             "license": [
                 "BSD-3-Clause"
             ],
-            "homepage": "https://github.com/zendframework/zf2",
             "keywords": [
                 "servicemanager",
                 "zf2"
             ],
-            "time": "2014-09-16 22:58:11"
+            "time": "2014-03-03 21:00:12"
         },
         {
             "name": "zendframework/zend-stdlib",
