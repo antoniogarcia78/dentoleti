@@ -93,6 +93,14 @@ class Article
     private $budgetDetails;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="active", type="boolean")
+     */
+    private $active;
+
+
+    /**
      * Get id
      *
      * @return integer 
@@ -223,5 +231,68 @@ class Article
     public function __toString()
     {
         return $this->getDescription();
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->budgetDetails = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set active
+     *
+     * @param boolean $active
+     * @return Article
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+    
+        return $this;
+    }
+
+    /**
+     * Get active
+     *
+     * @return boolean 
+     */
+    public function getActive()
+    {
+        return $this->active;
+    }
+
+    /**
+     * Add budgetDetails
+     *
+     * @param \Dentoleti\BudgetBundle\Entity\BudgetDetail $budgetDetails
+     * @return Article
+     */
+    public function addBudgetDetail(\Dentoleti\BudgetBundle\Entity\BudgetDetail $budgetDetails)
+    {
+        $this->budgetDetails[] = $budgetDetails;
+    
+        return $this;
+    }
+
+    /**
+     * Remove budgetDetails
+     *
+     * @param \Dentoleti\BudgetBundle\Entity\BudgetDetail $budgetDetails
+     */
+    public function removeBudgetDetail(\Dentoleti\BudgetBundle\Entity\BudgetDetail $budgetDetails)
+    {
+        $this->budgetDetails->removeElement($budgetDetails);
+    }
+
+    /**
+     * Get budgetDetails
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getBudgetDetails()
+    {
+        return $this->budgetDetails;
     }
 }
