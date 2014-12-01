@@ -148,7 +148,7 @@ class DoctorController extends Controller {
     $searchData = array();
     $form = $this->createFormBuilder($searchData)
       ->add('name', 'text', array(
-        'required' => FALSE,
+        'required' => TRUE,
       ))
       ->add('phone1', 'text', array(
         'required' => FALSE,

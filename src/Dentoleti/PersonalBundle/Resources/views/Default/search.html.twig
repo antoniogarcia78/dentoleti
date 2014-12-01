@@ -65,5 +65,8 @@
 	{{ form_rest(form) }}
 	{{ form_end(form) }}
 </div>
+<div id="links">
+    <a href="{{ path('doctor_add') }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/add-user.png') }}"></a>
+</div>
 {% include 'DentoletiPersonalBundle:Default:results.html.twig' %}
 {% endblock %}
