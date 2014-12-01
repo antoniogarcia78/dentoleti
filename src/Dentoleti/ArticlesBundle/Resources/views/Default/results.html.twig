@@ -11,7 +11,7 @@
 			<th>Editar</th>
 			<th>Eliminar</th>
 		</tr>
-		{% for article in articlesList %}
+		{% for article in pagination %}
 		<tr>
 
 			<td>{{ article.id }}</td>
@@ -26,4 +26,8 @@
 		</tr>
 		{% endfor %}		
 	</table>
+    {# display navigation #}
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
 </div>

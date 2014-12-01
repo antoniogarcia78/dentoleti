@@ -38,200 +38,200 @@ use Dentoleti\ArticlesBundle\Entity\Article;
 use Dentoleti\ArticlesBundle\Form\Article\ArticleType;
 use Dentoleti\ArticlesBundle\Helper\ArticlesUtils;
 
-class DefaultController extends Controller
-{
-    /**
-     * Add a new article in the system
-     */
-    public function addAction()
-    {
-      $petition = $this->getRequest();
+class DefaultController extends Controller {
+  /**
+   * Add a new article in the system
+   */
+  public function addAction() {
+    $petition = $this->container->get('request_stack')->getCurrentRequest();
 
-    	$article = new Article();
-		
-		  $form = $this->createForm(new ArticleType(), $article);
-		
-		  $form->handleRequest($petition);
+    $article = new Article();
 
-		  if ($form->isValid()){
-  		  //save the form
-  		  $em = $this->getDoctrine()->getManager();
-  		  
-        $article->setRegistrationDate(new \DateTime());
-  		  $em->persist($article);
-  		  $em->flush();
+    $form = $this->createForm(new ArticleType(), $article);
+
+    $form->handleRequest($petition);
+
+    if ($form->isValid()) {
+      //save the form
+      $em = $this->getDoctrine()->getManager();
+
+      $article->setRegistrationDate(new \DateTime());
+      $em->persist($article);
+      $em->flush();
+
+      $this->get('session')->getFlashBag()->add(
+        'notice',
+        'El artículo se ha guardado correctamente'
+      );
+    }
+
+    return $this->render('DentoletiArticlesBundle:Default:article.html.twig', array(
+      'form' => $form->createView()
+    ));
+  }
+
+  /**
+   * This method search an article by the name
+   */
+  public function searchAction(Request $request) {
+    $searchData = array();
+    $form = $this->createFormBuilder($searchData)
+      ->add('description', 'text')
+      ->add('search', 'submit')
+      ->getForm();
+
+    $em = $this->getDoctrine()->getManager();
+
+    $articlesList = $em->getRepository('DentoletiArticlesBundle:Article')
+      ->findActives();
+    if ($request->isMethod('POST')) {
+      // The search params has been submited and we will search the data and
+      // redirect to the list view
+      $form->handleRequest($request);
+
+      $searchData = $form->getData();
+
+      $articlesList = $em->getRepository('DentoletiArticlesBundle:Article')
+        ->findSearchedArticles($searchData['description']);
+
+      // If the list is empty, send also a flashmessage to indicate it
+      if (count($articlesList) == 0) {
 
         $this->get('session')->getFlashBag()->add(
           'notice',
-          'El artículo se ha guardado correctamente'
+          'There is no articles'
         );
-     	}
+      }
 
-      return $this->render('DentoletiArticlesBundle:Default:article.html.twig', array(
-       	'form' => $form->createView()
-      ));
     }
 
-    /**
-     * This method search an article by the name
-     */
-    public function searchAction(Request $request)
-    {
-        $searchData = array();
-        $form = $this->createFormBuilder($searchData)
-            ->add('description', 'text')
-            ->add('search', 'submit')
-            ->getForm();
+    $paginator  = $this->get('knp_paginator');
+    $pagination = $paginator->paginate(
+      $articlesList,
+      $this->get('request')->query->get('page', 1),
+      5
+    );
 
-      $articlesList = array();
-        if ($request->isMethod('POST')) {
-            // The search params has been submited and we will search the data and 
-            // redirect to the list view
-            $form->bind($request);
+    // This wil render the search form
+    return $this->render('DentoletiArticlesBundle:Default:search.html.twig', array(
+      'pagination' => $pagination,
+      'form' => $form->createView()
+    ));
+  }
 
-            $searchData = $form->getData();
+  /**
+   * Method for view all the articles's information
+   */
+  public function viewAction($id) {
+    $em = $this->getDoctrine()->getManager();
 
-            $em = $this->getDoctrine()->getManager();
+    $article = $em->getRepository('DentoletiArticlesBundle:Article')
+      ->findOneById($id);
 
-            $articlesList = $em->getRepository('DentoletiArticlesBundle:Article')
-            ->findSearchedArticles($searchData['description']);
-
-            // If the list is empty, send also a flashmessage to indicate it
-            if (count($articlesList) == 0) {
-
-                $this->get('session')->getFlashBag()->add(
-                    'notice',
-                    'No hay artículos'
-                );
-            }
-
-        }
-        
-        // This wil render the search form
-        return $this->render('DentoletiArticlesBundle:Default:search.html.twig', array(
-          'articlesList' => $articlesList,
-          'form' => $form->createView()
-        ));
+    if (!$article) {
+      throw $this->createNotFoundException('No existe el artículo');
     }
 
-    /**
-     * Method for view all the articles's information
-     */
-    public function viewAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
+    return $this->render('DentoletiArticlesBundle:Default:article_view.html.twig', array(
+      'article' => $article
+    ));
+  }
 
-        $article = $em->getRepository('DentoletiArticlesBundle:Article')
-            ->findOneById($id);
+  /**
+   * List all the articles in the system
+   */
+  public function listAction() {
+    $em = $this->getDoctrine()->getManager();
 
-        if (!$article) {
-            throw $this->createNotFoundException('No existe el artículo');
-        }
+    $articlesList = $em->getRepository('DentoletiArticlesBundle:Article')
+      ->findActives();
 
-        return $this->render('DentoletiArticlesBundle:Default:article_view.html.twig', array(
-            'article' => $article
-        ));
+    $paginator = $this->get('knp_paginator');
+    $pagination = $paginator->paginate(
+      $articlesList,
+      $this->get('request')->query->get('page', 1),
+      5
+    );
+    return $this->render('DentoletiArticlesBundle:Default:list.html.twig', array(
+      'articlesList' => $pagination
+    ));
+  }
+
+  /**
+   * Edit the article with the $id given in the params
+   */
+  public function editAction($id) {
+    $petition = $this->getRequest();
+
+    $em = $this->getDoctrine()->getManager();
+
+    $article = $em->getRepository('DentoletiArticlesBundle:Article')
+      ->findOneById($id);
+
+    if (!$article) {
+      throw $this->createNotFoundException('No existe el article');
     }
 
-    /**
-     * List all the articles in the system
-     */
-    public function listAction()
-    {
-      $em = $this->getDoctrine()->getManager();
+    $form = $this->createForm(new ArticleType(), $article);
 
-      $articlesList = $em->getRepository('DentoletiArticlesBundle:Article')
-        ->findActives();
+    $form->handleRequest($petition);
 
-        $paginator  = $this->get('knp_paginator');
-        $pagination = $paginator->paginate(
-            $articlesList,
-            $this->get('request')->query->get('page', 1),
-            5
-        );
-      return $this->render('DentoletiArticlesBundle:Default:list.html.twig', array(
-        'articlesList' => $pagination
-      ));
+    $em->persist($article);
+    $em->flush();
+
+    return $this->render('DentoletiArticlesBundle:Default:article.html.twig', array(
+      'form' => $form->createView()
+    ));
+  }
+
+  /**
+   * ATTENTION
+   *
+   * Delete method for deleting one article given by the id.
+   * This will delete the record and all the relations with other entities
+   * so that, USE IT WITH CAREFULL
+   */
+  public function deleteAction($id) {
+    $em = $this->getDoctrine()->getManager();
+
+    $article = $em->getRepository('DentoletiArticlesBundle:Article')
+      ->findOneById($id);
+
+    if (!$article) {
+      throw $this->createNotFoundException('No existe el article');
+    }
+    else {
+      $em->remove($article);
+      $em->flush();
     }
 
-    /**
-     * Edit the article with the $id given in the params
-     */
-    public function editAction($id)
-    {
-        $petition = $this->getRequest();
+    //TODO Pendiente de ver donde redirigir la petición
+    return $this->forward('DentoletiArticlesBundle:Default:list');
+  }
 
-        $em = $this->getDoctrine()->getManager();
+  /**
+   * This method is used to set the article's information to default values
+   * The intention of this method is to delete the information but not its relationships
+   */
+  public function eraseAction($id) {
+    $em = $this->getDoctrine()->getManager();
 
-        $article = $em->getRepository('DentoletiArticlesBundle:Article')
-            ->findOneById($id);
+    $article = $em->getRepository('DentoletiArticlesBundle:Article')
+      ->findOneById($id);
 
-        if (!$article) {
-            throw $this->createNotFoundException('No existe el article');
-        }
-
-        $form = $this->createForm(new ArticleType(), $article);
-        
-        $form->handleRequest($petition);
-
-        $em->persist($article);
-        $em->flush();
-        
-        return $this->render('DentoletiArticlesBundle:Default:article.html.twig', array(
-            'form' => $form->createView()
-        ));
+    if (!$article) {
+      throw $this->createNotFoundException('No existe el article');
     }
 
-    /**
-     * ATTENTION
-     *
-     * Delete method for deleting one article given by the id.
-     * This will delete the record and all the relations with other entities
-     * so that, USE IT WITH CAREFULL
-     */
-    public function deleteAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
+    //Nuevo helper
+    $utils = new ArticlesUtils();
 
-        $article = $em->getRepository('DentoletiArticlesBundle:Article')
-            ->findOneById($id);
+    $article = $utils->eraseArticle($article);
 
-        if (!$article) {
-            throw $this->createNotFoundException('No existe el article');
-        }
-        else {
-            $em->remove($article);
-            $em->flush();
-        }
+    $em->persist($article);
+    $em->flush();
 
-        //TODO Pendiente de ver donde redirigir la petición
-        return $this->forward('DentoletiArticlesBundle:Default:list');
-    }
-
-    /**
-     * This method is used to set the article's information to default values
-     * The intention of this method is to delete the information but not its relationships
-     */
-    public function eraseAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $article = $em->getRepository('DentoletiArticlesBundle:Article')
-            ->findOneById($id);
-
-        if (!$article) {
-            throw $this->createNotFoundException('No existe el article');
-        }
-
-        //Nuevo helper
-        $utils = new ArticlesUtils();
-
-        $article = $utils->eraseArticle($article);
-
-        $em->persist($article);
-        $em->flush();
-
-        //TODO Pendiente de ver donde redirigir la petición
-        return $this->forward('DentoletiArticlesBundle:Default:list');
-    }
+    //TODO Pendiente de ver donde redirigir la petición
+    return $this->forward('DentoletiArticlesBundle:Default:list');
+  }
 }

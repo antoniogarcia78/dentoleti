@@ -61,6 +61,7 @@ class ArticleRepository extends EntityRepository
     $query = $em->createQuery('
 			SELECT a
 			FROM DentoletiArticlesBundle:Article a
+			WHERE a.active = 1
 			');
 
     return $query->getResult();
