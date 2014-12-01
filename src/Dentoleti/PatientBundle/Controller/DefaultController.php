@@ -51,18 +51,16 @@ class DefaultController extends Controller {
 
     $form->handleRequest($petition);
 
-    if ($form->isValid()) {
-      //save the form
-      $em = $this->getDoctrine()->getManager();
+    //save the form
+    $em = $this->getDoctrine()->getManager();
 
-      $em->persist($patient);
-      $em->flush();
+    $em->persist($patient);
+    $em->flush();
 
-      $this->get('session')->getFlashBag()->add(
-        'notice',
-        'El paciente se ha guardado correctamente'
-      );
-    }
+    $this->get('session')->getFlashBag()->add(
+      'notice',
+      'El paciente se ha guardado correctamente'
+    );
 
     return $this->render('DentoletiPatientBundle:Default:patient.html.twig', array(
       'form' => $form->createView()
