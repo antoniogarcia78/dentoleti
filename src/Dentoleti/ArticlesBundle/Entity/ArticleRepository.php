@@ -42,18 +42,16 @@ class ArticleRepository extends EntityRepository
 		$em = $this->getEntityManager();
 
 		$query = $em->createQuery('
-			SELECT f
-			FROM DentoletiArticlesBundle:Family f
-			WHERE f.name = :name
+			SELECT a
+			FROM DentoletiArticlesBundle:Article a
+			WHERE a.description LIKE :name
 			');
 
-		$query->setParameter('name', $name);
+		$query->setParameter('name', '%' . $name . '%');
 
 		return $query->getResult();
 	}
 
-  //TODO este método es necesario pero hay que añadir un campo active a Article
-  //     y modificar la consulta
   public function findActives()
   {
     $em = $this->getEntityManager();

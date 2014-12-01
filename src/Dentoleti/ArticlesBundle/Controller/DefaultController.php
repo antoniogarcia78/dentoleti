@@ -96,7 +96,8 @@ class DefaultController extends Controller {
 
       // If the list is empty, send also a flashmessage to indicate it
       if (count($articlesList) == 0) {
-
+        $articlesList = $em->getRepository('DentoletiArticlesBundle:Article')
+          ->findActives();
         $this->get('session')->getFlashBag()->add(
           'notice',
           'There is no articles'
