@@ -1,4 +1,4 @@
-{% extends '::main.html.twig' %}
+{% extends '::frontend.html.twig' %}
 
 {% block stylesheets %}
     <link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletigeneral/css/fonts.css') }}">
@@ -14,7 +14,7 @@
         <nav>
             <div id='cssmenu'>
                 <ul>
-                    <li><a href='{{ path('patient_search') }}'><span>Pacientes</span></a>
+                    <li><a href='{{ path('patient_search') }}'><span>Patients</span></a>
                     </li>
                     <li class='has-sub'><a href='#'><span>Agenda</span></a>
                         <ul>
@@ -23,27 +23,10 @@
                             <li class='last'><a href='{{ path('consultation_search') }}'><span>Búsqueda</span></a></li>
                         </ul>
                     </li>
-                    <li class='has-sub'><a href='#'><span>Doctores</span></a>
-                        <ul>
-                            <li><a href="{{ path('doctor_add') }}"><span>Agregar</span></a></li>
-                            <li><a href='{{ path('doctor_list') }}'><span>Listado</span></a></li>
-                            <li class='last'><a href='{{ path('doctor_search') }}'><span>Búsqueda</span></a></li>
-                        </ul>
-                    </li>
-                    <li class='has-sub'><a href='#'><span>Tratamientos</span></a>
-                        <ul>
-                            <li><a href="#"><span>Agregar</span></a></li>
-                            <li><a href='#'><span>Listado</span></a></li>
-                            <li class='last'><a href='#'><span>Búsqueda</span></a></li>
-                        </ul>
-                    </li>
-                    <li class='has-sub'><a href='#'><span>Artículos</span></a>
-                        <ul>
-                            <li><a href="{{ path('article_add') }}"><span>Agregar</span></a></li>
-                            <li><a href='{{ path('articles_list') }}'><span>Listado</span></a></li>
-                            <li class='last'><a href='{{ path('articles_search') }}'><span>Búsqueda</span></a></li>
-                        </ul>
-                    </li>
+                    <li><a href='{{ path('doctor_search') }}'><span>Doctors</span></a></li>
+                    <li><a href='{{ path('budget_search') }}'><span>Budgets</span></a></li>
+                    <li><a href='{{ path('treatment_search') }}'><span>Treatments</span></a></li>
+                    <li><a href='{{ path('articles_search') }}'><span>Articles</span></a></li>
                     <li class='has-sub'><a href='#'><span>Caja</span></a>
                         <ul>
                             <li><a href='{{ path('dentoleti_accounting_daily') }}'><span>Cierre de caja</span></a></li>
