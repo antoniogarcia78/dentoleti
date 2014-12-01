@@ -50,12 +50,13 @@ class DefaultController extends Controller {
     $form = $this->createForm(new PatientType(), $patient);
 
     $form->handleRequest($petition);
+    if ($form->isValid()) {
+      //save the form
+      $em = $this->getDoctrine()->getManager();
 
-    //save the form
-    $em = $this->getDoctrine()->getManager();
-
-    $em->persist($patient);
-    $em->flush();
+      $em->persist($patient);
+      $em->flush();
+    }
 
     $this->get('session')->getFlashBag()->add(
       'notice',
