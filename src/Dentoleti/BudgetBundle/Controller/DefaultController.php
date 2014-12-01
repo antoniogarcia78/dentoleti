@@ -47,7 +47,7 @@ class DefaultController extends Controller {
    * Add a new budget in the system
    */
   public function addAction() {
-    $petition = $this->getRequest();
+    $petition = $this->container->get('request_stack')->getCurrentRequest();
 
     $budget = new Budget();
 
@@ -175,7 +175,7 @@ class DefaultController extends Controller {
    * Edit the budget with the $id given in the params
    */
   public function editAction($id, Request $request) {
-    $petition = $this->getRequest();
+    $petition = $this->container->get('request_stack')->getCurrentRequest();
 
     $em = $this->getDoctrine()->getManager();
 

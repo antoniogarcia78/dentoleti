@@ -93,6 +93,12 @@ class BudgetDetail
      */
     private $done;
 
+  /**
+   * @var float
+   *
+   * @ORM\Column(name="labexpense", type="float")
+   */
+  private $labExpense;
 
     /**
      * Get id
@@ -249,5 +255,28 @@ class BudgetDetail
     public function getDone()
     {
         return $this->done;
+    }
+
+    /**
+     * Set labExpense
+     *
+     * @param float $labExpense
+     * @return BudgetDetail
+     */
+    public function setLabExpense($labExpense)
+    {
+        $this->labExpense = $labExpense;
+
+        return $this;
+    }
+
+    /**
+     * Get labExpense
+     *
+     * @return float 
+     */
+    public function getLabExpense()
+    {
+        return $this->labExpense;
     }
 }

@@ -18,7 +18,8 @@
 			<th>Pieza dental</th>
 			<th>Precio/unidad</th>
 			<th>Cantidad</th>
-			<th>Parcial</th>
+            <th>Labs. expenses</th>
+            <th>Parcial</th>
 			<th>IVA</th>
 			<th>Subtotal</th>
 			<th>Editar</th>
@@ -30,7 +31,8 @@
 			<td>{{ budgetDetail.article }}</td>
 			<td>{{ budgetDetail.tooth }}</td>
 			<td>{{ budgetDetail.price }}</td>
-			<td>{{ budgetDetail.amount }}</td>
+            <td>{{ budgetDetail.amount }}</td>
+            <td>{{ budgetDetail.labExpense }}</td>
 			<td>{{ partialTotals[budgetDetail.id] }}</td>
 			<td>{{ ivas[budgetDetail.id] }}</td>
 			<td>{{ subTotals[budgetDetail.id] }}</td>
@@ -39,7 +41,7 @@
 		</tr>
 		{% endfor %}
 		<tr>
-			<td class="total" colspan="6">Total</td>
+			<td class="total" colspan="7">Total</td>
 			<td class="total"><strong>{{ total }}€</strong></td>
 		</tr>
 	</table>

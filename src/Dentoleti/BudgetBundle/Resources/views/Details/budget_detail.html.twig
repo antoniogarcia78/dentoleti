@@ -71,6 +71,17 @@
 						</div>
 					</div>
 				</div>
+                <div class="col2-two">
+                    <div class="label">
+                        {{ form_label(form.labexpense) }}
+                    </div>
+                    <div class="data">
+                        {{ form_widget(form.labexpense) }}
+                        <div class="error">
+                            {{ form_errors(form.labexpense) }}
+                        </div>
+                    </div>
+                </div>
 			</fieldset>
 		</div>
 		<div id="buttons">

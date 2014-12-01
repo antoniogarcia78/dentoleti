@@ -63,6 +63,10 @@ class BudgetDetailType extends AbstractType
 			'required' => false
 		));
 
+    $builder->add('labexpense', 'number', array(
+      'required' => false
+    ));
+
 		$builder->add('addItem', 'submit');
 		$builder->add('saveAndFinish', 'submit');
 	}
