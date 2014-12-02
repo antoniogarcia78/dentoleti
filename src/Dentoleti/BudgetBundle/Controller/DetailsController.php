@@ -33,6 +33,7 @@
 namespace Dentoleti\BudgetBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Ps\PdfBundle\Annotation\Pdf;
@@ -263,7 +264,10 @@ class DetailsController extends Controller
             }
 
             $log->info("/loadPricesAction: Response to send-> " . $article->getPrice());
-            $response = new Response($article->getPrice());
+            $response = new JsonResponse(array(
+              'price' => $article->getPrice(),
+              'vat' => $article->getVat()
+            ), 200, array('Content-type' => 'application/json'));
 
             $log->info("\\loadPricesAction: Ends.");
             return $response;

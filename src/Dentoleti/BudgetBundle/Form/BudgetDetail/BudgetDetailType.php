@@ -54,6 +54,11 @@ class BudgetDetailType extends AbstractType
 		$builder->add('price', 'number', array(
 			'required' => true
 		));
+
+    $builder->add('vat', 'number', array(
+			'required' => true,
+      'disabled' => true,
+		));
 		
 		$builder->add('amount', 'number', array(
 			'required' => true

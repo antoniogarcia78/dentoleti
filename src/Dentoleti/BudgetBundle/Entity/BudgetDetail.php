@@ -40,58 +40,63 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Dentoleti\BudgetBundle\Entity\BudgetDetailRepository")
  */
-class BudgetDetail
-{
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
+class BudgetDetail {
+  /**
+   * @var integer
+   *
+   * @ORM\Column(name="id", type="integer")
+   * @ORM\Id
+   * @ORM\GeneratedValue(strategy="AUTO")
+   */
+  private $id;
 
-    /**
-     *
-     * @ORM\ManyToOne(targetEntity="Dentoleti\BudgetBundle\Entity\Budget", inversedBy="budgetDetails",cascade={"persist"})
-     * @ORM\JoinColumn(name="budget_id", referencedColumnName="id")
-     */
-    private $budget;
+  /**
+   *
+   * @ORM\ManyToOne(targetEntity="Dentoleti\BudgetBundle\Entity\Budget", inversedBy="budgetDetails",cascade={"persist"})
+   * @ORM\JoinColumn(name="budget_id", referencedColumnName="id")
+   */
+  private $budget;
 
-    /**
-     *
-     * @ORM\ManyToOne(targetEntity="Dentoleti\ArticlesBundle\Entity\Article", inversedBy="budgetDetails",cascade={"persist"})
-     * @ORM\JoinColumn(name="article_id", referencedColumnName="id", nullable=true)
-     */
-    private $article;
+  /**
+   *
+   * @ORM\ManyToOne(targetEntity="Dentoleti\ArticlesBundle\Entity\Article", inversedBy="budgetDetails",cascade={"persist"})
+   * @ORM\JoinColumn(name="article_id", referencedColumnName="id", nullable=true)
+   */
+  private $article;
 
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="price", type="float")
-     */
-    private $price;
+  /**
+   * @var float
+   *
+   * @ORM\Column(name="price", type="float")
+   */
+  private $price;
+  /**
+   * @var float
+   *
+   * @ORM\Column(name="vat", type="float", nullable=true)
+   */
+  private $vat;
 
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="amount", type="float")
-     */
-    private $amount;
+  /**
+   * @var float
+   *
+   * @ORM\Column(name="amount", type="float")
+   */
+  private $amount;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="tooth", type="string", length=50, nullable=true)
-     */
-    private $tooth;
+  /**
+   * @var string
+   *
+   * @ORM\Column(name="tooth", type="string", length=50, nullable=true)
+   */
+  private $tooth;
 
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="done", type="boolean", nullable=true)
-     */
-    private $done;
+  /**
+   * @var boolean
+   *
+   * @ORM\Column(name="done", type="boolean", nullable=true)
+   */
+  private $done;
 
   /**
    * @var float
@@ -100,183 +105,188 @@ class BudgetDetail
    */
   private $labExpense;
 
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+  /**
+   * Get id
+   *
+   * @return integer
+   */
+  public function getId() {
+    return $this->id;
+  }
 
-    /**
-     * Set budget
-     *
-     * @param string $budget
-     * @return BudgetDetail
-     */
-    public function setBudget($budget)
-    {
-        $this->budget = $budget;
+  /**
+   * Set budget
+   *
+   * @param string $budget
+   * @return BudgetDetail
+   */
+  public function setBudget($budget) {
+    $this->budget = $budget;
 
-        return $this;
-    }
+    return $this;
+  }
 
-    /**
-     * Get budget
-     *
-     * @return string 
-     */
-    public function getBudget()
-    {
-        return $this->budget;
-    }
+  /**
+   * Get budget
+   *
+   * @return string
+   */
+  public function getBudget() {
+    return $this->budget;
+  }
 
-    /**
-     * Set article
-     *
-     * @param string $article
-     * @return BudgetDetail
-     */
-    public function setArticle($article)
-    {
-        $this->article = $article;
+  /**
+   * Set article
+   *
+   * @param string $article
+   * @return BudgetDetail
+   */
+  public function setArticle($article) {
+    $this->article = $article;
 
-        return $this;
-    }
+    return $this;
+  }
 
-    /**
-     * Get article
-     *
-     * @return string 
-     */
-    public function getArticle()
-    {
-        return $this->article;
-    }
+  /**
+   * Get article
+   *
+   * @return string
+   */
+  public function getArticle() {
+    return $this->article;
+  }
 
-    /**
-     * Set price
-     *
-     * @param float $price
-     * @return BudgetDetail
-     */
-    public function setPrice($price)
-    {
-        $this->price = $price;
+  /**
+   * Set price
+   *
+   * @param float $price
+   * @return BudgetDetail
+   */
+  public function setPrice($price) {
+    $this->price = $price;
 
-        return $this;
-    }
+    return $this;
+  }
 
-    /**
-     * Get price
-     *
-     * @return float 
-     */
-    public function getPrice()
-    {
-        return $this->price;
-    }
+  /**
+   * Get price
+   *
+   * @return float
+   */
+  public function getPrice() {
+    return $this->price;
+  }
 
-    /**
-     * Set amount
-     *
-     * @param float $amount
-     * @return BudgetDetail
-     */
-    public function setAmount($amount)
-    {
-        $this->amount = $amount;
+  /**
+   * Set amount
+   *
+   * @param float $amount
+   * @return BudgetDetail
+   */
+  public function setAmount($amount) {
+    $this->amount = $amount;
 
-        return $this;
-    }
+    return $this;
+  }
 
-    /**
-     * Get amount
-     *
-     * @return float 
-     */
-    public function getAmount()
-    {
-        return $this->amount;
-    }
+  /**
+   * Get amount
+   *
+   * @return float
+   */
+  public function getAmount() {
+    return $this->amount;
+  }
 
-    /**
-     * Set tooth
-     *
-     * @param string $tooth
-     * @return BudgetDetail
-     */
-    public function setTooth($tooth)
-    {
-        $this->tooth = $tooth;
+  /**
+   * Set tooth
+   *
+   * @param string $tooth
+   * @return BudgetDetail
+   */
+  public function setTooth($tooth) {
+    $this->tooth = $tooth;
 
-        return $this;
-    }
+    return $this;
+  }
 
-    /**
-     * Get tooth
-     *
-     * @return string 
-     */
-    public function getTooth()
-    {
-        return $this->tooth;
-    }
+  /**
+   * Get tooth
+   *
+   * @return string
+   */
+  public function getTooth() {
+    return $this->tooth;
+  }
 
-    /**
-     * Method toString
-     */
-    public function __toString()
-    {
-        return "{$this->getId()}";
-    }
+  /**
+   * Method toString
+   */
+  public function __toString() {
+    return "{$this->getId()}";
+  }
 
-    /**
-     * Set done
-     *
-     * @param boolean $done
-     *
-     * @return BudgetDetail
-     */
-    public function setDone($done)
-    {
-        $this->done = $done;
+  /**
+   * Set done
+   *
+   * @param boolean $done
+   *
+   * @return BudgetDetail
+   */
+  public function setDone($done) {
+    $this->done = $done;
 
-        return $this;
-    }
+    return $this;
+  }
 
-    /**
-     * Get done
-     *
-     * @return boolean 
-     */
-    public function getDone()
-    {
-        return $this->done;
-    }
+  /**
+   * Get done
+   *
+   * @return boolean
+   */
+  public function getDone() {
+    return $this->done;
+  }
 
-    /**
-     * Set labExpense
-     *
-     * @param float $labExpense
-     * @return BudgetDetail
-     */
-    public function setLabExpense($labExpense)
-    {
-        $this->labExpense = $labExpense;
+  /**
+   * Set labExpense
+   *
+   * @param float $labExpense
+   * @return BudgetDetail
+   */
+  public function setLabExpense($labExpense) {
+    $this->labExpense = $labExpense;
 
-        return $this;
-    }
+    return $this;
+  }
 
-    /**
-     * Get labExpense
-     *
-     * @return float 
-     */
-    public function getLabExpense()
-    {
-        return $this->labExpense;
-    }
+  /**
+   * Get labExpense
+   *
+   * @return float
+   */
+  public function getLabExpense() {
+    return $this->labExpense;
+  }
+
+  /**
+   * Set vat
+   *
+   * @param float $vat
+   * @return BudgetDetail
+   */
+  public function setVat($vat) {
+    $this->vat = $vat;
+
+    return $this;
+  }
+
+  /**
+   * Get vat
+   *
+   * @return float
+   */
+  public function getVat() {
+    return $this->vat;
+  }
 }
