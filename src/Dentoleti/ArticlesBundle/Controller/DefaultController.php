@@ -76,7 +76,9 @@ class DefaultController extends Controller {
   public function searchAction(Request $request) {
     $searchData = array();
     $form = $this->createFormBuilder($searchData)
-      ->add('description', 'text')
+      ->add('description', 'text', array(
+        'required' => FALSE,
+      ))
       ->add('search', 'submit')
       ->getForm();
 

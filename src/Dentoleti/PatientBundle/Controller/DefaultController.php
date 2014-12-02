@@ -36,7 +36,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Dentoleti\PatientBundle\Entity\Patient;
 use Dentoleti\PatientBundle\Form\Patient\PatientType;
-use Dentoleti\PatientBundle\Helper\PatientsUtils;
+use Dentoleti\GeneralBundle\Helper\DentoletiUtils;
 
 class DefaultController extends Controller {
   /**
@@ -220,7 +220,7 @@ class DefaultController extends Controller {
       $form->handleRequest($request);
 
       $searchData = $form->getData();
-      $utils = new PatientsUtils();
+      $utils = new DentoletiUtils();
       if ($utils->isEmptyParams($searchData)) {
         $patients = $em->getRepository('DentoletiPatientBundle:Patient')
           ->findPatients($searchData);

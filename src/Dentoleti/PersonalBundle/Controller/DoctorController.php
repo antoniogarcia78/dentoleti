@@ -38,6 +38,7 @@ use Dentoleti\PersonalBundle\Form\Doctor\DoctorType;
 use Dentoleti\PersonalBundle\Entity\Doctor;
 use Dentoleti\PersonalBundle\Entity\Personal;
 use Dentoleti\PersonalBundle\Helper\PersonalUtils;
+use Dentoleti\GeneralBundle\Helper\DentoletiUtils;
 
 class DoctorController extends Controller {
 
@@ -148,7 +149,7 @@ class DoctorController extends Controller {
     $searchData = array();
     $form = $this->createFormBuilder($searchData)
       ->add('name', 'text', array(
-        'required' => TRUE,
+        'required' => FALSE,
       ))
       ->add('phone1', 'text', array(
         'required' => FALSE,
@@ -172,8 +173,11 @@ class DoctorController extends Controller {
 
       $searchData = $form->getData();
 
-      $doctorsList = $em->getRepository('DentoletiPersonalBundle:Doctor')
-        ->findSearchedDoctor($searchData);
+      $utils = new DentoletiUtils();
+      if ($utils->isEmptyParams($searchData)) {
+        $doctorsList = $em->getRepository('DentoletiPersonalBundle:Doctor')
+          ->findSearchedDoctor($searchData);
+      }
 
       // If the list is empty, send also a flashmessage to indicate it
       if (count($doctorsList) == 0) {
