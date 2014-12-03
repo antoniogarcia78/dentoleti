@@ -42,7 +42,7 @@ class DefaultController extends Controller
 {
   public function addAction($doctorId)
   {
-    $petition = $this->getRequest();
+    $petition = $this->container->get('request_stack')->getCurrentRequest();
 
   	$consultation = new Consultation();
 	
@@ -76,7 +76,7 @@ class DefaultController extends Controller
 
   public function editAction($id)
   {
-    $petition = $this->getRequest();
+    $petition = $this->container->get('request_stack')->getCurrentRequest();
 
     $em = $this->getDoctrine()->getManager();
 

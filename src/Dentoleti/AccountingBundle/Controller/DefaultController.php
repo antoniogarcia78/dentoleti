@@ -125,7 +125,7 @@ class DefaultController extends Controller
 
       $facade = $this->get('ps_pdf.facade');
       $response = new Response();
-
+print_r($initialAccounting);
       $this->render('DentoletiAccountingBundle:Default:daily.pdf.twig', array(
         'postingLinesIncomes' => $postingLinesIncomes,
         'postingLinesExpenses' => $postingLinesExpenses,
@@ -133,12 +133,12 @@ class DefaultController extends Controller
         'postingLinesTPV' => $postingLinesTPV,
         'total_incomes' => $total_incomes,
         'total_expenses' => $total_expenses,
-        'sum' => $total_incomes - $total_expenses + 
-            $initialAccounting[0]->getAmount(),
+        'sum' => $total_incomes - $total_expenses +
+            empty($initialAccounting)? 0: $initialAccounting[0]->getAmount(),
         'total_financed' => $total_financed,
         'total_tpv' => $total_tpv,
         'total' => $total,
-        'initial' => $initialAccounting[0]
+        'initial' => empty($initialAccounting) ? 0: $initialAccounting[0]
       ), $response);
 
       $xml = $response->getContent();
