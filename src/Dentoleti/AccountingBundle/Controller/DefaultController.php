@@ -125,7 +125,6 @@ class DefaultController extends Controller
 
       $facade = $this->get('ps_pdf.facade');
       $response = new Response();
-print_r($initialAccounting);
       $this->render('DentoletiAccountingBundle:Default:daily.pdf.twig', array(
         'postingLinesIncomes' => $postingLinesIncomes,
         'postingLinesExpenses' => $postingLinesExpenses,
