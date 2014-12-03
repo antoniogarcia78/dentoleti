@@ -46,6 +46,7 @@ class BudgetsUtils
 		$budget->setObservations(null);
 		$budget->setDiscountCompany(null);
 		$budget->setDiscountInsurance(null);
+    $budget->setErased(true);
 
 		return $budget;
 	}

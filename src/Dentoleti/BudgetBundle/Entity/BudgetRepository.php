@@ -78,7 +78,7 @@ class BudgetRepository extends EntityRepository
       $query_str = '
         SELECT b
         FROM DentoletiBudgetBundle:Budget b
-        WHERE b.confirmed = ' . $confirmed . ' AND';
+        WHERE b.confirmed = ' . $confirmed . ' AND b.erased = 0';
       foreach($params as $param => $value) {
         if (isset($value)) {
           $query_str .= ' b.' . $param . ' = :' . $param . ' AND';
@@ -114,6 +114,7 @@ class BudgetRepository extends EntityRepository
       ->select('b')
       ->from('DentoletiBudgetBundle:Budget', 'b')
       ->where('b.confirmed = 0')
+      ->andWhere('b.erased = 0')
       ->getQuery();
 
     return $queryBuilder->getResult();
