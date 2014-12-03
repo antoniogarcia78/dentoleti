@@ -37,6 +37,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Dentoleti\PatientBundle\Entity\Patient;
 use Dentoleti\PatientBundle\Form\Patient\PatientType;
 use Dentoleti\GeneralBundle\Helper\DentoletiUtils;
+use Dentoleti\PatientBundle\Helper\PatientsUtils;
 
 class DefaultController extends Controller {
   /**
@@ -180,7 +181,7 @@ class DefaultController extends Controller {
     $em->flush();
 
     //TODO Pendiente de ver donde redirigir la petición
-    return $this->forward('DentoletiPatientBundle:Default:list');
+    return $this->forward('DentoletiPatientBundle:Default:search');
   }
 
   /**

@@ -25,6 +25,8 @@
 	font-size: 2.2em;
 	padding-left: 2%;
 	padding-top: 4%;
+    clear: both;
+    float: left;
 }
 
 #budget fieldset {
@@ -88,11 +90,6 @@
 td.total {
 	text-align: right !important;
 }
-#list {
-	font-size: 2.2em;
-	margin-left: 2%;
-	margin-top: 4%;
-}
 
 #list,
 #list th {
@@ -114,7 +111,18 @@ td.total {
 	padding-left: 2px;
 }
 
+#budget-details a {
+    font-size: 1.2em;
+}
 
+#budget-details {
+    clear: both;
+    float: left;
+    font-size: 1.2em;
+    padding-left: 2%;
+    padding-top: 4%;
+
+}
 /* Search styles */
 #search {
 	font-size: 1.8em;

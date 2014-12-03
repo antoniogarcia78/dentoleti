@@ -162,12 +162,40 @@ class DefaultController extends Controller {
     $budget = $em->getRepository('DentoletiBudgetBundle:Budget')
       ->findOneById($id);
 
+    $budgetDetailsList = array();
     if (!$budget) {
-      throw $this->createNotFoundException('No existe el presupuesto');
+      throw $this->createNotFoundException('The budget doesn\'t exist');
+    }
+    else {
+      $budgetDetailsList = $em->getRepository('DentoletiBudgetBundle:BudgetDetail')
+        ->findArticlesOfBudget($budget);
+    }
+
+    $partialTotals = array();
+    $subTotals = array();
+    $ivas = array();
+
+    $total = 0;
+    foreach ($budgetDetailsList as $budgetDetail) {
+      $partial = $budgetDetail->getAmount() * $budgetDetail->getPrice();
+      $ivas[$budgetDetail->getId()] =
+        $budgetDetail->getArticle()->getVat() * $partial;
+
+      $partialTotals[$budgetDetail->getId()] = $partial;
+      $subTotals[$budgetDetail->getId()] =
+        $partial + $ivas[$budgetDetail->getId()];
+      $total = $total + $subTotals[$budgetDetail->getId()];
+
     }
 
     return $this->render('DentoletiBudgetBundle:Default:budget_view.html.twig', array(
       'budget' => $budget,
+      'budgetDetailsList' => $budgetDetailsList,
+      'partialTotals' => $partialTotals,
+      'total' => $total,
+      'budgetId' => $budget->getId(),
+      'ivas' => $ivas,
+      'subTotals' => $subTotals
     ));
   }
 
@@ -265,7 +293,7 @@ class DefaultController extends Controller {
     $em->flush();
 
     //TODO Pendiente de ver donde redirigir la petición
-    return $this->forward('DentoletiBudgetBundle:Default:list');
+    return $this->forward('DentoletiBudgetBundle:Default:search');
   }
 
   /**

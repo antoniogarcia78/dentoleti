@@ -56,8 +56,6 @@ class PatientsUtils
 		$patient->setBirthday(null);
 		$patient->setPhone1(null);
 		$patient->setPhone2(null);
-		$patient->setCountry(null);
-		$patient->setProvince(null);
 		$patient->setTown(null);
 		$patient->setPostalCode(null);
 		$patient->setOccupation(null);

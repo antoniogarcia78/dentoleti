@@ -1,50 +1,42 @@
-{% extends '::frontend.html.twig' %}
-
-{% block stylesheets %}
-	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletibudget/css/budget.css') }}">
-	{{ parent() }}
-{% endblock %}
-
-{% block article %}
-	{% for flashMessage in app.session.flashbag.get('notice') %}
-    	<div class="flash-notice">
-       		{{ flashMessage }}
-    	</div>
-	{% endfor %}
-	<table id="list">
-		<tr>
-			<th>Id</th>
-			<th>Artículo</th>
-			<th>Pieza dental</th>
-			<th>Precio/unidad</th>
-			<th>Cantidad</th>
-            <th>Labs. expenses</th>
-            <th>Parcial</th>
-			<th>IVA</th>
-			<th>Subtotal</th>
-			<th>Editar</th>
-			<th>Eliminar</th>
-		</tr>
-		{% for budgetDetail in budgetDetailsList %}
-		<tr>
-			<td>{{ budgetDetail.id }}</td>
-			<td>{{ budgetDetail.article }}</td>
-			<td>{{ budgetDetail.tooth }}</td>
-			<td>{{ budgetDetail.price }}</td>
+<table id="list">
+    <tr>
+        <th>Id</th>
+        <th>Artículo</th>
+        <th>Pieza dental</th>
+        <th>Precio/unidad</th>
+        <th>Cantidad</th>
+        <th>Labs. expenses</th>
+        <th>Parcial</th>
+        <th>IVA</th>
+        <th>Subtotal</th>
+        <th>Editar</th>
+        <th>Eliminar</th>
+    </tr>
+    {% for budgetDetail in budgetDetailsList %}
+        <tr>
+            <td>{{ budgetDetail.id }}</td>
+            <td>{{ budgetDetail.article }}</td>
+            <td>{{ budgetDetail.tooth }}</td>
+            <td>{{ budgetDetail.price }}</td>
             <td>{{ budgetDetail.amount }}</td>
             <td>{{ budgetDetail.labExpense }}</td>
-			<td>{{ partialTotals[budgetDetail.id] }}</td>
-			<td>{{ ivas[budgetDetail.id] }}</td>
-			<td>{{ subTotals[budgetDetail.id] }}</td>
-			<td><a href="{{ path('budget_details_edit', { 'budgetDetailId': budgetDetail.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/edit.png') }}"></a></td>
-			<td><a href="{{ path('budget_details_delete', { 'budgetId': budgetId , 'budgetDetailId': budgetDetail.id }) }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/erase.png') }}"></a></td>
-		</tr>
-		{% endfor %}
-		<tr>
-			<td class="total" colspan="7">Total</td>
-			<td class="total"><strong>{{ total }}€</strong></td>
-		</tr>
-	</table>
-	<a href="{{ path('budget_details_add', { 'budgetId': budgetId }) }}">AddNewItem</a>
-	<a href="{{ path('budget_pdf_view', { 'budgetId': budgetId }) }}" target="_blank">Generar PDF</a>
-{% endblock %}
+            <td>{{ partialTotals[budgetDetail.id] }}</td>
+            <td>{{ ivas[budgetDetail.id] }}</td>
+            <td>{{ subTotals[budgetDetail.id] }}</td>
+            <td>
+                <a href="{{ path('budget_details_edit', { 'budgetDetailId': budgetDetail.id }) }}"><img
+                            src="{{ asset('bundles/dentoletigeneral/images/icons/edit.png') }}"></a>
+            </td>
+            <td>
+                <a href="{{ path('budget_details_delete', { 'budgetId': budget.id , 'budgetDetailId': budgetDetail.id }) }}"><img
+                            src="{{ asset('bundles/dentoletigeneral/images/icons/erase.png') }}"></a>
+            </td>
+        </tr>
+    {% endfor %}
+    <tr>
+        <td class="total" colspan="7">Total</td>
+        <td class="total"><strong>{{ total }}€</strong></td>
+    </tr>
+</table>
+<a href="{{ path('budget_details_add', { 'budgetId': budget.id }) }}">AddNewItem</a>
+<a href="{{ path('budget_pdf_view', { 'budgetId': budget.id }) }}" target="_blank">Generar PDF</a>
