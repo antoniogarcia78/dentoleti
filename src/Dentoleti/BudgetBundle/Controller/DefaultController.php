@@ -55,6 +55,7 @@ class DefaultController extends Controller {
 
     $budget->setBudgetDate(new \DateTime());
     $budget->setConfirmed(FALSE);
+    $budget->setErased(FALSE);
 
     $form->handleRequest($petition);
 
