@@ -297,21 +297,9 @@
     {% block treatments %}
         <article id="treatments">
             <div id="treatments-info">
-                <fieldset>
-                    <legend>Tratamientos en curso</legend>
-                    <div class="col1-three">
-                        <div class="label">
-                            Listado de tratamientos:
-                        </div>
-                        <div class="data">
-                            <ul>
-                                {% for treatment in treatments %}
-                                    <li><a href="{{ path('treatment_view', { 'id' : treatment.id }) }}">{{ treatment.id }}</a></li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    </div>
-                </fieldset>
+                <div class="data">
+                    {% include 'DentoletiTreatmentBundle:Default:list.html.twig' with {'treatmentList' : treatments } %}
+                </div>
             </div>
             {% if debts is not empty %}
                 <div id="debts">

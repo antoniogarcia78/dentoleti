@@ -126,7 +126,7 @@ class DefaultController extends Controller {
 
     $em = $this->getDoctrine()->getManager();
     $budgets = $em->getRepository('DentoletiBudgetBundle:Budget')
-      ->findAllBudgets();
+      ->findAllBudgets($confirmed);
     if ($request->isMethod('POST')) {
       // The search params has been submited and we will search the data and
       // redirect to the list view
@@ -139,7 +139,7 @@ class DefaultController extends Controller {
       // If the list is empty, send also a flashmessage to indicate it
       if (count($budgets) == 0) {
         $budgets = $em->getRepository('DentoletiBudgetBundle:Budget')
-          ->findAllBudgets();
+          ->findAllBudgets($confirmed);
         $this->get('session')->getFlashBag()->add(
           'notice',
           'Sorry, but there is no budgets. Maybe a treatment?'
@@ -150,6 +150,7 @@ class DefaultController extends Controller {
     // This wil render the search form
     return $this->render('DentoletiBudgetBundle:Default:search.html.twig', array(
       'budget' => $budgets,
+      'confirmed' => $confirmed,
       'form' => $form->createView()
     ));
   }
