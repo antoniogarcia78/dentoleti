@@ -6,48 +6,53 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletigeneral/css/frontend.css') }}">
 {% endblock %}
 
+{% block header %}
+<header>
+    <h1><a href="{{ path('portada') }}"><img src="{{ asset('bundles/dentoletigeneral/images/logo.png')}}"></a></h1>
+    <nav>
+        <div id='cssmenu'>
+            <ul>
+                <li><a href='{{ path('patient_search') }}'><span>Patients</span></a>
+                </li>
+                <li class='has-sub'><a href='#'><span>Agenda</span></a>
+                    <ul>
+                        <li><a href="{{ path('consultation_add', { 'doctorId': 1 }) }}"><span>Agregar</span></a></li> {# TODO Put here the real doctorId #}
+                        <li><a href='{{ path('consultation_list') }}'><span>Listado</span></a></li>
+                        <li class='last'><a href='{{ path('consultation_search') }}'><span>Búsqueda</span></a></li>
+                    </ul>
+                </li>
+                <li><a href='{{ path('doctor_search') }}'><span>Doctors</span></a></li>
+                <li><a href='{{ path('budget_search') }}'><span>Budgets</span></a></li>
+                <li><a href='{{ path('treatment_search') }}'><span>Treatments</span></a></li>
+                <li><a href='{{ path('articles_search') }}'><span>Articles</span></a></li>
+                <li class='has-sub'><a href='#'><span>Caja</span></a>
+                    <ul>
+                        <li><a href='{{ path('dentoleti_accounting_daily') }}'><span>Cierre de caja</span></a></li>
+                    </ul>
+                </li>
+                <li class='last has-sub'><a href='#'><span>Citas</span></a>
+                    <ul>
+                        <li><a href="#"><span>Agregar</span></a></li>
+                        <li><a href='#'><span>Listado</span></a></li>
+                        <li class='last'><a href='#'><span>Búsqueda</span></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+{% endblock %}
+
 {% block body %}
 <div id="contendor">
-    <header>
-        <h1><a href="{{ path('portada') }}"><img src="{{ asset('bundles/dentoletigeneral/images/logo.png')}}"></a></h1>
-        <nav>
-            <div id='cssmenu'>
-                <ul>
-                    <li><a href='{{ path('patient_search') }}'><span>Patients</span></a>
-                    </li>
-                    <li class='has-sub'><a href='#'><span>Agenda</span></a>
-                        <ul>
-                            <li><a href="{{ path('consultation_add', { 'doctorId': 1 }) }}"><span>Agregar</span></a></li> {# TODO Put here the real doctorId #}
-                            <li><a href='{{ path('consultation_list') }}'><span>Listado</span></a></li>
-                            <li class='last'><a href='{{ path('consultation_search') }}'><span>Búsqueda</span></a></li>
-                        </ul>
-                    </li>
-                    <li><a href='{{ path('doctor_search') }}'><span>Doctors</span></a></li>
-                    <li><a href='{{ path('budget_search') }}'><span>Budgets</span></a></li>
-                    <li><a href='{{ path('treatment_search') }}'><span>Treatments</span></a></li>
-                    <li><a href='{{ path('articles_search') }}'><span>Articles</span></a></li>
-                    <li class='has-sub'><a href='#'><span>Caja</span></a>
-                        <ul>
-                            <li><a href='{{ path('dentoleti_accounting_daily') }}'><span>Cierre de caja</span></a></li>
-                        </ul>
-                    </li>
-                    <li class='last has-sub'><a href='#'><span>Citas</span></a>
-                        <ul>
-                            <li><a href="#"><span>Agregar</span></a></li>
-                            <li><a href='#'><span>Listado</span></a></li>
-                            <li class='last'><a href='#'><span>Búsqueda</span></a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
     <aside>
+        {# Basic data of the entity that is being showing, i.e. patient, traeatment, budget, doctor, etc #}
         {% block aside %}{% endblock %}
     </aside>
     <section>
         <article>
-            {# Quizás la portada lleve varios artículos con los últimos historiales vistos #}
+            {# Maybe, Dentoleti should show another articles for the patient's history that are most visited or
+            the last patients that have been shown#}
             {% block article %}{% endblock %}
         </article>
     </section>

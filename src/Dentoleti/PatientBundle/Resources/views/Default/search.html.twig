@@ -6,6 +6,11 @@
 	{{ parent() }}
 {% endblock %}
 
+{% block aside %}
+    {# Block with the logged user info#}
+    {% include'DentoletiGeneralBundle:Default:user-info.html.twig' %}
+{% endblock %}
+
 {% block article %}
 <div id="search">
 	{{ form_start(form) }}
