@@ -1,5 +1,13 @@
 {% extends '::frontend.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletigeneral/css/general.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletigeneral/css/login.css') }}">
+{% endblock %}
 {% block body %}
-<h2>Welcome to Dentoleti v1.0</h2>
+    <span class="midle-text"><h1>Welcome to Dentoleti v1.0</h1></span>
+    <div id="login-box">
+        <span>CAJITA DE LOGIN</span>
+    </div>
 {% endblock %}
