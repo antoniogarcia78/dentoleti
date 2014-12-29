@@ -101,7 +101,7 @@ class BudgetDetail {
   /**
    * @var float
    *
-   * @ORM\Column(name="labexpense", type="float")
+   * @ORM\Column(name="labexpense", type="float", nullable=trueConnected as:)
    */
   private $labExpense;
 
