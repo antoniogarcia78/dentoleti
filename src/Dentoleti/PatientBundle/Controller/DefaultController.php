@@ -187,7 +187,7 @@ class DefaultController extends Controller {
   /**
    * This is the controller for searching patients
    */
-  public function searchAction(Request $request, $page = 1) {
+  public function searchAction(Request $request) {
     //Array data for searching params
     $searchData = array();
     $form = $this->createFormBuilder($searchData)
