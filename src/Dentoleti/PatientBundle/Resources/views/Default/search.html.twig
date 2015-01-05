@@ -11,7 +11,7 @@
     {% include'DentoletiGeneralBundle:Default:user-info.html.twig' %}
 {% endblock %}
 
-{% block article %}
+{% block search %}
 <div id="search">
 	{{ form_start(form) }}
 		{{ form_errors(form) }}
@@ -95,5 +95,9 @@
 <div id="links">
     <a href="{{ path('patient_add') }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/add-user.png') }}"></a>
 </div>
-{% include 'DentoletiPatientBundle:Default:results.html.twig' %}
+{% endblock %}
+{% block results %}
+    <div id="results">
+        {% include 'DentoletiPatientBundle:Default:results.html.twig' %}
+    </div>
 {% endblock %}
