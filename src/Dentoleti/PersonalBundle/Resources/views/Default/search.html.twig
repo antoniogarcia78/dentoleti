@@ -6,6 +6,11 @@
 	{{ parent() }}
 {% endblock %}
 
+{% block aside %}
+    {# Block with the logged user info#}
+    {% include'DentoletiGeneralBundle:Default:user-info.html.twig' %}
+{% endblock %}
+
 {% block article %}
 <div id="search">
 	{{ form_start(form) }}
@@ -68,5 +73,7 @@
 <div id="links">
     <a href="{{ path('doctor_add') }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/add-user.png') }}"></a>
 </div>
-{% include 'DentoletiPersonalBundle:Default:results.html.twig' %}
+{% endblock %}
+{% block results %}
+    {% include 'DentoletiPersonalBundle:Default:results.html.twig' %}
 {% endblock %}
