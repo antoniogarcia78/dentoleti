@@ -102,7 +102,7 @@ class PatientRepository extends EntityRepository {
   public function findAllPatients() {
     $em = $this->getEntityManager();
 
-    $query_str = 'SELECT p FROM DentoletiPatientBundle:Patient p';
+    $query_str = 'SELECT p FROM DentoletiPatientBundle:Patient p WHERE p.erased != true ';
     $query = $em->createQuery($query_str);
 
     return $query->getResult();

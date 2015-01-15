@@ -216,6 +216,14 @@ class Patient
     private $meeting;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="erased", type="boolean")
+     */
+    private $erased;
+
+
+    /**
      * Get id
      *
      * @return integer 
@@ -882,5 +890,28 @@ class Patient
     public function getDoctor()
     {
         return $this->doctor;
+    }
+
+    /**
+     * Set erased
+     *
+     * @param boolean $erased
+     * @return Patient
+     */
+    public function setErased($erased)
+    {
+        $this->erased = $erased;
+
+        return $this;
+    }
+
+    /**
+     * Get erased
+     *
+     * @return boolean 
+     */
+    public function getErased()
+    {
+        return $this->erased;
     }
 }
