@@ -246,6 +246,6 @@ class DoctorController extends Controller {
     $em->flush();
 
     //TODO Pendiente de ver donde redirigir la petición
-    return $this->forward('DentoletiPersonalBundle:Default:list');
+    return $this->forward('DentoletiPersonalBundle:Doctor:search');
   }
 }
