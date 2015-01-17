@@ -11,19 +11,19 @@ budget_search:
     defaults: { _controller: DentoletiBudgetBundle:Default:search }
 
 budget_view:
-    pattern: /view/{id}
+    pattern: /view/{budgetId}
     defaults: { _controller: DentoletiBudgetBundle:Default:view }
 
 budget_edit:
-    pattern: /edit/{id}
+    pattern: /edit/{budgetId}
     defaults: { _controller: DentoletiBudgetBundle:Default:edit }
 
 budget_delete:
-    pattern: /delete/{id}
+    pattern: /delete/{budgetId}
     defaults: { _controller: DentoletiBudgetBundle:Default:delete }
 
 budget_erase:
-    pattern: /erase/{id}
+    pattern: /erase/{budgetId}
     defaults: { _controller: DentoletiBudgetBundle:Default:erase }
 
 budget_pdf_view:

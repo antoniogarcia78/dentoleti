@@ -76,7 +76,7 @@ class DetailsController extends Controller
 
             $nextAction = $form->get('addItem')->isClicked()
               ? 'budget_details_add'
-              : 'budget_details_list';
+              : 'budget_view';
 
             return $this->redirect($this->generateUrl($nextAction, array(
                     'budgetId' => $budget->getId())));
@@ -118,7 +118,7 @@ class DetailsController extends Controller
         
   		}
 
-  		return $this->render('DentoletiBudgetBundle:Details:list.html.twig', array(
+  		return $this->render('DentoletiBudgetBundle:Default:list.html.twig', array(
         	'budgetDetailsList' => $budgetDetailsList,
         	'partialTotals' => $partialTotals,
         	'total' => $total,

@@ -149,7 +149,7 @@ class DefaultController extends Controller {
 
     // This wil render the search form
     return $this->render('DentoletiBudgetBundle:Default:search.html.twig', array(
-      'budget' => $budgets,
+      'budgets' => $budgets,
       'confirmed' => $confirmed,
       'form' => $form->createView()
     ));
@@ -158,11 +158,11 @@ class DefaultController extends Controller {
   /**
    * Method for view all the budget's information
    */
-  public function viewAction($id) {
+  public function viewAction($budgetId) {
     $em = $this->getDoctrine()->getManager();
 
     $budget = $em->getRepository('DentoletiBudgetBundle:Budget')
-      ->findOneById($id);
+      ->findOneById($budgetId);
 
     $budgetDetailsList = array();
     if (!$budget) {

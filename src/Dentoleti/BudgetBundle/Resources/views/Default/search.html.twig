@@ -45,5 +45,5 @@
     </div>
 {% endblock %}
 {% block results %}
-    {% include 'DentoletiBudgetBundle:Default:results.html.twig' %}
+    {% include 'DentoletiBudgetBundle:Default:results.html.twig' with {'budgets': budgets } %}
 {% endblock %}
