@@ -46,22 +46,22 @@ class DefaultController extends Controller
     public function loadProvincesAction(Request $request)
     {
         $log = $this->get('monolog.logger.dentoleti');
-        $log->info("GeneralBundle loadProvincesAction -> Starts.");
+        $log->info("/loadProvincesAction: Starts.");
 
         $cp = $request->get('cp_id');
-        $log->info("GeneralBundle loadProvincesAction -> CP received-> " . $cp);
+        $log->info("/loadProvincesAction: CP received-> " . $cp);
         if ($request->isXmlHttpRequest()) {
-            $log->info("GeneralBundle loadProvincesAction -> Ajax petition");
+            $log->info("/loadProvincesAction: Ajax petition");
             $em = $this->getDoctrine()->getManager();
-            $log->info("GeneralBundle loadProvincesAction -> Obtained the EntityManager");
+            $log->info("/loadProvincesAction: Obtained the EntityManager");
 
             try{
-                $towns = $em->getRepository('GeneralBundle loadProvincesAction -> Town')
+                $towns = $em->getRepository('DentoletiGeneralBundle:Town')
             	->findAllTownsForCP($cp);
-                $log->info("GeneralBundle loadProvincesAction -> Obatained " . sizeof($towns)
+                $log->info("/loadProvincesAction: Obatained " . sizeof($towns)
                     . " towns");
             } catch (\Exception $e) {
-                $log->info("GeneralBundle loadProvincesAction -> Error " . $e);
+                $log->info("/loadProvincesAction: Error " . $e);
             }
             
 
@@ -70,16 +70,16 @@ class DefaultController extends Controller
             	$html = "<option value=\"" . $town->getId() . "\">" . 
             		$town->getName() . "</option>" ;
             }
-            $log->info("GeneralBundle loadProvincesAction -> Response to send-> " . $html);
+            $log->info("/loadProvincesAction: Response to send-> " . $html);
             $response = new Response($html);
 			
-            $log->info("GeneralBundle loadProvincesAction -> Ends.");
+            $log->info("\\loadProvincesAction: Ends.");
             return $response;
             
         }
         else {
-            $log->info("GeneralBundle loadProvincesAction ->: Non ajax petition");
-            $log->info("GeneralBundle loadProvincesAction -> Ends.");
+            $log->info("/loadProvincesAction: Non ajax petition");
+            $log->info("\\loadProvincesAction: Ends.");
             return new Response();
         }
     }
