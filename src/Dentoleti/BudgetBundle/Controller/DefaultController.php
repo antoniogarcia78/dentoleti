@@ -204,13 +204,13 @@ class DefaultController extends Controller {
   /**
    * Edit the budget with the $id given in the params
    */
-  public function editAction($id, Request $request) {
+  public function editAction($budgetId, Request $request) {
     $petition = $this->container->get('request_stack')->getCurrentRequest();
 
     $em = $this->getDoctrine()->getManager();
 
     $budget = $em->getRepository('DentoletiBudgetBundle:Budget')
-      ->findOneById($id);
+      ->findOneById($budgetId);
 
     if (!$budget) {
       throw $this->createNotFoundException('No existe el presupuesto');
@@ -255,11 +255,11 @@ class DefaultController extends Controller {
    * This will delete the record and all the relations with other entities
    * so that, USE IT WITH CAREFULL
    */
-  public function deleteAction($id) {
+  public function deleteAction($budgetId) {
     $em = $this->getDoctrine()->getManager();
 
     $budget = $em->getRepository('DentoletiBudgetBundle:Budget')
-      ->findOneById($id);
+      ->findOneById($budgetId);
 
     if (!$budget) {
       throw $this->createNotFoundException('No existe el presupuesto');
@@ -277,11 +277,11 @@ class DefaultController extends Controller {
    * This method is used to set the budget's information to default values
    * The intention of this method is to delete the information but not its relationships
    */
-  public function eraseAction($id) {
+  public function eraseAction($budgetId) {
     $em = $this->getDoctrine()->getManager();
 
     $budget = $em->getRepository('DentoletiBudgetBundle:Budget')
-      ->findOneById($id);
+      ->findOneById($budgetId);
 
     if (!$budget) {
       throw $this->createNotFoundException('No existe el presupuesto');
@@ -290,11 +290,11 @@ class DefaultController extends Controller {
     $utils = new BudgetsUtils();
 
     $budget = $utils->setNullBudget($budget);
+    $budget->setErased(true);
 
     $em->persist($budget);
     $em->flush();
 
-    //TODO Pendiente de ver donde redirigir la petición
     return $this->forward('DentoletiBudgetBundle:Default:search');
   }
 
