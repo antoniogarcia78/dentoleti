@@ -1,5 +1,5 @@
 budget_add:
-    pattern:  /add
+    pattern:  /add/{patientId}
     defaults: { _controller: DentoletiBudgetBundle:Default:add }
 
 budget_list:

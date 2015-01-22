@@ -40,13 +40,6 @@ class BudgetType extends AbstractType
 {
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
-		$builder->add('patient', 'entity', array(
-			'class' => 'DentoletiPatientBundle:Patient',
-			'property' => 'name',
-			'empty_value' => '-- Paciente --',
-			'required' => false
-		));
-
 		$builder->add('discount', 'number', array(
 			'required' => false
 		));

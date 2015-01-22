@@ -255,7 +255,7 @@
                     {% endfor %}
                 </table>
                 <div id="budgets-buttons">
-                    <a href="{{ path('budget_add') }}">Add budget</a>
+                    <a href="{{ path('budget_add', {'patientId': patient.id}) }}">Add budget</a>
                 </div>
             </div>
         </article>

@@ -46,7 +46,7 @@ class DefaultController extends Controller {
   /**
    * Add a new budget in the system
    */
-  public function addAction() {
+  public function addAction($patientId) {
     $petition = $this->container->get('request_stack')->getCurrentRequest();
 
     $budget = new Budget();
@@ -63,6 +63,10 @@ class DefaultController extends Controller {
       //save the form
       $em = $this->getDoctrine()->getManager();
 
+      $patient = $em->getRepository('DentoletiPatientBundle:Patient')
+          ->findOneById($patientId);
+      $budget->setPatient($patient);
+
       $em->persist($budget);
       $em->flush();
 
@@ -77,11 +81,11 @@ class DefaultController extends Controller {
 
       if ('budget_details_add' == $nextAction) {
         return $this->redirect($this->generateUrl($nextAction, array(
-          'budgetId' => $budget->getId()
+          'budgetId' => $budget->getId(),
         )));
       }
 
-      return $this->redirect($this->generateUrl($nextAction));
+      return $this->redirect($this->generateUrl($nextAction, array('patientId' => $patientId)));
     }
 
     return $this->render('DentoletiBudgetBundle:Default:budget.html.twig', array(
