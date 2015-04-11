@@ -1,24 +1,28 @@
-<nav>
-    <div id='main-menu'>
-        <ul>
-            <li><a href='{{ path('patient_search') }}'><span>Patients</span></a>
-            </li>
-            <li class='has-sub'><a href='#'><span>Agenda</span></a>
-                <ul>
-                    <li><a href="{{ path('consultation_add', { 'doctorId': 1 }) }}"><span>Agregar</span></a></li> {# TODO Put here the real doctorId #}
-                    <li><a href='{{ path('consultation_list') }}'><span>Listado</span></a></li>
-                    <li class='last'><a href='{{ path('consultation_search') }}'><span>Búsqueda</span></a></li>
-                </ul>
-            </li>
-            <li><a href='{{ path('doctor_search') }}'><span>Doctors</span></a></li>
-            <li><a href='{{ path('budget_search') }}'><span>Budgets</span></a></li>
-            <li><a href='{{ path('treatment_search') }}'><span>Treatments</span></a></li>
-            <li><a href='{{ path('articles_search') }}'><span>Articles</span></a></li>
-            <li class='has-sub'><a href='#'><span>Caja</span></a>
-                <ul>
-                    <li><a href='{{ path('dentoleti_accounting_daily') }}'><span>Cierre de caja</span></a></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href='{{ path('portada') }}'>Dentoleti</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <!-- Add class="active" with JQuery to li elements if you want to give an selected item -->
+                <li><a href='{{ path('patient_search') }}'><span>Patients</span><span class="sr-only">(current)</span></a></li>
+                <li><a href="#"><span>Doctors</span></a></li>
+                <li><a href="#"><span>Budgets</span></a></li>
+                <li><a href="#"><span>Treatments</span></a></li>
+                <li><a href="#"><span>Articles</span></a></li>
+                <li><a href="#"><span>Cash Box</span></a></li>
+                <li><a href="#"><span>Dates</span></a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
 </nav>

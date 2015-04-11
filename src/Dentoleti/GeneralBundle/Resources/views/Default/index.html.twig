@@ -2,12 +2,13 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletigeneral/css/general.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletigeneral/css/login.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletigeneral/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletigeneral/css/bootstrap-theme.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletigeneral/css/dentoleti.css') }}">
 {% endblock %}
 {% block body %}
-    <span class="midle-text"><h1>Welcome to Dentoleti v1.0</h1></span>
+    <div class="midle-text"><h1>Welcome to Dentoleti v1.0</h1></div>
     <div id="login-box">
-        <span>CAJITA DE LOGIN</span>
+        {% include 'DentoletiGeneralBundle:Default:login.html.twig' %}
     </div>
 {% endblock %}
