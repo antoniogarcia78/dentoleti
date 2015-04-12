@@ -1,7 +1,25 @@
+#logo {
+    margin: 2%;
+}
+
 #user-info {
     text-align: right;
 }
 
 .midle-text {
     text-align: center;
+}
+
+#search {
+    margin: 2%;
+}
+
+#list,
+#links,
+#patient {
+    margin: 2%;
+}
+
+.panel {
+    clear: both;
 }

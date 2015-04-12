@@ -2,7 +2,6 @@
 
 
 {% block stylesheets %}
-	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/dentoletipatient/css/patient.css') }}">
 	{{ parent() }}
 {% endblock %}
 
@@ -12,88 +11,64 @@
 {% endblock %}
 
 {% block search %}
-<div id="search">
+<div id="search" xmlns="http://www.w3.org/1999/html">
 	{{ form_start(form) }}
-		{{ form_errors(form) }}
-		{% for flashMessage in app.session.flashbag.get('notice') %}
-	    	<div class="flash-notice">
-	       		{{ flashMessage }}
-	    	</div>
-		{% endfor %}
-		<div class="col1-two">
-			<div class="label">
-				{{ form_label(form.name) }}
-			</div>
-			<div class="data">
-				{{ form_widget(form.name) }}
-				<div class="error">
-					{{ form_errors(form.name) }}
-				</div>
-			</div>
-		</div>
-        <div class="col2-two">
-            <div class="label">
-                {{ form_label(form.surname1) }}
-            </div>
-            <div class="data">
-                {{ form_widget(form.surname1) }}
-                <div class="error">
-                    {{ form_errors(form.surname1) }}
-                </div>
-            </div>
+    {{ form_errors(form) }}
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="flash-notice">
+            {{ flashMessage }}
         </div>
-        <div class="col1-two">
-            <div class="label">
-                {{ form_label(form.surname2) }}
-            </div>
-            <div class="data">
-                {{ form_widget(form.surname2) }}
-                <div class="error">
-                    {{ form_errors(form.surname2) }}
-                </div>
-            </div>
+    {% endfor %}
+    <div class="col-xs-6 form-group">
+        {{ form_label(form.name) }}
+        {{ form_widget(form.name) }}
+        <div class="form-error">
+            {{ form_errors(form.name) }}
         </div>
-        <div class="col2-two">
-            <div class="label">
-                {{ form_label(form.phone1) }}
-            </div>
-            <div class="data">
-                {{ form_widget(form.phone1) }}
-                <div class="error">
-                    {{ form_errors(form.phone1) }}
-                </div>
-            </div>
+    </div>
+    <div class="col-xs-6 form-group">
+        {{ form_label(form.surname1) }}
+        {{ form_widget(form.surname1) }}
+        <div class="form-error">
+            {{ form_errors(form.surname1) }}
         </div>
-        <div class="col1-two">
-            <div class="label">
-                {{ form_label(form.address) }}
-            </div>
-            <div class="data">
-                {{ form_widget(form.address) }}
-                <div class="error">
-                    {{ form_errors(form.address) }}
-                </div>
-            </div>
+    </div>
+    <div class="col-xs-6 form-group">
+        {{ form_label(form.surname2) }}
+        {{ form_widget(form.surname2) }}
+        <div class="form-error">
+            {{ form_errors(form.surname2) }}
         </div>
-        <div class="col2-two">
-            <div class="label">
-                {{ form_label(form.postalCode) }}
-            </div>
-            <div class="data">
-                {{ form_widget(form.postalCode) }}
-                <div class="error">
-                    {{ form_errors(form.postalCode) }}
-                </div>
-            </div>
+    </div>
+    <div class="col-xs-6 form-group">
+        {{ form_label(form.phone1) }}
+        {{ form_widget(form.phone1) }}
+        <div class="error">
+            {{ form_errors(form.phone1) }}
         </div>
-        <div id="buttons">
-			{{ form_widget(form.search) }}
-		</div>
+    </div>
+    <div class="col-xs-6 form-group">
+        {{ form_label(form.address) }}
+        {{ form_widget(form.address) }}
+        <div class="error">
+            {{ form_errors(form.address) }}
+        </div>
+    </div>
+    <div class="col-xs-6 form-group">
+        {{ form_label(form.postalCode) }}
+        {{ form_widget(form.postalCode) }}
+        <div class="error">
+            {{ form_errors(form.postalCode) }}
+        </div>
+    </div>
+    <div class="col-xs-10 form-group">
+        {{ form_widget(form.search) }}
+    </div>
 	{{ form_rest(form) }}
 	{{ form_end(form) }}
 </div>
-<div id="links">
-    <a href="{{ path('patient_add') }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/add-user.png') }}"></a>
+<div id="links" class="col-xs-6">
+    <a class="btn btn-default" href="{{ path('patient_add') }}"><img src="{{ asset('bundles/dentoletigeneral/images/icons/add-user.png') }}"></a>
 </div>
 {% endblock %}
 {% block results %}
