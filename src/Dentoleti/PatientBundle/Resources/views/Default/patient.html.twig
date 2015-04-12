@@ -192,6 +192,7 @@
             </div>
             <div id="buttons" class="col-xs-10 form-group">
                 {{ form_widget(form.save) }}
+                <a class="btn btn-default" href="{{ path('patient_search') }}" role="button">Cancel</a>
             </div>
         {{ form_rest(form) }}
         {{ form_end(form) }}
