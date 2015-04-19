@@ -24,3 +24,8 @@
     clear: both;
     text-align: center;
 }
+
+span.label {
+    color: #000;
+    display: inline;
+}
